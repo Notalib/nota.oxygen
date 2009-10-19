@@ -1,11 +1,14 @@
 package tables;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import javax.swing.text.TabExpander;
 import javax.swing.undo.CannotUndoException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -23,14 +26,14 @@ import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.access.AuthorEditorAccess;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.commons.id.DefaultUniqueAttributesRecognizer;
+import ro.sync.xsd.persistence.AdditionalPropertiesPO;
 
 import common.BaseAuthorOperation;
-import common.Dtbook110UniqueAttributesRecognizer;
+import common.id.dtbook110.Dtbook110UniqueAttributesRecognizer;
 
 public class FixTableHeadersOperation extends BaseAuthorOperation {
 
-	
-	private int getIntAttr(Element elem, String attrName, int defVal)
+	private static int getIntAttr(Element elem, String attrName, int defVal)
 			throws AuthorOperationException {
 		int res = defVal;
 		if (elem.hasAttribute(attrName)) {
@@ -45,24 +48,78 @@ public class FixTableHeadersOperation extends BaseAuthorOperation {
 		return res;
 	}
 	
-	private void setHeadersAttrInColumn(int colIndex, String id, Iterator<Element> trElements)
-		throws AuthorOperationException
+	private static boolean idrefsContainsId(String id, String idrefs) {
+		for (String idref : idrefs.split(" ")) {
+			if (idref == id) return true;
+		}
+		return false;
+	}
+	
+	private static void addIdToCellHeaders(Element cell, String id) {
+		if (cell.hasAttribute("headers")) {
+			String headers = cell.getAttribute("headers");
+			if (!idrefsContainsId(id, headers)) cell.setAttribute("headers", headers+" "+id);
+		}
+		else {
+			cell.setAttribute("headers", id);
+		}
+	}
+	
+	
+	private static Map<TableIndex, Element> generateTableMap(Element table) throws AuthorOperationException
 	{
-		while (trElements.hasNext()) {
-			Element tr = trElements.next();
-			int thisColIndex = 0;
-			Element td = (Element)tr.getFirstChild();
-			while (td!= null) {
-				if (colIndex==thisColIndex)
-				{
-					if (td.getLocalName()=="td")
-					{
-						td.setAttribute("headers", id);
+		HashMap<TableIndex, Element> result = new HashMap<TableIndex, Element>();
+		List<Element> tableRows = getTableRows(table);
+		for (int rowIndex = 0; rowIndex<tableRows.size(); rowIndex++) {
+			Element row = tableRows.get(rowIndex);
+			if (!row.hasChildNodes()) continue;
+			int colIndex = 0;
+			Element cell = (Element)row.getFirstChild();
+			while (cell != null) {
+				while (result.containsKey(new TableIndex(rowIndex, colIndex))) colIndex++;
+				int rowspan = getIntAttr(cell, "rowspan", 1);
+				int colspan = getIntAttr(cell, "colspan", 1);
+				for (int dr=0; dr<rowspan; dr++) {
+					for (int dc=0; dc<colspan; dc++) {
+						result.put(new TableIndex(rowIndex+dr, colIndex+dc), cell);
 					}
 				}
-				thisColIndex += getIntAttr(td, "colspan", 1);
+				colIndex += colspan;
+				if (cell.getNextSibling()!=null){
+					cell = (Element)cell.getNextSibling();
+				}
+				else {
+					cell = null;
+				}
 			}
+			
 		}
+		return result;
+	}
+
+	private static List<Element> getTableRows(Element table) throws AuthorOperationException {
+		List<Element> result = new ArrayList<Element>();
+		String expr;
+		XPath xpath = getXPath("d", table.getNamespaceURI());
+		NodeList tableRows;
+		try {
+			expr = (table.getNamespaceURI() == null) ? "thead/tr" : "d:thead/d:tr";
+			tableRows = (NodeList) xpath.evaluate(expr, table, XPathConstants.NODESET);
+			for (int i=0; i<tableRows.getLength(); i++) result.add((Element)tableRows.item(i));
+			expr = (table.getNamespaceURI() == null) ? "tr" : "d:tr";
+			tableRows = (NodeList) xpath.evaluate(expr, table, XPathConstants.NODESET);
+			for (int i=0; i<tableRows.getLength(); i++) result.add((Element)tableRows.item(i));
+			expr = (table.getNamespaceURI() == null) ? "tbody/tr" : "d:tbody/d:tr";
+			tableRows = (NodeList) xpath.evaluate(expr, table, XPathConstants.NODESET);
+			for (int i=0; i<tableRows.getLength(); i++) result.add((Element)tableRows.item(i));
+			expr = (table.getNamespaceURI() == null) ? "tfoot/tr" : "d:tfoot/d:tr";
+			tableRows = (NodeList) xpath.evaluate(expr, table, XPathConstants.NODESET);
+			for (int i=0; i<tableRows.getLength(); i++) result.add((Element)tableRows.item(i));
+		}
+		catch (Exception e) {
+			throw new AuthorOperationException("Unexpected exception occured in getTableRows method:\n"+e.getMessage(), e);
+		}
+		return result;
 	}
 
 	@Override
@@ -78,54 +135,55 @@ public class FixTableHeadersOperation extends BaseAuthorOperation {
 					throw new AuthorOperationException(
 							"The current selection is not inside a table");
 				}
+				
 				Dtbook110UniqueAttributesRecognizer uaReq = new Dtbook110UniqueAttributesRecognizer();
-				uaReq.assignUniqueIDs(tableAElem.getStartOffset(), tableAElem
-						.getEndOffset(), false);
+				uaReq.activated(access);
+				uaReq.assignUniqueIDs(tableAElem.getStartOffset(), tableAElem.getEndOffset(), false);
 
 				String tableXml = docCtrl.serializeFragmentToXML(docCtrl
 						.createDocumentFragment(tableAElem, true));
 				Element tableXmlElem = deserialize(tableXml);
+				
 
+				// Remove pre-existing headers attributes on td table cells
 				String expr = (tableXmlElem.getNamespaceURI() == null) ? "//tr/td"
 						: "//d:tr/d:td";
 				XPath xpath = getXPath("d", tableXmlElem.getNamespaceURI());
-				NodeList tableCells = (NodeList) xpath.evaluate(expr,
-						tableXmlElem, XPathConstants.NODESET);
+				NodeList tableCells = (NodeList) xpath.evaluate(expr, tableXmlElem, XPathConstants.NODESET);
 				for (int i = 0; i < tableCells.getLength(); i++) {
 					Element td = (Element) tableCells.item(i);
 					td.removeAttribute("headers");
 				}
-				Element firstTR = null;
-				expr = (tableXmlElem.getNamespaceURI() == null) ? "//tr[not(parent::tfoot)]"
-						: "//d:tr[not(parent::d:tfoot)]";
-				NodeList nl = (NodeList) xpath.evaluate(expr, tableXmlElem,
-						XPathConstants.NODESET);
-				if (nl.getLength() == 1) {
-					firstTR = (Element) nl.item(0);
-				}
 				
-				Set<Element> trElements = new HashSet<Element>();
-				nl = tableXmlElem.getElementsByTagName("tr");
-				for (int i=0; i<nl.getLength(); i++) trElements.add((Element)nl.item(i));
+				String comment = "";
 				
-				if (firstTR != null) {
-					int colIndex = 0;
-					Element th = (Element)firstTR.getFirstChild();
-					while (th!=null) {
-						if (th.getLocalName()=="th")
-						{
-							setHeadersAttrInColumn(colIndex, th.getAttribute("id"), trElements.iterator());							
+				Map<TableIndex, Element> tableMap = generateTableMap(tableXmlElem);
+				for (TableIndex rcIndex : tableMap.keySet()) {
+					comment += "("+rcIndex.RowIndex+","+rcIndex.ColIndex+"):"+tableMap.get(rcIndex).getAttribute("id")+";";
+					Element cell = tableMap.get(rcIndex);
+					if (rcIndex.RowIndex>0) {
+						Element colHeader = tableMap.get(new TableIndex(0, rcIndex.ColIndex));
+						if (colHeader!=null) {
+							if (colHeader.getLocalName()=="th" && colHeader.hasAttribute("id")) {
+								addIdToCellHeaders(cell, colHeader.getAttribute("id"));
+							}
 						}
-						colIndex += getIntAttr(th, "colspan", 1);
-						th = (Element)th.getNextSibling();
 					}
-						
+					if (rcIndex.ColIndex>0) {
+						Element rowHeader = tableMap.get(new TableIndex(rcIndex.RowIndex, 0));
+						if (rowHeader!=null) {
+							if (rowHeader.getLocalName()=="th" && rowHeader.hasAttribute("id")) {
+								addIdToCellHeaders(cell, rowHeader.getAttribute("id"));
+							}
+						}
+					}
 				}
-
+				comment = "<!--"+comment+"-->";
 				tableXml = serialize(tableXmlElem);
 
 				docCtrl.deleteNode(tableAElem);
 				docCtrl.insertXMLFragment(tableXml, access.getCaretOffset());
+				docCtrl.insertXMLFragment(comment, access.getCaretOffset());
 				docCtrl.endCompoundEdit();
 			} catch (Exception e) {
 				docCtrl.endCompoundEdit();

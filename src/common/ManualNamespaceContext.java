@@ -1,7 +1,6 @@
 package common;
 
 import java.util.*;
-import java.util.Iterator;
 
 import javax.xml.namespace.NamespaceContext;
 
@@ -32,13 +31,13 @@ public class ManualNamespaceContext implements NamespaceContext {
 
 	@Override
 	public String getPrefix(String namespaceURI) {
-		Iterator prefixes = getPrefixes(namespaceURI);
-		if (prefixes.hasNext()) return (String)prefixes.next();
+		Iterator<String> prefixes = getPrefixes(namespaceURI);
+		if (prefixes.hasNext()) return prefixes.next();
 		return null;
 	}
 	
 	@Override
-	public Iterator getPrefixes(String namespaceURI) {
+	public Iterator<String> getPrefixes(String namespaceURI) {
 		Iterator<String> prefixes = _prefixNSMap.keySet().iterator();
 		Set<String> res = new HashSet<String>();
 		while (prefixes.hasNext()){
