@@ -2,8 +2,17 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="lib/oxygen.jar" sourcepath="oxygen.zip"/>
+	<classpathentry kind="lib" path="lib/oxygen.jar" sourcepath="oxygen.zip">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/F:/software/oxygen/xml editor/oxygenAuthorSDK/doc/api/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="lib/log4j.jar"/>
 	<classpathentry kind="lib" path="lib/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="C:/Programmer/Microsoft SQL Server JDBC Driver 2.0/sqljdbc_2.0/enu/sqljdbc.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Programmer/Microsoft SQL Server JDBC Driver 2.0/sqljdbc_2.0/enu/help/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

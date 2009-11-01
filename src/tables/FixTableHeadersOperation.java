@@ -2,20 +2,14 @@ package tables;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import javax.swing.text.TabExpander;
 import javax.swing.undo.CannotUndoException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
 
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
@@ -23,10 +17,7 @@ import ro.sync.ecss.extensions.api.ArgumentsMap;
 import ro.sync.ecss.extensions.api.AuthorAccess;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
-import ro.sync.ecss.extensions.api.access.AuthorEditorAccess;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
-import ro.sync.ecss.extensions.commons.id.DefaultUniqueAttributesRecognizer;
-import ro.sync.xsd.persistence.AdditionalPropertiesPO;
 
 import common.BaseAuthorOperation;
 import common.id.dtbook110.Dtbook110UniqueAttributesRecognizer;
@@ -123,21 +114,21 @@ public class FixTableHeadersOperation extends BaseAuthorOperation {
 	}
 
 	@Override
-	public void doOperation(AuthorAccess access, ArgumentsMap map)
+	public void doOperation(AuthorAccess aa, ArgumentsMap args)
 			throws IllegalArgumentException, AuthorOperationException {
+		super.doOperation(aa, args);
 		try {
-			AuthorDocumentController docCtrl = access.getDocumentController();
+			AuthorDocumentController docCtrl = authorAccess.getDocumentController();
 			docCtrl.beginCompoundEdit();
 			try {
-				AuthorElement tableAElem = getNamedCommonParentElementOfSelection(
-						access, "table", null);
+				AuthorElement tableAElem = getNamedCommonParentElementOfSelection("table", null);
 				if (tableAElem == null) {
 					throw new AuthorOperationException(
 							"The current selection is not inside a table");
 				}
 				
 				Dtbook110UniqueAttributesRecognizer uaReq = new Dtbook110UniqueAttributesRecognizer();
-				uaReq.activated(access);
+				uaReq.activated(authorAccess);
 				uaReq.assignUniqueIDs(tableAElem.getStartOffset(), tableAElem.getEndOffset(), false);
 
 				String tableXml = docCtrl.serializeFragmentToXML(docCtrl
@@ -182,8 +173,8 @@ public class FixTableHeadersOperation extends BaseAuthorOperation {
 				tableXml = serialize(tableXmlElem);
 
 				docCtrl.deleteNode(tableAElem);
-				docCtrl.insertXMLFragment(tableXml, access.getCaretOffset());
-				docCtrl.insertXMLFragment(comment, access.getCaretOffset());
+				docCtrl.insertXMLFragment(tableXml, authorAccess.getCaretOffset());
+				docCtrl.insertXMLFragment(comment, authorAccess.getCaretOffset());
 				docCtrl.endCompoundEdit();
 			} catch (Exception e) {
 				docCtrl.endCompoundEdit();

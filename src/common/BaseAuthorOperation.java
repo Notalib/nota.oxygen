@@ -18,6 +18,7 @@ import org.w3c.dom.ls.LSInput;
 import org.w3c.dom.ls.LSParser;
 import org.w3c.dom.ls.LSSerializer;
 
+import ro.sync.ecss.extensions.api.ArgumentsMap;
 import ro.sync.ecss.extensions.api.AuthorAccess;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperation;
@@ -27,6 +28,31 @@ import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
 
 public abstract class BaseAuthorOperation implements AuthorOperation {
+	
+	protected AuthorAccess authorAccess;
+	@Override
+	public void doOperation(AuthorAccess aa, ArgumentsMap args)
+			throws IllegalArgumentException, AuthorOperationException {
+		authorAccess = aa;
+	}
+
+	protected boolean showOkCancelMessage(String title, String message) {
+		int answer = authorAccess.getWorkspaceAccess().showConfirmDialog(
+				title, 
+				message, 
+				new String[] {"OK", "Cancel"}, 
+				new int[] {0, 1});
+		return answer==0;
+	}
+	
+	protected void showMessage(String message) {
+		
+		authorAccess.getWorkspaceAccess().showConfirmDialog(
+				getDescription(),
+				message,
+				new String[] {"OK"},
+				new int[] {0});
+	}
 	
 	public static XPath getXPath(String prefix, String namespace)
 	{
@@ -42,29 +68,39 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 		return xpath;
 	}
 	
-	public static AuthorNode getCommonParentNodeOfSelection(AuthorAccess access) throws AuthorOperationException
+	public AuthorNode getCommonParentNodeOfSelection() throws AuthorOperationException
 	{
-		AuthorDocumentController docCtrl = access.getDocumentController();
-		AuthorEditorAccess edtAccess = access.getEditorAccess();
+		AuthorDocumentController docCtrl = authorAccess.getDocumentController();
+		AuthorEditorAccess edtAccess = authorAccess.getEditorAccess();
 		try
 		{
-			return docCtrl.getCommonParentNode(
+			AuthorNode parent = docCtrl.getCommonParentNode(
 					docCtrl.getAuthorDocumentNode(), edtAccess.getSelectionStart(), edtAccess.getSelectionEnd());
+			if (parent.getType()==AuthorNode.NODE_TYPE_ELEMENT) {
+				AuthorElement elem = (AuthorElement)parent;
+				for (AuthorNode c : elem.getContentNodes()) {
+					if (c.getStartOffset()==edtAccess.getSelectionStart() 
+							&& c.getEndOffset()==edtAccess.getSelectionEnd()-1) {
+						return c;
+					}
+				}
+			}
+			return parent;
 		}
 		catch (BadLocationException e)
 		{
-			throw new AuthorOperationException("Current select does not have a common parent node", e);
+			throw new AuthorOperationException("Current selection does not have a common parent node", e);
 		}
 	}
 	
-	public static AuthorElement getCommonParentElementOfSelection(AuthorAccess access) throws AuthorOperationException
+	public AuthorElement getCommonParentElementOfSelection() throws AuthorOperationException
 	{
-		return getAncestorOrSelfElement(getCommonParentNodeOfSelection(access));
+		return getAncestorOrSelfElement(getCommonParentNodeOfSelection());
 	}
 	
-	public static AuthorElement getNamedCommonParentElementOfSelection(AuthorAccess access, String ln, String ns) throws AuthorOperationException
+	public AuthorElement getNamedCommonParentElementOfSelection(String ln, String ns) throws AuthorOperationException
 	{
-		AuthorElement curElem = getCommonParentElementOfSelection(access);
+		AuthorElement curElem = getCommonParentElementOfSelection();
 		while (true)
 		{
 			if (ns==null) {
@@ -132,5 +168,7 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 					"Unexpected exception occured while deserializing node from xml:\n"+xml+"\n"+e.getMessage(), e);
 		}
 	}
+	
+	
 		
 }
