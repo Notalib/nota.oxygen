@@ -29,15 +29,38 @@ import ro.sync.ecss.extensions.api.node.AuthorNode;
 
 public abstract class BaseAuthorOperation implements AuthorOperation {
 	
-	protected AuthorAccess authorAccess;
+	private AuthorAccess authorAccess;
+	
+	protected abstract void doOperation() 
+		throws AuthorOperationException; 
+	
+	protected abstract void parseArguments(ArgumentsMap args)
+			throws IllegalArgumentException;
+
 	@Override
-	public void doOperation(AuthorAccess aa, ArgumentsMap args)
+	public final void doOperation(AuthorAccess aa, ArgumentsMap args)
 			throws IllegalArgumentException, AuthorOperationException {
 		authorAccess = aa;
+		parseArguments(args);
+		AuthorDocumentController docCtrl = getAuthorAccess().getDocumentController();
+		docCtrl.beginCompoundEdit();
+		try {
+			doOperation();
+		}
+		catch (AuthorOperationException e) {
+			docCtrl.endCompoundEdit();
+			try {
+				docCtrl.getUndoManager().undo();
+			} catch (Exception e2) {
+				// Do nothing
+			}
+			throw e;
+		}
+		docCtrl.endCompoundEdit();
 	}
 
 	protected boolean showOkCancelMessage(String title, String message) {
-		int answer = authorAccess.getWorkspaceAccess().showConfirmDialog(
+		int answer = getAuthorAccess().getWorkspaceAccess().showConfirmDialog(
 				title, 
 				message, 
 				new String[] {"OK", "Cancel"}, 
@@ -47,7 +70,7 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 	
 	protected void showMessage(String message) {
 		
-		authorAccess.getWorkspaceAccess().showConfirmDialog(
+		getAuthorAccess().getWorkspaceAccess().showConfirmDialog(
 				getDescription(),
 				message,
 				new String[] {"OK"},
@@ -70,8 +93,8 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 	
 	public AuthorNode getCommonParentNodeOfSelection() throws AuthorOperationException
 	{
-		AuthorDocumentController docCtrl = authorAccess.getDocumentController();
-		AuthorEditorAccess edtAccess = authorAccess.getEditorAccess();
+		AuthorDocumentController docCtrl = getAuthorAccess().getDocumentController();
+		AuthorEditorAccess edtAccess = getAuthorAccess().getEditorAccess();
 		try
 		{
 			AuthorNode parent = docCtrl.getCommonParentNode(
@@ -138,6 +161,18 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 		
 	}
 	
+	public String serialize(AuthorNode input) throws AuthorOperationException {
+		AuthorDocumentController docCtrl = getAuthorAccess().getDocumentController();
+		try {
+			return docCtrl.serializeFragmentToXML(docCtrl.createDocumentFragment(input, true));
+		}
+		catch (BadLocationException e) {
+			throw new AuthorOperationException(
+					"Unexpected BadLocationException: "+e.getMessage(),
+					e);
+		}
+	}
+	
 	public static String serialize(Node input) throws AuthorOperationException
 	{
 		LSSerializer writer = getDOMImplementation().createLSSerializer();
@@ -167,6 +202,10 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 			throw new AuthorOperationException(
 					"Unexpected exception occured while deserializing node from xml:\n"+xml+"\n"+e.getMessage(), e);
 		}
+	}
+
+	protected AuthorAccess getAuthorAccess() {
+		return authorAccess;
 	}
 	
 	

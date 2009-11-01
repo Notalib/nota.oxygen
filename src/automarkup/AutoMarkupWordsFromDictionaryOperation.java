@@ -1,22 +1,35 @@
 package automarkup;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
-import ro.sync.ecss.extensions.api.*;
-import ro.sync.ecss.extensions.api.access.AuthorEditorAccess;
+import ro.sync.ecss.extensions.api.ArgumentDescriptor;
+import ro.sync.ecss.extensions.api.ArgumentsMap;
+import ro.sync.ecss.extensions.api.AuthorDocumentController;
+import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.access.AuthorWorkspaceAccess;
-import ro.sync.ecss.extensions.api.node.*;
+import ro.sync.ecss.extensions.api.node.AuthorElement;
+import ro.sync.ecss.extensions.api.node.AuthorNode;
+
 import common.BaseAuthorOperation;
 
 public class AutoMarkupWordsFromDictionaryOperation extends BaseAuthorOperation {
 	
 	private static Set<String> getWords(String connection, String table)
-			throws AuthorOperationException {
+			throws IllegalArgumentException {
 		Set<String> words = new HashSet<String>();
 		try	{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -29,7 +42,7 @@ public class AutoMarkupWordsFromDictionaryOperation extends BaseAuthorOperation 
 				
 		}
 		catch (Exception e) {
-			throw new AuthorOperationException(
+			throw new IllegalArgumentException(
 					"Unexpected "+e.getClass().getName()
 					+" occured while retrieving word dictionary from database:\n"+e.getMessage(),
 					e);
@@ -81,32 +94,14 @@ public class AutoMarkupWordsFromDictionaryOperation extends BaseAuthorOperation 
 		}
 	}
 	
-	
 
 	@Override
-	public void doOperation(AuthorAccess aa, ArgumentsMap args)
-			throws IllegalArgumentException, AuthorOperationException {
-		super.doOperation(aa, args);
-		AuthorDocumentController docCtrl = authorAccess.getDocumentController();
-		AuthorWorkspaceAccess authorWrksp = authorAccess.getWorkspaceAccess();
+	public void doOperation()
+			throws AuthorOperationException {
+		AuthorDocumentController docCtrl = getAuthorAccess().getDocumentController();
+		AuthorWorkspaceAccess authorWrksp = getAuthorAccess().getWorkspaceAccess();
 		docCtrl.beginCompoundEdit();
-		try
-		{
-			String connection = (String)args.getArgumentValue(ARG_CONNECTION);
-			String table = (String)args.getArgumentValue(ARG_TABLE);
-			fragment = deserialize((String)args.getArgumentValue(ARG_FRAGMENT));
-			if (fragment == null) {
-				throw new AuthorOperationException("Could not load fragment \""+(String)args.getArgumentValue(ARG_FRAGMENT)+"\""); 
-			}
-			insertCount = 0;
-			words = getWords(connection, table);
-			parents = new HashSet<String>();
-			ignoreCase = (((String)args.getArgumentValue(ARG_IGNORE_CASE))=="true");
-			wordChars = (String)args.getArgumentValue(ARG_WORD_CHARS);
-			wordPattern = Pattern.compile("\\b["+wordChars+"]+\\b", ignoreCase ? Pattern.CASE_INSENSITIVE : 0);
-			contentRoot = (String)args.getArgumentValue(ARG_CONTENT_ROOT);
-			String pArg = (String)args.getArgumentValue(ARG_PARENTS);
-			for (String p : pArg.split(" ")) parents.add(p);
+		try {
 			AuthorNode nod = getCommonParentNodeOfSelection();
 			if (nod==docCtrl.getAuthorDocumentNode()) {
 				AuthorElement root = docCtrl.getAuthorDocumentNode().getRootElement();
@@ -123,23 +118,21 @@ public class AutoMarkupWordsFromDictionaryOperation extends BaseAuthorOperation 
 			ownerDoc = elem.getOwnerDocument();
 			applyMarkup(elem);
 			xml = serialize(elem);
-			showMessage(xml.substring(0, 2048));
 			docCtrl.deleteNode(nod);
-			docCtrl.insertXMLFragment(xml, authorAccess.getCaretOffset());
+			docCtrl.insertXMLFragment(xml, getAuthorAccess().getCaretOffset());
 			authorWrksp.showInformationMessage("Applied markup "+fragment.getLocalName()+" to "+insertCount+" words");
 		}
 		catch (AuthorOperationException e) {
 			throw e;
 		}
 		catch (Exception e) {
+			docCtrl.endCompoundEdit();
+			docCtrl.getUndoManager().undo();
 			throw new AuthorOperationException(
 					"An unexpected "+e.getClass().getName()+" occured: "+e.getMessage(), 
 					e);
 		}
-		finally {
-			docCtrl.endCompoundEdit();
-		}
-		authorAccess = null;
+		docCtrl.endCompoundEdit();
 	}
 
 	@Override
@@ -214,6 +207,34 @@ public class AutoMarkupWordsFromDictionaryOperation extends BaseAuthorOperation 
 	@Override
 	public String getDescription() {
 		return "Auto applies inline markup to words from a database stored dictionary";
+	}
+
+	@Override
+	protected void parseArguments(ArgumentsMap args)
+			throws IllegalArgumentException {
+		String connection = (String)args.getArgumentValue(ARG_CONNECTION);
+		String table = (String)args.getArgumentValue(ARG_TABLE);
+		String f = (String)args.getArgumentValue(ARG_FRAGMENT);
+		try {
+			fragment = deserialize(f);
+			
+		} catch (AuthorOperationException e) {
+			throw new IllegalArgumentException(
+					"Could not deserialize fragment \""+f+"\":\n"+e.getMessage(),
+					e);
+		}
+		if (fragment == null) {
+			throw new IllegalArgumentException("Could not load fragment \""+f+"\""); 
+		}
+		insertCount = 0;
+		words = getWords(connection, table);
+		ignoreCase = (((String)args.getArgumentValue(ARG_IGNORE_CASE))=="true");
+		wordChars = (String)args.getArgumentValue(ARG_WORD_CHARS);
+		wordPattern = Pattern.compile("\\b["+wordChars+"]+\\b", ignoreCase ? Pattern.CASE_INSENSITIVE : 0);
+		contentRoot = (String)args.getArgumentValue(ARG_CONTENT_ROOT);
+		parents = new HashSet<String>();
+		String pArg = (String)args.getArgumentValue(ARG_PARENTS);
+		for (String p : pArg.split(" ")) parents.add(p);
 	}
 
 }

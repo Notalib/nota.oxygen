@@ -14,7 +14,6 @@ import org.w3c.dom.NodeList;
 
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
-import ro.sync.ecss.extensions.api.AuthorAccess;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
@@ -114,11 +113,10 @@ public class FixTableHeadersOperation extends BaseAuthorOperation {
 	}
 
 	@Override
-	public void doOperation(AuthorAccess aa, ArgumentsMap args)
-			throws IllegalArgumentException, AuthorOperationException {
-		super.doOperation(aa, args);
+	public void doOperation()
+			throws AuthorOperationException {
 		try {
-			AuthorDocumentController docCtrl = authorAccess.getDocumentController();
+			AuthorDocumentController docCtrl = getAuthorAccess().getDocumentController();
 			docCtrl.beginCompoundEdit();
 			try {
 				AuthorElement tableAElem = getNamedCommonParentElementOfSelection("table", null);
@@ -128,7 +126,7 @@ public class FixTableHeadersOperation extends BaseAuthorOperation {
 				}
 				
 				Dtbook110UniqueAttributesRecognizer uaReq = new Dtbook110UniqueAttributesRecognizer();
-				uaReq.activated(authorAccess);
+				uaReq.activated(getAuthorAccess());
 				uaReq.assignUniqueIDs(tableAElem.getStartOffset(), tableAElem.getEndOffset(), false);
 
 				String tableXml = docCtrl.serializeFragmentToXML(docCtrl
@@ -173,8 +171,8 @@ public class FixTableHeadersOperation extends BaseAuthorOperation {
 				tableXml = serialize(tableXmlElem);
 
 				docCtrl.deleteNode(tableAElem);
-				docCtrl.insertXMLFragment(tableXml, authorAccess.getCaretOffset());
-				docCtrl.insertXMLFragment(comment, authorAccess.getCaretOffset());
+				docCtrl.insertXMLFragment(tableXml, getAuthorAccess().getCaretOffset());
+				docCtrl.insertXMLFragment(comment, getAuthorAccess().getCaretOffset());
 				docCtrl.endCompoundEdit();
 			} catch (Exception e) {
 				docCtrl.endCompoundEdit();
@@ -202,6 +200,13 @@ public class FixTableHeadersOperation extends BaseAuthorOperation {
 	@Override
 	public String getDescription() {
 		return "Fix table header attributes";
+	}
+
+	@Override
+	protected void parseArguments(ArgumentsMap args)
+			throws IllegalArgumentException {
+		// No arguments to parse
+		
 	}
 
 }
