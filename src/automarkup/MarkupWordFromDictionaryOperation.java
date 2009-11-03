@@ -2,9 +2,6 @@ package automarkup;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.regex.Pattern;
-
-import org.w3c.dom.Element;
 
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;

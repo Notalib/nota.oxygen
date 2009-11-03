@@ -24,6 +24,7 @@ import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperation;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.access.AuthorEditorAccess;
+import ro.sync.ecss.extensions.api.node.AuthorDocumentFragment;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
 
@@ -49,16 +50,11 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 		}
 		catch (AuthorOperationException e) {
 			docCtrl.endCompoundEdit();
-			try {
-				docCtrl.getUndoManager().undo();
-			} catch (Exception e2) {
-				// Do nothing
-			}
-			throw e;
+  			throw e;
 		}
 		docCtrl.endCompoundEdit();
 	}
-
+	
 	protected boolean showOkCancelMessage(String title, String message) {
 		int answer = getAuthorAccess().getWorkspaceAccess().showConfirmDialog(
 				title, 
@@ -127,11 +123,15 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 		while (true)
 		{
 			if (ns==null) {
-				if (curElem.getLocalName()==ln) return curElem;
+				if (curElem.getLocalName().equals(ln)) return curElem;
 			}
 			else {
-				if (curElem.getLocalName()==ln && curElem.getNamespace()==ns) return curElem;
+				if (curElem.getLocalName().equals(ln) && curElem.getNamespace().equals(ns)) return curElem;
 			}
+			showMessage(
+					"Common element: "
+					+curElem.getName()+"[@id='"+curElem.getAttribute("id").getValue()+"'] "
+					+"does not match "+ns+":"+ln);
 			if (!(curElem.getParent() instanceof AuthorElement)) return null;
 			curElem = (AuthorElement)curElem.getParent();
 		}
@@ -162,9 +162,13 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 	}
 	
 	public String serialize(AuthorNode input) throws AuthorOperationException {
+		return serialize(input,	true);
+	}
+	
+	public String serialize(AuthorNode input, boolean copyContent) throws AuthorOperationException {
 		AuthorDocumentController docCtrl = getAuthorAccess().getDocumentController();
 		try {
-			return docCtrl.serializeFragmentToXML(docCtrl.createDocumentFragment(input, true));
+			return docCtrl.serializeFragmentToXML(docCtrl.createDocumentFragment(input, copyContent));
 		}
 		catch (BadLocationException e) {
 			throw new AuthorOperationException(

@@ -20,7 +20,6 @@ public class Dtbook110UniqueAttributesRecognizer extends
 					"bdo", 
 					"blockquote", 
 					"bodymatter", 
-					"book", 
 					"br", 
 					"caption", 
 					"cite", 
@@ -34,7 +33,6 @@ public class Dtbook110UniqueAttributesRecognizer extends
 					"docauthor", 
 					"doctitle", 
 					"dt", 
-					"dtbook", 
 					"em", 
 					"frontmatter", 
 					"h1", 
@@ -63,7 +61,6 @@ public class Dtbook110UniqueAttributesRecognizer extends
 					"linenum", 
 					"link", 
 					"list", 
-					"meta", 
 					"note", 
 					"noteref", 
 					"notice", 
@@ -86,7 +83,6 @@ public class Dtbook110UniqueAttributesRecognizer extends
 					"tfoot", 
 					"th", 
 					"thead", 
-					"title", 
 					"tr", 
 					"w"});
 	
