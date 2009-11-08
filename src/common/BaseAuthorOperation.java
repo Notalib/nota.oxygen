@@ -24,10 +24,13 @@ import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperation;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.access.AuthorEditorAccess;
-import ro.sync.ecss.extensions.api.node.AuthorDocumentFragment;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
 
+/**
+ * Abstract base class for {@link AuthorOperation} providing convenience methods
+ * @author Ole Holst Andersen (oha@nota.nu)
+ */
 public abstract class BaseAuthorOperation implements AuthorOperation {
 	
 	private AuthorAccess authorAccess;
@@ -37,6 +40,24 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 	
 	protected abstract void parseArguments(ArgumentsMap args)
 			throws IllegalArgumentException;
+	
+	/**
+	 * Gets a descendant {@link Element} by id
+	 * @param root	The root of the descendant tree 
+	 * @param id	The id
+	 * @return		The first descendant {@link Element} with the given id or {@code null} if no such element exists
+	 */
+	public static Element getDescentantElementById(Element root, String id) {
+		for (int i=0; i<root.getChildNodes().getLength(); i++) {
+			if (root.getChildNodes().item(i) instanceof Element) {
+				Element child = (Element)root.getChildNodes().item(i);
+				if (id.equals(child.getAttribute("id"))) return child;
+				Element tmp = getDescentantElementById(child, id);
+				if (tmp!=null) return tmp;
+			}
+		}
+		return null;
+	}
 
 	@Override
 	public final void doOperation(AuthorAccess aa, ArgumentsMap args)
@@ -73,6 +94,12 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 				new int[] {0});
 	}
 	
+	/**
+	 * Create an {@link XPath} initialized with the given namespace/prefix pair 
+	 * @param prefix		The prefix
+	 * @param namespace		The namespace
+	 * @return				The created {@link XPath}
+	 */
 	public static XPath getXPath(String prefix, String namespace)
 	{
 		Map<String,String> pNSMap = new HashMap<String,String>();
@@ -80,6 +107,12 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 		return getXPath(pNSMap);
 	}
 	
+	
+	/**
+	 * Creates a {@link XPath} inistalized with the given prefix/namespace {@link Map}
+	 * @param prefixNSMap	The given {@link Map}
+	 * @return				The created {@link XPath}
+	 */
 	public static XPath getXPath(Map<String,String> prefixNSMap)
 	{
 		XPath xpath = XPathFactory.newInstance().newXPath();
@@ -87,6 +120,12 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 		return xpath;
 	}
 	
+	/**
+	 * Gets the common parent {@link AuthorNode} of the current selection
+	 * @return		The common parent {@link AuthorNode}
+	 * @throws AuthorOperationException
+	 * 				When the current does not have a common parent {@link AuthorNode} 
+	 */
 	public AuthorNode getCommonParentNodeOfSelection() throws AuthorOperationException
 	{
 		AuthorDocumentController docCtrl = getAuthorAccess().getDocumentController();
@@ -112,11 +151,27 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 		}
 	}
 	
+	/**
+	 * Get the common parent {@link AuthorElement} of the current selection
+	 * @return		The common parent {@link AuthorElement}
+	 * @throws AuthorOperationException
+	 * 				When the current selection does not have a common parent {@link AuthorElement}
+	 */
 	public AuthorElement getCommonParentElementOfSelection() throws AuthorOperationException
 	{
 		return getAncestorOrSelfElement(getCommonParentNodeOfSelection());
 	}
 	
+	/**
+	 * Gets the common parent {@link AuthorElement} with the given QName of the current selection
+	 * @param ln	The local-name part of the QName
+	 * @param ns	The name-space part of the QName 
+	 * 				- if {@code null} the common parent {@link AuthorElement} with the given local-name is returned
+	 * @return		The common parent {@link AuthorElement} with the given QName 
+	 * 				or {@code null} if no such common parent {@link AuthorElement} exists
+	 * @throws AuthorOperationException
+	 * 				When the current selection has no common parent {@link AuthorElement} (with any QName)
+	 */
 	public AuthorElement getNamedCommonParentElementOfSelection(String ln, String ns) throws AuthorOperationException
 	{
 		AuthorElement curElem = getCommonParentElementOfSelection();
@@ -128,16 +183,17 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 			else {
 				if (curElem.getLocalName().equals(ln) && curElem.getNamespace().equals(ns)) return curElem;
 			}
-			showMessage(
-					"Common element: "
-					+curElem.getName()+"[@id='"+curElem.getAttribute("id").getValue()+"'] "
-					+"does not match "+ns+":"+ln);
 			if (!(curElem.getParent() instanceof AuthorElement)) return null;
 			curElem = (AuthorElement)curElem.getParent();
 		}
 	}
 	
 	
+	/**
+	 * Gets the nearest ancestor or self {@link AuthorElement} of a given {@link AuthorNode}
+	 * @param node	The given {@link AuthorNode}
+	 * @return		The nearest ancestor or self {@link AuthorElement}
+	 */
 	public static AuthorElement getAncestorOrSelfElement(AuthorNode node)
 	{
 		while (node!=null)
@@ -161,10 +217,25 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 		
 	}
 	
+	/**
+	 * Serializes a {@link AuthorNode} to it's xml representation, including all content nodes
+	 * @param input		The {@link AuthorNode} to serialize
+	 * @return			The serialized xml representation
+	 * @throws AuthorOperationException
+	 * 					When the given {@link AuthorNode} unexpectedly could not be serialized
+	 */
 	public String serialize(AuthorNode input) throws AuthorOperationException {
 		return serialize(input,	true);
 	}
 	
+	/**
+	 * Serialized a {@link AuthorNode}, optionally including all content nodes
+	 * @param input			The {@link AuthorNode} to serialize
+	 * @param copyContent	A {@link Boolean} indicating if content nodes should also be serailized
+	 * @return				The serialized xml representation
+	 * @throws AuthorOperationException
+	 * 					When the given {@link AuthorNode} unexpectedly could not be serialized
+	 */
 	public String serialize(AuthorNode input, boolean copyContent) throws AuthorOperationException {
 		AuthorDocumentController docCtrl = getAuthorAccess().getDocumentController();
 		try {
@@ -177,6 +248,13 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 		}
 	}
 	
+	/**
+	 * Serializes a {@link Node} to it's xml representation
+	 * @param input		The {@link Node} to serailize
+	 * @return			The serialized xml
+	 * @throws AuthorOperationException
+	 * 					When a {@link LSSerializer} for some reason could not be created
+	 */
 	public static String serialize(Node input) throws AuthorOperationException
 	{
 		LSSerializer writer = getDOMImplementation().createLSSerializer();
@@ -184,6 +262,13 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 		return writer.writeToString(input);
 	}
 	
+	/**
+	 * De-serializes a xml element {@link String} representation to a {@link Element} 
+	 * @param xml	The xml to de-serailize
+	 * @return		The de-serailized {@link Element}
+	 * @throws AuthorOperationException
+	 * 				When the given xml could not be de-serialized
+	 */
 	public static Element deserialize(String xml) throws AuthorOperationException
 	{
 		try

@@ -10,6 +10,10 @@ import ro.sync.ecss.extensions.api.AuthorOperationException;
 
 import common.BaseAuthorOperation;
 
+/**
+ * Mark-up words and optionally add them to dictionary
+ * @author Ole Holst Andersen (oha@nota.nu)
+ */
 public class MarkupWordFromDictionaryOperation extends
 		BaseAuthorOperation {
 

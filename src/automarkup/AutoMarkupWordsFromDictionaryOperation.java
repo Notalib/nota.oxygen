@@ -26,6 +26,10 @@ import ro.sync.ecss.extensions.api.node.AuthorNode;
 
 import common.BaseAuthorOperation;
 
+/**
+ * Automatically applies markup to words from a dictionary
+ * @author Ole Holst Andersen (oha@nota.nu)
+ */
 public class AutoMarkupWordsFromDictionaryOperation extends BaseAuthorOperation {
 	
 	private static Set<String> getWords(String connection, String table)

@@ -6,6 +6,10 @@ import ro.sync.ecss.extensions.api.AuthorExtensionStateListener;
 import ro.sync.ecss.extensions.api.ExtensionsBundle;
 import ro.sync.ecss.extensions.api.UniqueAttributesRecognizer;
 
+/**
+ * Extension bundle for dtbook v1.1.0
+ * @author Ole Holst Andersen (oha@nota.nu)
+ */
 public class Dtbook110ExtensionBundle extends ExtensionsBundle {
 
 	@Override

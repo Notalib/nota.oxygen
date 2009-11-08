@@ -4,15 +4,18 @@ import java.util.*;
 
 import javax.xml.namespace.NamespaceContext;
 
+/**
+ * {@link NamespaceContext} based on a {@link Map}, that the user manually adds prefix/name-space pairs to
+ * @author OHA
+ */
 public class ManualNamespaceContext implements NamespaceContext {
 
 	Map<String,String> _prefixNSMap = new HashMap<String,String>(); 
-	
-	public ManualNamespaceContext()
-	{
-		
-	}
-	
+
+	/**
+	 * Creates a {@link ManualNamespaceContext} initialized with prefix/name-space pairs from a given {@link Map}
+	 * @param map	The given {@link Map}, mapping prefixes to name-spces
+	 */
 	public ManualNamespaceContext(Map<String,String> map)
 	{
 		Iterator<String> itr = map.keySet().iterator();
@@ -47,6 +50,11 @@ public class ManualNamespaceContext implements NamespaceContext {
 		return res.iterator();
 	}
 	
+	/**
+	 * Maps a given prefix to a given name-space
+	 * @param prefix		The prefix
+	 * @param namespace		The name-space
+	 */
 	public void mapPrefix(String prefix, String namespace)
 	{
 		if (namespace==null)

@@ -10,6 +10,10 @@ import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
 
+/**
+ *	Operation that deleted the parent xml tag of the current selection
+ * @author Ole Holst Andersen (oha@nota.nu)
+ */
 public class DeleteParentElementOperation extends BaseAuthorOperation {
 
 	@Override

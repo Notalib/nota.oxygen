@@ -3,6 +3,10 @@ package common.id.dtbook110;
 import ro.sync.ecss.extensions.commons.id.ConfigureAutoIDElementsOperation;
 import ro.sync.ecss.extensions.commons.id.GenerateIDElementsInfo;
 
+/**
+ * Configures for which elements auto-id generation works 
+ * @author Ole Holst Andersen (oha@nota.nu)
+ */
 public class Dtbook110ConfigureAutoIDElementsOperation extends
 		ConfigureAutoIDElementsOperation {
 

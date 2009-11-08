@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.undo.CannotUndoException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 
@@ -21,6 +20,10 @@ import ro.sync.ecss.extensions.api.node.AuthorElement;
 import common.BaseAuthorOperation;
 import common.id.dtbook110.Dtbook110UniqueAttributesRecognizer;
 
+/**
+ * Fixes the headers attribute of the cell in the selected table
+ * @author Ole Holst Andersen (oha@nota.nu)
+ */
 public class FixTableHeadersOperation extends BaseAuthorOperation {
 
 	private static int getIntAttr(Element elem, String attrName, int defVal)
@@ -117,72 +120,61 @@ public class FixTableHeadersOperation extends BaseAuthorOperation {
 			throws AuthorOperationException {
 		try {
 			AuthorDocumentController docCtrl = getAuthorAccess().getDocumentController();
-			docCtrl.beginCompoundEdit();
-			try {
-				AuthorElement tableAElem = getNamedCommonParentElementOfSelection("table", null);
-				if (tableAElem == null) {
-					throw new AuthorOperationException(
-							"The current selection is not inside a table");
-				}
-				
-				Dtbook110UniqueAttributesRecognizer uaReq = new Dtbook110UniqueAttributesRecognizer();
-				uaReq.activated(getAuthorAccess());
-				uaReq.assignUniqueIDs(tableAElem.getStartOffset(), tableAElem.getEndOffset(), false);
-
-				String tableXml = docCtrl.serializeFragmentToXML(docCtrl
-						.createDocumentFragment(tableAElem, true));
-				Element tableXmlElem = deserialize(tableXml);
-				
-
-				// Remove pre-existing headers attributes on td table cells
-				String expr = (tableXmlElem.getNamespaceURI() == null) ? "//tr/td"
-						: "//d:tr/d:td";
-				XPath xpath = getXPath("d", tableXmlElem.getNamespaceURI());
-				NodeList tableCells = (NodeList) xpath.evaluate(expr, tableXmlElem, XPathConstants.NODESET);
-				for (int i = 0; i < tableCells.getLength(); i++) {
-					Element td = (Element) tableCells.item(i);
-					td.removeAttribute("headers");
-				}
-				
-				String comment = "";
-				
-				Map<TableIndex, Element> tableMap = generateTableMap(tableXmlElem);
-				for (TableIndex rcIndex : tableMap.keySet()) {
-					comment += "("+rcIndex.RowIndex+","+rcIndex.ColIndex+"):"+tableMap.get(rcIndex).getAttribute("id")+";";
-					Element cell = tableMap.get(rcIndex);
-					if (rcIndex.RowIndex>0) {
-						Element colHeader = tableMap.get(new TableIndex(0, rcIndex.ColIndex));
-						if (colHeader!=null) {
-							if (colHeader.getLocalName()=="th" && colHeader.hasAttribute("id")) {
-								addIdToCellHeaders(cell, colHeader.getAttribute("id"));
-							}
-						}
-					}
-					if (rcIndex.ColIndex>0) {
-						Element rowHeader = tableMap.get(new TableIndex(rcIndex.RowIndex, 0));
-						if (rowHeader!=null) {
-							if (rowHeader.getLocalName()=="th" && rowHeader.hasAttribute("id")) {
-								addIdToCellHeaders(cell, rowHeader.getAttribute("id"));
-							}
-						}
-					}
-				}
-				comment = "<!--"+comment+"-->";
-				tableXml = serialize(tableXmlElem);
-
-				docCtrl.deleteNode(tableAElem);
-				docCtrl.insertXMLFragment(tableXml, getAuthorAccess().getCaretOffset());
-				docCtrl.insertXMLFragment(comment, getAuthorAccess().getCaretOffset());
-				docCtrl.endCompoundEdit();
-			} catch (Exception e) {
-				docCtrl.endCompoundEdit();
-				try {
-					docCtrl.getUndoManager().undo();
-				} catch (CannotUndoException es) {
-					// Do nothing
-				}
-				throw e;
+			AuthorElement tableAElem = getNamedCommonParentElementOfSelection("table", null);
+			if (tableAElem == null) {
+				throw new AuthorOperationException(
+						"The current selection is not inside a table");
 			}
+			
+			Dtbook110UniqueAttributesRecognizer uaReq = new Dtbook110UniqueAttributesRecognizer();
+			uaReq.activated(getAuthorAccess());
+			
+			uaReq.assignUniqueIDs(tableAElem.getStartOffset(), tableAElem.getEndOffset(), false);
+
+			String tableXml = docCtrl.serializeFragmentToXML(docCtrl
+					.createDocumentFragment(tableAElem, true));
+			Element tableXmlElem = deserialize(tableXml);
+			
+
+			// Remove pre-existing headers attributes on td table cells
+			String expr = (tableXmlElem.getNamespaceURI() == null) ? "//tr/td"
+					: "//d:tr/d:td";
+			XPath xpath = getXPath("d", tableXmlElem.getNamespaceURI());
+			NodeList tableCells = (NodeList) xpath.evaluate(expr, tableXmlElem, XPathConstants.NODESET);
+			for (int i = 0; i < tableCells.getLength(); i++) {
+				Element td = (Element) tableCells.item(i);
+				td.removeAttribute("headers");
+			}
+			
+			String comment = "";
+			
+			Map<TableIndex, Element> tableMap = generateTableMap(tableXmlElem);
+			for (TableIndex rcIndex : tableMap.keySet()) {
+				comment += "("+rcIndex.RowIndex+","+rcIndex.ColIndex+"):"+tableMap.get(rcIndex).getAttribute("id")+";";
+				Element cell = tableMap.get(rcIndex);
+				if (rcIndex.RowIndex>0) {
+					Element colHeader = tableMap.get(new TableIndex(0, rcIndex.ColIndex));
+					if (colHeader!=null) {
+						if (colHeader.getLocalName()=="th" && colHeader.hasAttribute("id")) {
+							addIdToCellHeaders(cell, colHeader.getAttribute("id"));
+						}
+					}
+				}
+				if (rcIndex.ColIndex>0) {
+					Element rowHeader = tableMap.get(new TableIndex(rcIndex.RowIndex, 0));
+					if (rowHeader!=null) {
+						if (rowHeader.getLocalName()=="th" && rowHeader.hasAttribute("id")) {
+							addIdToCellHeaders(cell, rowHeader.getAttribute("id"));
+						}
+					}
+				}
+			}
+			comment = "<!--"+comment+"-->";
+			tableXml = serialize(tableXmlElem);
+
+			docCtrl.deleteNode(tableAElem);
+			docCtrl.insertXMLFragment(tableXml, getAuthorAccess().getCaretOffset());
+			docCtrl.insertXMLFragment(comment, getAuthorAccess().getCaretOffset());
 		} catch (AuthorOperationException e) {
 			throw e;
 		} catch (Exception e) {

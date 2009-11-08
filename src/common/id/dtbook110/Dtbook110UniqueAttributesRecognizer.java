@@ -3,9 +3,16 @@ package common.id.dtbook110;
 import ro.sync.ecss.extensions.commons.id.DefaultUniqueAttributesRecognizer;
 import ro.sync.ecss.extensions.commons.id.GenerateIDElementsInfo;
 
+/**
+ * {@link DefaultUniqueAttributesRecognizer} for dtbook v 1.1.0
+ * @author Ole Holst Andersen (oha@nota.nu)
+ */
 public class Dtbook110UniqueAttributesRecognizer extends
 		DefaultUniqueAttributesRecognizer {
 	
+	/**
+	 * The default {@link GenerateIDElementsInfo}
+	 */
 	public static GenerateIDElementsInfo GENERATE_ID_DEFAULTS = new GenerateIDElementsInfo(
 			true, 
 			GenerateIDElementsInfo.DEFAULT_ID_GENERATION_PATTERN, 
@@ -86,6 +93,9 @@ public class Dtbook110UniqueAttributesRecognizer extends
 					"tr", 
 					"w"});
 	
+	/**
+	 * Default constructor
+	 */
 	public Dtbook110UniqueAttributesRecognizer()
 	{
 		super("id");
