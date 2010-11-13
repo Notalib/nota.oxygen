@@ -25,10 +25,6 @@ public class OutdentListOperation extends BaseAuthorOperation {
 	protected void doOperation() throws AuthorOperationException {
 		try {
 			AuthorElement aList = getNamedCommonParentElementOfSelection(listElement, null);
-			if (aList == null) {
-				throw new AuthorOperationException(
-						"The current selection is not inside a list");
-			}
 			String listId = "";
 			AttrValue idAttr = aList.getAttribute("id");
 			if (idAttr!=null) listId = idAttr.getValue();

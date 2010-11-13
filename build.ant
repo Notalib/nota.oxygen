@@ -5,6 +5,6 @@
 		<fileset dir="bin" />
 		<fileset dir="." includes="doc/**" />
 	</jar>
-	<copy file="OxygenDtbookActions.jar" todir="C:\Programmer\Oxygen XML Editor 11\frameworks\dtbook110\"/>
+	<copy file="OxygenDtbookActions.jar" todir="C:\Program Files (x86)\Oxygen XML Editor 12\frameworks\dtbook110\"/>
 </target>
 </project>
