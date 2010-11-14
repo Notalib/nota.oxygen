@@ -12,7 +12,7 @@ import ro.sync.ecss.extensions.api.node.AttrValue;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 
 import common.BaseAuthorOperation;
-import common.id.dtbook110.Dtbook110UniqueAttributesRecognizer;
+import common.dtbook.v110.Dtbook110UniqueAttributesRecognizer;
 
 /**
  * Outdents lists by replacing the list with it's items
