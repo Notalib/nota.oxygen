@@ -1,4 +1,4 @@
-package common.id.dtbook110;
+package common.dtbook.v110;
 
 import ro.sync.ecss.extensions.commons.id.ConfigureAutoIDElementsOperation;
 import ro.sync.ecss.extensions.commons.id.GenerateIDElementsInfo;

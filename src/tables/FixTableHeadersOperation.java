@@ -18,7 +18,7 @@ import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 
 import common.BaseAuthorOperation;
-import common.id.dtbook110.Dtbook110UniqueAttributesRecognizer;
+import common.dtbook.v110.Dtbook110UniqueAttributesRecognizer;
 
 /**
  * Fixes the headers attribute of the cell in the selected table

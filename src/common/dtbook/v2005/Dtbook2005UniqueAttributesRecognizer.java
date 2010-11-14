@@ -1,4 +1,4 @@
-package common.id.dtbook2005;
+package common.dtbook.v2005;
 
 import ro.sync.ecss.extensions.commons.id.DefaultUniqueAttributesRecognizer;
 import ro.sync.ecss.extensions.commons.id.GenerateIDElementsInfo;

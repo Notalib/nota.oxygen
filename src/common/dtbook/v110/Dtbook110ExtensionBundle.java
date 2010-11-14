@@ -1,45 +1,40 @@
-package common.id.dtbook2005;
+package common.dtbook.v110;
 
 
 import ro.sync.ecss.extensions.api.AuthorExtensionStateListener;
 import ro.sync.ecss.extensions.api.ExtensionsBundle;
 import ro.sync.ecss.extensions.api.UniqueAttributesRecognizer;
-import ro.sync.ecss.extensions.api.structure.AuthorOutlineCustomizer;
 
 /**
- * Extension bundle for dtbook 2005
+ * Extension bundle for dtbook v1.1.0
  * @author Ole Holst Andersen (oha@nota.nu)
  */
-public class Dtbook2005ExtensionBundle extends ExtensionsBundle {
+public class Dtbook110ExtensionBundle extends ExtensionsBundle {
 
 	@Override
 	public String getDocumentTypeID() {
-		return "dtbook2005";
+		// TODO Auto-generated method stub
+		return "dtbook110";
 	}
 
 	@Override
 	public String getDescription() {
-		return "dtbook 2005 extension bundle";
+		// TODO Auto-generated method stub
+		return "dtbook v1.1.0 extension bundle";
 	}
 	
 	private UniqueAttributesRecognizer uniqueRecognizer;
-	
 
 	@Override
 	public AuthorExtensionStateListener createAuthorExtensionStateListener() {
-		return new Dtbook2005UniqueAttributesRecognizer();
+		uniqueRecognizer = new Dtbook110UniqueAttributesRecognizer();
+		return uniqueRecognizer;
 	}
 
 	@Override
 	public UniqueAttributesRecognizer getUniqueAttributesIdentifier() {
 		return uniqueRecognizer;
 	}
-
-	@Override
-	public AuthorOutlineCustomizer createAuthorOutlineCustomizer() {
-		return new Dtbook2005AuthorOutlineCustomizer();
-	}
-	
 	
 	
 
