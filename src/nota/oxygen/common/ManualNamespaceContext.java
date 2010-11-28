@@ -14,7 +14,7 @@ public class ManualNamespaceContext implements NamespaceContext {
 
 	/**
 	 * Creates a {@link ManualNamespaceContext} initialized with prefix/name-space pairs from a given {@link Map}
-	 * @param map	The given {@link Map}, mapping prefixes to name-spces
+	 * @param map	The given {@link Map}, mapping prefixes to name-spaces
 	 */
 	public ManualNamespaceContext(Map<String,String> map)
 	{
