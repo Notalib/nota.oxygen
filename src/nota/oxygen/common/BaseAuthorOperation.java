@@ -1,8 +1,9 @@
-package common;
+package nota.oxygen.common;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.text.BadLocationException;
@@ -24,6 +25,7 @@ import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperation;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.access.AuthorEditorAccess;
+import ro.sync.ecss.extensions.api.node.AuthorDocumentFragment;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
 
@@ -95,6 +97,14 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 	}
 	
 	/**
+	 * Creates an {@link XPath}
+	 * @return The created {@link XPath}
+	 */
+	public static XPath getXPath() {
+		return XPathFactory.newInstance().newXPath();
+	}
+	
+	/**
 	 * Create an {@link XPath} initialized with the given namespace/prefix pair 
 	 * @param prefix		The prefix
 	 * @param namespace		The namespace
@@ -115,7 +125,7 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 	 */
 	public static XPath getXPath(Map<String,String> prefixNSMap)
 	{
-		XPath xpath = XPathFactory.newInstance().newXPath();
+		XPath xpath = getXPath();
 		xpath.setNamespaceContext(new ManualNamespaceContext(prefixNSMap));
 		return xpath;
 	}
@@ -249,6 +259,32 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 	}
 	
 	/**
+	 * Recursively removes xmlns:xml attributes on an AuthorDocumentFragment and all it's decendants
+	 * @param input		The AuthorDocumentFragment
+	 */
+	public void removeXmlnsXmlAttribute(AuthorDocumentFragment input) {
+		List<AuthorNode> nodes = input.getContentNodes();
+		for (int i=0; i<nodes.size(); i++) {
+			removeXmlnsXmlAttribute(nodes.get(i));
+		}
+	}
+	
+	/**
+	 * Recursively removes xmlns:xml attributes on an AuthorNode and all it's decendants
+	 * @param input		The Node
+	 */
+	public void removeXmlnsXmlAttribute(AuthorNode input) {
+		if (input instanceof AuthorElement) {
+			AuthorElement elem = (AuthorElement)input;
+			elem.removeAttribute("xmlns:xml");
+			List<AuthorNode> children = elem.getContentNodes();
+			for (int i=0; i<children.size(); i++) {
+				removeXmlnsXmlAttribute(children.get(i));
+			}
+		}
+	}
+	
+	/**
 	 * Serializes a {@link Node} to it's xml representation
 	 * @param input		The {@link Node} to serailize
 	 * @return			The serialized xml
@@ -269,7 +305,7 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 	 * @throws AuthorOperationException
 	 * 				When the given xml could not be de-serialized
 	 */
-	public static Element deserialize(String xml) throws AuthorOperationException
+	public static Element deserializeElement(String xml) throws AuthorOperationException
 	{
 		try
 		{

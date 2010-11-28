@@ -1,7 +1,10 @@
-package lists;
+package nota.oxygen.common.list;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import nota.oxygen.common.BaseAuthorOperation;
+
 
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
@@ -10,7 +13,6 @@ import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
 
-import common.BaseAuthorOperation;
 
 /**
  * Marks-up the selected items as list items

@@ -1,4 +1,4 @@
-package tables;
+package nota.oxygen.common.table;
 
 /**
  * Represents a table index, that is the pair RowIndex,ColIndex

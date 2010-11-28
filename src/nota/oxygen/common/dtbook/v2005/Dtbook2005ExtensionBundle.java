@@ -1,16 +1,24 @@
-package common.dtbook.v2005;
+package nota.oxygen.common.dtbook.v2005;
 
 
 import ro.sync.ecss.extensions.api.AuthorExtensionStateListener;
+import ro.sync.ecss.extensions.api.AuthorTableCellSpanProvider;
+import ro.sync.ecss.extensions.api.AuthorTableColumnWidthProvider;
 import ro.sync.ecss.extensions.api.ExtensionsBundle;
 import ro.sync.ecss.extensions.api.UniqueAttributesRecognizer;
 import ro.sync.ecss.extensions.api.structure.AuthorOutlineCustomizer;
+import ro.sync.ecss.extensions.commons.table.support.HTMLTableCellInfoProvider;
 
 /**
  * Extension bundle for dtbook 2005
  * @author Ole Holst Andersen (oha@nota.nu)
  */
 public class Dtbook2005ExtensionBundle extends ExtensionsBundle {
+
+	@Override
+	public AuthorTableColumnWidthProvider createAuthorTableColumnWidthProvider() {
+		return new HTMLTableCellInfoProvider();
+	}
 
 	@Override
 	public String getDocumentTypeID() {
@@ -41,6 +49,10 @@ public class Dtbook2005ExtensionBundle extends ExtensionsBundle {
 	}
 	
 	
+	@Override
+	public AuthorTableCellSpanProvider createAuthorTableCellSpanProvider() {
+		return new HTMLTableCellInfoProvider();
+	}
 	
 
 }

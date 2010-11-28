@@ -1,4 +1,4 @@
-package common.dtbook.v110;
+package nota.oxygen.common.dtbook.v110;
 
 import ro.sync.ecss.extensions.commons.id.DefaultUniqueAttributesRecognizer;
 import ro.sync.ecss.extensions.commons.id.GenerateIDElementsInfo;

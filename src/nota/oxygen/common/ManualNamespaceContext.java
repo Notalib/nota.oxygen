@@ -1,4 +1,4 @@
-package common;
+package nota.oxygen.common;
 
 import java.util.*;
 
@@ -59,11 +59,11 @@ public class ManualNamespaceContext implements NamespaceContext {
 	{
 		if (namespace==null)
 		{
-			if (_prefixNSMap.containsKey(namespace)) _prefixNSMap.remove(namespace);
+			if (_prefixNSMap.containsKey(prefix)) _prefixNSMap.remove(prefix);
 		}
 		else
 		{
-			_prefixNSMap.put(namespace, prefix);
+			_prefixNSMap.put(prefix, namespace);
 		}
 	}
 

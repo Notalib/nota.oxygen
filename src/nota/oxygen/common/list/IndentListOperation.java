@@ -1,8 +1,11 @@
-package lists;
+package nota.oxygen.common.list;
 
 
 import java.util.ArrayList;
 import java.util.List;
+
+
+import nota.oxygen.common.BaseAuthorOperation;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -16,7 +19,6 @@ import ro.sync.ecss.extensions.api.access.AuthorEditorAccess;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
 
-import common.BaseAuthorOperation;
 
 /**
  * Indents the selected list items 
@@ -61,7 +63,7 @@ public class IndentListOperation extends BaseAuthorOperation {
 			}
 
 			String xml = serialize(list);
-			Element listElem = deserialize(xml);
+			Element listElem = deserializeElement(xml);
 			Element li = null;
 			NodeList children = listElem.getChildNodes();
 			List<Node> childrenToMove = new ArrayList<Node>();

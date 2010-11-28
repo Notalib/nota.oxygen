@@ -1,4 +1,8 @@
-package lists;
+package nota.oxygen.common.list;
+
+
+import nota.oxygen.common.BaseAuthorOperation;
+import nota.oxygen.common.dtbook.v110.Dtbook110UniqueAttributesRecognizer;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -11,8 +15,6 @@ import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.node.AttrValue;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 
-import common.BaseAuthorOperation;
-import common.dtbook.v110.Dtbook110UniqueAttributesRecognizer;
 
 /**
  * Outdents lists by replacing the list with it's items
@@ -40,7 +42,7 @@ public class OutdentListOperation extends BaseAuthorOperation {
 				showMessage("List not nested");
 				return;
 			}
-			Element parentList = deserialize(serialize(aParentList));
+			Element parentList = deserializeElement(serialize(aParentList));
 			Document doc = parentList.getOwnerDocument();
 			Element list = getDescentantElementById(parentList, listId);
 			if (list==null) {

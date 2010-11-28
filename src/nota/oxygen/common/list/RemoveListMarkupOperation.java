@@ -1,7 +1,10 @@
-package lists;
+package nota.oxygen.common.list;
 
 
 import java.util.ArrayList;
+
+
+import nota.oxygen.common.BaseAuthorOperation;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -12,7 +15,6 @@ import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 
-import common.BaseAuthorOperation;
 
 /**
  * Out-indents nested lists
@@ -30,7 +32,7 @@ public class RemoveListMarkupOperation extends BaseAuthorOperation {
 				throw new AuthorOperationException(
 						"The current selection is not inside a list");
 			}
-			Element list = deserialize(serialize(listAuthElem));
+			Element list = deserializeElement(serialize(listAuthElem));
 			String xml = "";
 			for (int i=0; i<list.getChildNodes().getLength(); i++) {
 				Node child = list.getChildNodes().item(i);

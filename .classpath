@@ -4,7 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="lib/oxygen.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Users/oha/Projects/subversion/ProduktionTools/OxygenTools/OxygenDtbookActions/libdoc/oxygen/"/>
+			<attribute name="javadoc_location" value="http://www.oxygenxml.com/InstData/Editor/Developer/javadoc/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/log4j.jar"/>

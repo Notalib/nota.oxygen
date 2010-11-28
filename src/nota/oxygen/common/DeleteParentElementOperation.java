@@ -1,4 +1,4 @@
-package common;
+package nota.oxygen.common;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -29,7 +29,7 @@ public class DeleteParentElementOperation extends BaseAuthorOperation {
 			if (aNode == null) {
 				throw new AuthorOperationException("Unexpectedly could not find parent element");
 			}
-			Element xElem = (Element)deserialize(serialize(aNode));
+			Element xElem = (Element)deserializeElement(serialize(aNode));
 			String xml = "";
 			NodeList children = xElem.getChildNodes();
 			for (int i=0; i<children.getLength(); i++) {
