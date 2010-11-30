@@ -1,0 +1,1175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serialized version="12.0">
+  <map>
+    <entry>
+      <String xml:space="preserve">document.types</String>
+      <documentTypeDescriptor-array>
+        <documentTypeDescriptor>
+          <field name="name">
+            <String xml:space="preserve">dtbook110</String>
+          </field>
+          <field name="schemaDescriptor">
+            <docTypeSchema>
+              <field name="type">
+                <Integer xml:space="preserve">1</Integer>
+              </field>
+              <field name="uri">
+                <String  xml:space="preserve">${frameworks}\dtbook110\dtbook110.dtd</String>
+              </field>
+            </docTypeSchema>
+          </field>
+          <field name="classpath">
+            <String-array>
+              <String xml:space="preserve">${oxygenHome}/lib/oxygen.jar</String>
+              <String xml:space="preserve">${frameworks}/dtbook2005/OxygenDtbookActions.jar</String>
+              <String xml:space="preserve">${frameworks}/dtbook2005/sqljdbc4.jar</String>
+            </String-array>
+          </field>
+          <field name="authorExtensionDescriptor">
+            <authorExtension>
+              <field name="cssDescriptors">
+                <cssFile-array>
+                  <cssFile>
+                    <field name="href">
+                      <String xml:space="preserve">${frameworks}\dtbook110\dtbook110.css</String>
+                    </field>
+                    <field name="title">
+                      <String xml:space="preserve">basic</String>
+                    </field>
+                    <field name="alternate">
+                      <Boolean xml:space="preserve">false</Boolean>
+                    </field>
+                  </cssFile>
+                </cssFile-array>
+              </field>
+              <field name="mergeCSSsFromDocument">
+                <Boolean xml:space="preserve">false</Boolean>
+              </field>
+              <field name="actionDescriptors">
+                <action-array>
+                  <action>
+                    <field name="id">
+                      <String xml:space="preserve">INLINE_FOREIGN_LANGUAGE_TOGGLE</String>
+                    </field>
+                    <field name="name">
+                      <String xml:space="preserve">Toggle inline foreign language span</String>
+                    </field>
+                    <field name="description">
+                      <String xml:space="preserve">Toggle &lt;span lang='xx'></String>
+                    </field>
+                    <field name="largeIconPath">
+                      <String xml:space="preserve">${frameworks}/dtbook2005/inline_foreign_language.png</String>
+                    </field>
+                    <field name="smallIconPath">
+                      <String xml:space="preserve">${frameworks}/dtbook2005/inline_foreign_language.png</String>
+                    </field>
+                    <field name="accessKey">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accelerator">
+                      <String xml:space="preserve">ctrl shift L</String>
+                    </field>
+                    <field name="actionModes">
+                      <actionMode-array>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve">parent::span[@lang]|self::span[@lang]</String>
+                          </field>
+                          <field name="argValues">
+                            <map></map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">common.DeleteParentElementOperation</String>
+                          </field>
+                        </actionMode>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve"></String>
+                          </field>
+                          <field name="argValues">
+                            <map>
+                              <entry>
+                                <String xml:space="preserve">fragment</String>
+                                <String xml:space="preserve">&lt;span lang="xx">&lt;/span></String>
+                              </entry>
+                            </map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+                          </field>
+                        </actionMode>
+                      </actionMode-array>
+                    </field>
+                  </action>
+                  <action>
+                    <field name="id">
+                      <String xml:space="preserve">INLINE_ACRONYM_TOGGLE</String>
+                    </field>
+                    <field name="name">
+                      <String xml:space="preserve">Toggle acronym</String>
+                    </field>
+                    <field name="description">
+                      <String xml:space="preserve">Toggle &lt;acronym></String>
+                    </field>
+                    <field name="largeIconPath">
+                      <String xml:space="preserve">${frameworks}/dtbook2005/acronym.png</String>
+                    </field>
+                    <field name="smallIconPath">
+                      <String xml:space="preserve">${frameworks}/dtbook2005/acronym.png</String>
+                    </field>
+                    <field name="accessKey">
+                      <String xml:space="preserve">A</String>
+                    </field>
+                    <field name="accelerator">
+                      <String xml:space="preserve">ctrl shift A</String>
+                    </field>
+                    <field name="actionModes">
+                      <actionMode-array>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve">parent::acronym|self::acronym</String>
+                          </field>
+                          <field name="argValues">
+                            <map></map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">common.DeleteParentElementOperation</String>
+                          </field>
+                        </actionMode>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve"></String>
+                          </field>
+                          <field name="argValues">
+                            <map>
+                              <entry>
+                                <String xml:space="preserve">fragment</String>
+                                <String xml:space="preserve">&lt;acronym>&lt;/acronym></String>
+                              </entry>
+                            </map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+                          </field>
+                        </actionMode>
+                      </actionMode-array>
+                    </field>
+                  </action>
+                  <action>
+                    <field name="id">
+                      <String xml:space="preserve">INLINE_EM_TOGGLE</String>
+                    </field>
+                    <field name="name">
+                      <String xml:space="preserve">Toggle em</String>
+                    </field>
+                    <field name="description">
+                      <String xml:space="preserve">Toggle &lt;em></String>
+                    </field>
+                    <field name="largeIconPath">
+                      <String xml:space="preserve">${frameworks}/dtbook2005/em.PNG</String>
+                    </field>
+                    <field name="smallIconPath">
+                      <String xml:space="preserve">${frameworks}/dtbook2005/em.PNG</String>
+                    </field>
+                    <field name="accessKey">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accelerator">
+                      <String xml:space="preserve">ctrl shift K</String>
+                    </field>
+                    <field name="actionModes">
+                      <actionMode-array>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve">parent::em|self::em</String>
+                          </field>
+                          <field name="argValues">
+                            <map></map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">common.DeleteParentElementOperation</String>
+                          </field>
+                        </actionMode>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve"></String>
+                          </field>
+                          <field name="argValues">
+                            <map>
+                              <entry>
+                                <String xml:space="preserve">fragment</String>
+                                <String xml:space="preserve">&lt;em>&lt;/em></String>
+                              </entry>
+                            </map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+                          </field>
+                        </actionMode>
+                      </actionMode-array>
+                    </field>
+                  </action>
+                  <action>
+                    <field name="id">
+                      <String xml:space="preserve">INLINE_STRONG_TOGGLE</String>
+                    </field>
+                    <field name="name">
+                      <String xml:space="preserve">Toggle strong</String>
+                    </field>
+                    <field name="description">
+                      <String xml:space="preserve">Toggle &lt;strong></String>
+                    </field>
+                    <field name="largeIconPath">
+                      <String xml:space="preserve">${frameworks}/dtbook2005/strong.PNG</String>
+                    </field>
+                    <field name="smallIconPath">
+                      <String xml:space="preserve">${frameworks}/dtbook2005/strong.PNG</String>
+                    </field>
+                    <field name="accessKey">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accelerator">
+                      <String xml:space="preserve">ctrl shift F</String>
+                    </field>
+                    <field name="actionModes">
+                      <actionMode-array>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve">parent::strong|self::strong</String>
+                          </field>
+                          <field name="argValues">
+                            <map></map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">common.DeleteParentElementOperation</String>
+                          </field>
+                        </actionMode>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve">not(ancestor-or-self::strong)</String>
+                          </field>
+                          <field name="argValues">
+                            <map>
+                              <entry>
+                                <String xml:space="preserve">fragment</String>
+                                <String xml:space="preserve">&lt;strong>&lt;/strong></String>
+                              </entry>
+                            </map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+                          </field>
+                        </actionMode>
+                      </actionMode-array>
+                    </field>
+                  </action>
+                  <action>
+                    <field name="id">
+                      <String xml:space="preserve">TABLE_DELETE_ROW</String>
+                    </field>
+                    <field name="name">
+                      <String xml:space="preserve">Delete table row</String>
+                    </field>
+                    <field name="description">
+                      <String xml:space="preserve">Delete table ro</String>
+                    </field>
+                    <field name="largeIconPath">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="smallIconPath">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accessKey">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accelerator">
+                      <null></null>
+                    </field>
+                    <field name="actionModes">
+                      <actionMode-array>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve">ancestor-or-self::tr</String>
+                          </field>
+                          <field name="argValues">
+                            <map></map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">ro.sync.ecss.extensions.commons.table.operations.xhtml.DeleteRowOperation</String>
+                          </field>
+                        </actionMode>
+                      </actionMode-array>
+                    </field>
+                  </action>
+                  <action>
+                    <field name="id">
+                      <String xml:space="preserve">TABLE_DELETE_COLUMN</String>
+                    </field>
+                    <field name="name">
+                      <String xml:space="preserve">Delete table column</String>
+                    </field>
+                    <field name="description">
+                      <String xml:space="preserve">Delete column</String>
+                    </field>
+                    <field name="largeIconPath">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="smallIconPath">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accessKey">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accelerator">
+                      <null></null>
+                    </field>
+                    <field name="actionModes">
+                      <actionMode-array>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve">ancestor-or-self::td|ancestor-or-self::th</String>
+                          </field>
+                          <field name="argValues">
+                            <map></map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">ro.sync.ecss.extensions.commons.table.operations.xhtml.DeleteColumnOperation</String>
+                          </field>
+                        </actionMode>
+                      </actionMode-array>
+                    </field>
+                  </action>
+                  <action>
+                    <field name="id">
+                      <String xml:space="preserve">TABLE_INSERT_ROW</String>
+                    </field>
+                    <field name="name">
+                      <String xml:space="preserve">Insert table row</String>
+                    </field>
+                    <field name="description">
+                      <String xml:space="preserve">Insert row</String>
+                    </field>
+                    <field name="largeIconPath">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="smallIconPath">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accessKey">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accelerator">
+                      <null></null>
+                    </field>
+                    <field name="actionModes">
+                      <actionMode-array>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve">ancestor-or-self::tr</String>
+                          </field>
+                          <field name="argValues">
+                            <map>
+                              <entry>
+                                <String xml:space="preserve">insertLocation</String>
+                                <String xml:space="preserve">ancestor-or-self::tr</String>
+                              </entry>
+                              <entry>
+                                <String xml:space="preserve">insertPosition</String>
+                                <String xml:space="preserve">Before</String>
+                              </entry>
+                            </map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertRowOperation</String>
+                          </field>
+                        </actionMode>
+                      </actionMode-array>
+                    </field>
+                  </action>
+                  <action>
+                    <field name="id">
+                      <String xml:space="preserve">TABLE_INSERT_COLUMN</String>
+                    </field>
+                    <field name="name">
+                      <String xml:space="preserve">Insert table column</String>
+                    </field>
+                    <field name="description">
+                      <String xml:space="preserve">Insert column</String>
+                    </field>
+                    <field name="largeIconPath">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="smallIconPath">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accessKey">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accelerator">
+                      <null></null>
+                    </field>
+                    <field name="actionModes">
+                      <actionMode-array>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve">ancestor-or-self::td|ancestor-or-self::th</String>
+                          </field>
+                          <field name="argValues">
+                            <map></map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertColumnOperation</String>
+                          </field>
+                        </actionMode>
+                      </actionMode-array>
+                    </field>
+                  </action>
+                  <action>
+                    <field name="id">
+                      <String xml:space="preserve">TABLE_INSERT</String>
+                    </field>
+                    <field name="name">
+                      <String xml:space="preserve">Insert table</String>
+                    </field>
+                    <field name="description">
+                      <String xml:space="preserve">Insert table</String>
+                    </field>
+                    <field name="largeIconPath">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="smallIconPath">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accessKey">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accelerator">
+                      <null></null>
+                    </field>
+                    <field name="actionModes">
+                      <actionMode-array>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve">not(ancestor-or-self::table)</String>
+                          </field>
+                          <field name="argValues">
+                            <map></map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertTableOperation</String>
+                          </field>
+                        </actionMode>
+                      </actionMode-array>
+                    </field>
+                  </action>
+                  <action>
+                    <field name="id">
+                      <String xml:space="preserve">TABLE_FIX_HEADERS</String>
+                    </field>
+                    <field name="name">
+                      <String xml:space="preserve">Fix headers</String>
+                    </field>
+                    <field name="description">
+                      <String xml:space="preserve">Fix table headers</String>
+                    </field>
+                    <field name="largeIconPath">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="smallIconPath">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accessKey">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accelerator">
+                      <null></null>
+                    </field>
+                    <field name="actionModes">
+                      <actionMode-array>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve"></String>
+                          </field>
+                          <field name="argValues">
+                            <map></map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">tables.FixTableHeadersOperation</String>
+                          </field>
+                        </actionMode>
+                      </actionMode-array>
+                    </field>
+                  </action>
+                  <action>
+                    <field name="id">
+                      <String xml:space="preserve">CONFIGURE_AUTO_ID_ELEMENTS</String>
+                    </field>
+                    <field name="name">
+                      <String xml:space="preserve">Configure auto id generation</String>
+                    </field>
+                    <field name="description">
+                      <String xml:space="preserve">Configure auto id generation</String>
+                    </field>
+                    <field name="largeIconPath">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="smallIconPath">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accessKey">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accelerator">
+                      <null></null>
+                    </field>
+                    <field name="actionModes">
+                      <actionMode-array>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve">true()</String>
+                          </field>
+                          <field name="argValues">
+                            <map></map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">common.id.dtbook110.Dtbook110ConfigureAutoIDElementsOperation</String>
+                          </field>
+                        </actionMode>
+                      </actionMode-array>
+                    </field>
+                  </action>
+                  <action>
+                    <field name="id">
+                      <String xml:space="preserve">GENERATE_IDS</String>
+                    </field>
+                    <field name="name">
+                      <String xml:space="preserve">Generate ids</String>
+                    </field>
+                    <field name="description">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="largeIconPath">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="smallIconPath">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accessKey">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accelerator">
+                      <null></null>
+                    </field>
+                    <field name="actionModes">
+                      <actionMode-array>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve">true()</String>
+                          </field>
+                          <field name="argValues">
+                            <map></map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">common.dtbook.v110.GenerateIDsOperation</String>
+                          </field>
+                        </actionMode>
+                      </actionMode-array>
+                    </field>
+                  </action>
+                  <action>
+                    <field name="id">
+                      <String xml:space="preserve">AUTO_APPLY_ACRONYM</String>
+                    </field>
+                    <field name="name">
+                      <String xml:space="preserve">Auto-apply acronym</String>
+                    </field>
+                    <field name="description">
+                      <String xml:space="preserve">Auto-apply acronym</String>
+                    </field>
+                    <field name="largeIconPath">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="smallIconPath">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accessKey">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accelerator">
+                      <null></null>
+                    </field>
+                    <field name="actionModes">
+                      <actionMode-array>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve">true()</String>
+                          </field>
+                          <field name="argValues">
+                            <map>
+                              <entry>
+                                <String xml:space="preserve">allowed parent elements</String>
+                                <String xml:space="preserve">address author notice prodnote sidebar line a em strong dfn kbd code samp cite abbr sub sup span bdo sent w q p doctitle docauthor levelhd h1 h2 h3 h4 h5 h6 hd dt dd li lic caption th td</String>
+                              </entry>
+                              <entry>
+                                <String xml:space="preserve">connection</String>
+                                <String xml:space="preserve">jdbc:sqlserver://ntsdbb09;database=dtbook;integratedSecurity=true;</String>
+                              </entry>
+                              <entry>
+                                <String xml:space="preserve">content root</String>
+                                <String xml:space="preserve">book</String>
+                              </entry>
+                              <entry>
+                                <String xml:space="preserve">fragment</String>
+                                <String xml:space="preserve">&lt;acronym>&lt;/acronym></String>
+                              </entry>
+                              <entry>
+                                <String xml:space="preserve">ignore case</String>
+                                <String xml:space="preserve">false</String>
+                              </entry>
+                              <entry>
+                                <String xml:space="preserve">table</String>
+                                <String xml:space="preserve">acronyms</String>
+                              </entry>
+                              <entry>
+                                <String xml:space="preserve">word characters</String>
+                                <String xml:space="preserve">0-9a-zÃ¥Ã¤Ã¦Ã¨Ã©ÃªÃ«Ã¸Ã²Ã³Ã´Ã¶Ã¼Ã§Ã¡Ã Ã¢Ã­Ã¬Ã¯Ã±Ã°ÃºÃ£Ã®A-ZÃ…Ã„Ã†ÃˆÃ‰ÃŠÃ‹Ã˜Ã“Ã”Ã–ÃœÃ�Ãš</String>
+                              </entry>
+                            </map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">automarkup.AutoMarkupWordsFromDictionaryOperation</String>
+                          </field>
+                        </actionMode>
+                      </actionMode-array>
+                    </field>
+                  </action>
+                  <action>
+                    <field name="id">
+                      <String xml:space="preserve">LIST_UL</String>
+                    </field>
+                    <field name="name">
+                      <String xml:space="preserve">Unordered list</String>
+                    </field>
+                    <field name="description">
+                      <String xml:space="preserve">Markup as un-ordered list</String>
+                    </field>
+                    <field name="largeIconPath">
+                      <String xml:space="preserve">${frameworks}/dtbook2005/list_ul.png</String>
+                    </field>
+                    <field name="smallIconPath">
+                      <String xml:space="preserve">${frameworks}/dtbook2005/list_ul.png</String>
+                    </field>
+                    <field name="accessKey">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accelerator">
+                      <null></null>
+                    </field>
+                    <field name="actionModes">
+                      <actionMode-array>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve"></String>
+                          </field>
+                          <field name="argValues">
+                            <map>
+                              <entry>
+                                <String xml:space="preserve">elements to substitute</String>
+                                <String xml:space="preserve">p div</String>
+                              </entry>
+                              <entry>
+                                <String xml:space="preserve">item fragment</String>
+                                <String xml:space="preserve">&lt;li>&lt;/li></String>
+                              </entry>
+                              <entry>
+                                <String xml:space="preserve">list fragment</String>
+                                <String xml:space="preserve">&lt;list type="ul">&lt;/list></String>
+                              </entry>
+                            </map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">lists.MarkupListItemsOperation</String>
+                          </field>
+                        </actionMode>
+                      </actionMode-array>
+                    </field>
+                  </action>
+                  <action>
+                    <field name="id">
+                      <String xml:space="preserve">LIST_OL</String>
+                    </field>
+                    <field name="name">
+                      <String xml:space="preserve">Ordered list</String>
+                    </field>
+                    <field name="description">
+                      <String xml:space="preserve">Markup as ordered list			</String>
+                    </field>
+                    <field name="largeIconPath">
+                      <String xml:space="preserve">${frameworks}/dtbook2005/list_ol.png</String>
+                    </field>
+                    <field name="smallIconPath">
+                      <String xml:space="preserve">${frameworks}/dtbook2005/list_ol.png</String>
+                    </field>
+                    <field name="accessKey">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accelerator">
+                      <null></null>
+                    </field>
+                    <field name="actionModes">
+                      <actionMode-array>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve"></String>
+                          </field>
+                          <field name="argValues">
+                            <map>
+                              <entry>
+                                <String xml:space="preserve">elements to substitute</String>
+                                <String xml:space="preserve">p div</String>
+                              </entry>
+                              <entry>
+                                <String xml:space="preserve">item fragment</String>
+                                <String xml:space="preserve">&lt;li>&lt;/li></String>
+                              </entry>
+                              <entry>
+                                <String xml:space="preserve">list fragment</String>
+                                <String xml:space="preserve">&lt;list type="ol">&lt;/list></String>
+                              </entry>
+                            </map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">lists.MarkupListItemsOperation</String>
+                          </field>
+                        </actionMode>
+                      </actionMode-array>
+                    </field>
+                  </action>
+                  <action>
+                    <field name="id">
+                      <String xml:space="preserve">LIST_INDENT</String>
+                    </field>
+                    <field name="name">
+                      <String xml:space="preserve">Indent list</String>
+                    </field>
+                    <field name="description">
+                      <String xml:space="preserve">Indent list		</String>
+                    </field>
+                    <field name="largeIconPath">
+                      <String xml:space="preserve">${frameworks}/dtbook2005/list_indent.png</String>
+                    </field>
+                    <field name="smallIconPath">
+                      <String xml:space="preserve">${frameworks}/dtbook2005/list_indent.png</String>
+                    </field>
+                    <field name="accessKey">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accelerator">
+                      <null></null>
+                    </field>
+                    <field name="actionModes">
+                      <actionMode-array>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve"></String>
+                          </field>
+                          <field name="argValues">
+                            <map>
+                              <entry>
+                                <String xml:space="preserve">item element</String>
+                                <String xml:space="preserve">li</String>
+                              </entry>
+                              <entry>
+                                <String xml:space="preserve">list element</String>
+                                <String xml:space="preserve">list</String>
+                              </entry>
+                            </map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">lists.IndentListOperation</String>
+                          </field>
+                        </actionMode>
+                      </actionMode-array>
+                    </field>
+                  </action>
+                </action-array>
+              </field>
+              <field name="menubarDescriptor">
+                <menu>
+                  <field name="label">
+                    <String xml:space="preserve">dtbook</String>
+                  </field>
+                  <field name="accessKey">
+                    <String xml:space="preserve">d</String>
+                  </field>
+                  <field name="iconPath">
+                    <String xml:space="preserve"></String>
+                  </field>
+                  <field name="menuEntriesDescriptorList">
+                    <menuEntry-array>
+                      <menuItem>
+                        <field name="actionID">
+                          <String xml:space="preserve">GENERATE_IDS</String>
+                        </field>
+                      </menuItem>
+                      <menuItem>
+                        <field name="actionID">
+                          <String xml:space="preserve">CONFIGURE_AUTO_ID_ELEMENTS</String>
+                        </field>
+                      </menuItem>
+                      <menuItem>
+                        <field name="actionID">
+                          <String xml:space="preserve">INLINE_STRONG_TOGGLE</String>
+                        </field>
+                      </menuItem>
+                      <menuItem>
+                        <field name="actionID">
+                          <String xml:space="preserve">INLINE_EM_TOGGLE</String>
+                        </field>
+                      </menuItem>
+                      <menuItem>
+                        <field name="actionID">
+                          <String xml:space="preserve">INLINE_FOREIGN_LANGUAGE_TOGGLE</String>
+                        </field>
+                      </menuItem>
+                      <menuItem>
+                        <field name="actionID">
+                          <String xml:space="preserve">INLINE_ACRONYM_TOGGLE</String>
+                        </field>
+                      </menuItem>
+                      <menu>
+                        <field name="label">
+                          <String xml:space="preserve">Lists</String>
+                        </field>
+                        <field name="accessKey">
+                          <String xml:space="preserve"></String>
+                        </field>
+                        <field name="iconPath">
+                          <String xml:space="preserve"></String>
+                        </field>
+                        <field name="menuEntriesDescriptorList">
+                          <menuEntry-array>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">LIST_UL</String>
+                              </field>
+                            </menuItem>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">LIST_OL</String>
+                              </field>
+                            </menuItem>
+                          </menuEntry-array>
+                        </field>
+                      </menu>
+                      <menu>
+                        <field name="label">
+                          <String xml:space="preserve">Tables</String>
+                        </field>
+                        <field name="accessKey">
+                          <String xml:space="preserve"></String>
+                        </field>
+                        <field name="iconPath">
+                          <String xml:space="preserve"></String>
+                        </field>
+                        <field name="menuEntriesDescriptorList">
+                          <menuEntry-array>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">TABLE_INSERT_COLUMN</String>
+                              </field>
+                            </menuItem>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">TABLE_INSERT_ROW</String>
+                              </field>
+                            </menuItem>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">TABLE_DELETE_COLUMN</String>
+                              </field>
+                            </menuItem>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">TABLE_DELETE_ROW</String>
+                              </field>
+                            </menuItem>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">TABLE_INSERT</String>
+                              </field>
+                            </menuItem>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">TABLE_FIX_HEADERS</String>
+                              </field>
+                            </menuItem>
+                          </menuEntry-array>
+                        </field>
+                      </menu>
+                    </menuEntry-array>
+                  </field>
+                </menu>
+              </field>
+              <field name="popupMenuDescriptor">
+                <menu>
+                  <field name="label">
+                    <String xml:space="preserve">Contextual menu</String>
+                  </field>
+                  <field name="accessKey">
+                    <null></null>
+                  </field>
+                  <field name="iconPath">
+                    <null></null>
+                  </field>
+                  <field name="menuEntriesDescriptorList">
+                    <menuEntry-array>
+                      <menu>
+                        <field name="label">
+                          <String xml:space="preserve">dtbook</String>
+                        </field>
+                        <field name="accessKey">
+                          <String xml:space="preserve"></String>
+                        </field>
+                        <field name="iconPath">
+                          <String xml:space="preserve"></String>
+                        </field>
+                        <field name="menuEntriesDescriptorList">
+                          <menuEntry-array>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">INLINE_STRONG_TOGGLE</String>
+                              </field>
+                            </menuItem>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">INLINE_EM_TOGGLE</String>
+                              </field>
+                            </menuItem>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">INLINE_FOREIGN_LANGUAGE_TOGGLE</String>
+                              </field>
+                            </menuItem>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">INLINE_ACRONYM_TOGGLE</String>
+                              </field>
+                            </menuItem>
+                            <menu>
+                              <field name="label">
+                                <String xml:space="preserve">Lists</String>
+                              </field>
+                              <field name="accessKey">
+                                <String xml:space="preserve"></String>
+                              </field>
+                              <field name="iconPath">
+                                <String xml:space="preserve"></String>
+                              </field>
+                              <field name="menuEntriesDescriptorList">
+                                <menuEntry-array>
+                                  <menuItem>
+                                    <field name="actionID">
+                                      <String xml:space="preserve">LIST_UL</String>
+                                    </field>
+                                  </menuItem>
+                                  <menuItem>
+                                    <field name="actionID">
+                                      <String xml:space="preserve">LIST_OL</String>
+                                    </field>
+                                  </menuItem>
+                                </menuEntry-array>
+                              </field>
+                            </menu>
+                            <menu>
+                              <field name="label">
+                                <String xml:space="preserve">Tables</String>
+                              </field>
+                              <field name="accessKey">
+                                <String xml:space="preserve"></String>
+                              </field>
+                              <field name="iconPath">
+                                <String xml:space="preserve"></String>
+                              </field>
+                              <field name="menuEntriesDescriptorList">
+                                <menuEntry-array>
+                                  <menuItem>
+                                    <field name="actionID">
+                                      <String xml:space="preserve">TABLE_INSERT_COLUMN</String>
+                                    </field>
+                                  </menuItem>
+                                  <menuItem>
+                                    <field name="actionID">
+                                      <String xml:space="preserve">TABLE_INSERT_ROW</String>
+                                    </field>
+                                  </menuItem>
+                                  <menuItem>
+                                    <field name="actionID">
+                                      <String xml:space="preserve">TABLE_DELETE_COLUMN</String>
+                                    </field>
+                                  </menuItem>
+                                  <menuItem>
+                                    <field name="actionID">
+                                      <String xml:space="preserve">TABLE_DELETE_ROW</String>
+                                    </field>
+                                  </menuItem>
+                                  <menuItem>
+                                    <field name="actionID">
+                                      <String xml:space="preserve">TABLE_INSERT</String>
+                                    </field>
+                                  </menuItem>
+                                  <menuItem>
+                                    <field name="actionID">
+                                      <String xml:space="preserve">TABLE_FIX_HEADERS</String>
+                                    </field>
+                                  </menuItem>
+                                </menuEntry-array>
+                              </field>
+                            </menu>
+                          </menuEntry-array>
+                        </field>
+                      </menu>
+                    </menuEntry-array>
+                  </field>
+                </menu>
+              </field>
+              <field name="toolbarDescriptor">
+                <toolbar>
+                  <field name="id">
+                    <String xml:space="preserve">dtbook</String>
+                  </field>
+                  <field name="type">
+                    <Integer xml:space="preserve">2</Integer>
+                  </field>
+                  <field name="largeIconPath">
+                    <null></null>
+                  </field>
+                  <field name="smallIconPath">
+                    <null></null>
+                  </field>
+                  <field name="toolbarEntriesDescriptorList">
+                    <toolbarEntry-array>
+                      <toolbarItem>
+                        <field name="actionID">
+                          <String xml:space="preserve">INLINE_STRONG_TOGGLE</String>
+                        </field>
+                      </toolbarItem>
+                      <toolbarItem>
+                        <field name="actionID">
+                          <String xml:space="preserve">INLINE_EM_TOGGLE</String>
+                        </field>
+                      </toolbarItem>
+                      <toolbarSeparator></toolbarSeparator>
+                      <toolbarItem>
+                        <field name="actionID">
+                          <String xml:space="preserve">INLINE_FOREIGN_LANGUAGE_TOGGLE</String>
+                        </field>
+                      </toolbarItem>
+                      <toolbarItem>
+                        <field name="actionID">
+                          <String xml:space="preserve">INLINE_ACRONYM_TOGGLE</String>
+                        </field>
+                      </toolbarItem>
+                      <toolbarSeparator></toolbarSeparator>
+                      <toolbarItem>
+                        <field name="actionID">
+                          <String xml:space="preserve">LIST_UL</String>
+                        </field>
+                      </toolbarItem>
+                      <toolbarItem>
+                        <field name="actionID">
+                          <String xml:space="preserve">LIST_OL</String>
+                        </field>
+                      </toolbarItem>
+                    </toolbarEntry-array>
+                  </field>
+                </toolbar>
+              </field>
+              <field name="additionalToolbarsDescriptors">
+                <null></null>
+              </field>
+              <field name="tableSupportClassName">
+                <null></null>
+              </field>
+              <field name="tableColWidthSupportClassName">
+                <null></null>
+              </field>
+              <field name="customReferencesResolver">
+                <null></null>
+              </field>
+              <field name="authorExtensionStateListener">
+                <null></null>
+              </field>
+              <field name="attributesRecognizer">
+                <null></null>
+              </field>
+            </authorExtension>
+          </field>
+          <field name="templatesLocations">
+            <String-array></String-array>
+          </field>
+          <field name="xmlCatalogs">
+            <String-array></String-array>
+          </field>
+          <field name="description">
+            <String xml:space="preserve">dtbook v1.1.0</String>
+          </field>
+          <field name="doctypeRules">
+            <documentTypeRule-array>
+              <documentTypeRule>
+                <field name="namespace">
+                  <String xml:space="preserve"></String>
+                </field>
+                <field name="rootElem">
+                  <String xml:space="preserve">dtbook</String>
+                </field>
+                <field name="fileName">
+                  <String xml:space="preserve">*</String>
+                </field>
+                <field name="publicID">
+                  <String xml:space="preserve">*</String>
+                </field>
+                <field name="javaRuleClass">
+                  <String xml:space="preserve"></String>
+                </field>
+              </documentTypeRule>
+            </documentTypeRule-array>
+          </field>
+          <field name="scenarios">
+            <scenario-array></scenario-array>
+          </field>
+          <field name="extensionsBundleClassName">
+            <String xml:space="preserve">common.dtbook.v110.Dtbook110ExtensionBundle</String>
+          </field>
+          <field name="useImposedInitialPage">
+            <Boolean xml:space="preserve">true</Boolean>
+          </field>
+          <field name="imposedInitialPage">
+            <String xml:space="preserve">Author</String>
+          </field>
+          <field name="elementLocatorExtension">
+            <null></null>
+          </field>
+          <field name="schemaManagerFilterExtension">
+            <null></null>
+          </field>
+          <field name="authorSWTDndExtension">
+            <null></null>
+          </field>
+          <field name="textSWTDndExtension">
+            <null></null>
+          </field>
+          <field name="authorSwingDndExtension">
+            <null></null>
+          </field>
+          <field name="cssStylesFilterExtension">
+            <null></null>
+          </field>
+          <field name="attributesValueEditor">
+            <null></null>
+          </field>
+        </documentTypeDescriptor>
+      </documentTypeDescriptor-array>
+    </entry>
+  </map>
+</serialized>
