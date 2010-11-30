@@ -5,7 +5,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathException;
 
 import nota.oxygen.common.BaseAuthorOperation;
-import nota.oxygen.common.dtbook.v110.Dtbook110UniqueAttributesRecognizer;
+import nota.oxygen.common.dtbook.v2005.Dtbook2005UniqueAttributesRecognizer;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -16,6 +16,7 @@ import ro.sync.ecss.extensions.api.ArgumentsMap;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
+import ro.sync.ecss.extensions.commons.id.DefaultUniqueAttributesRecognizer;
 
 
 /**
@@ -104,7 +105,7 @@ public class FixTableHeadersOperation extends BaseAuthorOperation {
 						"The current selection is not inside a table");
 			}
 			
-			Dtbook110UniqueAttributesRecognizer uaReq = new Dtbook110UniqueAttributesRecognizer();
+			DefaultUniqueAttributesRecognizer uaReq = new Dtbook2005UniqueAttributesRecognizer();
 			uaReq.activated(getAuthorAccess());
 			
 			uaReq.assignUniqueIDs(tableAElem.getStartOffset(), tableAElem.getEndOffset(), false);
