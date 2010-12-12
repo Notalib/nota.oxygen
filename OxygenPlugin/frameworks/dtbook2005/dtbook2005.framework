@@ -861,7 +861,7 @@
                               </entry>
                               <entry>
                                 <String xml:space="preserve">list fragment</String>
-                                <String xml:space="preserve">&lt;list xmlns='http://www.daisy.org/z3986/2005/dtbook/'/></String>
+                                <String xml:space="preserve">&lt;list xmlns='http://www.daisy.org/z3986/2005/dtbook/' type='pl'/></String>
                               </entry>
                             </map>
                           </field>
@@ -983,7 +983,7 @@
                               </entry>
                               <entry>
                                 <String xml:space="preserve">list fragment</String>
-                                <String xml:space="preserve">&lt;list xmlns='http://www.daisy.org/z3986/2005/dtbook/'/></String>
+                                <String xml:space="preserve">&lt;list xmlns='http://www.daisy.org/z3986/2005/dtbook/' type='ol'/></String>
                               </entry>
                             </map>
                           </field>
@@ -1058,7 +1058,7 @@
                               </entry>
                               <entry>
                                 <String xml:space="preserve">list fragment</String>
-                                <String xml:space="preserve">&lt;list xmlns='http://www.daisy.org/z3986/2005/dtbook/'/></String>
+                                <String xml:space="preserve">&lt;list xmlns='http://www.daisy.org/z3986/2005/dtbook/' type='ul'/></String>
                               </entry>
                             </map>
                           </field>
