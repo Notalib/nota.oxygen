@@ -1546,7 +1546,7 @@
             <scenario-array></scenario-array>
           </field>
           <field name="extensionsBundleClassName">
-            <String xml:space="preserve">common.dtbook.v110.Dtbook110ExtensionBundle</String>
+            <String xml:space="preserve">nota.oxygen.common.dtbook.v110.Dtbook110ExtensionBundle</String>
           </field>
           <field name="useImposedInitialPage">
             <Boolean xml:space="preserve">true</Boolean>
