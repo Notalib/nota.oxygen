@@ -1,9 +1,5 @@
 package nota.oxygen.common.dtbook.v2005;
 
-import java.util.Random;
-import ro.sync.ecss.extensions.api.AuthorDocumentController;
-import ro.sync.ecss.extensions.api.AuthorOperationException;
-import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.commons.id.DefaultUniqueAttributesRecognizer;
 import ro.sync.ecss.extensions.commons.id.GenerateIDElementsInfo;
 
@@ -13,40 +9,6 @@ import ro.sync.ecss.extensions.commons.id.GenerateIDElementsInfo;
  */
 public class Dtbook2005UniqueAttributesRecognizer extends
 		DefaultUniqueAttributesRecognizer {
-	
-	private long nextLuidSource = -1;
-	
-	/* (non-Javadoc)
-	 * @see ro.sync.ecss.extensions.commons.id.DefaultUniqueAttributesRecognizer#generateUniqueIDFor(java.lang.String, ro.sync.ecss.extensions.api.node.AuthorElement)
-	 */
-	@Override
-	protected String generateUniqueIDFor(String idGenerationPattern,
-			AuthorElement element) {
-		AuthorDocumentController docCtrl = authorAccess.getDocumentController();
-		String idVal = super.generateUniqueIDFor(idGenerationPattern, element);
-		if (idVal.indexOf("${luid}")!=-1) {
-			String luid = idVal.replace("${luid}", getNextLUID());
-			try {
-				while (docCtrl.findNodesByXPath("//*[@id='"+luid+"']", true, true, true).length>0) {
-					luid = idVal.replace("${luid}", getNextLUID());
-				}
-			}
-			catch (AuthorOperationException e) {}
-			return luid;
-		}
-		return  idVal;
-	}
-	
-	private String getNextLUID() {
-		if (nextLuidSource==-1) {
-			Random randomGenerator = new Random();
-			nextLuidSource = randomGenerator.nextLong() & ~0xFFFF;
-		}
-		String luid = "00000000"+Long.toHexString(nextLuidSource);
-		luid = luid.substring(0, 8);
-		nextLuidSource++;
-		return luid;
-	}
 
 	/**
 	 * The default {@link GenerateIDElementsInfo}
