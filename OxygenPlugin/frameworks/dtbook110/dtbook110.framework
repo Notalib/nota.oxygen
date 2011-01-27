@@ -73,7 +73,7 @@
                       <actionMode-array>
                         <actionMode>
                           <field name="xpathCondition">
-                            <String xml:space="preserve">self::span[@xml:lang]|parent::span[@xml:lang]	</String>
+                            <String xml:space="preserve">self::span[@lang]|parent::span[@lang]</String>
                           </field>
                           <field name="argValues">
                             <map></map>
@@ -90,7 +90,7 @@
                             <map>
                               <entry>
                                 <String xml:space="preserve">fragment</String>
-                                <String xml:space="preserve">&lt;span xml:lang="xx">&lt;/span></String>
+                                <String xml:space="preserve">&lt;span lang="xx">&lt;/span></String>
                               </entry>
                             </map>
                           </field>
