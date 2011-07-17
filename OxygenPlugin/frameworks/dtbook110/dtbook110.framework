@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<serialized version="12.0">
+<serialized version="12.1">
   <map>
     <entry>
       <String xml:space="preserve">document.types</String>
@@ -1128,6 +1128,60 @@
                       </actionMode-array>
                     </field>
                   </action>
+                  <action>
+                    <field name="id">
+                      <String xml:space="preserve">INLINE_ROMAN_NUMERALS</String>
+                    </field>
+                    <field name="name">
+                      <String xml:space="preserve">Toggle roman numerals</String>
+                    </field>
+                    <field name="description">
+                      <String xml:space="preserve">Toggle &lt;span class='roman'></String>
+                    </field>
+                    <field name="largeIconPath">
+                      <String xml:space="preserve">${frameworks}/dtbook2005/roman.png</String>
+                    </field>
+                    <field name="smallIconPath">
+                      <String xml:space="preserve">${frameworks}/dtbook2005/roman.png</String>
+                    </field>
+                    <field name="accessKey">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accelerator">
+                      <String xml:space="preserve">ctrl shift R</String>
+                    </field>
+                    <field name="actionModes">
+                      <actionMode-array>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve">self::span[@class='roman']|parent::span[@class='roman']</String>
+                          </field>
+                          <field name="argValues">
+                            <map></map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">nota.oxygen.common.DeleteParentElementOperation</String>
+                          </field>
+                        </actionMode>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve"></String>
+                          </field>
+                          <field name="argValues">
+                            <map>
+                              <entry>
+                                <String xml:space="preserve">fragment</String>
+                                <String xml:space="preserve">&lt;span class="roman">&lt;/span></String>
+                              </entry>
+                            </map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+                          </field>
+                        </actionMode>
+                      </actionMode-array>
+                    </field>
+                  </action>
                 </action-array>
               </field>
               <field name="menubarDescriptor">
@@ -1171,6 +1225,11 @@
                       <menuItem>
                         <field name="actionID">
                           <String xml:space="preserve">INLINE_ACRONYM_TOGGLE</String>
+                        </field>
+                      </menuItem>
+                      <menuItem>
+                        <field name="actionID">
+                          <String xml:space="preserve">INLINE_ROMAN_NUMERALS</String>
                         </field>
                       </menuItem>
                       <menu>
@@ -1328,6 +1387,11 @@
                           <String xml:space="preserve">INLINE_ACRONYM_TOGGLE</String>
                         </field>
                       </menuItem>
+                      <menuItem>
+                        <field name="actionID">
+                          <String xml:space="preserve">INLINE_ROMAN_NUMERALS</String>
+                        </field>
+                      </menuItem>
                       <menu>
                         <field name="label">
                           <String xml:space="preserve">Lists</String>
@@ -1477,6 +1541,11 @@
                           <String xml:space="preserve">INLINE_ACRONYM_TOGGLE</String>
                         </field>
                       </toolbarItem>
+                      <toolbarItem>
+                        <field name="actionID">
+                          <String xml:space="preserve">INLINE_ROMAN_NUMERALS</String>
+                        </field>
+                      </toolbarItem>
                       <toolbarSeparator></toolbarSeparator>
                       <toolbarItem>
                         <field name="actionID">
@@ -1494,6 +1563,16 @@
               </field>
               <field name="additionalToolbarsDescriptors">
                 <null></null>
+              </field>
+              <field name="contextualItems">
+                <contextProvider>
+                  <field name="items">
+                    <contextItem-array></contextItem-array>
+                  </field>
+                  <field name="removeItems">
+                    <null></null>
+                  </field>
+                </contextProvider>
               </field>
               <field name="tableSupportClassName">
                 <null></null>

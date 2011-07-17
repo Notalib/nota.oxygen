@@ -419,6 +419,11 @@ span {
   display: inline;
 }
 
+span.roman
+{
+	background-color: orange;
+}
+
 span:lang(xx)
 {
   background-color: red;
