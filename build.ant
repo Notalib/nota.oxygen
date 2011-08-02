@@ -7,6 +7,6 @@
 	</jar>
 	<copy file="OxygenDtbookActions.jar" todir="./OxygenPlugin/frameworks/dtbook2005/"/>
 	<zip destfile="dtbookplugin.zip" basedir="./OxygenPlugin"/>
-	<copy file="OxygenDtbookActions.jar" todir="C:\oxygen\frameworks\dtbook110\"/>
+	<copy file="OxygenDtbookActions.jar" todir="C:\oxygen\frameworks\dtbook2005\"/>
 </target>
 </project>

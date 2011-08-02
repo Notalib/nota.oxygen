@@ -288,7 +288,7 @@
                       <String xml:space="preserve"></String>
                     </field>
                     <field name="accelerator">
-                      <null></null>
+                      <String xml:space="preserve">ctrl shift J</String>
                     </field>
                     <field name="actionModes">
                       <actionMode-array>
@@ -1258,6 +1258,60 @@
                       </actionMode-array>
                     </field>
                   </action>
+                  <action>
+                    <field name="id">
+                      <String xml:space="preserve">INLINE_NOTE_IDENTIFIER</String>
+                    </field>
+                    <field name="name">
+                      <String xml:space="preserve">Toggle note identifier</String>
+                    </field>
+                    <field name="description">
+                      <String xml:space="preserve">Toggle &lt;span class='note_identifier'></String>
+                    </field>
+                    <field name="largeIconPath">
+                      <String xml:space="preserve">${frameworks}/dtbook2005/note_identifier.png</String>
+                    </field>
+                    <field name="smallIconPath">
+                      <String xml:space="preserve">${frameworks}/dtbook2005/note_identifier.png</String>
+                    </field>
+                    <field name="accessKey">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accelerator">
+                      <String xml:space="preserve">ctrl shift N</String>
+                    </field>
+                    <field name="actionModes">
+                      <actionMode-array>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve">self::span[@class='note_identifier']|parent::span[@class='note_identifier']</String>
+                          </field>
+                          <field name="argValues">
+                            <map></map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">nota.oxygen.common.DeleteParentElementOperation</String>
+                          </field>
+                        </actionMode>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve"></String>
+                          </field>
+                          <field name="argValues">
+                            <map>
+                              <entry>
+                                <String xml:space="preserve">fragment</String>
+                                <String xml:space="preserve">&lt;span xmlns="http://www.daisy.org/z3986/2005/dtbook/" class="note_identifier">&lt;/span></String>
+                              </entry>
+                            </map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+                          </field>
+                        </actionMode>
+                      </actionMode-array>
+                    </field>
+                  </action>
                 </action-array>
               </field>
               <field name="menubarDescriptor">
@@ -1273,6 +1327,51 @@
                   </field>
                   <field name="menuEntriesDescriptorList">
                     <menuEntry-array>
+                      <menu>
+                        <field name="label">
+                          <String xml:space="preserve">Inline</String>
+                        </field>
+                        <field name="accessKey">
+                          <String xml:space="preserve">I</String>
+                        </field>
+                        <field name="iconPath">
+                          <String xml:space="preserve"></String>
+                        </field>
+                        <field name="menuEntriesDescriptorList">
+                          <menuEntry-array>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">INLINE_STRONG_TOGGLE</String>
+                              </field>
+                            </menuItem>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">INLINE_EM_TOGGLE</String>
+                              </field>
+                            </menuItem>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">INLINE_ROMAN_NUMERALS</String>
+                              </field>
+                            </menuItem>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">INLINE_NOTE_IDENTIFIER</String>
+                              </field>
+                            </menuItem>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">INLINE_ACRONYM_TOGGLE</String>
+                              </field>
+                            </menuItem>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">INLINE_FOREIGN_LANGUAGE_TOGGLE</String>
+                              </field>
+                            </menuItem>
+                          </menuEntry-array>
+                        </field>
+                      </menu>
                       <menuItem>
                         <field name="actionID">
                           <String xml:space="preserve">GENERATE_IDS</String>
@@ -1281,31 +1380,6 @@
                       <menuItem>
                         <field name="actionID">
                           <String xml:space="preserve">CONFIGURE_AUTO_ID_ELEMENTS</String>
-                        </field>
-                      </menuItem>
-                      <menuItem>
-                        <field name="actionID">
-                          <String xml:space="preserve">INLINE_STRONG_TOGGLE</String>
-                        </field>
-                      </menuItem>
-                      <menuItem>
-                        <field name="actionID">
-                          <String xml:space="preserve">INLINE_EM_TOGGLE</String>
-                        </field>
-                      </menuItem>
-                      <menuItem>
-                        <field name="actionID">
-                          <String xml:space="preserve">INLINE_FOREIGN_LANGUAGE_TOGGLE</String>
-                        </field>
-                      </menuItem>
-                      <menuItem>
-                        <field name="actionID">
-                          <String xml:space="preserve">INLINE_ACRONYM_TOGGLE</String>
-                        </field>
-                      </menuItem>
-                      <menuItem>
-                        <field name="actionID">
-                          <String xml:space="preserve">INLINE_ROMAN_NUMERALS</String>
                         </field>
                       </menuItem>
                       <menu>
@@ -1438,6 +1512,51 @@
                   </field>
                   <field name="menuEntriesDescriptorList">
                     <menuEntry-array>
+                      <menu>
+                        <field name="label">
+                          <String xml:space="preserve">Inline</String>
+                        </field>
+                        <field name="accessKey">
+                          <String xml:space="preserve">I</String>
+                        </field>
+                        <field name="iconPath">
+                          <String xml:space="preserve"></String>
+                        </field>
+                        <field name="menuEntriesDescriptorList">
+                          <menuEntry-array>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">INLINE_STRONG_TOGGLE</String>
+                              </field>
+                            </menuItem>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">INLINE_EM_TOGGLE</String>
+                              </field>
+                            </menuItem>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">INLINE_ROMAN_NUMERALS</String>
+                              </field>
+                            </menuItem>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">INLINE_NOTE_IDENTIFIER</String>
+                              </field>
+                            </menuItem>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">INLINE_FOREIGN_LANGUAGE_TOGGLE</String>
+                              </field>
+                            </menuItem>
+                            <menuItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">INLINE_ACRONYM_TOGGLE</String>
+                              </field>
+                            </menuItem>
+                          </menuEntry-array>
+                        </field>
+                      </menu>
                       <menuItem>
                         <field name="actionID">
                           <String xml:space="preserve">GENERATE_IDS</String>
@@ -1446,31 +1565,6 @@
                       <menuItem>
                         <field name="actionID">
                           <String xml:space="preserve">CONFIGURE_AUTO_ID_ELEMENTS</String>
-                        </field>
-                      </menuItem>
-                      <menuItem>
-                        <field name="actionID">
-                          <String xml:space="preserve">INLINE_STRONG_TOGGLE</String>
-                        </field>
-                      </menuItem>
-                      <menuItem>
-                        <field name="actionID">
-                          <String xml:space="preserve">INLINE_EM_TOGGLE</String>
-                        </field>
-                      </menuItem>
-                      <menuItem>
-                        <field name="actionID">
-                          <String xml:space="preserve">INLINE_FOREIGN_LANGUAGE_TOGGLE</String>
-                        </field>
-                      </menuItem>
-                      <menuItem>
-                        <field name="actionID">
-                          <String xml:space="preserve">INLINE_ACRONYM_TOGGLE</String>
-                        </field>
-                      </menuItem>
-                      <menuItem>
-                        <field name="actionID">
-                          <String xml:space="preserve">INLINE_ROMAN_NUMERALS</String>
                         </field>
                       </menuItem>
                       <menu>
@@ -1532,12 +1626,12 @@
                             </menuItem>
                             <menuItem>
                               <field name="actionID">
-                                <String xml:space="preserve">DELETE_TABLE_COLUMN</String>
+                                <String xml:space="preserve">DELETE_TABLE_ROW</String>
                               </field>
                             </menuItem>
                             <menuItem>
                               <field name="actionID">
-                                <String xml:space="preserve">DELETE_TABLE_ROW</String>
+                                <String xml:space="preserve">DELETE_TABLE_COLUMN</String>
                               </field>
                             </menuItem>
                             <menuSeparator></menuSeparator>
@@ -1616,7 +1710,16 @@
                           <String xml:space="preserve">INLINE_EM_TOGGLE</String>
                         </field>
                       </toolbarItem>
-                      <toolbarSeparator></toolbarSeparator>
+                      <toolbarItem>
+                        <field name="actionID">
+                          <String xml:space="preserve">INLINE_ROMAN_NUMERALS</String>
+                        </field>
+                      </toolbarItem>
+                      <toolbarItem>
+                        <field name="actionID">
+                          <String xml:space="preserve">INLINE_NOTE_IDENTIFIER</String>
+                        </field>
+                      </toolbarItem>
                       <toolbarItem>
                         <field name="actionID">
                           <String xml:space="preserve">INLINE_FOREIGN_LANGUAGE_TOGGLE</String>
@@ -1625,11 +1728,6 @@
                       <toolbarItem>
                         <field name="actionID">
                           <String xml:space="preserve">INLINE_ACRONYM_TOGGLE</String>
-                        </field>
-                      </toolbarItem>
-                      <toolbarItem>
-                        <field name="actionID">
-                          <String xml:space="preserve">INLINE_ROMAN_NUMERALS</String>
                         </field>
                       </toolbarItem>
                       <toolbarSeparator></toolbarSeparator>
@@ -1648,6 +1746,82 @@
                           <String xml:space="preserve">LIST_OL</String>
                         </field>
                       </toolbarItem>
+                      <toolbarSeparator></toolbarSeparator>
+                      <toolbar>
+                        <field name="id">
+                          <String xml:space="preserve">Tables</String>
+                        </field>
+                        <field name="type">
+                          <Integer xml:space="preserve">3</Integer>
+                        </field>
+                        <field name="largeIconPath">
+                          <String xml:space="preserve"></String>
+                        </field>
+                        <field name="smallIconPath">
+                          <String xml:space="preserve"></String>
+                        </field>
+                        <field name="toolbarEntriesDescriptorList">
+                          <toolbarEntry-array>
+                            <toolbarItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">INSERT_TABLE_COLUMN</String>
+                              </field>
+                            </toolbarItem>
+                            <toolbarItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">INSERT_TABLE_ROW</String>
+                              </field>
+                            </toolbarItem>
+                            <toolbarItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">DELETE_TABLE_COLUMN</String>
+                              </field>
+                            </toolbarItem>
+                            <toolbarItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">DELETE_TABLE_ROW</String>
+                              </field>
+                            </toolbarItem>
+                            <toolbarSeparator></toolbarSeparator>
+                            <toolbarItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">TABLE_JOIN_ROW_CELLS</String>
+                              </field>
+                            </toolbarItem>
+                            <toolbarItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">TABLE_JOIN_CELL_ABOVE</String>
+                              </field>
+                            </toolbarItem>
+                            <toolbarItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">TABLE_JOIN_CELL_BELOW</String>
+                              </field>
+                            </toolbarItem>
+                            <toolbarSeparator></toolbarSeparator>
+                            <toolbarItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">TABLE_SPLIT_ABOVE</String>
+                              </field>
+                            </toolbarItem>
+                            <toolbarItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">TABLE_SPLIT_BELOW</String>
+                              </field>
+                            </toolbarItem>
+                            <toolbarItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">TABLE_SPLIT_LEFT</String>
+                              </field>
+                            </toolbarItem>
+                            <toolbarItem>
+                              <field name="actionID">
+                                <String xml:space="preserve">TABLE_SPLIT_RIGHT</String>
+                              </field>
+                            </toolbarItem>
+                          </toolbarEntry-array>
+                        </field>
+                      </toolbar>
                     </toolbarEntry-array>
                   </field>
                 </toolbar>

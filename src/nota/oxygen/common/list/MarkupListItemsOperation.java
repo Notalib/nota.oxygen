@@ -31,7 +31,7 @@ public class MarkupListItemsOperation extends BaseAuthorOperation {
 				startSel = endSel;
 				endSel = tmp;
 			}
-			AuthorElement firstAthElem = (AuthorElement)docCtrl.getNodeAtOffset(startSel);
+			AuthorElement firstAthElem = (AuthorElement)docCtrl.getNodeAtOffset(startSel+1);
 			AuthorElement lastAthElem = (AuthorElement)docCtrl.getNodeAtOffset(endSel-1);
 			if (firstAthElem.getParent()!=lastAthElem.getParent()) {
 				String msg = "Selected nodes are not siblings:\n";

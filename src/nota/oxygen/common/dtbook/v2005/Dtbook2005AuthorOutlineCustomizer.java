@@ -80,11 +80,11 @@ public class Dtbook2005AuthorOutlineCustomizer extends AuthorOutlineCustomizer {
 	
 	protected String getChildElementText(AuthorElement elem, String childLocalName)
 	{
-		AuthorNode child = elem.getChild(childLocalName);
-		if (child!=null)
+		AuthorElement[] children = elem.getElementsByLocalName(childLocalName);
+		if (children.length>0)
 		{
 			try {
-				return child.getTextContent();
+				return children[0].getTextContent();
 			} catch (BadLocationException e) {
 				return "";
 			}

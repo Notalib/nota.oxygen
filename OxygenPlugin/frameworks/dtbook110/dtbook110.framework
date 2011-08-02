@@ -798,6 +798,81 @@
                   </action>
                   <action>
                     <field name="id">
+                      <String xml:space="preserve">LIST_PL</String>
+                    </field>
+                    <field name="name">
+                      <String xml:space="preserve">Preformatted list</String>
+                    </field>
+                    <field name="description">
+                      <String xml:space="preserve">Markup as pre-formatted list</String>
+                    </field>
+                    <field name="largeIconPath">
+                      <String xml:space="preserve">${frameworks}/dtbook2005/list_pl.png</String>
+                    </field>
+                    <field name="smallIconPath">
+                      <String xml:space="preserve">${frameworks}/dtbook2005/list_pl.png</String>
+                    </field>
+                    <field name="accessKey">
+                      <String xml:space="preserve"></String>
+                    </field>
+                    <field name="accelerator">
+                      <null></null>
+                    </field>
+                    <field name="actionModes">
+                      <actionMode-array>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve">ancestor-or-self::list[@type='pl']</String>
+                          </field>
+                          <field name="argValues">
+                            <map>
+                              <entry>
+                                <String xml:space="preserve">item element</String>
+                                <String xml:space="preserve">li</String>
+                              </entry>
+                              <entry>
+                                <String xml:space="preserve">list element</String>
+                                <String xml:space="preserve">list</String>
+                              </entry>
+                              <entry>
+                                <String xml:space="preserve">list sibling elements</String>
+                                <String xml:space="preserve">address annotation author blockquote byline dateline div dl epigraph lic line linegroup list note p poem prodnote sidebar table</String>
+                              </entry>
+                            </map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">nota.oxygen.common.list.RemoveListMarkupOperation</String>
+                          </field>
+                        </actionMode>
+                        <actionMode>
+                          <field name="xpathCondition">
+                            <String xml:space="preserve"></String>
+                          </field>
+                          <field name="argValues">
+                            <map>
+                              <entry>
+                                <String xml:space="preserve">elements to substitute</String>
+                                <String xml:space="preserve">p</String>
+                              </entry>
+                              <entry>
+                                <String xml:space="preserve">item fragment</String>
+                                <String xml:space="preserve">&lt;li xmlns='http://www.daisy.org/z3986/2005/dtbook/'/></String>
+                              </entry>
+                              <entry>
+                                <String xml:space="preserve">list fragment</String>
+                                <String xml:space="preserve">&lt;list xmlns='http://www.daisy.org/z3986/2005/dtbook/' type='pl'/></String>
+                              </entry>
+                            </map>
+                          </field>
+                          <field name="operationID">
+                            <String xml:space="preserve">nota.oxygen.common.list.MarkupListItemsOperation</String>
+                          </field>
+                        </actionMode>
+                      </actionMode-array>
+                    </field>
+                  </action>
+                  <action>
+                    <field name="id">
                       <String xml:space="preserve">LIST_INDENT</String>
                     </field>
                     <field name="name">
