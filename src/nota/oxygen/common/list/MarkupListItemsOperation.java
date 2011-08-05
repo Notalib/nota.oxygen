@@ -24,7 +24,9 @@ public class MarkupListItemsOperation extends BaseAuthorOperation {
 	protected void doOperation() throws AuthorOperationException {
 		try {
 			AuthorDocumentController docCtrl = getAuthorAccess().getDocumentController();
+			@SuppressWarnings("deprecation")
 			int startSel = getAuthorAccess().getSelectionStart();
+			@SuppressWarnings("deprecation")
 			int endSel = getAuthorAccess().getSelectionEnd();
 			if (startSel>endSel) {
 				int tmp = startSel;

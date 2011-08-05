@@ -21,7 +21,7 @@ public class DeleteParentElementOperation extends BaseAuthorOperation {
 		AuthorDocumentController docCtrl = getAuthorAccess().getDocumentController();
 		try
 		{
-			AuthorNode aNode = docCtrl.getNodeAtOffset(getAuthorAccess().getCaretOffset());
+			AuthorNode aNode = docCtrl.getNodeAtOffset(getAuthorAccess().getEditorAccess().getCaretOffset());
 			while (aNode != null) {
 				if (aNode instanceof AuthorElement) break;
 				aNode = aNode.getParent();
@@ -37,8 +37,8 @@ public class DeleteParentElementOperation extends BaseAuthorOperation {
 			}
 			//showMessage("Deleting element "+xElem.getLocalName());
 			docCtrl.deleteNode(aNode);
-			docCtrl.insertXMLFragment(xml, getAuthorAccess().getCaretOffset());
-			getAuthorAccess().getEditorAccess().select(getAuthorAccess().getCaretOffset()-xml.length(), getAuthorAccess().getCaretOffset());
+			docCtrl.insertXMLFragment(xml, getAuthorAccess().getEditorAccess().getCaretOffset());
+			getAuthorAccess().getEditorAccess().select(getAuthorAccess().getEditorAccess().getCaretOffset()-xml.length(), getAuthorAccess().getEditorAccess().getCaretOffset());
 		}
 		catch (Exception e) {
 			throw new AuthorOperationException(

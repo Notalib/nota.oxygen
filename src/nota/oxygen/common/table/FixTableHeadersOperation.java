@@ -134,7 +134,7 @@ public class FixTableHeadersOperation extends BaseAuthorOperation {
 			tableXml = serialize(tableXmlElem);
 
 			docCtrl.deleteNode(tableAElem);
-			docCtrl.insertXMLFragment(tableXml, getAuthorAccess().getCaretOffset());
+			docCtrl.insertXMLFragment(tableXml, getAuthorAccess().getEditorAccess().getCaretOffset());
 		} catch (AuthorOperationException e) {
 			throw e;
 		} catch (Exception e) {

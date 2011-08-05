@@ -1,7 +1,6 @@
 package nota.oxygen.common.dtbook.v2005;
 
 
-import ro.sync.contentcompletion.xml.SchemaManagerFilter;
 import ro.sync.ecss.extensions.api.AuthorExtensionStateListener;
 import ro.sync.ecss.extensions.api.AuthorTableCellSpanProvider;
 import ro.sync.ecss.extensions.api.AuthorTableColumnWidthProvider;
@@ -15,14 +14,6 @@ import ro.sync.ecss.extensions.commons.table.support.HTMLTableCellInfoProvider;
  * @author Ole Holst Andersen (oha@nota.nu)
  */
 public class Dtbook2005ExtensionBundle extends ExtensionsBundle {
-
-	/* (non-Javadoc)
-	 * @see ro.sync.ecss.extensions.api.ExtensionsBundle#createSchemaManagerFilter()
-	 */
-	@Override
-	public SchemaManagerFilter createSchemaManagerFilter() {
-		return new Dtbook2005SchemaManagerFilter();
-	}
 
 	@Override
 	public AuthorTableColumnWidthProvider createAuthorTableColumnWidthProvider() {

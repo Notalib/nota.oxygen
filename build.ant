@@ -6,7 +6,19 @@
 		<fileset dir="." includes="doc/**" />
 	</jar>
 	<copy file="OxygenDtbookActions.jar" todir="./OxygenPlugin/frameworks/dtbook2005/"/>
-	<zip destfile="dtbookplugin.zip" basedir="./OxygenPlugin"/>
 	<copy file="OxygenDtbookActions.jar" todir="C:\oxygen\frameworks\dtbook2005\"/>
+	<delete>
+		<fileset dir="./OxygenPlugin/frameworks/dtbook110/"/>
+		<fileset dir="./OxygenPlugin/frameworks/dtbook2005/"/>
+	</delete>
+	<copy todir="./OxygenPlugin/frameworks/dtbook2005/">
+		<fileset dir="C:\oxygen\frameworks\dtbook2005\">
+			<exclude name="OxygenDtbookActions.jar"/>
+		</fileset>
+	</copy>
+	<copy todir="./OxygenPlugin/frameworks/dtbook110/">
+		<fileset dir="C:\oxygen\frameworks\dtbook110\"/>
+	</copy>
+	<zip destfile="dtbookplugin.zip" basedir="./OxygenPlugin"/>
 </target>
 </project>
