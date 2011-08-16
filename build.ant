@@ -5,12 +5,12 @@
 		<fileset dir="bin" />
 		<fileset dir="." includes="doc/**" />
 	</jar>
-	<copy file="OxygenDtbookActions.jar" todir="./OxygenPlugin/frameworks/dtbook2005/"/>
-	<copy file="OxygenDtbookActions.jar" todir="C:\oxygen\frameworks\dtbook2005\"/>
 	<delete>
 		<fileset dir="./OxygenPlugin/frameworks/dtbook110/"/>
 		<fileset dir="./OxygenPlugin/frameworks/dtbook2005/"/>
 	</delete>
+	<copy file="OxygenDtbookActions.jar" todir="./OxygenPlugin/frameworks/dtbook2005/"/>
+	<copy file="OxygenDtbookActions.jar" todir="C:\oxygen\frameworks\dtbook2005"/>
 	<copy todir="./OxygenPlugin/frameworks/dtbook2005/">
 		<fileset dir="C:\oxygen\frameworks\dtbook2005\">
 			<exclude name="OxygenDtbookActions.jar"/>

@@ -1312,6 +1312,114 @@
 											</actionMode-array>
 										</field>
 									</action>
+									<action>
+										<field name="id">
+											<String>INLINE_SUPER_SCRIPT_TOGGLE</String>
+										</field>
+										<field name="name">
+											<String>Toggle super script</String>
+										</field>
+										<field name="description">
+											<String>Toggle &lt;sup></String>
+										</field>
+										<field name="largeIconPath">
+											<String>${frameworks}/dtbook2005/sup.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>${frameworks}/dtbook2005/sup.png</String>
+										</field>
+										<field name="accessKey">
+											<String>p</String>
+										</field>
+										<field name="accelerator">
+											<String>ctrl shift PLUS</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::sup|parent::sup</String>
+													</field>
+													<field name="argValues">
+														<map/>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.DeleteParentElementOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;sup xmlns="http://www.daisy.org/z3986/2005/dtbook/">&lt;/sup></String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>INLINE_SUBSCRIPT_TOGGLE</String>
+										</field>
+										<field name="name">
+											<String>Toggle subscript</String>
+										</field>
+										<field name="description">
+											<String>Toggle &lt;sub></String>
+										</field>
+										<field name="largeIconPath">
+											<String>${frameworks}/dtbook2005/sub.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>${frameworks}/dtbook2005/sub.png</String>
+										</field>
+										<field name="accessKey">
+											<String>p</String>
+										</field>
+										<field name="accelerator">
+											<String>ctrl shift MINUS</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::sub|parent::sub</String>
+													</field>
+													<field name="argValues">
+														<map/>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.DeleteParentElementOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;sub xmlns="http://www.daisy.org/z3986/2005/dtbook/">&lt;/sub></String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
 								</action-array>
 							</field>
 							<field name="menubarDescriptor">
@@ -1352,6 +1460,16 @@
 														<menuItem>
 															<field name="actionID">
 																<String>INLINE_ROMAN_NUMERALS</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>INLINE_SUBSCRIPT_TOGGLE</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>INLINE_SUPER_SCRIPT_TOGGLE</String>
 															</field>
 														</menuItem>
 														<menuItem>
@@ -1541,6 +1659,16 @@
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
+																<String>INLINE_SUBSCRIPT_TOGGLE</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>INLINE_SUPER_SCRIPT_TOGGLE</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
 																<String>INLINE_NOTE_IDENTIFIER</String>
 															</field>
 														</menuItem>
@@ -1710,6 +1838,18 @@
 													<String>INLINE_EM_TOGGLE</String>
 												</field>
 											</toolbarItem>
+											<toolbarSeparator/>
+											<toolbarItem>
+												<field name="actionID">
+													<String>INLINE_SUBSCRIPT_TOGGLE</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>INLINE_SUPER_SCRIPT_TOGGLE</String>
+												</field>
+											</toolbarItem>
+											<toolbarSeparator/>
 											<toolbarItem>
 												<field name="actionID">
 													<String>INLINE_ROMAN_NUMERALS</String>
@@ -1890,7 +2030,7 @@
 						<scenario-array/>
 					</field>
 					<field name="validationScenarios">
-						<null/>
+						<validationScenario-array/>
 					</field>
 					<field name="defaultValidationScenarioName">
 						<null/>

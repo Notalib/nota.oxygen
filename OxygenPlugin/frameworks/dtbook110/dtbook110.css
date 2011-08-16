@@ -97,7 +97,7 @@ book {
  display: block;
  background-color: rgb(255,255,255);
  color: rgb(0,0,0);
- font-family: arial, verdana, sans-serif;
+ font-family: georgia,"times new roman",times,serif;
  line-height: 1.5em;
  margin-top: 4em;
  margin-bottom: 2em;
@@ -198,7 +198,7 @@ h3, level level level levelhd {
 h4, level level level level levelhd {
   font-size: 1.3em;
   margin-top: 0.25em;
-  color: red;
+  color: maroon;
 }
 h5, level level level level level levelhd {
   font-size: 1.2em;
@@ -208,8 +208,9 @@ h5, level level level level level levelhd {
 h6, level level level level level level levelhd {
   font-size: 1.0em;
   margin-top: 0.25em;
-  color: orange;
+  color: navy;
 }
+
 bridgehead, hd {
   font-size: 1.0em;
   margin-top: 0.25em	
@@ -245,6 +246,11 @@ linenum:after {
 /*                       general block                           */
 /* ------------------------------------------------------------- */
 
+div:before {
+    content: "DIV." attr(class) "\A";
+    font-size: smaller;
+}
+
 div {
   display: block;
 }
@@ -263,36 +269,19 @@ level, level1, level2, level3, level4, level5, level6 {
   display: block;
 }
 
-/*
-level > level, level2 {
-  margin-left: 2em;
-  display: block;
-}
-
-level > level > level, level3 {
-  margin-left: 2em;
-  display: block;
-}
-
-level > level > level, level4 {
-  margin-left: 2em;
-  display: block;
-}
-
-level > level > level, level5 {
-  margin-left: 2em;
-  display: block;
-}
-
-level > level > level, level6 {
-  margin-left: 2em;
-  display: block;
-}
-*/
-
 p {
   display: block;
   margin-top: 0.7em;
+}
+
+prodnote:before {
+    content: "PRODNOTE:";
+    font-size: smaller;
+}
+
+notice:before {
+    content: "NOTICE:";
+    font-size: smaller;
 }
 
 prodnote, notice {
@@ -308,6 +297,11 @@ frontmatter bodymatter rearmatter level level1 level2 level3 level4 level5 level
    sidebar content model inline:
 div prodnote sidebar note annotation blockquote dd li th td
 */
+
+sidebar:before {
+    content: "SIDEBAR [" attr(render) "]\A";
+    font-size: smaller;
+}
 
 sidebar {
   display: block;
@@ -337,12 +331,22 @@ address {
   margin-bottom:1em;
 }
 
+note:before {
+    content: "NOTE\A";
+    font-size: smaller;
+}
+
 note {
   display:block;
   margin:  1.2em 1em 1.2em 1em;
   padding: 0.5em 1em 0.5em 1em;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
+}
+
+blockquote:before {
+    content: "BLOCKQUOTE\A";
+    font-size: smaller;
 }
 
 blockquote {
@@ -713,4 +717,52 @@ imggroup > caption {
   font-size: 80%;
 }
 
- 
+/* ------------------------------------------------------------- */
+/*                        cru's  tilføjelser                     */
+/* ------------------------------------------------------------- */
+
+ p.precedingemptyline:before{
+	content:"PRECEDINGEMPTYLINE\A";
+	color:navy;
+	font-size:smaller;
+}
+
+ p.precedingemptyline{
+	background-color: #cdc0b0;
+	padding-top: 1em;
+	}
+	
+p.precedingseparator:before{
+	content:"PRECEDINGSEPARATOR\A";
+	color:silver;
+	font-size:smaller;
+}
+
+p.precedingseparator{
+    padding-top: 1em;	
+    background-color:#FFFF99;
+    border-top: 1px solid black;
+}
+
+poem:before{
+    font-size: smaller;
+	content:"POEM\A";
+}
+
+poem, div.poem {
+	padding:10px;
+	background-color:#CCFFFF;
+	border: 1px dotted gray;
+}
+
+div.stanza {
+	background-color:#CC0033;
+	color:white;
+	border: 1px dotted gray;
+}
+
+p.bridgehead {
+	padding-top:6px;
+	color : gray;
+	font-size:large;
+}

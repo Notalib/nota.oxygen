@@ -1257,6 +1257,222 @@
 											</actionMode-array>
 										</field>
 									</action>
+									<action>
+										<field name="id">
+											<String>INLINE_ROMAN_NUMERALS</String>
+										</field>
+										<field name="name">
+											<String>Toggle roman numerals</String>
+										</field>
+										<field name="description">
+											<String>Toggle &lt;span class='roman'></String>
+										</field>
+										<field name="largeIconPath">
+											<String>${frameworks}/dtbook2005/roman.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>${frameworks}/dtbook2005/roman.png</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<String>ctrl shift R</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::span[@class='roman']|parent::span[@class='roman']</String>
+													</field>
+													<field name="argValues">
+														<map/>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.DeleteParentElementOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;span class="roman">&lt;/span></String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>INLINE_NOTE_IDENTIFIER</String>
+										</field>
+										<field name="name">
+											<String>Toggle note identifier</String>
+										</field>
+										<field name="description">
+											<String>Toggle &lt;span class='note_identifier'></String>
+										</field>
+										<field name="largeIconPath">
+											<String>${frameworks}/dtbook2005/note_identifier.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>${frameworks}/dtbook2005/note_identifier.png</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<String>ctrl shift N</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::span[@class='note_identifier']|parent::span[@class='note_identifier']</String>
+													</field>
+													<field name="argValues">
+														<map/>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.DeleteParentElementOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;span class="note_identifier">&lt;/span></String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>INLINE_SUPER_SCRIPT_TOGGLE</String>
+										</field>
+										<field name="name">
+											<String>Toggle super script</String>
+										</field>
+										<field name="description">
+											<String>Toggle &lt;sup></String>
+										</field>
+										<field name="largeIconPath">
+											<String>${frameworks}/dtbook2005/sup.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>${frameworks}/dtbook2005/sup.png</String>
+										</field>
+										<field name="accessKey">
+											<String>p</String>
+										</field>
+										<field name="accelerator">
+											<String>ctrl shift PLUS</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::sup|parent::sup</String>
+													</field>
+													<field name="argValues">
+														<map/>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.DeleteParentElementOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;sup>&lt;/sup></String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>INLINE_SUBSCRIPT_TOGGLE</String>
+										</field>
+										<field name="name">
+											<String>Toggle subscript</String>
+										</field>
+										<field name="description">
+											<String>Toggle &lt;sub></String>
+										</field>
+										<field name="largeIconPath">
+											<String>${frameworks}/dtbook2005/sub.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>${frameworks}/dtbook2005/sub.png</String>
+										</field>
+										<field name="accessKey">
+											<String>p</String>
+										</field>
+										<field name="accelerator">
+											<String>ctrl shift MINUS</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::sub|parent::sub</String>
+													</field>
+													<field name="argValues">
+														<map/>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.DeleteParentElementOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;sub>&lt;/sub></String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
 								</action-array>
 							</field>
 							<field name="menubarDescriptor">
@@ -1272,6 +1488,61 @@
 									</field>
 									<field name="menuEntriesDescriptorList">
 										<menuEntry-array>
+											<menu>
+												<field name="label">
+													<String>Inline</String>
+												</field>
+												<field name="accessKey">
+													<String>I</String>
+												</field>
+												<field name="iconPath">
+													<String></String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>INLINE_STRONG_TOGGLE</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>INLINE_EM_TOGGLE</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>INLINE_ROMAN_NUMERALS</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>INLINE_SUBSCRIPT_TOGGLE</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>INLINE_SUPER_SCRIPT_TOGGLE</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>INLINE_NOTE_IDENTIFIER</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>INLINE_ACRONYM_TOGGLE</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>INLINE_FOREIGN_LANGUAGE_TOGGLE</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+											</menu>
 											<menuItem>
 												<field name="actionID">
 													<String>GENERATE_IDS</String>
@@ -1280,31 +1551,6 @@
 											<menuItem>
 												<field name="actionID">
 													<String>CONFIGURE_AUTO_ID_ELEMENTS</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
-													<String>INLINE_STRONG_TOGGLE</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
-													<String>INLINE_EM_TOGGLE</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
-													<String>INLINE_FOREIGN_LANGUAGE_TOGGLE</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
-													<String>INLINE_ACRONYM_TOGGLE</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
-													<String>INLINE_ROMAN_NUMERALS</String>
 												</field>
 											</menuItem>
 											<menu>
@@ -1319,6 +1565,11 @@
 												</field>
 												<field name="menuEntriesDescriptorList">
 													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>LIST_PL</String>
+															</field>
+														</menuItem>
 														<menuItem>
 															<field name="actionID">
 																<String>LIST_UL</String>
@@ -1432,6 +1683,61 @@
 									</field>
 									<field name="menuEntriesDescriptorList">
 										<menuEntry-array>
+											<menu>
+												<field name="label">
+													<String>Inline</String>
+												</field>
+												<field name="accessKey">
+													<String>I</String>
+												</field>
+												<field name="iconPath">
+													<String></String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>INLINE_STRONG_TOGGLE</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>INLINE_EM_TOGGLE</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>INLINE_ROMAN_NUMERALS</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>INLINE_SUBSCRIPT_TOGGLE</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>INLINE_SUPER_SCRIPT_TOGGLE</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>INLINE_NOTE_IDENTIFIER</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>INLINE_FOREIGN_LANGUAGE_TOGGLE</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>INLINE_ACRONYM_TOGGLE</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+											</menu>
 											<menuItem>
 												<field name="actionID">
 													<String>GENERATE_IDS</String>
@@ -1440,31 +1746,6 @@
 											<menuItem>
 												<field name="actionID">
 													<String>CONFIGURE_AUTO_ID_ELEMENTS</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
-													<String>INLINE_STRONG_TOGGLE</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
-													<String>INLINE_EM_TOGGLE</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
-													<String>INLINE_FOREIGN_LANGUAGE_TOGGLE</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
-													<String>INLINE_ACRONYM_TOGGLE</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
-													<String>INLINE_ROMAN_NUMERALS</String>
 												</field>
 											</menuItem>
 											<menu>
@@ -1479,6 +1760,11 @@
 												</field>
 												<field name="menuEntriesDescriptorList">
 													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>LIST_PL</String>
+															</field>
+														</menuItem>
 														<menuItem>
 															<field name="actionID">
 																<String>LIST_UL</String>
@@ -1521,12 +1807,12 @@
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>DELETE_TABLE_COLUMN</String>
+																<String>DELETE_TABLE_ROW</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>DELETE_TABLE_ROW</String>
+																<String>DELETE_TABLE_COLUMN</String>
 															</field>
 														</menuItem>
 														<menuSeparator/>
@@ -1608,6 +1894,27 @@
 											<toolbarSeparator/>
 											<toolbarItem>
 												<field name="actionID">
+													<String>INLINE_SUBSCRIPT_TOGGLE</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>INLINE_SUPER_SCRIPT_TOGGLE</String>
+												</field>
+											</toolbarItem>
+											<toolbarSeparator/>
+											<toolbarItem>
+												<field name="actionID">
+													<String>INLINE_ROMAN_NUMERALS</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>INLINE_NOTE_IDENTIFIER</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
 													<String>INLINE_FOREIGN_LANGUAGE_TOGGLE</String>
 												</field>
 											</toolbarItem>
@@ -1616,12 +1923,12 @@
 													<String>INLINE_ACRONYM_TOGGLE</String>
 												</field>
 											</toolbarItem>
+											<toolbarSeparator/>
 											<toolbarItem>
 												<field name="actionID">
-													<String>INLINE_ROMAN_NUMERALS</String>
+													<String>LIST_PL</String>
 												</field>
 											</toolbarItem>
-											<toolbarSeparator/>
 											<toolbarItem>
 												<field name="actionID">
 													<String>LIST_UL</String>
@@ -1632,6 +1939,82 @@
 													<String>LIST_OL</String>
 												</field>
 											</toolbarItem>
+											<toolbarSeparator/>
+											<toolbar>
+												<field name="id">
+													<String>Tables</String>
+												</field>
+												<field name="type">
+													<Integer>3</Integer>
+												</field>
+												<field name="largeIconPath">
+													<String></String>
+												</field>
+												<field name="smallIconPath">
+													<String></String>
+												</field>
+												<field name="toolbarEntriesDescriptorList">
+													<toolbarEntry-array>
+														<toolbarItem>
+															<field name="actionID">
+																<String>INSERT_TABLE_COLUMN</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>INSERT_TABLE_ROW</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>DELETE_TABLE_COLUMN</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>DELETE_TABLE_ROW</String>
+															</field>
+														</toolbarItem>
+														<toolbarSeparator/>
+														<toolbarItem>
+															<field name="actionID">
+																<String>TABLE_JOIN_ROW_CELLS</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>TABLE_JOIN_CELL_ABOVE</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>TABLE_JOIN_CELL_BELOW</String>
+															</field>
+														</toolbarItem>
+														<toolbarSeparator/>
+														<toolbarItem>
+															<field name="actionID">
+																<String>TABLE_SPLIT_ABOVE</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>TABLE_SPLIT_BELOW</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>TABLE_SPLIT_LEFT</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>TABLE_SPLIT_RIGHT</String>
+															</field>
+														</toolbarItem>
+													</toolbarEntry-array>
+												</field>
+											</toolbar>
 										</toolbarEntry-array>
 									</field>
 								</toolbar>
@@ -1700,7 +2083,7 @@
 						<scenario-array/>
 					</field>
 					<field name="validationScenarios">
-						<null/>
+						<validationScenario-array/>
 					</field>
 					<field name="defaultValidationScenarioName">
 						<null/>
