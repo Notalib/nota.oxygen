@@ -1420,6 +1420,64 @@
 											</actionMode-array>
 										</field>
 									</action>
+									<action>
+										<field name="id">
+											<String>MARKUP_AS_LINK</String>
+										</field>
+										<field name="name">
+											<String>Markup as link</String>
+										</field>
+										<field name="description">
+											<String>&lt;a href=""></String>
+										</field>
+										<field name="largeIconPath">
+											<String>${frameworks}/dtbook2005/link.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>${frameworks}/dtbook2005/link.png</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::a|parent::a</String>
+													</field>
+													<field name="argValues">
+														<map/>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.DeleteParentElementOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>link fragment</String>
+																<String>&lt;a xmlns="http://www.daisy.org/z3986/2005/dtbook/" external="true">&lt;/a></String>
+															</entry>
+															<entry>
+																<String>reference attribute name</String>
+																<String>href</String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.MarkupLinkOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
 								</action-array>
 							</field>
 							<field name="menubarDescriptor">
@@ -1485,6 +1543,11 @@
 														<menuItem>
 															<field name="actionID">
 																<String>INLINE_FOREIGN_LANGUAGE_TOGGLE</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>MARKUP_AS_LINK</String>
 															</field>
 														</menuItem>
 													</menuEntry-array>
@@ -1682,6 +1745,11 @@
 																<String>INLINE_ACRONYM_TOGGLE</String>
 															</field>
 														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>MARKUP_AS_LINK</String>
+															</field>
+														</menuItem>
 													</menuEntry-array>
 												</field>
 											</menu>
@@ -1868,6 +1936,11 @@
 											<toolbarItem>
 												<field name="actionID">
 													<String>INLINE_ACRONYM_TOGGLE</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>MARKUP_AS_LINK</String>
 												</field>
 											</toolbarItem>
 											<toolbarSeparator/>

@@ -60,6 +60,32 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 		}
 		return null;
 	}
+	
+	
+	
+	/**
+	 * Gets the start of the current selection
+	 * @return The start of the selection
+	 */
+	public int getSelectionStart()
+	{
+		int selStart = getAuthorAccess().getEditorAccess().getSelectionStart();
+		int selEnd = getAuthorAccess().getEditorAccess().getSelectionEnd();
+		if (selStart<selEnd) return selStart;
+		return selEnd;
+	}
+	
+	/**
+	 * Gets the end of the current selection
+	 * @return The end of the current selection
+	 */
+	public int getSelectionEnd()
+	{
+		int selStart = getAuthorAccess().getEditorAccess().getSelectionStart();
+		int selEnd = getAuthorAccess().getEditorAccess().getSelectionEnd();
+		if (selStart<selEnd) return selEnd;
+		return selStart;
+	}
 
 	@Override
 	public final void doOperation(AuthorAccess aa, ArgumentsMap args)

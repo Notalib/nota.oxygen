@@ -299,7 +299,7 @@ div prodnote sidebar note annotation blockquote dd li th td
 */
 
 sidebar:before {
-    content: "SIDEBAR [" attr(render) "]\A";
+    content: "SIDEBAR\A";
     font-size: smaller;
 }
 
@@ -428,10 +428,20 @@ span.roman
 	background-color: orange;
 }
 
-span[lang='xx']
+span:lang(xx)
 {
   background-color: red;
 }
+span:lang(en), span:lang(de), span:lang(fr)
+{
+  background-color: rgb(255,127,127);     
+}
+
+span:lang(sv), span:lang(no), span:lang(fi)
+{
+  background-color: rgb(255,191,191);  
+}
+
 
 sub {
   display: inline;
@@ -766,3 +776,4 @@ p.bridgehead {
 	color : gray;
 	font-size:large;
 }
+

@@ -73,6 +73,8 @@
 
 */
 
+@namespace xml "http://www.w3.org/XML/1998/namespace";
+
 
 /* ------------------------------------------------------------- */
 /*             elements without display properties               */
@@ -438,7 +440,6 @@ span:lang(xx)
 {
   background-color: red;
 }
-
 span:lang(en), span:lang(de), span:lang(fr)
 {
   background-color: rgb(255,127,127);     
@@ -448,6 +449,8 @@ span:lang(sv), span:lang(no), span:lang(fi)
 {
   background-color: rgb(255,191,191);  
 }
+
+
 sub {
   display: inline;
   vertical-align : sub;
@@ -781,5 +784,3 @@ p.bridgehead {
 	color : gray;
 	font-size:large;
 }
-
- 

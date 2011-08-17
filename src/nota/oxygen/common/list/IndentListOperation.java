@@ -31,9 +31,8 @@ public class IndentListOperation extends BaseAuthorOperation {
 		try {
 			AuthorEditorAccess edtAccess = getAuthorAccess().getEditorAccess();
 			AuthorDocumentController docCtrl = getAuthorAccess().getDocumentController();
-			int selStart = edtAccess.getSelectionStart();
-			int selEnd = edtAccess.getSelectionEnd();
-			showMessage("Selection: "+selStart+"-"+selEnd);
+			int selStart = getSelectionStart();
+			int selEnd = getSelectionEnd();
 			AuthorElement list = getNamedCommonParentElementOfSelection(listElement, null);
 			if (list==null) {
 				throw new AuthorOperationException("Current selection has no common parent "+listElement+" element");
