@@ -359,6 +359,69 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 		return authorAccess;
 	}
 	
+	/**
+	 * Gets the last child AuthorElement of a parent AuthorElement
+	 * @param parent The parent AuthorElement from which to get the last child
+	 * @return The last child or null if no last child exists
+	 */
+	public static AuthorElement getLastChild(AuthorElement parent){
+		List<AuthorNode> children = parent.getContentNodes();
+		for (int i = children.size()-1; i>=0; i--)	{
+			if (children.get(i) instanceof AuthorElement) return (AuthorElement)children.get(i);
+		}
+		return null;
+	}
+	
+	/**
+	 * Gets the previous sibling of an AuthorElement
+	 * @param elem The AuthorElement for which to get the previous sibling
+	 * @return The previous sibling of elem - null if no previous sibling exists
+	 */
+	public static AuthorElement getPreviousSibling(AuthorElement elem) {
+		if (elem.getParent()!=null) {
+			AuthorElement parent = (AuthorElement)elem.getParent();
+			List<AuthorNode> siblings = parent.getContentNodes();
+			int thisIndex = siblings.indexOf(elem);
+			for (int i=thisIndex-1; i>=0; i--) {
+				if (siblings.get(i) instanceof AuthorElement) return (AuthorElement)siblings.get(i);
+			}
+		}
+		return null; 
+	}
+	
+	/**
+	 * Gets the next sibling of an AuthorElement
+	 * @param elem The AuthorElement for which to get the next sibling
+	 * @return The next sibling of elem - null if no previous sibling exists
+	 */
+	public static AuthorElement getNextSibling(AuthorElement elem) {
+		if (elem.getParent()!=null) {
+			AuthorElement parent = (AuthorElement)elem.getParent();
+			List<AuthorNode> siblings = parent.getContentNodes();
+			int thisIndex = siblings.indexOf(elem);
+			for (int i=thisIndex+1; i<siblings.size(); i++) {
+				if (siblings.get(i) instanceof AuthorElement) return (AuthorElement)siblings.get(i);
+			}
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * Serializes the children of an AuthorElement to xml
+	 * @param elem The parent AuthorElement
+	 * @return The xml representing the children 
+	 * @throws AuthorOperationException 
+	 */
+	public String serializeChildren(AuthorElement elem) throws AuthorOperationException {
+		String res = "";
+		List<AuthorNode> children = elem.getContentNodes();
+		for (int i=0; i<children.size(); i++) {
+			res += serialize(children.get(i));
+		}
+		return res;
+	}
+
 	
 		
 }

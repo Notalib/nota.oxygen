@@ -257,7 +257,7 @@ div {
 
 level:before {
   display: inline;
-  content: "level depth: " attr(depth) " class: " attr(class);
+  content: "level depth: " attr(depth) " class: " attr(class) " ";
   border: 1px solid black;
   margin-top: 1em;
   font-size: 0.8em;

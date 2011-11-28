@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<serialized version="12.2" xml:space="preserve">
+<serialized version="13.1" xml:space="preserve">
 	<map>
 		<entry>
 			<String>document.types</String>
@@ -1531,6 +1531,183 @@
 											</actionMode-array>
 										</field>
 									</action>
+									<action>
+										<field name="id">
+											<String>MARKUP_SUB_LEVEL</String>
+										</field>
+										<field name="name">
+											<String>Markup sub-level</String>
+										</field>
+										<field name="description">
+											<String>Make current element as heading in a new sub-level</String>
+										</field>
+										<field name="largeIconPath">
+											<String>${frameworks}/dtbook2005/h_plus.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>${frameworks}/dtbook2005/h_plus.png</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<String>ctrl shift 2</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>fixed-heading-tags</String>
+																<String>h1|h2|h3|h4|h5|h6</String>
+															</entry>
+															<entry>
+																<String>fixed-level-tags</String>
+																<String>level1|level2|level3|level4|level5|level6</String>
+															</entry>
+															<entry>
+																<String>generic-heading-tag</String>
+																<String>levelhd</String>
+															</entry>
+															<entry>
+																<String>generic-level-tag</String>
+																<String>level</String>
+															</entry>
+															<entry>
+																<String>level-type</String>
+																<String>sub-level</String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.dtbook.MarkupLevelHeadingOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>MARKUP_SAME_LEVEL</String>
+										</field>
+										<field name="name">
+											<String>Markup same-level</String>
+										</field>
+										<field name="description">
+											<String>Make the current element the heading of a new level at the same depth as the containing level</String>
+										</field>
+										<field name="largeIconPath">
+											<String>${frameworks}/dtbook2005/h.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>${frameworks}/dtbook2005/h.png</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<String>ctrl shift 1</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>fixed-heading-tags</String>
+																<String>h1|h2|h3|h4|h5|h6</String>
+															</entry>
+															<entry>
+																<String>fixed-level-tags</String>
+																<String>level1|level2|level3|level4|level5|level6</String>
+															</entry>
+															<entry>
+																<String>generic-heading-tag</String>
+																<String>levelhd</String>
+															</entry>
+															<entry>
+																<String>generic-level-tag</String>
+																<String>level</String>
+															</entry>
+															<entry>
+																<String>level-type</String>
+																<String>same-level</String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.dtbook.MarkupLevelHeadingOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>REMOVE_LEVEL_MARKUP</String>
+										</field>
+										<field name="name">
+											<String>Remove level markup</String>
+										</field>
+										<field name="description">
+											<String>Removes the level of which the current element is heading, marging it with its predesessor or parent</String>
+										</field>
+										<field name="largeIconPath">
+											<String>${frameworks}/dtbook2005/h_x.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>${frameworks}/dtbook2005/h_x.png</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<String>ctrl shift 3</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>block-replacement-name</String>
+																<String>p</String>
+															</entry>
+															<entry>
+																<String>fixed-heading-tags</String>
+																<String>h1|h2|h3|h4|h5|h6</String>
+															</entry>
+															<entry>
+																<String>fixed-level-tags</String>
+																<String>level1|level2|level3|level4|level5|level6</String>
+															</entry>
+															<entry>
+																<String>generic-heading-tag</String>
+																<String>levelhd</String>
+															</entry>
+															<entry>
+																<String>generic-level-tag</String>
+																<String>level</String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.dtbook.RemoveLevelHeadingOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
 								</action-array>
 							</field>
 							<field name="menubarDescriptor">
@@ -1546,6 +1723,21 @@
 									</field>
 									<field name="menuEntriesDescriptorList">
 										<menuEntry-array>
+											<menuItem>
+												<field name="actionID">
+													<String>MARKUP_SAME_LEVEL</String>
+												</field>
+											</menuItem>
+											<menuItem>
+												<field name="actionID">
+													<String>MARKUP_SUB_LEVEL</String>
+												</field>
+											</menuItem>
+											<menuItem>
+												<field name="actionID">
+													<String>REMOVE_LEVEL_MARKUP</String>
+												</field>
+											</menuItem>
 											<menu>
 												<field name="label">
 													<String>Inline</String>
@@ -1746,6 +1938,21 @@
 									</field>
 									<field name="menuEntriesDescriptorList">
 										<menuEntry-array>
+											<menuItem>
+												<field name="actionID">
+													<String>MARKUP_SAME_LEVEL</String>
+												</field>
+											</menuItem>
+											<menuItem>
+												<field name="actionID">
+													<String>MARKUP_SUB_LEVEL</String>
+												</field>
+											</menuItem>
+											<menuItem>
+												<field name="actionID">
+													<String>REMOVE_LEVEL_MARKUP</String>
+												</field>
+											</menuItem>
 											<menu>
 												<field name="label">
 													<String>Inline</String>
@@ -1949,6 +2156,22 @@
 									</field>
 									<field name="toolbarEntriesDescriptorList">
 										<toolbarEntry-array>
+											<toolbarItem>
+												<field name="actionID">
+													<String>MARKUP_SAME_LEVEL</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>MARKUP_SUB_LEVEL</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>REMOVE_LEVEL_MARKUP</String>
+												</field>
+											</toolbarItem>
+											<toolbarSeparator/>
 											<toolbarItem>
 												<field name="actionID">
 													<String>INLINE_STRONG_TOGGLE</String>
@@ -2193,6 +2416,9 @@
 					</field>
 					<field name="attributesValueEditor">
 						<null/>
+					</field>
+					<field name="priority">
+						<Integer>3</Integer>
 					</field>
 				</documentTypeDescriptor>
 			</documentTypeDescriptor-array>

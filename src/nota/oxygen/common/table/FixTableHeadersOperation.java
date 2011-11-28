@@ -135,13 +135,17 @@ public class FixTableHeadersOperation extends BaseAuthorOperation {
 
 			docCtrl.deleteNode(tableAElem);
 			docCtrl.insertXMLFragment(tableXml, getAuthorAccess().getEditorAccess().getCaretOffset());
-		} catch (AuthorOperationException e) {
-			throw e;
-		} catch (Exception e) {
-			String msg = "Unexpected "+e.getClass().getSimpleName()+" occured";
-			if (e.getMessage()!=null) msg += ": "+e.getMessage();
-//					+ "\nStack Trace:\n" + e.getStackTrace().toString();
-			throw new AuthorOperationException(msg, e);
+		}
+		catch (Exception e) {
+			if (e instanceof AuthorOperationException) {
+				throw (AuthorOperationException)e;
+			}
+			else {
+				String msg = "Unexpected "+e.getClass().getSimpleName()+" occured";
+				if (e.getMessage()!=null) msg += ": "+e.getMessage();
+//						+ "\nStack Trace:\n" + e.getStackTrace().toString();
+				throw new AuthorOperationException(msg, e);
+			}
 		}
 	}
 

@@ -85,10 +85,18 @@ public class IndentListOperation extends BaseAuthorOperation {
 			docCtrl.deleteNode(list);
 			docCtrl.insertXMLFragment(serialize(listElem), edtAccess.getCaretOffset());
 		}
-		catch (Exception e) {
-			throw new AuthorOperationException(
-					"Unexpected "+e.getClass().getName()+" occured: "+e.getMessage(),
-					e);
+		catch (Exception e)
+		{
+			if (e instanceof AuthorOperationException)
+			{
+				throw (AuthorOperationException)e;
+			}
+			else
+			{
+				throw new AuthorOperationException(
+						"Unexpected "+e.getClass().getName()+" occured: "+e.getMessage(),
+						e);
+			}
 		}
 	}
 
