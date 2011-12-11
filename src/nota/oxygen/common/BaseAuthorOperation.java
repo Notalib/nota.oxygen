@@ -62,6 +62,20 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 	}
 	
 	
+	/**
+	 * Finds a AuthorElement by XPath - the search is global and finds the first matching element in the document
+	 * @param xpath
+	 * @return The matching AuthorElement or null if no match is found
+	 * @throws AuthorOperationException 
+	 */
+	public AuthorElement findElementByXPath(String xpath) throws AuthorOperationException {
+		AuthorNode[] res = getAuthorAccess().getDocumentController().findNodesByXPath(xpath, true, true, true);
+		for (int i=0; i<res.length; i++) {
+			if (res[i] instanceof AuthorElement) return (AuthorElement)res[i];
+		}
+		return null;
+	}
+	
 	
 	/**
 	 * Gets the start of the current selection
@@ -98,7 +112,7 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 			doOperation();
 		}
 		catch (AuthorOperationException e) {
-			docCtrl.endCompoundEdit();
+			docCtrl.cancelCompoundEdit();
   			throw e;
 		}
 		docCtrl.endCompoundEdit();
@@ -325,6 +339,23 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 	}
 	
 	/**
+	 * Gets the element at the caret position
+	 * @return The AuthorElement at the caret position or null if no such AuthorElement exists
+	 * @throws BadLocationException 
+	 */
+	public AuthorElement getCurrentElement() throws BadLocationException {
+		AuthorDocumentController docCtrl = getAuthorAccess().getDocumentController();
+		AuthorNode aNode = docCtrl.getNodeAtOffset(getAuthorAccess().getEditorAccess().getBalancedSelectionStart()+1);
+		while (aNode != null) {
+			if (aNode instanceof AuthorElement) {
+				return (AuthorElement)aNode;
+			}
+			aNode = aNode.getParent();
+		}
+		return null;
+	}
+		
+	/**
 	 * De-serializes a xml element {@link String} representation to a {@link Element} 
 	 * @param xml	The xml to de-serailize
 	 * @return		The de-serailized {@link Element}
@@ -375,7 +406,7 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 	/**
 	 * Gets the previous sibling of an AuthorElement
 	 * @param elem The AuthorElement for which to get the previous sibling
-	 * @return The previous sibling of elem - null if no previous sibling exists
+	 * @return The previous sibling AuthorElement of elem - null if no previous sibling exists
 	 */
 	public static AuthorElement getPreviousSibling(AuthorElement elem) {
 		if (elem.getParent()!=null) {
@@ -392,7 +423,7 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 	/**
 	 * Gets the next sibling of an AuthorElement
 	 * @param elem The AuthorElement for which to get the next sibling
-	 * @return The next sibling of elem - null if no previous sibling exists
+	 * @return The next sibling AuthorElement of elem - null if no next sibling exists
 	 */
 	public static AuthorElement getNextSibling(AuthorElement elem) {
 		if (elem.getParent()!=null) {
@@ -405,7 +436,6 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 		}
 		return null;
 	}
-	
 	
 	/**
 	 * Serializes the children of an AuthorElement to xml

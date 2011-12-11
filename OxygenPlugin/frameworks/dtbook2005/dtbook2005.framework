@@ -1667,6 +1667,87 @@
 											</actionMode-array>
 										</field>
 									</action>
+									<action>
+										<field name="id">
+											<String>SPLIT_PARAGRAPH_AT_PAGENUM</String>
+										</field>
+										<field name="name">
+											<String>Split p at pagenum</String>
+										</field>
+										<field name="description">
+											<String>Splits the parent paragraph of the selected page number element, making the page number element a sibling between the two splitted parts</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::pagenum[parent::p]</String>
+													</field>
+													<field name="argValues">
+														<map/>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.SplitParentAtSelfOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>FIND_NEXT_IN_PARAGRAPH_PAGENUM</String>
+										</field>
+										<field name="name">
+											<String>Find next pagenum inside a paragraph</String>
+										</field>
+										<field name="description">
+											<String>Find next pagenum element that is inside a paragraph</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>XPath statement</String>
+																<String>//p/pagenum</String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.XPathFindOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
 								</action-array>
 							</field>
 							<field name="menubarDescriptor">
@@ -1789,6 +1870,31 @@
 											</menu>
 											<menu>
 												<field name="label">
+													<String>Page Numbers</String>
+												</field>
+												<field name="accessKey">
+													<String>N</String>
+												</field>
+												<field name="iconPath">
+													<String></String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>FIND_NEXT_IN_PARAGRAPH_PAGENUM</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>SPLIT_PARAGRAPH_AT_PAGENUM</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+											</menu>
+											<menu>
+												<field name="label">
 													<String>Tables</String>
 												</field>
 												<field name="accessKey">
@@ -1887,6 +1993,11 @@
 									</field>
 									<field name="menuEntriesDescriptorList">
 										<menuEntry-array>
+											<menuItem>
+												<field name="actionID">
+													<String>SPLIT_PARAGRAPH_AT_PAGENUM</String>
+												</field>
+											</menuItem>
 											<menuItem>
 												<field name="actionID">
 													<String>MARKUP_SAME_LEVEL</String>
@@ -2315,7 +2426,148 @@
 						</documentTypeRule-array>
 					</field>
 					<field name="scenarios">
-						<scenario-array/>
+						<scenario-array>
+							<scenario>
+								<field name="advancedOptionsMap">
+									<map>
+										<entry>
+											<String>Saxon-EE</String>
+											<xsltSaxonSAAdvancedOptions>
+												<field name="sourceValidation">
+													<String>saxon.source.lax.schema.based.validation</String>
+												</field>
+												<field name="treatResultValidationErrorsAsWarnings">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="addCommentsForValidationErrors">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="allowCallsOnExtensionFunctions">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="showVersionWarnings">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="dtdSourceValidation">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="dtdSourceValidationRecover">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="lineNumbering">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="initialMode">
+													<null/>
+												</field>
+												<field name="initialTemplate">
+													<null/>
+												</field>
+												<field name="traceXPathExpression">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="errorRecoverPolicy">
+													<String>saxon.recover.with.warning</String>
+												</field>
+												<field name="stripWS">
+													<String>saxon.strip.ws.ignorable</String>
+												</field>
+												<field name="optimizationLevel">
+													<String>10</String>
+												</field>
+												<field name="useConfigFile">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="configSystemID">
+													<null/>
+												</field>
+												<field name="initializer">
+													<String></String>
+												</field>
+											</xsltSaxonSAAdvancedOptions>
+										</entry>
+									</map>
+								</field>
+								<field name="name">
+									<String>Format and indent</String>
+								</field>
+								<field name="baseURL">
+									<String></String>
+								</field>
+								<field name="footerURL">
+									<String></String>
+								</field>
+								<field name="fOPMethod">
+									<String>pdf</String>
+								</field>
+								<field name="fOProcessorName">
+									<String>Apache FOP</String>
+								</field>
+								<field name="headerURL">
+									<String></String>
+								</field>
+								<field name="inputXSLURL">
+									<String>${frameworks}\dtbook2005\copy.xsl</String>
+								</field>
+								<field name="inputXMLURL">
+									<String>${currentFileURL}</String>
+								</field>
+								<field name="defaultScenario">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="isFOPPerforming">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="type">
+									<String>XSL</String>
+								</field>
+								<field name="saveAs">
+									<Boolean>true</Boolean>
+								</field>
+								<field name="openInBrowser">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="outputFile">
+									<File>${currentFileURL}</File>
+								</field>
+								<field name="openOtherLocationInBrowser">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="locationToOpenInBrowserURL">
+									<null/>
+								</field>
+								<field name="openInEditor">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="showInHTMLPane">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="showInXMLPane">
+									<Boolean>true</Boolean>
+								</field>
+								<field name="showInSVGPane">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="showInResultSetPane">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="useXSLTInput">
+									<Boolean>true</Boolean>
+								</field>
+								<field name="xsltParams">
+									<list/>
+								</field>
+								<field name="cascadingStylesheets">
+									<String-array/>
+								</field>
+								<field name="xslTransformer">
+									<String>Saxon-EE</String>
+								</field>
+								<field name="extensionURLs">
+									<String-array/>
+								</field>
+							</scenario>
+						</scenario-array>
 					</field>
 					<field name="validationScenarios">
 						<validationScenario-array/>

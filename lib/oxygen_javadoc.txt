@@ -1,0 +1,5 @@
+javadoc for Author SDK
+http://www.oxygenxml.com/InstData/Editor/Developer/javadoc/
+
+javadoc for Plugin SDK
+http://www.oxygenxml.com/InstData/Editor/Plugins/javadoc/
