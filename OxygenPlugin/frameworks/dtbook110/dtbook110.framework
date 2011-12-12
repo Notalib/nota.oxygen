@@ -1708,6 +1708,96 @@
 											</actionMode-array>
 										</field>
 									</action>
+									<action>
+										<field name="id">
+											<String>INSERT_IMAGE_GROUP</String>
+										</field>
+										<field name="name">
+											<String>Insert image group</String>
+										</field>
+										<field name="description">
+											<String>Inserts an image group, prompting for the URL of the image</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::level|self::level1|self::level2|self::level3|self::level4|self::level5|self::level6</String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>imggroup fragment</String>
+																<String>&lt;imggroup>
+  &lt;caption>CAPTIONPLACEHOLDER&lt;/caption>
+  &lt;img src="$image" alt="ALTTEXT" width="$width" height="$height"/>
+  &lt;prodnote render="optional">&lt;/prodnote>
+&lt;/imggroup></String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.dtbook.InsertImageGroupOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>INSERT_IMAGE</String>
+										</field>
+										<field name="name">
+											<String>Insert image </String>
+										</field>
+										<field name="description">
+											<String>Inserts an (additional) image in an image group</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::imggroup</String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>imggroup fragment</String>
+																<String>&lt;img src="$image" alt="ALTTEXT" width="$width" height="$height"/></String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.dtbook.InsertImageGroupOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
 								</action-array>
 							</field>
 							<field name="menubarDescriptor">
@@ -1738,6 +1828,31 @@
 													<String>REMOVE_LEVEL_MARKUP</String>
 												</field>
 											</menuItem>
+											<menu>
+												<field name="label">
+													<String>Images</String>
+												</field>
+												<field name="accessKey">
+													<String>M</String>
+												</field>
+												<field name="iconPath">
+													<String></String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>INSERT_IMAGE_GROUP</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>INSERT_IMAGE</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+											</menu>
 											<menu>
 												<field name="label">
 													<String>Inline</String>
