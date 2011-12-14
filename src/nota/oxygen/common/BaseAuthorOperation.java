@@ -127,6 +127,18 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 		return answer==0;
 	}
 	
+	protected int showYesNoCancelMessage(String title, String message, int defaultButton) {
+		int index = 0;
+		if (defaultButton==0) index = 1;
+		if (defaultButton==-1) index = 2;
+		return getAuthorAccess().getWorkspaceAccess().showConfirmDialog(
+				title, 
+				message, 
+				new String[] {"Yes", "No", "Cancel"}, 
+				new int[] {1, 0, -1}, 
+				index);
+	}
+	
 	protected void showMessage(String message) {
 		
 		getAuthorAccess().getWorkspaceAccess().showConfirmDialog(

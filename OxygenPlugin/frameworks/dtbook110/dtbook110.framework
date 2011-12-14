@@ -1739,6 +1739,10 @@
 													<field name="argValues">
 														<map>
 															<entry>
+																<String>fixup mode</String>
+																<String>yes</String>
+															</entry>
+															<entry>
 																<String>imggroup fragment</String>
 																<String>&lt;imggroup>
   &lt;caption>CAPTIONPLACEHOLDER&lt;/caption>
@@ -1750,6 +1754,87 @@
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.dtbook.InsertImageGroupOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>SPLIT_PARAGRAPH_AT_PAGENUM</String>
+										</field>
+										<field name="name">
+											<String>Split p at pagenum</String>
+										</field>
+										<field name="description">
+											<String>Splits the parent paragraph of the selected page number element, making the page number element a sibling between the two splitted parts</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::pagenum[parent::p]</String>
+													</field>
+													<field name="argValues">
+														<map/>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.SplitParentAtSelfOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>FIND_NEXT_IN_PARAGRAPH_PAGENUM</String>
+										</field>
+										<field name="name">
+											<String>Find next pagenum inside a paragraph</String>
+										</field>
+										<field name="description">
+											<String>Find next pagenum element that is inside a paragraph</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>XPath statement</String>
+																<String>//p/pagenum</String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.XPathFindOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -1786,6 +1871,10 @@
 													<field name="argValues">
 														<map>
 															<entry>
+																<String>fixup mode</String>
+																<String>no</String>
+															</entry>
+															<entry>
 																<String>imggroup fragment</String>
 																<String>&lt;img src="$image" alt="ALTTEXT" width="$width" height="$height"/></String>
 															</entry>
@@ -1793,6 +1882,298 @@
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.dtbook.InsertImageGroupOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>MARKUP_PAGENUMBERS_AUTO</String>
+										</field>
+										<field name="name">
+											<String>Markup pagenumbers automatically</String>
+										</field>
+										<field name="description">
+											<String>Find paragraphs containing whole numbers and replace then with page numbers	</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>Markup mode</String>
+																<String>Fully automatic</String>
+															</entry>
+															<entry>
+																<String>candidate xpath</String>
+																<String>//p[parent::level or parent::level1 or parent::level2 or parent::level3 or parent::level4 or parent::level5 or parent::level6]</String>
+															</entry>
+															<entry>
+																<String>pagenumber fragment - $pagenum is placeholder for the pagenumber</String>
+																<String>&lt;pagenum page="normal">$pagenum&lt;/pagenum></String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.pagenumber.MarkupPagenumbersOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>PAGE_FIND_NEXT</String>
+										</field>
+										<field name="name">
+											<String>Find next pagenumber</String>
+										</field>
+										<field name="description">
+											<String>Find next pagenumber</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<String>ctrl shift F10</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>XPath statement</String>
+																<String>//pagenum</String>
+															</entry>
+															<entry>
+																<String>direction</String>
+																<String>forward</String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.XPathFindOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>PAGE_FIND_PREVIOUS</String>
+										</field>
+										<field name="name">
+											<String>Find previous pagenumber</String>
+										</field>
+										<field name="description">
+											<String>Find previous pagenumber</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<String>ctrl shift F9</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>XPath statement</String>
+																<String>//pagenum</String>
+															</entry>
+															<entry>
+																<String>direction</String>
+																<String>reverse</String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.XPathFindOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>MARKUP_PAGENUMBERS_CONFIRM_OUT_OF_SEQUENCE</String>
+										</field>
+										<field name="name">
+											<String>Markup pagenumbers, confirming when out-of-sequence</String>
+										</field>
+										<field name="description">
+											<String>Find paragraphs containing whole numbers and replace then with page numbers	, 
+the user will be required to confirm when the next page number is out-of-sequence</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>Markup mode</String>
+																<String>Confirm when out-of-sequence</String>
+															</entry>
+															<entry>
+																<String>candidate xpath</String>
+																<String>//p[parent::level or parent::level1 or parent::level2 or parent::level3 or parent::level4 or parent::level5 or parent::level6]</String>
+															</entry>
+															<entry>
+																<String>pagenumber fragment - $pagenum is placeholder for the pagenumber</String>
+																<String>&lt;pagenum page="normal">$pagenum&lt;/pagenum></String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.pagenumber.MarkupPagenumbersOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>MARKUP_PAGENUMBERS_CONFIRM_ALL</String>
+										</field>
+										<field name="name">
+											<String>Markup pagenumbers with full confirm</String>
+										</field>
+										<field name="description">
+											<String>Find paragraphs containing whole numbers and replace then with page numbers	, 
+the user will be required to confirm all pages</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>Markup mode</String>
+																<String>Confirm all</String>
+															</entry>
+															<entry>
+																<String>candidate xpath</String>
+																<String>//p[parent::level or parent::level1 or parent::level2 or parent::level3 or parent::level4 or parent::level5 or parent::level6]</String>
+															</entry>
+															<entry>
+																<String>pagenumber fragment - $pagenum is placeholder for the pagenumber</String>
+																<String>&lt;pagenum page="normal">$pagenum&lt;/pagenum></String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.pagenumber.MarkupPagenumbersOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>PAGE_SHOW_REPORT</String>
+										</field>
+										<field name="name">
+											<String>Show page number report</String>
+										</field>
+										<field name="description">
+											<String>Show the page numbers present in the document, categorized by front, normal and special</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>pagenum xpath</String>
+																<String>//pagenum</String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.pagenumber.ShowPageNumberReportOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -1913,16 +2294,6 @@
 													</menuEntry-array>
 												</field>
 											</menu>
-											<menuItem>
-												<field name="actionID">
-													<String>GENERATE_IDS</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
-													<String>CONFIGURE_AUTO_ID_ELEMENTS</String>
-												</field>
-											</menuItem>
 											<menu>
 												<field name="label">
 													<String>Lists</String>
@@ -1948,6 +2319,61 @@
 														<menuItem>
 															<field name="actionID">
 																<String>LIST_OL</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+											</menu>
+											<menu>
+												<field name="label">
+													<String>Page Numbers</String>
+												</field>
+												<field name="accessKey">
+													<String>N</String>
+												</field>
+												<field name="iconPath">
+													<String></String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>PAGE_FIND_PREVIOUS</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>PAGE_FIND_NEXT</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>FIND_NEXT_IN_PARAGRAPH_PAGENUM</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>MARKUP_PAGENUMBERS_AUTO</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>MARKUP_PAGENUMBERS_CONFIRM_OUT_OF_SEQUENCE</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>MARKUP_PAGENUMBERS_CONFIRM_ALL</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>SPLIT_PARAGRAPH_AT_PAGENUM</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>PAGE_SHOW_REPORT</String>
 															</field>
 														</menuItem>
 													</menuEntry-array>
@@ -2055,6 +2481,11 @@
 										<menuEntry-array>
 											<menuItem>
 												<field name="actionID">
+													<String>SPLIT_PARAGRAPH_AT_PAGENUM</String>
+												</field>
+											</menuItem>
+											<menuItem>
+												<field name="actionID">
 													<String>MARKUP_SAME_LEVEL</String>
 												</field>
 											</menuItem>
@@ -2068,6 +2499,31 @@
 													<String>REMOVE_LEVEL_MARKUP</String>
 												</field>
 											</menuItem>
+											<menu>
+												<field name="label">
+													<String>Images</String>
+												</field>
+												<field name="accessKey">
+													<String>M</String>
+												</field>
+												<field name="iconPath">
+													<String></String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>INSERT_IMAGE_GROUP</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>INSERT_IMAGE</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+											</menu>
 											<menu>
 												<field name="label">
 													<String>Inline</String>
@@ -2128,16 +2584,6 @@
 													</menuEntry-array>
 												</field>
 											</menu>
-											<menuItem>
-												<field name="actionID">
-													<String>GENERATE_IDS</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
-													<String>CONFIGURE_AUTO_ID_ELEMENTS</String>
-												</field>
-											</menuItem>
 											<menu>
 												<field name="label">
 													<String>Lists</String>
@@ -2163,6 +2609,61 @@
 														<menuItem>
 															<field name="actionID">
 																<String>LIST_OL</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+											</menu>
+											<menu>
+												<field name="label">
+													<String>Page Numbers</String>
+												</field>
+												<field name="accessKey">
+													<String></String>
+												</field>
+												<field name="iconPath">
+													<String></String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>PAGE_FIND_PREVIOUS</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>PAGE_FIND_NEXT</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>FIND_NEXT_IN_PARAGRAPH_PAGENUM</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>MARKUP_PAGENUMBERS_AUTO</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>MARKUP_PAGENUMBERS_CONFIRM_OUT_OF_SEQUENCE</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>MARKUP_PAGENUMBERS_CONFIRM_ALL</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>SPLIT_PARAGRAPH_AT_PAGENUM</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>PAGE_SHOW_REPORT</String>
 															</field>
 														</menuItem>
 													</menuEntry-array>
@@ -2353,6 +2854,92 @@
 											<toolbarSeparator/>
 											<toolbar>
 												<field name="id">
+													<String>Images</String>
+												</field>
+												<field name="type">
+													<Integer>3</Integer>
+												</field>
+												<field name="largeIconPath">
+													<String></String>
+												</field>
+												<field name="smallIconPath">
+													<String></String>
+												</field>
+												<field name="toolbarEntriesDescriptorList">
+													<toolbarEntry-array>
+														<toolbarItem>
+															<field name="actionID">
+																<String>INSERT_IMAGE_GROUP</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>INSERT_IMAGE</String>
+															</field>
+														</toolbarItem>
+													</toolbarEntry-array>
+												</field>
+											</toolbar>
+											<toolbar>
+												<field name="id">
+													<String>Page Numbers</String>
+												</field>
+												<field name="type">
+													<Integer>3</Integer>
+												</field>
+												<field name="largeIconPath">
+													<String></String>
+												</field>
+												<field name="smallIconPath">
+													<String></String>
+												</field>
+												<field name="toolbarEntriesDescriptorList">
+													<toolbarEntry-array>
+														<toolbarItem>
+															<field name="actionID">
+																<String>PAGE_FIND_PREVIOUS</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>PAGE_FIND_NEXT</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>FIND_NEXT_IN_PARAGRAPH_PAGENUM</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>MARKUP_PAGENUMBERS_AUTO</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>MARKUP_PAGENUMBERS_CONFIRM_OUT_OF_SEQUENCE</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>MARKUP_PAGENUMBERS_CONFIRM_ALL</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>SPLIT_PARAGRAPH_AT_PAGENUM</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>PAGE_SHOW_REPORT</String>
+															</field>
+														</toolbarItem>
+													</toolbarEntry-array>
+												</field>
+											</toolbar>
+											<toolbar>
+												<field name="id">
 													<String>Tables</String>
 												</field>
 												<field name="type">
@@ -2461,7 +3048,9 @@
 						</authorExtension>
 					</field>
 					<field name="templatesLocations">
-						<String-array/>
+						<String-array>
+							<String>\\ntsdbb03\xmlarkiv$\OxygenTemplates\dtbook110</String>
+						</String-array>
 					</field>
 					<field name="xmlCatalogs">
 						<String-array/>

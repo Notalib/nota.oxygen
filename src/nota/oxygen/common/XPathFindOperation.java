@@ -20,9 +20,14 @@ public class XPathFindOperation extends BaseAuthorOperation {
 	@Override
 	public ArgumentDescriptor[] getArguments() {
 		return new ArgumentDescriptor[] {
-				new ArgumentDescriptor(ARG_XPATH_STATEMENT, ArgumentDescriptor.TYPE_STRING, "The XPath statement")
+				new ArgumentDescriptor(ARG_XPATH_STATEMENT, ArgumentDescriptor.TYPE_STRING, "The XPath statement"),
+				new ArgumentDescriptor(ARG_DIRECTION, ArgumentDescriptor.TYPE_CONSTANT_LIST, "The XPath statement", DIRECTIONS, DIRECTIONS[0])
 		};
 	}
+	
+	private static String ARG_DIRECTION = "direction";
+	private static String[] DIRECTIONS = new String[] {"forward", "reverse"};
+	private String direction;
 
 	@Override
 	public String getDescription() {
@@ -36,18 +41,32 @@ public class XPathFindOperation extends BaseAuthorOperation {
 		{
 			AuthorNode[] res = docCtrl.findNodesByXPath(xpathStatement, true, true, true);
 			if (res.length==0) {
-				showMessage("No nodes matches "+xpathStatement);
+				showMessage("No node matches "+xpathStatement);
 			}
 			else {
 				int currentCaretPos = getAuthorAccess().getEditorAccess().getCaretOffset();
 				AuthorNode next = null;
-				for (int i=0; i<res.length; i++) {
-					if (currentCaretPos<=res[i].getStartOffset()) {
-						next = res[i];
-						break;
+				if (DIRECTIONS[0].equals(direction)) {
+					for (int i=0; i<res.length; i++) {
+						if (currentCaretPos<=res[i].getStartOffset()) {
+							next = res[i];
+							break;
+						}
 					}
+					if (next==null) next = res[0];
 				}
-				if (next==null) next = res[0];
+				else if (DIRECTIONS[1].equals(direction)) {
+					for (int i=res.length-1; i>=0; i--) {
+						if (currentCaretPos>res[i].getEndOffset()) {
+							next = res[i];
+							break;
+						}
+					}
+					if (next==null) next = res[res.length-1];
+				}
+				else {
+					throw new AuthorOperationException("Invalid direction "+direction);
+				}
 				getAuthorAccess().getEditorAccess().select(next.getStartOffset(), next.getEndOffset());
 			}
 		}
@@ -62,6 +81,7 @@ public class XPathFindOperation extends BaseAuthorOperation {
 	protected void parseArguments(ArgumentsMap args)
 			throws IllegalArgumentException {
 		xpathStatement = (String)args.getArgumentValue(ARG_XPATH_STATEMENT);
+		direction = (String)args.getArgumentValue(ARG_DIRECTION);
 
 	}
 
