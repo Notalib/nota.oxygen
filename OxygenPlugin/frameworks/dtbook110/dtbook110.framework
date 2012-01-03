@@ -565,7 +565,7 @@
 									</action>
 									<action>
 										<field name="id">
-											<String>INSERT_TABLE_COLUMN</String>
+											<String>TABLE_INSERT_COLUMN</String>
 										</field>
 										<field name="name">
 											<String>Insert Column</String>
@@ -608,7 +608,7 @@
 									</action>
 									<action>
 										<field name="id">
-											<String>DELETE_TABLE_COLUMN</String>
+											<String>TABLE_DELETE_COLUMN</String>
 										</field>
 										<field name="name">
 											<String>Delete Column</String>
@@ -646,7 +646,7 @@
 									</action>
 									<action>
 										<field name="id">
-											<String>DELETE_TABLE_ROW</String>
+											<String>TABLE_DELETE_ROW</String>
 										</field>
 										<field name="name">
 											<String>Delete Row</String>
@@ -722,82 +722,6 @@
 									</action>
 									<action>
 										<field name="id">
-											<String>CONFIGURE_AUTO_ID_ELEMENTS</String>
-										</field>
-										<field name="name">
-											<String>Configure auto id generation</String>
-										</field>
-										<field name="description">
-											<String>Configure auto id generation</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String>true()</String>
-													</field>
-													<field name="argValues">
-														<map/>
-													</field>
-													<field name="operationID">
-														<String>nota.oxygen.common.dtbook.v2005.Dtbook2005ConfigureAutoIDElementsOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-									</action>
-									<action>
-										<field name="id">
-											<String>GENERATE_IDS</String>
-										</field>
-										<field name="name">
-											<String>Generate ids</String>
-										</field>
-										<field name="description">
-											<String></String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String>true()</String>
-													</field>
-													<field name="argValues">
-														<map/>
-													</field>
-													<field name="operationID">
-														<String>nota.oxygen.common.dtbook.v2005.GenerateIDsOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-									</action>
-									<action>
-										<field name="id">
 											<String>LIST_PL</String>
 										</field>
 										<field name="name">
@@ -856,11 +780,11 @@
 															</entry>
 															<entry>
 																<String>item fragment</String>
-																<String>&lt;li xmlns='http://www.daisy.org/z3986/2005/dtbook/'/></String>
+																<String>&lt;li/></String>
 															</entry>
 															<entry>
 																<String>list fragment</String>
-																<String>&lt;list xmlns='http://www.daisy.org/z3986/2005/dtbook/' type='pl'/></String>
+																<String>&lt;list  type="ul" bullet="none"/></String>
 															</entry>
 														</map>
 													</field>
@@ -1070,7 +994,7 @@
 									</action>
 									<action>
 										<field name="id">
-											<String>INSERT_TABLE_ROW</String>
+											<String>TABLE_INSERT_ROW</String>
 										</field>
 										<field name="name">
 											<String>Insert Row</String>
@@ -1313,60 +1237,6 @@
 									</action>
 									<action>
 										<field name="id">
-											<String>INLINE_NOTE_IDENTIFIER</String>
-										</field>
-										<field name="name">
-											<String>Toggle note identifier</String>
-										</field>
-										<field name="description">
-											<String>Toggle &lt;span class='note_identifier'></String>
-										</field>
-										<field name="largeIconPath">
-											<String>${frameworks}/dtbook2005/note_identifier.png</String>
-										</field>
-										<field name="smallIconPath">
-											<String>${frameworks}/dtbook2005/note_identifier.png</String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<String>ctrl shift N</String>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String>self::span[@class='note_identifier']|parent::span[@class='note_identifier']</String>
-													</field>
-													<field name="argValues">
-														<map/>
-													</field>
-													<field name="operationID">
-														<String>nota.oxygen.common.DeleteParentElementOperation</String>
-													</field>
-												</actionMode>
-												<actionMode>
-													<field name="xpathCondition">
-														<String></String>
-													</field>
-													<field name="argValues">
-														<map>
-															<entry>
-																<String>fragment</String>
-																<String>&lt;span class="note_identifier">&lt;/span></String>
-															</entry>
-														</map>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-									</action>
-									<action>
-										<field name="id">
 											<String>INLINE_SUPER_SCRIPT_TOGGLE</String>
 										</field>
 										<field name="name">
@@ -1533,7 +1403,7 @@
 									</action>
 									<action>
 										<field name="id">
-											<String>MARKUP_SUB_LEVEL</String>
+											<String>LEVEL_MARKUP_SUB_LEVEL</String>
 										</field>
 										<field name="name">
 											<String>Markup sub-level</String>
@@ -1592,7 +1462,7 @@
 									</action>
 									<action>
 										<field name="id">
-											<String>MARKUP_SAME_LEVEL</String>
+											<String>LEVEL_MARKUP_SAME_LEVEL</String>
 										</field>
 										<field name="name">
 											<String>Markup same-level</String>
@@ -1651,7 +1521,7 @@
 									</action>
 									<action>
 										<field name="id">
-											<String>REMOVE_LEVEL_MARKUP</String>
+											<String>LEVEL_REMOVE_LEVEL_MARKUP</String>
 										</field>
 										<field name="name">
 											<String>Remove level markup</String>
@@ -1710,7 +1580,7 @@
 									</action>
 									<action>
 										<field name="id">
-											<String>INSERT_IMAGE_GROUP</String>
+											<String>IMAGE_INSERT_GROUP</String>
 										</field>
 										<field name="name">
 											<String>Insert image group</String>
@@ -1761,7 +1631,7 @@
 									</action>
 									<action>
 										<field name="id">
-											<String>SPLIT_PARAGRAPH_AT_PAGENUM</String>
+											<String>PAGE_SPLIT_PARAGRAPH_AT_PAGENUM</String>
 										</field>
 										<field name="name">
 											<String>Split p at pagenum</String>
@@ -1799,13 +1669,13 @@
 									</action>
 									<action>
 										<field name="id">
-											<String>FIND_NEXT_IN_PARAGRAPH_PAGENUM</String>
+											<String>PAGE_FIND_NEXT_NON_LEVEL_CHILD</String>
 										</field>
 										<field name="name">
-											<String>Find next pagenum inside a paragraph</String>
+											<String>Find next non-level child pagenum</String>
 										</field>
 										<field name="description">
-											<String>Find next pagenum element that is inside a paragraph</String>
+											<String>Find next pagenum element that is not the child of a level element</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -1817,7 +1687,7 @@
 											<String></String>
 										</field>
 										<field name="accelerator">
-											<null/>
+											<String>ctrl shift F11</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
@@ -1829,7 +1699,7 @@
 														<map>
 															<entry>
 																<String>XPath statement</String>
-																<String>//p/pagenum</String>
+																<String>//pagenum[not(parent::level or parent::level1 or parent::level2 or parent::level3 or parent::level4 or parent::level5 or parent::level6)]</String>
 															</entry>
 														</map>
 													</field>
@@ -1842,7 +1712,7 @@
 									</action>
 									<action>
 										<field name="id">
-											<String>INSERT_IMAGE</String>
+											<String>IMAGE_INSERT</String>
 										</field>
 										<field name="name">
 											<String>Insert image </String>
@@ -1889,7 +1759,7 @@
 									</action>
 									<action>
 										<field name="id">
-											<String>MARKUP_PAGENUMBERS_AUTO</String>
+											<String>PAGE_MARKUP_PAGENUMBERS_AUTO</String>
 										</field>
 										<field name="name">
 											<String>Markup pagenumbers automatically</String>
@@ -1923,16 +1793,20 @@
 															</entry>
 															<entry>
 																<String>candidate xpath</String>
-																<String>//p[parent::level or parent::level1 or parent::level2 or parent::level3 or parent::level4 or parent::level5 or parent::level6]</String>
+																<String>//p[parent::level|parent::level1|parent::level2|parent::level3|parent::level4|parent::level5|parent::level6]</String>
 															</entry>
 															<entry>
-																<String>pagenumber fragment - $pagenum is placeholder for the pagenumber</String>
-																<String>&lt;pagenum page="normal">$pagenum&lt;/pagenum></String>
+																<String>id prefix</String>
+																<String>page_</String>
+															</entry>
+															<entry>
+																<String>pagenumber fragment - $pagenum is placeholder for the pagenumber, $id for pagenumber id</String>
+																<String>&lt;pagenum page="normal" id="$id">$pagenum&lt;/pagenum></String>
 															</entry>
 														</map>
 													</field>
 													<field name="operationID">
-														<String>nota.oxygen.common.pagenumber.MarkupPagenumbersOperation</String>
+														<String>nota.oxygen.common.pagenumber.MarkupPageNumbersOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -2034,7 +1908,7 @@
 									</action>
 									<action>
 										<field name="id">
-											<String>MARKUP_PAGENUMBERS_CONFIRM_OUT_OF_SEQUENCE</String>
+											<String>PAGE_MARKUP_PAGENUMBERS_CONFIRM_OUT_OF_SEQUENCE</String>
 										</field>
 										<field name="name">
 											<String>Markup pagenumbers, confirming when out-of-sequence</String>
@@ -2069,16 +1943,20 @@ the user will be required to confirm when the next page number is out-of-sequenc
 															</entry>
 															<entry>
 																<String>candidate xpath</String>
-																<String>//p[parent::level or parent::level1 or parent::level2 or parent::level3 or parent::level4 or parent::level5 or parent::level6]</String>
+																<String>//p[parent::level|parent::level1|parent::level2|parent::level3|parent::level4|parent::level5|parent::level6]</String>
 															</entry>
 															<entry>
-																<String>pagenumber fragment - $pagenum is placeholder for the pagenumber</String>
-																<String>&lt;pagenum page="normal">$pagenum&lt;/pagenum></String>
+																<String>id prefix</String>
+																<String>page_</String>
+															</entry>
+															<entry>
+																<String>pagenumber fragment - $pagenum is placeholder for the pagenumber, $id for pagenumber id</String>
+																<String>&lt;pagenum page="normal" id="$id">$pagenum&lt;/pagenum></String>
 															</entry>
 														</map>
 													</field>
 													<field name="operationID">
-														<String>nota.oxygen.common.pagenumber.MarkupPagenumbersOperation</String>
+														<String>nota.oxygen.common.pagenumber.MarkupPageNumbersOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -2086,7 +1964,7 @@ the user will be required to confirm when the next page number is out-of-sequenc
 									</action>
 									<action>
 										<field name="id">
-											<String>MARKUP_PAGENUMBERS_CONFIRM_ALL</String>
+											<String>PAGE_MARKUP_PAGENUMBERS_CONFIRM_ALL</String>
 										</field>
 										<field name="name">
 											<String>Markup pagenumbers with full confirm</String>
@@ -2121,16 +1999,20 @@ the user will be required to confirm all pages</String>
 															</entry>
 															<entry>
 																<String>candidate xpath</String>
-																<String>//p[parent::level or parent::level1 or parent::level2 or parent::level3 or parent::level4 or parent::level5 or parent::level6]</String>
+																<String>//p[parent::level|parent::level1|parent::level2|parent::level3|parent::level4|parent::level5|parent::level6]</String>
 															</entry>
 															<entry>
-																<String>pagenumber fragment - $pagenum is placeholder for the pagenumber</String>
-																<String>&lt;pagenum page="normal">$pagenum&lt;/pagenum></String>
+																<String>id prefix</String>
+																<String>page_</String>
+															</entry>
+															<entry>
+																<String>pagenumber fragment - $pagenum is placeholder for the pagenumber, $id for pagenumber id</String>
+																<String>&lt;pagenum page="normal" id="$id">$pagenum&lt;/pagenum></String>
 															</entry>
 														</map>
 													</field>
 													<field name="operationID">
-														<String>nota.oxygen.common.pagenumber.MarkupPagenumbersOperation</String>
+														<String>nota.oxygen.common.pagenumber.MarkupPageNumbersOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -2179,6 +2061,162 @@ the user will be required to confirm all pages</String>
 											</actionMode-array>
 										</field>
 									</action>
+									<action>
+										<field name="id">
+											<String>NOTE_MARKUP</String>
+										</field>
+										<field name="name">
+											<String>Markup note</String>
+										</field>
+										<field name="description">
+											<String>Markup note</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>note fragment</String>
+																<String>&lt;note>&lt;/note></String>
+															</entry>
+															<entry>
+																<String>note identifier fragment</String>
+																<String>&lt;span" class="note_identifier">&lt;/span></String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.notes.MarkupNoteOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>NOTE_FIND_REFERENCES</String>
+										</field>
+										<field name="name">
+											<String>Find noterefs</String>
+										</field>
+										<field name="description">
+											<String>Finds and marks up references to the current note - searches by the note identifier as spoecified by the &lt;span class="note_identifier"> markup</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>//*[ancestor-or-self::note]</String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>note identifier xpath</String>
+																<String>.//span[@class='note_identifier']</String>
+															</entry>
+															<entry>
+																<String>note xpath</String>
+																<String>ancestor-or-self::note</String>
+															</entry>
+															<entry>
+																<String>noteref candidate xpath</String>
+																<String>//text()[contains(string(.), '$noteident') and (ancestor::frontmatter or ancestor::bodymatter or ancestor::rearmatter) and not(ancestor-or-self::noteref) and not(ancestor-or-self::span[@class='note_identifier'])]</String>
+															</entry>
+															<entry>
+																<String>noteref fragment</String>
+																<String>&lt;noteref idref="#$idref">&lt;/noteref></String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.notes.FindNoterefOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>NOTE_MARKUP_IDENTIFIER</String>
+										</field>
+										<field name="name">
+											<String>Toggle note identifier</String>
+										</field>
+										<field name="description">
+											<String>Toggle &lt;span class='note_identifier'></String>
+										</field>
+										<field name="largeIconPath">
+											<String>${frameworks}/dtbook2005/note_identifier.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>${frameworks}/dtbook2005/note_identifier.png</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<String>ctrl shift N</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::span[@class='note_identifier']|parent::span[@class='note_identifier']</String>
+													</field>
+													<field name="argValues">
+														<map/>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.DeleteParentElementOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;span class="note_identifier">&lt;/span></String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
 								</action-array>
 							</field>
 							<field name="menubarDescriptor">
@@ -2196,17 +2234,17 @@ the user will be required to confirm all pages</String>
 										<menuEntry-array>
 											<menuItem>
 												<field name="actionID">
-													<String>MARKUP_SAME_LEVEL</String>
+													<String>LEVEL_MARKUP_SAME_LEVEL</String>
 												</field>
 											</menuItem>
 											<menuItem>
 												<field name="actionID">
-													<String>MARKUP_SUB_LEVEL</String>
+													<String>LEVEL_MARKUP_SUB_LEVEL</String>
 												</field>
 											</menuItem>
 											<menuItem>
 												<field name="actionID">
-													<String>REMOVE_LEVEL_MARKUP</String>
+													<String>LEVEL_REMOVE_LEVEL_MARKUP</String>
 												</field>
 											</menuItem>
 											<menu>
@@ -2223,12 +2261,12 @@ the user will be required to confirm all pages</String>
 													<menuEntry-array>
 														<menuItem>
 															<field name="actionID">
-																<String>INSERT_IMAGE_GROUP</String>
+																<String>IMAGE_INSERT_GROUP</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>INSERT_IMAGE</String>
+																<String>IMAGE_INSERT</String>
 															</field>
 														</menuItem>
 													</menuEntry-array>
@@ -2269,11 +2307,6 @@ the user will be required to confirm all pages</String>
 														<menuItem>
 															<field name="actionID">
 																<String>INLINE_SUPER_SCRIPT_TOGGLE</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>INLINE_NOTE_IDENTIFIER</String>
 															</field>
 														</menuItem>
 														<menuItem>
@@ -2326,6 +2359,36 @@ the user will be required to confirm all pages</String>
 											</menu>
 											<menu>
 												<field name="label">
+													<String>Notes</String>
+												</field>
+												<field name="accessKey">
+													<String></String>
+												</field>
+												<field name="iconPath">
+													<String></String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>NOTE_MARKUP</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>NOTE_MARKUP_IDENTIFIER</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>NOTE_FIND_REFERENCES</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+											</menu>
+											<menu>
+												<field name="label">
 													<String>Page Numbers</String>
 												</field>
 												<field name="accessKey">
@@ -2348,27 +2411,27 @@ the user will be required to confirm all pages</String>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>FIND_NEXT_IN_PARAGRAPH_PAGENUM</String>
+																<String>PAGE_FIND_NEXT_NON_LEVEL_CHILD</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>MARKUP_PAGENUMBERS_AUTO</String>
+																<String>PAGE_MARKUP_PAGENUMBERS_AUTO</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>MARKUP_PAGENUMBERS_CONFIRM_OUT_OF_SEQUENCE</String>
+																<String>PAGE_MARKUP_PAGENUMBERS_CONFIRM_OUT_OF_SEQUENCE</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>MARKUP_PAGENUMBERS_CONFIRM_ALL</String>
+																<String>PAGE_MARKUP_PAGENUMBERS_CONFIRM_ALL</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>SPLIT_PARAGRAPH_AT_PAGENUM</String>
+																<String>PAGE_SPLIT_PARAGRAPH_AT_PAGENUM</String>
 															</field>
 														</menuItem>
 														<menuItem>
@@ -2393,27 +2456,22 @@ the user will be required to confirm all pages</String>
 													<menuEntry-array>
 														<menuItem>
 															<field name="actionID">
-																<String>INSERT_TABLE_ROW</String>
+																<String>TABLE_INSERT_ROW</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>INSERT_TABLE_COLUMN</String>
+																<String>TABLE_INSERT_COLUMN</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>INSERT_TABLE_ENTRY</String>
+																<String>TABLE_DELETE_COLUMN</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>DELETE_TABLE_COLUMN</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>DELETE_TABLE_ROW</String>
+																<String>TABLE_DELETE_ROW</String>
 															</field>
 														</menuItem>
 														<menuSeparator/>
@@ -2481,22 +2539,22 @@ the user will be required to confirm all pages</String>
 										<menuEntry-array>
 											<menuItem>
 												<field name="actionID">
-													<String>SPLIT_PARAGRAPH_AT_PAGENUM</String>
+													<String>PAGE_SPLIT_PARAGRAPH_AT_PAGENUM</String>
 												</field>
 											</menuItem>
 											<menuItem>
 												<field name="actionID">
-													<String>MARKUP_SAME_LEVEL</String>
+													<String>LEVEL_MARKUP_SAME_LEVEL</String>
 												</field>
 											</menuItem>
 											<menuItem>
 												<field name="actionID">
-													<String>MARKUP_SUB_LEVEL</String>
+													<String>LEVEL_MARKUP_SUB_LEVEL</String>
 												</field>
 											</menuItem>
 											<menuItem>
 												<field name="actionID">
-													<String>REMOVE_LEVEL_MARKUP</String>
+													<String>LEVEL_REMOVE_LEVEL_MARKUP</String>
 												</field>
 											</menuItem>
 											<menu>
@@ -2513,12 +2571,12 @@ the user will be required to confirm all pages</String>
 													<menuEntry-array>
 														<menuItem>
 															<field name="actionID">
-																<String>INSERT_IMAGE_GROUP</String>
+																<String>IMAGE_INSERT_GROUP</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>INSERT_IMAGE</String>
+																<String>IMAGE_INSERT</String>
 															</field>
 														</menuItem>
 													</menuEntry-array>
@@ -2563,7 +2621,7 @@ the user will be required to confirm all pages</String>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>INLINE_NOTE_IDENTIFIER</String>
+																<String>NOTE_MARKUP_IDENTIFIER</String>
 															</field>
 														</menuItem>
 														<menuItem>
@@ -2616,6 +2674,36 @@ the user will be required to confirm all pages</String>
 											</menu>
 											<menu>
 												<field name="label">
+													<String>Notes</String>
+												</field>
+												<field name="accessKey">
+													<String></String>
+												</field>
+												<field name="iconPath">
+													<String></String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>NOTE_MARKUP</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>NOTE_MARKUP_IDENTIFIER</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>NOTE_FIND_REFERENCES</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+											</menu>
+											<menu>
+												<field name="label">
 													<String>Page Numbers</String>
 												</field>
 												<field name="accessKey">
@@ -2638,27 +2726,27 @@ the user will be required to confirm all pages</String>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>FIND_NEXT_IN_PARAGRAPH_PAGENUM</String>
+																<String>PAGE_FIND_NEXT_NON_LEVEL_CHILD</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>MARKUP_PAGENUMBERS_AUTO</String>
+																<String>PAGE_MARKUP_PAGENUMBERS_AUTO</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>MARKUP_PAGENUMBERS_CONFIRM_OUT_OF_SEQUENCE</String>
+																<String>PAGE_MARKUP_PAGENUMBERS_CONFIRM_OUT_OF_SEQUENCE</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>MARKUP_PAGENUMBERS_CONFIRM_ALL</String>
+																<String>PAGE_MARKUP_PAGENUMBERS_CONFIRM_ALL</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>SPLIT_PARAGRAPH_AT_PAGENUM</String>
+																<String>PAGE_SPLIT_PARAGRAPH_AT_PAGENUM</String>
 															</field>
 														</menuItem>
 														<menuItem>
@@ -2683,27 +2771,22 @@ the user will be required to confirm all pages</String>
 													<menuEntry-array>
 														<menuItem>
 															<field name="actionID">
-																<String>INSERT_TABLE_ROW</String>
+																<String>TABLE_INSERT_ROW</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>INSERT_TABLE_COLUMN</String>
+																<String>TABLE_INSERT_COLUMN</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>INSERT_TABLE_ENTRY</String>
+																<String>TABLE_DELETE_ROW</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>DELETE_TABLE_ROW</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>DELETE_TABLE_COLUMN</String>
+																<String>TABLE_DELETE_COLUMN</String>
 															</field>
 														</menuItem>
 														<menuSeparator/>
@@ -2774,17 +2857,17 @@ the user will be required to confirm all pages</String>
 										<toolbarEntry-array>
 											<toolbarItem>
 												<field name="actionID">
-													<String>MARKUP_SAME_LEVEL</String>
+													<String>LEVEL_MARKUP_SAME_LEVEL</String>
 												</field>
 											</toolbarItem>
 											<toolbarItem>
 												<field name="actionID">
-													<String>MARKUP_SUB_LEVEL</String>
+													<String>LEVEL_MARKUP_SUB_LEVEL</String>
 												</field>
 											</toolbarItem>
 											<toolbarItem>
 												<field name="actionID">
-													<String>REMOVE_LEVEL_MARKUP</String>
+													<String>LEVEL_REMOVE_LEVEL_MARKUP</String>
 												</field>
 											</toolbarItem>
 											<toolbarSeparator/>
@@ -2813,11 +2896,6 @@ the user will be required to confirm all pages</String>
 											<toolbarItem>
 												<field name="actionID">
 													<String>INLINE_ROMAN_NUMERALS</String>
-												</field>
-											</toolbarItem>
-											<toolbarItem>
-												<field name="actionID">
-													<String>INLINE_NOTE_IDENTIFIER</String>
 												</field>
 											</toolbarItem>
 											<toolbarItem>
@@ -2869,12 +2947,12 @@ the user will be required to confirm all pages</String>
 													<toolbarEntry-array>
 														<toolbarItem>
 															<field name="actionID">
-																<String>INSERT_IMAGE_GROUP</String>
+																<String>IMAGE_INSERT_GROUP</String>
 															</field>
 														</toolbarItem>
 														<toolbarItem>
 															<field name="actionID">
-																<String>INSERT_IMAGE</String>
+																<String>IMAGE_INSERT</String>
 															</field>
 														</toolbarItem>
 													</toolbarEntry-array>
@@ -2907,32 +2985,65 @@ the user will be required to confirm all pages</String>
 														</toolbarItem>
 														<toolbarItem>
 															<field name="actionID">
-																<String>FIND_NEXT_IN_PARAGRAPH_PAGENUM</String>
+																<String>PAGE_FIND_NEXT_NON_LEVEL_CHILD</String>
 															</field>
 														</toolbarItem>
 														<toolbarItem>
 															<field name="actionID">
-																<String>MARKUP_PAGENUMBERS_AUTO</String>
+																<String>PAGE_MARKUP_PAGENUMBERS_AUTO</String>
 															</field>
 														</toolbarItem>
 														<toolbarItem>
 															<field name="actionID">
-																<String>MARKUP_PAGENUMBERS_CONFIRM_OUT_OF_SEQUENCE</String>
+																<String>PAGE_MARKUP_PAGENUMBERS_CONFIRM_OUT_OF_SEQUENCE</String>
 															</field>
 														</toolbarItem>
 														<toolbarItem>
 															<field name="actionID">
-																<String>MARKUP_PAGENUMBERS_CONFIRM_ALL</String>
+																<String>PAGE_MARKUP_PAGENUMBERS_CONFIRM_ALL</String>
 															</field>
 														</toolbarItem>
 														<toolbarItem>
 															<field name="actionID">
-																<String>SPLIT_PARAGRAPH_AT_PAGENUM</String>
+																<String>PAGE_SPLIT_PARAGRAPH_AT_PAGENUM</String>
 															</field>
 														</toolbarItem>
 														<toolbarItem>
 															<field name="actionID">
 																<String>PAGE_SHOW_REPORT</String>
+															</field>
+														</toolbarItem>
+													</toolbarEntry-array>
+												</field>
+											</toolbar>
+											<toolbar>
+												<field name="id">
+													<String>Notes</String>
+												</field>
+												<field name="type">
+													<Integer>3</Integer>
+												</field>
+												<field name="largeIconPath">
+													<String></String>
+												</field>
+												<field name="smallIconPath">
+													<String></String>
+												</field>
+												<field name="toolbarEntriesDescriptorList">
+													<toolbarEntry-array>
+														<toolbarItem>
+															<field name="actionID">
+																<String>NOTE_MARKUP</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>NOTE_MARKUP_IDENTIFIER</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>NOTE_FIND_REFERENCES</String>
 															</field>
 														</toolbarItem>
 													</toolbarEntry-array>
@@ -2955,22 +3066,22 @@ the user will be required to confirm all pages</String>
 													<toolbarEntry-array>
 														<toolbarItem>
 															<field name="actionID">
-																<String>INSERT_TABLE_COLUMN</String>
+																<String>TABLE_INSERT_COLUMN</String>
 															</field>
 														</toolbarItem>
 														<toolbarItem>
 															<field name="actionID">
-																<String>INSERT_TABLE_ROW</String>
+																<String>TABLE_INSERT_ROW</String>
 															</field>
 														</toolbarItem>
 														<toolbarItem>
 															<field name="actionID">
-																<String>DELETE_TABLE_COLUMN</String>
+																<String>TABLE_DELETE_COLUMN</String>
 															</field>
 														</toolbarItem>
 														<toolbarItem>
 															<field name="actionID">
-																<String>DELETE_TABLE_ROW</String>
+																<String>TABLE_DELETE_ROW</String>
 															</field>
 														</toolbarItem>
 														<toolbarSeparator/>

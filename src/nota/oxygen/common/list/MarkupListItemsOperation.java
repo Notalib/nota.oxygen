@@ -5,9 +5,12 @@ import java.util.List;
 
 import nota.oxygen.common.BaseAuthorOperation;
 
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
+import ro.sync.ecss.extensions.api.AuthorConstants;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
@@ -59,6 +62,22 @@ public class MarkupListItemsOperation extends BaseAuthorOperation {
 					throw new AuthorOperationException(msg);
 				}
 				docCtrl.surroundInFragment(itemFragment, elem.getStartOffset(), elem.getEndOffset());
+				if (!keepSubstitutes) {
+					//remove the original element that was surrounded with the item element,
+					//keeping its children as children of the item element
+					AuthorElement item = (AuthorElement)elem.getParent();
+					Element itemElem = deserializeElement(serialize(item));
+					if (itemElem.getFirstChild() instanceof Element) {
+						Element e = (Element)itemElem.getFirstChild();
+						NodeList eChildren = e.getChildNodes();
+						for (int i=0; i<eChildren.getLength(); i++) {
+							itemElem.insertBefore(e.removeChild(eChildren.item(i)), e);
+						}
+						itemElem.removeChild(e);
+					}
+					docCtrl.insertXMLFragment(serialize(itemElem), item, AuthorConstants.POSITION_BEFORE);
+					docCtrl.deleteNode(item);
+				}
 				childIndex++;
 			}
 		}
@@ -80,21 +99,26 @@ public class MarkupListItemsOperation extends BaseAuthorOperation {
 		String elems = (String)args.getArgumentValue(ARG_ELEMENTS_TO_SUBSTITUTE);
 		elementsToSubstitute = new ArrayList<String>();
 		for (String e : elems.split(" ")) elementsToSubstitute.add(e);
+		keepSubstitutes = YES_NO[0].equals(args.getArgumentValue(ARG_KEEP_SUBSTITUTES));
 	}
 	
 	private static String ARG_LIST_FRAGMENT = "list fragment";
 	private static String ARG_ITEM_FRAGMENT = "item fragment";
 	private static String ARG_ELEMENTS_TO_SUBSTITUTE = "elements to substitute";
+	private static String ARG_KEEP_SUBSTITUTES = "keep substitutes";
+	private static String[] YES_NO = new String[] {"yes", "no"};
 
 	private String listFragment;
 	private String itemFragment;
 	private List<String> elementsToSubstitute;
+	private boolean keepSubstitutes;
 	@Override
 	public ArgumentDescriptor[] getArguments() {
 		return new ArgumentDescriptor[] {
 				new ArgumentDescriptor(ARG_LIST_FRAGMENT, ArgumentDescriptor.TYPE_FRAGMENT, "list xml fragment"),
 				new ArgumentDescriptor(ARG_ITEM_FRAGMENT, ArgumentDescriptor.TYPE_FRAGMENT, "item xml fragment"),
-				new ArgumentDescriptor(ARG_ELEMENTS_TO_SUBSTITUTE, ArgumentDescriptor.TYPE_STRING, "local names of elements to substitute with item - space separated")
+				new ArgumentDescriptor(ARG_ELEMENTS_TO_SUBSTITUTE, ArgumentDescriptor.TYPE_STRING, "local names of elements to substitute with item - space separated"),
+				new ArgumentDescriptor(ARG_KEEP_SUBSTITUTES, ArgumentDescriptor.TYPE_CONSTANT_LIST, "local names of elements to substitute with item - space separated", YES_NO, YES_NO[1])
 		};
 	}
 

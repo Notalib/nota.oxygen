@@ -46,7 +46,7 @@ public class XPathFindOperation extends BaseAuthorOperation {
 			else {
 				int currentCaretPos = getAuthorAccess().getEditorAccess().getCaretOffset();
 				AuthorNode next = null;
-				if (DIRECTIONS[0].equals(direction)) {
+				if (DIRECTIONS[0].equals(direction)) {//Search in forward direction
 					for (int i=0; i<res.length; i++) {
 						if (currentCaretPos<=res[i].getStartOffset()) {
 							next = res[i];
@@ -55,7 +55,7 @@ public class XPathFindOperation extends BaseAuthorOperation {
 					}
 					if (next==null) next = res[0];
 				}
-				else if (DIRECTIONS[1].equals(direction)) {
+				else if (DIRECTIONS[1].equals(direction)) {//Search in reverse direction
 					for (int i=res.length-1; i>=0; i--) {
 						if (currentCaretPos>res[i].getEndOffset()) {
 							next = res[i];

@@ -502,6 +502,14 @@ q {
   font-style: italic;
 }
 
+annoref:before {
+   link:attr(idref);
+   content: "ANNOREF:";
+}
+noteref:before {
+   link:attr(idref);
+   content: "NOTEREF:";
+}
 noteref, annoref {
   display: inline;
   font-size: 0.7em;
@@ -543,6 +551,8 @@ list {
 li {
  display: list-item;
  list-style-position: outside;
+ margin-top: 0.25em;
+ margin-bottom: 0.25em;
 }
 
 lic {

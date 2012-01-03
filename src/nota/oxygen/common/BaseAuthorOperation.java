@@ -13,6 +13,7 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.w3c.dom.bootstrap.DOMImplementationRegistry;
 import org.w3c.dom.ls.DOMImplementationLS;
 import org.w3c.dom.ls.LSInput;
@@ -351,13 +352,13 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 	}
 	
 	/**
-	 * Gets the element at the caret position
-	 * @return The AuthorElement at the caret position or null if no such AuthorElement exists
-	 * @throws BadLocationException 
+	 * Gets the element at a given offset
+	 * @param offset - the offset
+	 * @return The AuthorElement at the given offset - or null if non-existant
+	 * @throws BadLocationException
 	 */
-	public AuthorElement getCurrentElement() throws BadLocationException {
-		AuthorDocumentController docCtrl = getAuthorAccess().getDocumentController();
-		AuthorNode aNode = docCtrl.getNodeAtOffset(getAuthorAccess().getEditorAccess().getBalancedSelectionStart()+1);
+	public AuthorElement getElementAtOffset(int offset) throws BadLocationException {
+		AuthorNode aNode = getAuthorAccess().getDocumentController().getNodeAtOffset(offset);
 		while (aNode != null) {
 			if (aNode instanceof AuthorElement) {
 				return (AuthorElement)aNode;
@@ -365,7 +366,19 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 			aNode = aNode.getParent();
 		}
 		return null;
+		
 	}
+	
+	/**
+	 * Gets the element at the caret position
+	 * @return The AuthorElement at the caret position or null if no such AuthorElement exists
+	 * @throws BadLocationException 
+	 */
+	public AuthorElement getCurrentElement() throws BadLocationException {
+		return getElementAtOffset(getAuthorAccess().getEditorAccess().getBalancedSelectionStart()+1);
+	}
+	
+	
 		
 	/**
 	 * De-serializes a xml element {@link String} representation to a {@link Element} 
@@ -430,6 +443,22 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 			}
 		}
 		return null; 
+	}
+	
+	/**
+	 * Serializes all children of a AuthorElement, including text nodes
+	 * @param aElem The parent AuthorElement
+	 * @return the serialized child nodes, an empty string of the AuthorElement is empty
+	 * @throws AuthorOperationException
+	 */ 
+	public String serializeContent(AuthorElement aElem) throws AuthorOperationException {
+		Element elem = deserializeElement(serialize(aElem));
+		String res = "";
+		NodeList children = elem.getChildNodes();
+		for (int i=0; i<children.getLength(); i++) {
+			res += serialize(children.item(i));
+		}
+		return res;
 	}
 	
 	/**

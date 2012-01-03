@@ -21,7 +21,7 @@ import nota.oxygen.common.BaseAuthorOperation;
  */
 public class MarkupPageNumbersOperation extends BaseAuthorOperation {
 	
-	private static String ARG_PAGENUMBER_FRAGMENT = "pagenumber fragment - $pagenum is placeholder for the pagenumber";
+	private static String ARG_PAGENUMBER_FRAGMENT = "pagenumber fragment - $pagenum is placeholder for the pagenumber, $id for pagenumber id";
 	private String pagenumberFragment;
 	
 	private static String ARG_CANDIDATE_XPATH = "candidate xpath";
@@ -31,12 +31,16 @@ public class MarkupPageNumbersOperation extends BaseAuthorOperation {
 	private static String[] MARKUP_MODES = new String[] {"Fully automatic", "Confirm when out-of-sequence", "Confirm all"};
 	private String markupMode;
 
+	private static String ARG_ID_PREFIX = "id prefix";
+	private String idPrefix = "page_";
+	
 	@Override
 	public ArgumentDescriptor[] getArguments() {
 		return new ArgumentDescriptor[]{
 				new ArgumentDescriptor(ARG_PAGENUMBER_FRAGMENT, ArgumentDescriptor.TYPE_FRAGMENT, "Pagenumber xml fragment"),
 				new ArgumentDescriptor(ARG_CANDIDATE_XPATH, ArgumentDescriptor.TYPE_XPATH_EXPRESSION, "Candidate XPath"),
-				new ArgumentDescriptor(ARG_MARKUP_MODE, ArgumentDescriptor.TYPE_CONSTANT_LIST, "Markup mode", MARKUP_MODES, MARKUP_MODES[0])
+				new ArgumentDescriptor(ARG_MARKUP_MODE, ArgumentDescriptor.TYPE_CONSTANT_LIST, "Markup mode", MARKUP_MODES, MARKUP_MODES[0]),
+				new ArgumentDescriptor(ARG_ID_PREFIX, ArgumentDescriptor.TYPE_STRING, "id prefix")
 		};
 	}
 
@@ -44,19 +48,6 @@ public class MarkupPageNumbersOperation extends BaseAuthorOperation {
 	public String getDescription() {
 		return "Find and markup pagenumbers";
 	}
-	
-//	private void doFullyAutomatic() throws AuthorOperationException {
-//		AuthorDocumentController docCtrl = getAuthorAccess().getDocumentController();
-//		AuthorElement[] candidates = findCandidates();
-//		for (int i=0; i<candidates.length; i++) {
-//			int pagenumber = parseCandidate(candidates[i]);
-//			if (pagenumber>0) {
-//				String pnXml = pagenumberFragment.replace("$pagenum", String.format("%1$d", pagenumber));
-//				docCtrl.insertXMLFragment(pnXml, candidates[i].getEndOffset()+1);
-//				docCtrl.deleteNode(candidates[i]);
-//			}
-//		}
-//	}
 	
 	private void doOperation(boolean automatic, boolean confirmOnlyOutOfSequence) throws AuthorOperationException {
 		AuthorDocumentController docCtrl = getAuthorAccess().getDocumentController();
@@ -69,11 +60,11 @@ public class MarkupPageNumbersOperation extends BaseAuthorOperation {
 			int pagenumber = parseCandidate(candidates[i]);
 			if (pagenumber==-1) continue;
 			edtAcc.select(candidates[i].getStartOffset(), candidates[i].getEndOffset());
-			try {
-				Thread.sleep(10);
-			} catch (InterruptedException e) {
-				throw new AuthorOperationException("Unexpected InterruptException occured", e);
-			}
+//			try {
+//				Thread.sleep(10);
+//			} catch (InterruptedException e) {
+//				throw new AuthorOperationException("Unexpected InterruptException occured", e);
+//			}
 			boolean confirmed = false;
 			if (automatic || (pagenumber==nextExpected && confirmOnlyOutOfSequence)) {
 				confirmed = true;
@@ -86,6 +77,7 @@ public class MarkupPageNumbersOperation extends BaseAuthorOperation {
 			if (confirmed) {
 				wa.showStatusMessage("Page "+pagenumber);
 				String pnXml = pagenumberFragment.replace("$pagenum", String.format("%1$d", pagenumber));
+				pnXml = pnXml.replace("$id", String.format("%1$s%2$d", idPrefix, pagenumber));
 				docCtrl.insertXMLFragment(pnXml, candidates[i].getEndOffset()+1);
 				docCtrl.deleteNode(candidates[i]);
 				nextExpected = pagenumber+1;
@@ -118,13 +110,13 @@ public class MarkupPageNumbersOperation extends BaseAuthorOperation {
 
 	@Override
 	protected void doOperation() throws AuthorOperationException {
-		if (markupMode.equals(MARKUP_MODES[0])) {
+		if (markupMode.equals(MARKUP_MODES[0])) {//Fully automatic
 			doOperation(true, false);
 		}
-		else if (markupMode.equals(MARKUP_MODES[1])) {
+		else if (markupMode.equals(MARKUP_MODES[1])) {//Confirm when out-of-sequence
 			doOperation(false, true);
 		}
-		else if (markupMode.equals(MARKUP_MODES[2])) {
+		else if (markupMode.equals(MARKUP_MODES[2])) {//Confirm always
 			doOperation(false, false);
 		}
 		else {
@@ -138,6 +130,7 @@ public class MarkupPageNumbersOperation extends BaseAuthorOperation {
 		pagenumberFragment = (String)args.getArgumentValue(ARG_PAGENUMBER_FRAGMENT);
 		candidateXPath = (String)args.getArgumentValue(ARG_CANDIDATE_XPATH);
 		markupMode = (String)args.getArgumentValue(ARG_MARKUP_MODE);
+		idPrefix = (String)args.getArgumentValue(ARG_ID_PREFIX);
 	}
 
 }
