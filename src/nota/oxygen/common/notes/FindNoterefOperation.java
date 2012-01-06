@@ -79,7 +79,7 @@ public class FindNoterefOperation extends BaseAuthorOperation {
 				edtAcc.select(offset, offset+noteIdentifier.length());
 				int answer = showYesNoCancelMessage(getDescription(), "Is the current selection a reference to the note?\n(Note: "+note.getTextContent()+")", 1);
 				if (answer == -1) break;
-				if (answer == 1) {
+				if (answer == 1) { 
 					docCtrl.surroundInFragment(noterefFragment, offset, offset+noteIdentifier.length());
 				}
 				edtAcc.setCaretPosition(next.getStartOffset());
