@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="OxygenDtbookActions" default="dist">
+<!-- Set property oxygen_installation_folder in Window->Preferences->Ant->Runtime->Properties -->
+<property name="oxygen_installation_folder" value="c:/oxygen/"/>
 <target name="dist">
-	<jar destfile="OxygenDtbookActions.jar" basedir="./bin">
+ 	<jar destfile="OxygenDtbookActions.jar" basedir="./bin">
 		<fileset dir="bin" />
 		<fileset dir="." includes="doc/**" />
 	</jar>
@@ -10,14 +12,14 @@
 		<fileset dir="./OxygenPlugin/frameworks/dtbook2005/"/>
 	</delete>
 	<copy file="OxygenDtbookActions.jar" todir="./OxygenPlugin/frameworks/dtbook2005/"/>
-	<copy file="OxygenDtbookActions.jar" todir="C:\oxygen\frameworks\dtbook2005"/>
+	<copy file="OxygenDtbookActions.jar" todir="${oxygen_installation_folder}frameworks/dtbook2005"/>
 	<copy todir="./OxygenPlugin/frameworks/dtbook2005/">
-		<fileset dir="C:\oxygen\frameworks\dtbook2005\">
+		<fileset dir="${oxygen_installation_folder}frameworks\dtbook2005\">
 			<exclude name="OxygenDtbookActions.jar"/>
 		</fileset>
 	</copy>
 	<copy todir="./OxygenPlugin/frameworks/dtbook110/">
-		<fileset dir="C:\oxygen\frameworks\dtbook110\"/>
+		<fileset dir="${oxygen_installation_folder}frameworks\dtbook110\"/>
 	</copy>
 	<zip destfile="dtbookplugin.zip" basedir="./OxygenPlugin"/>
 </target>
