@@ -14,7 +14,7 @@
 								<Integer>1</Integer>
 							</field>
 							<field name="uri">
-								<String>${frameworks}\dtbook2005\dtbook-2005-3.dtd</String>
+								<String>${frameworks}/dtbook2005/dtbook-2005-3.dtd</String>
 							</field>
 						</docTypeSchema>
 					</field>
@@ -31,7 +31,7 @@
 								<cssFile-array>
 									<cssFile>
 										<field name="href">
-											<String>${frameworks}\dtbook2005\dtbook.basic.2005.css</String>
+											<String>${frameworks}/dtbook2005/dtbook.basic.2005.css</String>
 										</field>
 										<field name="title">
 											<String>basic</String>
