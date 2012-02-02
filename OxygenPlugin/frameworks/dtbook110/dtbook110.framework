@@ -2097,7 +2097,7 @@ the user will be required to confirm all pages</String>
 															</entry>
 															<entry>
 																<String>note identifier fragment</String>
-																<String>&lt;span" class="note_identifier">&lt;/span></String>
+																<String>&lt;span class="note_identifier">&lt;/span></String>
 															</entry>
 														</map>
 													</field>
