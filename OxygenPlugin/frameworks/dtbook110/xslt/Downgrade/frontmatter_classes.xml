@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<frontmatter>
+    
+  <frontname name="frontcover" defhead="Forsidetekst" type="physical">
+    <frontname reftype="content"/>
+  </frontname>
+  
+  <frontname name="rearcover" defhead="Bagsidetekst" type="physical">
+    <frontname reftype="content"/>
+  </frontname>
+
+  <frontname name="leftflap" type="physical" defhead="Venstre flap">
+    <frontname reftype="content"/>
+  </frontname>
+
+  <frontname name="rightflap" type="physical" defhead="Højre flap">
+     <frontname reftype="content"/>
+   </frontname>
+
+  <frontname name="preface" defhead="Forord" type="content"/>
+  <frontname name="this_edition" defhead="Oplysninger om denne udgave" type="content"/>
+  <frontname name="summary" defhead="Resumé" type="content"/>
+  <frontname name="authorbiography" defhead="Om forfatteren" type="content"/>
+  <frontname name="review" defhead="Anmeldelse" type="content"/>
+  <frontname name="advertisement" defhead="Annonce" type="content"/>
+  <frontname name="acknowledgments" defhead="Takord" type="content"/>
+  <frontname name="dedication" defhead="Dedikation" type="content"/>
+  <frontname name="other_titles" defhead="Af samme forfatter" type="content"/>
+  <frontname name="characters" defhead="Personer" type="content"/>
+  <frontname name="poem" type="content"/>
+  <frontname name="quote" type="content" defhead="Citat"/>
+  <frontname name="extract" defhead="Uddrag af bogen" type="content"/>
+  <frontname name="generic" defhead="*" type="content"/>
+
+
+</frontmatter>

@@ -7,12 +7,22 @@
 		<fileset dir="bin" />
 		<fileset dir="." includes="doc/**" />
 	</jar>
+	<copy todir="${oxygen_installation_folder}frameworks/dtbook2005/">
+		<fileset dir="./OxygenPlugin/frameworks/dtbook2005/">
+			<exclude name="OxygenDtbookActions.jar"/>
+		</fileset>
+	</copy>
+	<copy todir="${oxygen_installation_folder}frameworks/dtbook110/">
+		<fileset dir="./OxygenPlugin/frameworks/dtbook110/"/>
+	</copy>
 	<delete>
 		<fileset dir="./OxygenPlugin/frameworks/dtbook110/"/>
 		<fileset dir="./OxygenPlugin/frameworks/dtbook2005/"/>
+		<fileset dir="./OxygenPlugin/frameworks/xhtml/"/>
 	</delete>
 	<copy file="OxygenDtbookActions.jar" todir="./OxygenPlugin/frameworks/dtbook2005/"/>
 	<copy file="OxygenDtbookActions.jar" todir="${oxygen_installation_folder}frameworks/dtbook2005"/>
+	<copy file="${oxygen_installation_folder}frameworks/xhtml/xhtml.framework" todir="./OxygenPlugin/frameworks/xhtml/"/>
 	<copy todir="./OxygenPlugin/frameworks/dtbook2005/">
 		<fileset dir="${oxygen_installation_folder}frameworks/dtbook2005/">
 			<exclude name="OxygenDtbookActions.jar"/>

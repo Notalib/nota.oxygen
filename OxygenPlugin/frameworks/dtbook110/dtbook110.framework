@@ -3215,7 +3215,7 @@ the user will be required to confirm all pages</String>
 									<String></String>
 								</field>
 								<field name="inputXSLURL">
-									<String>file:////ntsdbb03/xmlarkiv/Styles/Sidste%20xslt/LPOut1.xsl</String>
+									<String>${frameworks}/dtbook110/xslt/LPOut1.xsl</String>
 								</field>
 								<field name="inputXMLURL">
 									<String>${currentFileURL}</String>
@@ -3269,7 +3269,7 @@ the user will be required to confirm all pages</String>
 									<String-array/>
 								</field>
 								<field name="xslTransformer">
-									<String>Saxon6.5.5</String>
+									<String>Saxon-EE</String>
 								</field>
 								<field name="extensionURLs">
 									<String-array/>
@@ -3298,7 +3298,7 @@ the user will be required to confirm all pages</String>
 									<String></String>
 								</field>
 								<field name="inputXSLURL">
-									<String>file:////ntsdbb03/xmlarkiv/Styles/Sidste%20xslt/LPOut2.xsl</String>
+									<String>${frameworks}/dtbook110/xslt/LPOut2.xsl</String>
 								</field>
 								<field name="inputXMLURL">
 									<String>${currentFileURL}</String>
@@ -3352,7 +3352,7 @@ the user will be required to confirm all pages</String>
 									<String-array/>
 								</field>
 								<field name="xslTransformer">
-									<String>Saxon6.5.5</String>
+									<String>Saxon-EE</String>
 								</field>
 								<field name="extensionURLs">
 									<String-array/>
@@ -3381,7 +3381,7 @@ the user will be required to confirm all pages</String>
 									<String></String>
 								</field>
 								<field name="inputXSLURL">
-									<String>file:////ntsdbb03/xmlarkiv/Styles/Sidste%20xslt/LPOut3.xsl</String>
+									<String>${frameworks}/dtbook110/xslt/LPOut3.xsl</String>
 								</field>
 								<field name="inputXMLURL">
 									<String>${currentFileURL}</String>
@@ -3435,7 +3435,7 @@ the user will be required to confirm all pages</String>
 									<String-array/>
 								</field>
 								<field name="xslTransformer">
-									<String>Saxon6.5.5</String>
+									<String>Saxon-EE</String>
 								</field>
 								<field name="extensionURLs">
 									<String-array/>
@@ -3464,7 +3464,7 @@ the user will be required to confirm all pages</String>
 									<String></String>
 								</field>
 								<field name="inputXSLURL">
-									<String>file:////ntsdbb03/xmlarkiv/Styles/Sidste%20xslt/InspirationHTML.xsl</String>
+									<String>${frameworks}/dtbook110/xslt/InspirationHTML.xsl</String>
 								</field>
 								<field name="inputXMLURL">
 									<String>${currentFileURL}</String>
@@ -3518,7 +3518,7 @@ the user will be required to confirm all pages</String>
 									<String-array/>
 								</field>
 								<field name="xslTransformer">
-									<String>Saxon6.5.5</String>
+									<String>Saxon-EE</String>
 								</field>
 								<field name="extensionURLs">
 									<String-array/>
@@ -3526,7 +3526,64 @@ the user will be required to confirm all pages</String>
 							</scenario>
 							<scenario>
 								<field name="advancedOptionsMap">
-									<null/>
+									<map>
+										<entry>
+											<String>Saxon-EE</String>
+											<xsltSaxonSAAdvancedOptions>
+												<field name="sourceValidation">
+													<String>saxon.source.lax.schema.based.validation</String>
+												</field>
+												<field name="treatResultValidationErrorsAsWarnings">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="addCommentsForValidationErrors">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="allowCallsOnExtensionFunctions">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="showVersionWarnings">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="dtdSourceValidation">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="dtdSourceValidationRecover">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="lineNumbering">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="initialMode">
+													<null/>
+												</field>
+												<field name="initialTemplate">
+													<null/>
+												</field>
+												<field name="traceXPathExpression">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="errorRecoverPolicy">
+													<String>saxon.recover.with.warning</String>
+												</field>
+												<field name="stripWS">
+													<String>saxon.strip.ws.none</String>
+												</field>
+												<field name="optimizationLevel">
+													<String>10</String>
+												</field>
+												<field name="useConfigFile">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="configSystemID">
+													<null/>
+												</field>
+												<field name="initializer">
+													<String></String>
+												</field>
+											</xsltSaxonSAAdvancedOptions>
+										</entry>
+									</map>
 								</field>
 								<field name="name">
 									<String>Downgrade</String>
@@ -3547,7 +3604,7 @@ the user will be required to confirm all pages</String>
 									<String></String>
 								</field>
 								<field name="inputXSLURL">
-									<String>file:////ntsdbb03/Udveksling/Xslt%20outputs/Transformations/InputXsl/StandardXML_In.xslt</String>
+									<String>${frameworks}/dtbook110/xslt/Downgrade/Downgrade.xslt</String>
 								</field>
 								<field name="inputXMLURL">
 									<String>${currentFileURL}</String>
@@ -3601,7 +3658,7 @@ the user will be required to confirm all pages</String>
 									<String-array/>
 								</field>
 								<field name="xslTransformer">
-									<String>MSXML4.0</String>
+									<String>Saxon-EE</String>
 								</field>
 								<field name="extensionURLs">
 									<String-array/>
