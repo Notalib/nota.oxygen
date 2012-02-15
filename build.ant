@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="OxygenDtbookActions" default="dist">
+<project name="dtbookOxygen" default="dist">
 <!-- Set property oxygen_installation_folder in Window->Preferences->Ant->Runtime->Properties -->
 <property name="oxygen_installation_folder" value="c:/oxygen/"/>
 <target name="dist">
@@ -15,14 +15,16 @@
 	<copy todir="${oxygen_installation_folder}frameworks/dtbook110/">
 		<fileset dir="./OxygenPlugin/frameworks/dtbook110/"/>
 	</copy>
+	<copy todir="${oxygen_installation_folder}frameworks/xhtml/">
+		<fileset dir="./OxygenPlugin/frameworks/xhtml/"/>
+	</copy>
 	<delete>
 		<fileset dir="./OxygenPlugin/frameworks/dtbook110/"/>
 		<fileset dir="./OxygenPlugin/frameworks/dtbook2005/"/>
 		<fileset dir="./OxygenPlugin/frameworks/xhtml/"/>
-	</delete>
+	</delete> 
 	<copy file="OxygenDtbookActions.jar" todir="./OxygenPlugin/frameworks/dtbook2005/"/>
 	<copy file="OxygenDtbookActions.jar" todir="${oxygen_installation_folder}frameworks/dtbook2005"/>
-	<copy file="${oxygen_installation_folder}frameworks/xhtml/xhtml.framework" todir="./OxygenPlugin/frameworks/xhtml/"/>
 	<copy todir="./OxygenPlugin/frameworks/dtbook2005/">
 		<fileset dir="${oxygen_installation_folder}frameworks/dtbook2005/">
 			<exclude name="OxygenDtbookActions.jar"/>
