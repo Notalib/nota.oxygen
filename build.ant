@@ -33,6 +33,6 @@
 	<copy todir="./OxygenPlugin/frameworks/dtbook110/">
 		<fileset dir="${oxygen_installation_folder}frameworks/dtbook110/"/>
 	</copy>
-	<zip destfile="dtbookplugin.zip" basedir="./OxygenPlugin"/>
+	<zip destfile="dtbookpluginV1.7.zip" basedir="./OxygenPlugin"/>
 </target>
 </project> 
