@@ -3666,10 +3666,67 @@ the user will be required to confirm all pages</String>
 							</scenario>
 							<scenario>
 								<field name="advancedOptionsMap">
-									<null/>
+									<map>
+										<entry>
+											<String>Saxon-EE</String>
+											<xsltSaxonSAAdvancedOptions>
+												<field name="sourceValidation">
+													<String>saxon.source.lax.schema.based.validation</String>
+												</field>
+												<field name="treatResultValidationErrorsAsWarnings">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="addCommentsForValidationErrors">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="allowCallsOnExtensionFunctions">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="showVersionWarnings">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="dtdSourceValidation">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="dtdSourceValidationRecover">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="lineNumbering">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="initialMode">
+													<null/>
+												</field>
+												<field name="initialTemplate">
+													<null/>
+												</field>
+												<field name="traceXPathExpression">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="errorRecoverPolicy">
+													<String>saxon.recover.with.warning</String>
+												</field>
+												<field name="stripWS">
+													<String>saxon.strip.ws.none</String>
+												</field>
+												<field name="optimizationLevel">
+													<String>10</String>
+												</field>
+												<field name="useConfigFile">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="configSystemID">
+													<null/>
+												</field>
+												<field name="initializer">
+													<String></String>
+												</field>
+											</xsltSaxonSAAdvancedOptions>
+										</entry>
+									</map>
 								</field>
 								<field name="name">
-									<String>Fix Level Depth</String>
+									<String>dtbook110</String>
 								</field>
 								<field name="baseURL">
 									<String></String>
@@ -3687,7 +3744,7 @@ the user will be required to confirm all pages</String>
 									<String></String>
 								</field>
 								<field name="inputXSLURL">
-									<String>${frameworks}/dtbook110/xslt/FixDepth.xsl</String>
+									<String>file:/oxygen/13.2/frameworks/dtbook110/xslt/ebraille/norm_dtbook_tables.xsl</String>
 								</field>
 								<field name="inputXMLURL">
 									<String>${currentFileURL}</String>
@@ -3708,7 +3765,7 @@ the user will be required to confirm all pages</String>
 									<Boolean>false</Boolean>
 								</field>
 								<field name="outputFile">
-									<File>${cf}</File>
+									<File>${cfn}_ebraille.txt</File>
 								</field>
 								<field name="openOtherLocationInBrowser">
 									<Boolean>false</Boolean>
@@ -3738,7 +3795,315 @@ the user will be required to confirm all pages</String>
 									<list/>
 								</field>
 								<field name="cascadingStylesheets">
+									<String-array>
+										<String>${frameworks}/dtbook110/xslt/ebraille/dtbook2ebraille.xsl</String>
+									</String-array>
+								</field>
+								<field name="xslTransformer">
+									<String>Saxon-EE</String>
+								</field>
+								<field name="extensionURLs">
 									<String-array/>
+								</field>
+							</scenario>
+							<scenario>
+								<field name="advancedOptionsMap">
+									<map>
+										<entry>
+											<String>Saxon-EE</String>
+											<xsltSaxonSAAdvancedOptions>
+												<field name="sourceValidation">
+													<String>saxon.source.lax.schema.based.validation</String>
+												</field>
+												<field name="treatResultValidationErrorsAsWarnings">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="addCommentsForValidationErrors">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="allowCallsOnExtensionFunctions">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="showVersionWarnings">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="dtdSourceValidation">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="dtdSourceValidationRecover">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="lineNumbering">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="initialMode">
+													<null/>
+												</field>
+												<field name="initialTemplate">
+													<null/>
+												</field>
+												<field name="traceXPathExpression">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="errorRecoverPolicy">
+													<String>saxon.recover.with.warning</String>
+												</field>
+												<field name="stripWS">
+													<String>saxon.strip.ws.none</String>
+												</field>
+												<field name="optimizationLevel">
+													<String>10</String>
+												</field>
+												<field name="useConfigFile">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="configSystemID">
+													<null/>
+												</field>
+												<field name="initializer">
+													<String></String>
+												</field>
+											</xsltSaxonSAAdvancedOptions>
+										</entry>
+									</map>
+								</field>
+								<field name="name">
+									<String>E-Braille with decimal numbering</String>
+								</field>
+								<field name="baseURL">
+									<String></String>
+								</field>
+								<field name="footerURL">
+									<String></String>
+								</field>
+								<field name="fOPMethod">
+									<String>pdf</String>
+								</field>
+								<field name="fOProcessorName">
+									<String>Apache FOP</String>
+								</field>
+								<field name="headerURL">
+									<String></String>
+								</field>
+								<field name="inputXSLURL">
+									<String>${frameworks}/dtbook110/xslt/ebraille/norm_dtbook_tables.xsl</String>
+								</field>
+								<field name="inputXMLURL">
+									<String>${currentFileURL}</String>
+								</field>
+								<field name="defaultScenario">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="isFOPPerforming">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="type">
+									<String>XSL</String>
+								</field>
+								<field name="saveAs">
+									<Boolean>true</Boolean>
+								</field>
+								<field name="openInBrowser">
+									<Boolean>true</Boolean>
+								</field>
+								<field name="outputFile">
+									<File>${cfn}_ebraille.txt</File>
+								</field>
+								<field name="openOtherLocationInBrowser">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="locationToOpenInBrowserURL">
+									<null/>
+								</field>
+								<field name="openInEditor">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="showInHTMLPane">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="showInXMLPane">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="showInSVGPane">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="showInResultSetPane">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="useXSLTInput">
+									<Boolean>true</Boolean>
+								</field>
+								<field name="xsltParams">
+									<list/>
+								</field>
+								<field name="cascadingStylesheets">
+									<String-array>
+										<String>${frameworks}/dtbook110/xslt/ebraille/dtbook2ebraille.xsl</String>
+									</String-array>
+								</field>
+								<field name="xslTransformer">
+									<String>Saxon-EE</String>
+								</field>
+								<field name="extensionURLs">
+									<String-array/>
+								</field>
+							</scenario>
+							<scenario>
+								<field name="advancedOptionsMap">
+									<map>
+										<entry>
+											<String>Saxon-EE</String>
+											<xsltSaxonSAAdvancedOptions>
+												<field name="sourceValidation">
+													<String>saxon.source.lax.schema.based.validation</String>
+												</field>
+												<field name="treatResultValidationErrorsAsWarnings">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="addCommentsForValidationErrors">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="allowCallsOnExtensionFunctions">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="showVersionWarnings">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="dtdSourceValidation">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="dtdSourceValidationRecover">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="lineNumbering">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="initialMode">
+													<null/>
+												</field>
+												<field name="initialTemplate">
+													<null/>
+												</field>
+												<field name="traceXPathExpression">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="errorRecoverPolicy">
+													<String>saxon.recover.with.warning</String>
+												</field>
+												<field name="stripWS">
+													<String>saxon.strip.ws.none</String>
+												</field>
+												<field name="optimizationLevel">
+													<String>10</String>
+												</field>
+												<field name="useConfigFile">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="configSystemID">
+													<null/>
+												</field>
+												<field name="initializer">
+													<String></String>
+												</field>
+											</xsltSaxonSAAdvancedOptions>
+										</entry>
+									</map>
+								</field>
+								<field name="name">
+									<String>E-Braille without decimal numbering</String>
+								</field>
+								<field name="baseURL">
+									<String></String>
+								</field>
+								<field name="footerURL">
+									<String></String>
+								</field>
+								<field name="fOPMethod">
+									<String>pdf</String>
+								</field>
+								<field name="fOProcessorName">
+									<String>Apache FOP</String>
+								</field>
+								<field name="headerURL">
+									<String></String>
+								</field>
+								<field name="inputXSLURL">
+									<String>${frameworks}/dtbook110/xslt/ebraille/norm_dtbook_tables.xsl</String>
+								</field>
+								<field name="inputXMLURL">
+									<String>${currentFileURL}</String>
+								</field>
+								<field name="defaultScenario">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="isFOPPerforming">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="type">
+									<String>XSL</String>
+								</field>
+								<field name="saveAs">
+									<Boolean>true</Boolean>
+								</field>
+								<field name="openInBrowser">
+									<Boolean>true</Boolean>
+								</field>
+								<field name="outputFile">
+									<File>${cfn}_ebraille.txt</File>
+								</field>
+								<field name="openOtherLocationInBrowser">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="locationToOpenInBrowserURL">
+									<null/>
+								</field>
+								<field name="openInEditor">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="showInHTMLPane">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="showInXMLPane">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="showInSVGPane">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="showInResultSetPane">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="useXSLTInput">
+									<Boolean>true</Boolean>
+								</field>
+								<field name="xsltParams">
+									<list>
+										<transformationParameter>
+											<field name="paramDescription">
+												<paramDescriptor>
+													<field name="localName">
+														<String>InsertDecNum</String>
+													</field>
+													<field name="prefix">
+														<null/>
+													</field>
+													<field name="namespace">
+														<null/>
+													</field>
+												</paramDescriptor>
+											</field>
+											<field name="value">
+												<String>false</String>
+											</field>
+											<field name="hasXPathValue">
+												<Boolean>false</Boolean>
+											</field>
+										</transformationParameter>
+									</list>
+								</field>
+								<field name="cascadingStylesheets">
+									<String-array>
+										<String>${frameworks}/dtbook110/xslt/ebraille/dtbook2ebraille.xsl</String>
+									</String-array>
 								</field>
 								<field name="xslTransformer">
 									<String>Saxon-EE</String>
