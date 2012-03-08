@@ -591,9 +591,6 @@ list[type="ul"] {
   list-style-type: disc;
 }
 
-list[type="pl"] {
-	list-style-type: none;	
-}
 
 list > li > list[type=ul] {
   list-style-type: circle;
@@ -603,7 +600,7 @@ list > li > list > li > list[type='ul'] {
   list-style-type: square;
 }
 
-list[bullet='none'] {
+list[bullet='none'], list > li > list[bullet='none'], list > li > list > li > list[bullet='none'] {
   list-style-type: none;
 }
 

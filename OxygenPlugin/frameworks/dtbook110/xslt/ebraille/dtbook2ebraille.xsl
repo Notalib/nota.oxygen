@@ -1,12 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     version="1.0">
-    <xsl:output method="text" omit-xml-declaration="yes" encoding="UTF-8"/>
+    <xsl:output method="text" omit-xml-declaration="yes" encoding="iso-8859-1"/>
     <xsl:param name="Stamp"/>
     <xsl:param name="InsertDecNum">true</xsl:param>
     
+    <xsl:template name="mainlang">
+        <xsl:choose>
+            <xsl:when test="/dtbook/@lang"><xsl:value-of select="/dtbook/@lang"/></xsl:when>
+            <xsl:when test="/dtbook/@xml:lang"><xsl:value-of select="/dtbook/@xml:lang"/></xsl:when>
+            <xsl:when test="/dtbook/book/@lang"><xsl:value-of select="/dtbook/book/@lang"/></xsl:when>
+            <xsl:when test="/dtbook/book/@xml:lang"><xsl:value-of select="/dtbook/book/@xml:lang"/></xsl:when>
+        </xsl:choose>
+    </xsl:template>
+    
     <xsl:template match="dtbook">
         <xsl:apply-templates select="book"/>
+    </xsl:template>
+    
+    <xsl:template match="frontmatter">
+        <xsl:apply-templates/>
+        <xsl:call-template name="linebreak"/>
+        <xsl:text>===</xsl:text>
+        <xsl:call-template name="linebreak"/>
+        <xsl:call-template name="linebreak"/>
+    </xsl:template>
+    
+    <xsl:template match="rearmatter">
+        <xsl:call-template name="linebreak"/>
+        <xsl:text>===</xsl:text>
+        <xsl:call-template name="linebreak"/>
+        <xsl:call-template name="linebreak"/>
+        <xsl:apply-templates/>
     </xsl:template>
     
     <xsl:template match="doctitle|docauthor">
@@ -98,6 +123,7 @@
     
     <xsl:template match="li">
         <xsl:choose>
+            <xsl:when test="parent::list[@type='ul' and @bullet='none']"/>
             <xsl:when test="parent::list[@type='ul']">
                 <xsl:call-template name="ulBullit"/>
             </xsl:when>
@@ -107,16 +133,20 @@
         </xsl:choose>
         <xsl:for-each select="node()">
             <xsl:apply-templates select=".">
-                <xsl:with-param name="indent"><xsl:if test="preceding-sibling::*"><xsl:text>  </xsl:text></xsl:if></xsl:with-param>
+                <xsl:with-param name="firstlineindent"><xsl:if test="preceding-sibling::*"><xsl:text>  </xsl:text></xsl:if></xsl:with-param>
+                <xsl:with-param name="indent"><xsl:text>  </xsl:text></xsl:with-param>
             </xsl:apply-templates>
         </xsl:for-each>
+        <xsl:if test="not(descendant::p)">
+            <xsl:call-template name="linebreak"/>
+        </xsl:if>
     </xsl:template>
     
     <xsl:template name="olBullit">
         <xsl:for-each select="ancestor::li">
+            <xsl:value-of select="concat(count(preceding-sibling::li)+1,' ')"/>
             <xsl:text>.</xsl:text>
         </xsl:for-each>
-        <xsl:value-of select="concat(count(preceding-sibling::li)+1,' ')"/>
     </xsl:template>
     
     <xsl:template name="ulBullit">
@@ -137,44 +167,20 @@
         <xsl:call-template name="extraFollowingLinebreak"/>
     </xsl:template>
     
-    <xsl:template match="table" mode="normTable">
-        <xsl:copy>
-            <xsl:apply-templates select="descendant::tr" mode="removeColspan"/>
-        </xsl:copy>
-    </xsl:template>
-    
-    <xsl:template match="tr" mode="normTable">
-        <xsl:copy>
-            <xsl:apply-templates mode="normTable"/>
-        </xsl:copy>
-    </xsl:template>
-    
-    <xsl:template match="td|th" mode="normTable">
-        <xsl:call-template name="expandColspan">
-            <xsl:with-param name="copies" select="@colspan"/>
-        </xsl:call-template>
-    </xsl:template>
-    
-    <xsl:template match="node()|@*" mode="normTable">
-        <xsl:copy>
-            <xsl:apply-templates select="node()|@*" mode="normTable"/>
-        </xsl:copy>
-    </xsl:template>
-    
-    <xsl:template name="expandColspan">
-        <xsl:param name="copies">1</xsl:param>
-        <xsl:copy>
-            <xsl:apply-templates select="node()|@*" mode="normTable"/>
-        </xsl:copy>
-        <xsl:if test="$copies>1">
-            <xsl:call-template name="expandColspan">
-                <xsl:with-param name="copies" select="$copies - 1"/>
-            </xsl:call-template>
-        </xsl:if>
+    <xsl:template name="rowName">
+        <xsl:variable name="lang">
+            <xsl:call-template name="mainlang"/>
+        </xsl:variable>
+        <xsl:choose>
+            <xsl:when test="$lang='da'">Række</xsl:when>
+            <xsl:when test="$lang='en'">Row</xsl:when>
+            <xsl:otherwise>Række</xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <xsl:template match="tr">
-        <xsl:value-of select="concat('Række ',count(preceding-sibling::tr)+1,':')"/>
+        <xsl:variable name="rowname"><xsl:call-template name="rowName"/></xsl:variable>
+        <xsl:value-of select="concat($rowname, ' ', count(preceding-sibling::tr)+1,':')"/>
         <xsl:call-template name="linebreak"/>
         <xsl:apply-templates/>
     </xsl:template>
@@ -182,6 +188,7 @@
     <xsl:template match="th|td">
         <xsl:value-of select="concat('  ',count(preceding-sibling::td|preceding-sibling::th)+1,': ')"/>
         <xsl:choose>
+            <xsl:when test="@class='copy'">...</xsl:when>
             <xsl:when test="descendant::text()[not(normalize-space(.)='')]">
                 <xsl:for-each select="descendant::text()[not(normalize-space(.)='')]">
                     <xsl:value-of select="concat(normalize-space(.),' ')"/>
@@ -192,13 +199,7 @@
             </xsl:otherwise>
         </xsl:choose>
         <xsl:call-template name="linebreak"></xsl:call-template>
-    </xsl:template>
-    
-    <xsl:template match="*" mode="inTableCell">
-        
-    </xsl:template>
-    
-    
+    </xsl:template> 
     
     <!--Page numbers
         ============-->
@@ -213,9 +214,13 @@
     <!--Paragraphs
         ==========-->
     <xsl:template match="p">
+        <xsl:param name="firstlineindent"></xsl:param>
         <xsl:param name="indent"></xsl:param>
         <xsl:value-of select="$indent"/>
-        <xsl:apply-templates/>
+        <xsl:apply-templates>
+            <xsl:with-param name="firstlineindent"><xsl:value-of select="$firstlineindent"/></xsl:with-param>
+            <xsl:with-param name="indent"><xsl:value-of select="$indent"/></xsl:with-param>
+        </xsl:apply-templates>
         <xsl:call-template name="linebreak"/>
     </xsl:template>
     
@@ -230,6 +235,12 @@
             <xsl:value-of select="normalize-space(.)"/>
             <xsl:text> </xsl:text>
         </xsl:if>
+    </xsl:template>
+    
+    <xsl:template match="br">
+        <xsl:param name="indent"></xsl:param>
+        <xsl:value-of select="$indent"/>
+        <xsl:call-template name="linebreak"/>
     </xsl:template>
     
     <!--

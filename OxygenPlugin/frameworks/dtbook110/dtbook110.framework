@@ -3907,7 +3907,7 @@ the user will be required to confirm all pages</String>
 									<Boolean>true</Boolean>
 								</field>
 								<field name="outputFile">
-									<File>${cfn}_ebraille.txt</File>
+									<File>${cfn}_dec_ebraille.txt</File>
 								</field>
 								<field name="openOtherLocationInBrowser">
 									<Boolean>false</Boolean>
