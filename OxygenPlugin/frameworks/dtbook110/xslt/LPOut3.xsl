@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-  <xsl:output method="xml" omit-xml-declaration="yes" encoding="Windows-1252" indent="yes"/>
+  <xsl:output method="xml" omit-xml-declaration="no" encoding="Windows-1252" indent="yes" doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"/>
 
   <xsl:strip-space elements ="li td"/>
   <xsl:template match="/">
@@ -18,7 +18,6 @@ GetLevDepth
 dtbook
 	============================================================================== -->
   <xsl:template match="dtbook">
-    <xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</xsl:text>
     <html>
       <xsl:apply-templates/>
     </html>
@@ -692,7 +691,7 @@ li
       </xsl:if>
 
       <xsl:choose>
-        <xsl:when test="child::p">
+        <xsl:when test="child::p|child::list">
           <xsl:apply-templates/>
         </xsl:when>
 
