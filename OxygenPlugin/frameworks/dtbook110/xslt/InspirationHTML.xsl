@@ -6,11 +6,6 @@
 	</xsl:template>
 	<xsl:template match="dtbook">
 		<html>
-			<!--				
-			<xsl:attribute name="xml:lang">				
-				<xsl:text disable-output-escaping="yes">en</xsl:text>			
-			</xsl:attribute>	
-	-->
 			<xsl:attribute name="lang">
 				<xsl:text disable-output-escaping="yes">en</xsl:text>
 			</xsl:attribute>
@@ -78,113 +73,51 @@ span.OEL{FONT-WEIGHT: bold;FONT-STYLE: italic;}
 	<xsl:template match="levelhd">
 		<xsl:if test="@depth='1'">
 			<h1>
-				<xsl:if test="@class">
-					<xsl:attribute name="class">
-						<xsl:value-of select="@class"/>
-					</xsl:attribute>
-				</xsl:if>
-				<xsl:element name="a">
-					<xsl:attribute name="name">
-						<xsl:value-of select="@id"/>
-					</xsl:attribute>
-					<xsl:apply-templates/>
-				</xsl:element>
+				<xsl:copy-of select="@class"/>
+				<xsl:call-template name="aName"/>
 			</h1>
 		</xsl:if>
 		<xsl:if test="@depth='2'">
 			<h2>
-				<xsl:if test="@class">
-					<xsl:attribute name="class">
-						<xsl:value-of select="@class"/>
-					</xsl:attribute>
-				</xsl:if>
-				<xsl:element name="a">
-					<xsl:attribute name="name">
-						<xsl:value-of select="@id"/>
-					</xsl:attribute>
-					<xsl:apply-templates/>
-				</xsl:element>
+				<xsl:copy-of select="@class"/>
+				<xsl:call-template name="aName"/>
 			</h2>
 		</xsl:if>
 		<xsl:if test="@depth='3'">
 			<h3>
-				<xsl:if test="@class">
-					<xsl:attribute name="class">
-						<xsl:value-of select="@class"/>
-					</xsl:attribute>
-				</xsl:if>
-				<xsl:element name="a">
-					<xsl:attribute name="name">
-						<xsl:value-of select="@id"/>
-					</xsl:attribute>
-					<xsl:apply-templates/>
-				</xsl:element>
+				<xsl:copy-of select="@class"/>
+				<xsl:call-template name="aName"/>
 			</h3>
 		</xsl:if>
 		<xsl:if test="@depth='4'">
 			<h4>
-				<xsl:if test="@class">
-					<xsl:attribute name="class">
-						<xsl:value-of select="@class"/>
-					</xsl:attribute>
-				</xsl:if>
-				<xsl:element name="a">
-					<xsl:attribute name="name">
-						<xsl:value-of select="@id"/>
-					</xsl:attribute>
-					<xsl:apply-templates/>
-				</xsl:element>
+				<xsl:copy-of select="@class"/>
+				<xsl:call-template name="aName"/>
 			</h4>
 		</xsl:if>
 		<xsl:if test="@depth='5'">
 			<h5>
-				<xsl:if test="@class">
-					<xsl:attribute name="class">
-						<xsl:value-of select="@class"/>
-					</xsl:attribute>
-				</xsl:if>
-				<xsl:element name="a">
-					<xsl:attribute name="name">
-						<xsl:value-of select="@id"/>
-					</xsl:attribute>
-					<xsl:apply-templates/>
-				</xsl:element>
+				<xsl:copy-of select="@class"/>
+				<xsl:call-template name="aName"/>
 			</h5>
 		</xsl:if>
 		<xsl:if test="@depth='6'">
 			<h6>
-				<xsl:if test="@class">
-					<xsl:attribute name="class">
-						<xsl:value-of select="@class"/>
-					</xsl:attribute>
-				</xsl:if>
-				<xsl:element name="a">
-					<xsl:attribute name="name">
-						<xsl:value-of select="@id"/>
-					</xsl:attribute>
-					<xsl:apply-templates/>
-				</xsl:element>
+				<xsl:copy-of select="@class"/>
+				<xsl:call-template name="aName"/>
 			</h6>
 		</xsl:if>
 	</xsl:template>
 	<xsl:template match="p">
 		<p>
-			<xsl:if test="@class">
-				<xsl:attribute name="class">
-					<xsl:value-of select="@class"/>
-				</xsl:attribute>
-			</xsl:if>
+			<xsl:copy-of select="@class"/>
 			<xsl:apply-templates/>
 		</p>
 	</xsl:template>
 	<xsl:template match="doctitle"></xsl:template>
 	<xsl:template match="div">
 		<div>
-			<xsl:if test="@class">
-				<xsl:attribute name="class">
-					<xsl:value-of select="@class"/>
-				</xsl:attribute>
-			</xsl:if>
+			<xsl:copy-of select="@class"/>
 			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
@@ -192,42 +125,26 @@ span.OEL{FONT-WEIGHT: bold;FONT-STYLE: italic;}
 	<xsl:template match="list">
 		<xsl:if test="@type='ul'">
 			<ul>
-				<xsl:if test="@class">
-					<xsl:attribute name="class">
-						<xsl:value-of select="@class"/>
-					</xsl:attribute>
-				</xsl:if>
+				<xsl:copy-of select="@class"/>
 				<xsl:apply-templates/>
 			</ul>
 		</xsl:if>
 		<xsl:if test="@type='ol'">
 			<ol>
-				<xsl:if test="@class">
-					<xsl:attribute name="class">
-						<xsl:value-of select="@class"/>
-					</xsl:attribute>
-				</xsl:if>
+				<xsl:copy-of select="@class"/>
 				<xsl:apply-templates/>
 			</ol>
 		</xsl:if>
 	</xsl:template>
 	<xsl:template match="li">
 		<li>
-			<xsl:if test="@class">
-				<xsl:attribute name="class">
-					<xsl:value-of select="@class"/>
-				</xsl:attribute>
-			</xsl:if>
+			<xsl:copy-of select="@class"/>
 			<xsl:apply-templates/>
 		</li>
 	</xsl:template>
 	<xsl:template match="a">
 		<a>
-			<xsl:if test="@href">
-				<xsl:attribute name="href">
-					<xsl:value-of select="@href"/>
-				</xsl:attribute>
-			</xsl:if>
+			<xsl:copy-of select="@href"/>
 			<xsl:apply-templates/>
 		</a>
 	</xsl:template>
@@ -236,55 +153,19 @@ span.OEL{FONT-WEIGHT: bold;FONT-STYLE: italic;}
 			<xsl:apply-templates/>
 		</strong>
 	</xsl:template>
-	<xsl:template match="em">
-		<em>
-			<xsl:apply-templates/>
-		</em>
-	</xsl:template>
 	<xsl:template match="br">
 		<br/>
 		<xsl:apply-templates/>
 	</xsl:template>
 	<xsl:template match="img">
 		<img>
-			<xsl:if test="@id">
-				<xsl:attribute name="id">
-					<xsl:value-of select="@id"/>
-				</xsl:attribute>
-			</xsl:if>
-			<xsl:if test="@src">
-				<xsl:attribute name="src">
-					<xsl:value-of select="@src"/>
-				</xsl:attribute>
-			</xsl:if>
-			<xsl:if test="@alt">
-				<xsl:attribute name="alt">
-					<xsl:value-of select="@alt"/>
-				</xsl:attribute>
-			</xsl:if>
-			<xsl:if test="@width">
-				<xsl:attribute name="width">
-					<xsl:value-of select="@width"/>
-				</xsl:attribute>
-			</xsl:if>
-			<xsl:if test="@height">
-				<xsl:attribute name="height">
-					<xsl:value-of select="@height"/>
-				</xsl:attribute>
-			</xsl:if>
-			<xsl:if test="@longdesc">
-				<xsl:attribute name="longdesc">
-					<xsl:value-of select="@longdesc"/>
-				</xsl:attribute>
-			</xsl:if>
+			<xsl:copy-of select="@id|@src|@alt|@width|@height|@longdesc"/>
 			<xsl:apply-templates/>
 		</img>
 	</xsl:template>
 	<xsl:template match="imggroup">
 		<div class="imggroup">
-			<xsl:attribute name="id">
-				<xsl:value-of select="@id"/>
-			</xsl:attribute>
+			<xsl:copy-of select="@id"/>
 			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
@@ -296,9 +177,7 @@ blockqoute
 	============================================================================== -->
 	<xsl:template match="blockquote">
 		<blockquote>
-			<xsl:attribute name="id">
-				<xsl:value-of select="@id"/>
-			</xsl:attribute>
+			<xsl:copy-of select="@id"/>
 			<xsl:apply-templates/>
 		</blockquote>
 	</xsl:template>
@@ -307,9 +186,7 @@ strong
 	============================================================================== -->
 	<xsl:template match="strong">
 		<strong>
-			<xsl:attribute name="id">
-				<xsl:value-of select="@id"/>
-			</xsl:attribute>
+			<xsl:copy-of select="@id"/>
 			<xsl:apply-templates/>
 		</strong>
 	</xsl:template>
@@ -318,9 +195,7 @@ em
 	============================================================================== -->
 	<xsl:template match="em">
 		<em>
-			<xsl:attribute name="id">
-				<xsl:value-of select="@id"/>
-			</xsl:attribute>
+			<xsl:copy-of select="@id"/>
 			<xsl:apply-templates/>
 		</em>
 	</xsl:template>
@@ -329,9 +204,7 @@ table
 	============================================================================== -->
 	<xsl:template match="table">
 		<table rules="all">
-			<xsl:attribute name="id">
-				<xsl:value-of select="@id"/>
-			</xsl:attribute>
+			<xsl:copy-of select="@id"/>
 			<xsl:if test="@border">
 				<xsl:attribute name="border">
 					<xsl:value-of select="@border"/>
@@ -345,9 +218,7 @@ tbody
 	============================================================================== -->
 	<xsl:template match="tbody">
 		<tbody>
-			<xsl:attribute name="id">
-				<xsl:value-of select="@id"/>
-			</xsl:attribute>
+			<xsl:copy-of select="@id"/>
 			<xsl:apply-templates/>
 		</tbody>
 	</xsl:template>
@@ -356,9 +227,7 @@ tr
 ============================================================================== -->
 	<xsl:template match="tr">
 		<tr>
-			<xsl:attribute name="id">
-				<xsl:value-of select="@id"/>
-			</xsl:attribute>
+			<xsl:copy-of select="@id"/>
 			<xsl:apply-templates/>
 		</tr>
 	</xsl:template>
@@ -367,9 +236,7 @@ td
 ============================================================================== -->
 	<xsl:template match="td">
 		<td>
-			<xsl:attribute name="id">
-				<xsl:value-of select="@id"/>
-			</xsl:attribute>
+			<xsl:copy-of select="@id"/>
 			<xsl:if test="@rowspan">
 				<xsl:attribute name="rowspan">
 					<xsl:value-of select="@rowspan"/>
@@ -388,9 +255,7 @@ caption
 	============================================================================== -->
 	<xsl:template match="caption">
 		<caption>
-			<xsl:attribute name="id">
-				<xsl:value-of select="@id"/>
-			</xsl:attribute>
+			<xsl:copy-of select="@id"/>
 			<xsl:apply-templates/>
 		</caption>
 	</xsl:template>
@@ -399,9 +264,7 @@ span
 	============================================================================== -->
 	<xsl:template match="span">
 		<span>
-			<xsl:attribute name="id">
-				<xsl:value-of select="@id"/>
-			</xsl:attribute>
+			<xsl:copy-of select="@id"/>
 			<xsl:if test="@class">
 				<xsl:attribute name="class">
 					<xsl:value-of select="@class"/>
@@ -415,9 +278,7 @@ thead
 	============================================================================== -->
 	<xsl:template match="thead">
 		<thead>
-			<xsl:attribute name="id">
-				<xsl:value-of select="@id"/>
-			</xsl:attribute>
+			<xsl:copy-of select="@id"/>
 			<xsl:apply-templates/>
 		</thead>
 	</xsl:template>
@@ -426,9 +287,7 @@ tfoot
 	============================================================================== -->
 	<xsl:template match="tfoot">
 		<tfoot>
-			<xsl:attribute name="id">
-				<xsl:value-of select="@id"/>
-			</xsl:attribute>
+			<xsl:copy-of select="@id"/>
 			<xsl:apply-templates/>
 		</tfoot>
 	</xsl:template>
@@ -437,9 +296,7 @@ colgroup
 	============================================================================== -->
 	<xsl:template match="colgroup">
 		<colgroup>
-			<xsl:attribute name="id">
-				<xsl:value-of select="@id"/>
-			</xsl:attribute>
+			<xsl:copy-of select="@id"/>
 			<xsl:apply-templates/>
 		</colgroup>
 	</xsl:template>
@@ -448,9 +305,7 @@ col
 	============================================================================== -->
 	<xsl:template match="col">
 		<col>
-			<xsl:attribute name="id">
-				<xsl:value-of select="@id"/>
-			</xsl:attribute>
+			<xsl:copy-of select="@id"/>
 			<xsl:apply-templates/>
 		</col>
 	</xsl:template>
@@ -459,9 +314,7 @@ th
 	============================================================================== -->
 	<xsl:template match="th">
 		<th>
-			<xsl:attribute name="id">
-				<xsl:value-of select="@id"/>
-			</xsl:attribute>
+			<xsl:copy-of select="@id"/>
 			<xsl:if test="@rowspan">
 				<xsl:attribute name="rowspan">
 					<xsl:value-of select="@rowspan"/>
@@ -483,4 +336,23 @@ normalize space
 	</xsl:template>
 	
 	<xsl:template match="*/text()[not(normalize-space())]" />
+	<!-- =========================================================================
+insert a name
+	============================================================================== -->
+	<xsl:template name="aName">
+		<xsl:element name="a">
+			<xsl:attribute name="name">
+				<xsl:choose>
+					<xsl:when test="@id">
+						<xsl:value-of select="@id"/>		
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="generate-id(.)"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:attribute>
+			<xsl:apply-templates/>
+		</xsl:element>
+	</xsl:template>
+
 </xsl:stylesheet>

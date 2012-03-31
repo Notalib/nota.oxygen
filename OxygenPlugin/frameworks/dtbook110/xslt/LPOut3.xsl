@@ -207,121 +207,37 @@ levelhd
     <xsl:choose>
       <xsl:when test="$strStyle='1'">
         <h1>
-          <xsl:if test="@id">
-            <xsl:attribute name="id">
-              <xsl:value-of select="@id"/>
-            </xsl:attribute>
-          </xsl:if>
-          <xsl:if test="@class">
-            <xsl:attribute name="class">
-              <xsl:value-of select="@class"/>
-            </xsl:attribute>
-          </xsl:if>
-          <xsl:if test="@lang">
-            <xsl:attribute name="lang">
-              <xsl:value-of select="@lang"/>
-            </xsl:attribute>
-          </xsl:if>
+          <xsl:copy-of select="@id|@class|@lang"/>
           <xsl:apply-templates/>
         </h1>
       </xsl:when>
       <xsl:when test="$strStyle='2'">
         <h2>
-          <xsl:if test="@id">
-            <xsl:attribute name="id">
-              <xsl:value-of select="@id"/>
-            </xsl:attribute>
-          </xsl:if>
-          <xsl:if test="@class">
-            <xsl:attribute name="class">
-              <xsl:value-of select="@class"/>
-            </xsl:attribute>
-          </xsl:if>
-          <xsl:if test="@lang">
-            <xsl:attribute name="lang">
-              <xsl:value-of select="@lang"/>
-            </xsl:attribute>
-          </xsl:if>
+          <xsl:copy-of select="@id|@class|@lang"/>
           <xsl:apply-templates/>
         </h2>
       </xsl:when>
       <xsl:when test="$strStyle='3'">
         <h3>
-          <xsl:if test="@id">
-            <xsl:attribute name="id">
-              <xsl:value-of select="@id"/>
-            </xsl:attribute>
-          </xsl:if>
-          <xsl:if test="@class">
-            <xsl:attribute name="class">
-              <xsl:value-of select="@class"/>
-            </xsl:attribute>
-          </xsl:if>
-          <xsl:if test="@lang">
-            <xsl:attribute name="lang">
-              <xsl:value-of select="@lang"/>
-            </xsl:attribute>
-          </xsl:if>
+          <xsl:copy-of select="@id|@class|@lang"/>
           <xsl:apply-templates/>
         </h3>
       </xsl:when>
       <xsl:when test="$strStyle='4'">
         <h4>
-          <xsl:if test="@id">
-            <xsl:attribute name="id">
-              <xsl:value-of select="@id"/>
-            </xsl:attribute>
-          </xsl:if>
-          <xsl:if test="@class">
-            <xsl:attribute name="class">
-              <xsl:value-of select="@class"/>
-            </xsl:attribute>
-          </xsl:if>
-          <xsl:if test="@lang">
-            <xsl:attribute name="lang">
-              <xsl:value-of select="@lang"/>
-            </xsl:attribute>
-          </xsl:if>
+          <xsl:copy-of select="@id|@class|@lang"/>
           <xsl:apply-templates/>
         </h4>
       </xsl:when>
       <xsl:when test="$strStyle='5'">
         <h5>
-          <xsl:if test="@id">
-            <xsl:attribute name="id">
-              <xsl:value-of select="@id"/>
-            </xsl:attribute>
-          </xsl:if>
-          <xsl:if test="@class">
-            <xsl:attribute name="class">
-              <xsl:value-of select="@class"/>
-            </xsl:attribute>
-          </xsl:if>
-          <xsl:if test="@lang">
-            <xsl:attribute name="lang">
-              <xsl:value-of select="@lang"/>
-            </xsl:attribute>
-          </xsl:if>
+          <xsl:copy-of select="@id|@class|@lang"/>
           <xsl:apply-templates/>
         </h5>
       </xsl:when>
       <xsl:when test="$strStyle='6'">
         <h6>
-          <xsl:if test="@id">
-            <xsl:attribute name="id">
-              <xsl:value-of select="@id"/>
-            </xsl:attribute>
-          </xsl:if>
-          <xsl:if test="@class">
-            <xsl:attribute name="class">
-              <xsl:value-of select="@class"/>
-            </xsl:attribute>
-          </xsl:if>
-          <xsl:if test="@lang">
-            <xsl:attribute name="lang">
-              <xsl:value-of select="@lang"/>
-            </xsl:attribute>
-          </xsl:if>
+          <xsl:copy-of select="@id|@class|@lang"/>
           <xsl:apply-templates/>
         </h6>
       </xsl:when>
@@ -330,11 +246,7 @@ levelhd
           <xsl:attribute name="class">
             <xsl:value-of select="concat('levelhd', $strStyle)"/>
           </xsl:attribute>
-          <xsl:if test="@lang">
-            <xsl:attribute name="lang">
-              <xsl:value-of select="@lang"/>
-            </xsl:attribute>
-          </xsl:if>
+          <xsl:copy-of select="@id|@lang"/>
           <xsl:apply-templates/>
         </p>
       </xsl:otherwise>
@@ -353,11 +265,7 @@ linenum
 		============================================================================== -->
   <xsl:template match="address">
     <div class="address">
-      <xsl:if test="@id">
-        <xsl:attribute name="id">
-          <xsl:value-of select="@id"/>
-        </xsl:attribute>
-      </xsl:if>
+      <xsl:copy-of select="@id"/>
       <xsl:apply-templates/>
     </div>
   </xsl:template>
@@ -382,11 +290,7 @@ note
 	============================================================================== -->
   <xsl:template match="note">
     <div class="note">
-      <xsl:if test="@id">
-        <xsl:attribute name="id">
-          <xsl:value-of select="@id"/>
-        </xsl:attribute>
-      </xsl:if>
+      <xsl:copy-of select="@id"/>
       <xsl:if test="@class">
         <xsl:attribute name="class">
           <xsl:value-of select="@class"/>
@@ -400,19 +304,10 @@ annotation
 	============================================================================== -->
   <xsl:template match="annotation">
     <a>
-      <xsl:if test="@id">
-        <xsl:attribute name="name">
-          <xsl:value-of select="@id"/>
-        </xsl:attribute>
-        <xsl:apply-templates/>
-      </xsl:if>
+      <xsl:copy-of select="@id"/>
     </a>
     <div class="annotation">
-      <xsl:if test="@id">
-        <xsl:attribute name="id">
-          <xsl:value-of select="@id"/>
-        </xsl:attribute>
-      </xsl:if>
+      <xsl:copy-of select="@id"/>
       <xsl:if test="@class">
         <xsl:attribute name="class">
           <xsl:value-of select="@class"/>
@@ -425,20 +320,6 @@ annotation
 noteref
 	============================================================================== -->
   <xsl:template match="noteref">
-    <!--<span class="noteref">
-			<xsl:if test="@id">
-				<xsl:attribute name="id">
-					<xsl:value-of select="@id"/>
-				</xsl:attribute>
-			</xsl:if>
-			<xsl:if test="@idref">
-				<xsl:attribute name="href">
-					<xsl:value-of select="@idref"/>
-				</xsl:attribute>
-			</xsl:if>
-			
-		</span>-->
-
     <xsl:apply-templates/>
   </xsl:template>
   <!-- =========================================================================
@@ -455,31 +336,11 @@ annoref
     </a>
   </xsl:template>
   <!-- =========================================================================
-line
-	============================================================================== -->
-  <!--Erstattet af line der tager hensyn til "stanza"-->
-
-  <!--<xsl:template match="line">
-    <p class="line">
-      <xsl:if test="@id">
-        <xsl:attribute name="id">
-          <xsl:value-of select="@id"/>
-        </xsl:attribute>
-      </xsl:if>
-      <xsl:apply-templates/>
-    </p>
-  </xsl:template>-->
-
-  <!-- =========================================================================
 a
 	============================================================================== -->
   <xsl:template match="a">
     <a>
-      <xsl:if test="@id">
-        <xsl:attribute name="id">
-          <xsl:value-of select="@id"/>
-        </xsl:attribute>
-      </xsl:if>
+      <xsl:copy-of select="@id"/>
       <xsl:if test="@href">
         <xsl:attribute name="href">
           <xsl:value-of select="@href"/>
@@ -575,66 +436,22 @@ abbr
 span
 	============================================================================== -->
   <xsl:template match="span">
-    <!--<span>
-			<xsl:if test="@id">
-				<xsl:attribute name="id">
-					<xsl:value-of select="@id"/>
-				</xsl:attribute>
-			</xsl:if>
-			<xsl:if test="@class">
-				<xsl:attribute name="class">
-					<xsl:value-of select="@class"/>
-				</xsl:attribute>
-			</xsl:if>
-			
-		</span>-->
-
     <xsl:apply-templates/>
   </xsl:template>
   <!-- =========================================================================
 img
 	============================================================================== -->
   <xsl:template match="img">
-    <img src="{@src}" id="{@id}" alt="{@alt}" width="{@width}" height="{@height}" />
-    <!--
-		<xsl:if test="@id">			
-			<xsl:attribute name="id">				
-				<xsl:value-of select="@id"/>			
-			</xsl:attribute>		
-		</xsl:if>		
-		<xsl:if test="@alt">			
-			<xsl:attribute name="alt">				
-				<xsl:value-of select="@alt"/>			
-			</xsl:attribute>		
-		</xsl:if>		
-		<xsl:if test="@width">			
-			<xsl:attribute name="width">				
-				<xsl:value-of select="@width"/>			
-			</xsl:attribute>		
-		</xsl:if>		
-		<xsl:if test="@height">			
-			<xsl:attribute name="height">				
-				<xsl:value-of select="@height"/>			
-			</xsl:attribute>		
-		</xsl:if>		
-		<xsl:if test="@longdesc">			
-			<xsl:attribute name="longdesc">				
-				<xsl:value-of select="@longdesc"/>			
-			</xsl:attribute>		
-		</xsl:if>		
-		-->
-    <xsl:apply-templates/>
+    <xsl:element name="img">
+      <xsl:copy-of select="@src|@id|@alt|@width|@height"/>
+    </xsl:element>
   </xsl:template>
   <!-- =========================================================================
 imggroup
 	============================================================================== -->
   <xsl:template match="imggroup">
     <div class="imggroup">
-      <xsl:if test="@id">
-        <xsl:attribute name="id">
-          <xsl:value-of select="@id"/>
-        </xsl:attribute>
-      </xsl:if>
+      <xsl:copy-of select="@id"/>
       <xsl:apply-templates/>
     </div>
   </xsl:template>
@@ -678,34 +495,23 @@ list
 li
 	============================================================================== -->
   <xsl:template match="li">
-
     <!--Rettet 01.10.2010 pga af inspirationsliste
     Alle li skal indeholde et <p> - pga indiske filer
     -->
-
     <li>
-      <xsl:if test="@id">
-        <xsl:attribute name="id">
-          <xsl:value-of select="@id"/>
-        </xsl:attribute>
-      </xsl:if>
-
+      <xsl:copy-of select="@id"/>
       <xsl:choose>
         <xsl:when test="child::p|child::list">
           <xsl:apply-templates/>
         </xsl:when>
-
         <xsl:otherwise>
           <p>
             <xsl:apply-templates/>
           </p>
         </xsl:otherwise>
       </xsl:choose>
-
     </li>
-
   </xsl:template>
-
   <!-- =========================================================================
 hd - indsat 2009.08.27
 ============================================================================== -->
@@ -713,14 +519,8 @@ hd - indsat 2009.08.27
   <xsl:template match ="hd">
     <li>
       <p class="hd">
-        <xsl:if test="@id">
-          <xsl:attribute name="id">
-            <xsl:value-of select="@id"/>
-          </xsl:attribute>
-        </xsl:if>
-
+        <xsl:copy-of select="@id"/>
         <xsl:apply-templates/>
-
       </p>
     </li>
   </xsl:template>
@@ -732,7 +532,7 @@ doctitle
 br
 	============================================================================== -->
   <xsl:template match="br">
-    <br id="{@id}" />
+    <br/>
   </xsl:template>
   <!-- =========================================================================
 table
@@ -883,15 +683,11 @@ p
         <p>
           <br></br>
         </p>
-        <xsl:attribute name="id">
-          <xsl:value-of select="@id"/>
-        </xsl:attribute>
+        <xsl:copy-of select="@id"/>
       </xsl:when>
       <xsl:otherwise>
         <p>
-          <xsl:attribute name="id">
-            <xsl:value-of select="@id"/>
-          </xsl:attribute>
+          <xsl:copy-of select="@id"/>
           <xsl:if test="@class">
             <xsl:attribute name="class">
               <xsl:value-of select="@class"/>
@@ -1036,11 +832,7 @@ Pagenum/list template
     <xsl:text disable-output-escaping="yes">&gt;</xsl:text>
 
     <span>
-      <xsl:if test="@id">
-        <xsl:attribute name="id">
-          <xsl:value-of select="@id"/>
-        </xsl:attribute>
-      </xsl:if>
+      <xsl:copy-of select="@id"/>
       <xsl:choose>
         <xsl:when test="@page[.='front']">
           <xsl:attribute name="class">
@@ -1108,11 +900,7 @@ pagenum
           <xsl:when test="name(..)='p'">
             <xsl:text disable-output-escaping="yes">&lt;/p&gt;</xsl:text>
             <span>
-              <xsl:if test="@id">
-                <xsl:attribute name="id">
-                  <xsl:value-of select="@id"/>
-                </xsl:attribute>
-              </xsl:if>
+              <xsl:copy-of select="@id"/>
               <xsl:choose>
                 <xsl:when test="@page[.='front']">
                   <xsl:attribute name="class">
@@ -1138,11 +926,7 @@ pagenum
 
           <xsl:otherwise>
             <span>
-              <xsl:if test="@id">
-                <xsl:attribute name="id">
-                  <xsl:value-of select="@id"/>
-                </xsl:attribute>
-              </xsl:if>
+              <xsl:copy-of select="@id"/>
               <xsl:choose>
                 <xsl:when test="@page[.='front']">
                   <xsl:attribute name="class">page-front</xsl:attribute>
@@ -1170,9 +954,7 @@ dl
 
   <xsl:template match="dl">
     <dl>
-      <xsl:attribute name="id">
-        <xsl:value-of select="@id"/>
-      </xsl:attribute>
+      <xsl:copy-of select="@id"/>
       <xsl:apply-templates/>
     </dl>
   </xsl:template>
@@ -1182,9 +964,7 @@ dt
 
   <xsl:template match="dt">
     <dt>
-      <xsl:attribute name="id">
-        <xsl:value-of select="@id"/>
-      </xsl:attribute>
+      <xsl:copy-of select="@id"/>
       <xsl:apply-templates/>
     </dt>
   </xsl:template>
@@ -1194,9 +974,7 @@ dd
 
   <xsl:template match="dd">
     <dd>
-      <xsl:attribute name="id">
-        <xsl:value-of select="@id"/>
-      </xsl:attribute>
+      <xsl:copy-of select="@id"/>
       <xsl:apply-templates/>
     </dd>
   </xsl:template>
