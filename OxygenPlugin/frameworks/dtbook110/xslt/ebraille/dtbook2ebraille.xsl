@@ -216,7 +216,7 @@
     <xsl:template match="p">
         <xsl:param name="firstlineindent"></xsl:param>
         <xsl:param name="indent"></xsl:param>
-        <xsl:value-of select="$indent"/>
+        <xsl:value-of select="$firstlineindent"/>
         <xsl:apply-templates>
             <xsl:with-param name="firstlineindent"><xsl:value-of select="$firstlineindent"/></xsl:with-param>
             <xsl:with-param name="indent"><xsl:value-of select="$indent"/></xsl:with-param>
@@ -239,8 +239,8 @@
     
     <xsl:template match="br">
         <xsl:param name="indent"></xsl:param>
-        <xsl:value-of select="$indent"/>
         <xsl:call-template name="linebreak"/>
+        <xsl:value-of select="$indent"/>
     </xsl:template>
     
     <!--

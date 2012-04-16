@@ -3197,7 +3197,7 @@ the user will be required to confirm all pages</String>
 									<null/>
 								</field>
 								<field name="name">
-									<String>LPOut2</String>
+									<String>LPOut2 - p elements in table cells</String>
 								</field>
 								<field name="baseURL">
 									<String></String>
@@ -3233,7 +3233,7 @@ the user will be required to confirm all pages</String>
 									<Boolean>true</Boolean>
 								</field>
 								<field name="openInBrowser">
-									<Boolean>true</Boolean>
+									<Boolean>false</Boolean>
 								</field>
 								<field name="outputFile">
 									<File>${cfn}.LPOut2.htm</File>
@@ -3263,7 +3263,29 @@ the user will be required to confirm all pages</String>
 									<Boolean>true</Boolean>
 								</field>
 								<field name="xsltParams">
-									<list/>
+									<list>
+										<transformationParameter>
+											<field name="paramDescription">
+												<paramDescriptor>
+													<field name="localName">
+														<String>paraInTableCells</String>
+													</field>
+													<field name="prefix">
+														<null/>
+													</field>
+													<field name="namespace">
+														<null/>
+													</field>
+												</paramDescriptor>
+											</field>
+											<field name="value">
+												<String>true</String>
+											</field>
+											<field name="hasXPathValue">
+												<Boolean>false</Boolean>
+											</field>
+										</transformationParameter>
+									</list>
 								</field>
 								<field name="cascadingStylesheets">
 									<String-array/>
@@ -3280,7 +3302,7 @@ the user will be required to confirm all pages</String>
 									<null/>
 								</field>
 								<field name="name">
-									<String>LPOut3</String>
+									<String>LPOut2 - inlines in table cells</String>
 								</field>
 								<field name="baseURL">
 									<String></String>
@@ -3298,7 +3320,7 @@ the user will be required to confirm all pages</String>
 									<String></String>
 								</field>
 								<field name="inputXSLURL">
-									<String>${frameworks}/dtbook110/xslt/LPOut3.xsl</String>
+									<String>${frameworks}/dtbook110/xslt/LPOut2.xsl</String>
 								</field>
 								<field name="inputXMLURL">
 									<String>${currentFileURL}</String>
@@ -3316,10 +3338,10 @@ the user will be required to confirm all pages</String>
 									<Boolean>true</Boolean>
 								</field>
 								<field name="openInBrowser">
-									<Boolean>true</Boolean>
+									<Boolean>false</Boolean>
 								</field>
 								<field name="outputFile">
-									<File>${cfn}.LPOut3.htm</File>
+									<File>${cfn}.LPOut2.htm</File>
 								</field>
 								<field name="openOtherLocationInBrowser">
 									<Boolean>false</Boolean>
@@ -3346,7 +3368,29 @@ the user will be required to confirm all pages</String>
 									<Boolean>true</Boolean>
 								</field>
 								<field name="xsltParams">
-									<list/>
+									<list>
+										<transformationParameter>
+											<field name="paramDescription">
+												<paramDescriptor>
+													<field name="localName">
+														<String>paraInTableCells</String>
+													</field>
+													<field name="prefix">
+														<null/>
+													</field>
+													<field name="namespace">
+														<null/>
+													</field>
+												</paramDescriptor>
+											</field>
+											<field name="value">
+												<String>false</String>
+											</field>
+											<field name="hasXPathValue">
+												<Boolean>false</Boolean>
+											</field>
+										</transformationParameter>
+									</list>
 								</field>
 								<field name="cascadingStylesheets">
 									<String-array/>
@@ -3399,7 +3443,7 @@ the user will be required to confirm all pages</String>
 									<Boolean>true</Boolean>
 								</field>
 								<field name="openInBrowser">
-									<Boolean>true</Boolean>
+									<Boolean>false</Boolean>
 								</field>
 								<field name="outputFile">
 									<File>${cfn}.Inspiration.htm</File>

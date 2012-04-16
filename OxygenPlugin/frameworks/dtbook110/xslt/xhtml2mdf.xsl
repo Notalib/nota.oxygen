@@ -36,12 +36,14 @@
 </xsl:text></xsl:variable>
         <xsl:variable name="elements">
             <elements>
-                <xsl:for-each-group select=".//*[local-name()!='br']" group-by="concat(local-name(), '.', @class)">
+                <xsl:for-each-group select=".//*[local-name()!='br']" group-by="concat(local-name(), '.', tokenize(@class, '\s')[1])">
                     <xsl:sort select="local-name()"/>
                     <xsl:variable name="incl"><xsl:call-template name="IncludeInMDF"/></xsl:variable>
                     <xsl:if test="$incl=1">
                         <xsl:element name="{local-name()}">
-                            <xsl:apply-templates select="@*"/>
+                            <xsl:for-each select="@*">
+                                <xsl:copy/>
+                            </xsl:for-each>
                         </xsl:element>
                     </xsl:if>
                 </xsl:for-each-group>
@@ -56,30 +58,17 @@
         <xsl:for-each select="$elements/elements/*">
             <xsl:value-of select="concat(position(), '=', local-name())"/>
             <xsl:if test="@class">
-                <xsl:value-of select="concat('.', @class)"/>
+                <xsl:value-of select="concat('.', tokenize(@class, '\s')[1])"/>
             </xsl:if>
             <xsl:value-of select="$newline"/>
         </xsl:for-each>
-        <!--
-        <xsl:for-each-group select=".//*[local-name()!='br']" group-by="concat(local-name(), '.', @class)">
-            <xsl:sort select="local-name()"/>
-            <xsl:variable name="incl"><xsl:call-template name="IncludeInMDF"/></xsl:variable>
-            <xsl:if test="$incl=1">
-                <xsl:value-of select="concat(position(), '=', local-name())"/>
-                <xsl:if test="@class">
-                    <xsl:value-of select="concat('.', @class)"/>
-                </xsl:if>
-                <xsl:value-of select="$newline"/>
-            </xsl:if>
-        </xsl:for-each-group>
-        -->
         <!-- 
             Print section for each tag 
         -->
         <xsl:for-each select="$elements/elements/*">
             <xsl:value-of select="concat($newline, '[', local-name())"/>
             <xsl:if test="@class">
-                <xsl:value-of select="concat('.', @class)"/>
+                <xsl:value-of select="concat('.', tokenize(@class, '\s')[1])"/>
             </xsl:if>
             <xsl:value-of select="concat(']', $newline)"/>
             <xsl:value-of select="concat('Desc=', $newline)"/>

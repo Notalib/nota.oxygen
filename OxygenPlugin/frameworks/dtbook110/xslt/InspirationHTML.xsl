@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 	<xsl:output method="xml" omit-xml-declaration="no" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" encoding="Windows-1252" indent="yes"/>
 	<xsl:template match="/">
 		<xsl:apply-templates/>
@@ -331,12 +331,18 @@ th
 	<!-- =========================================================================
 normalize space
 	============================================================================== -->
-	<xsl:template match="*/text()[normalize-space()]">
-		<xsl:value-of select="normalize-space()"/>
-	</xsl:template>
-	
-	<xsl:template match="*/text()[not(normalize-space())]" />
-	<!-- =========================================================================
+  <xsl:template match="*/text()[normalize-space()]">
+   <xsl:if test="matches(., '^\s.*')">
+      <xsl:value-of select="' '"/>
+    </xsl:if>
+    <xsl:value-of select="normalize-space()"/>
+    <xsl:if test="matches(., '.*\s$')">
+      <xsl:value-of select="' '"/>
+    </xsl:if>
+  </xsl:template>
+  
+  <xsl:template match="*/text()[not(normalize-space())]" />
+<!-- =========================================================================
 insert a name
 	============================================================================== -->
 	<xsl:template name="aName">
