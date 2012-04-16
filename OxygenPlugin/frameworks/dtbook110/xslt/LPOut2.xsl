@@ -554,10 +554,10 @@
   
   <xsl:template name="tableCellContent">
     <xsl:if test="child::div">
-      <xsl:message terminate="no" select="concat('WARNING: Table cell with div - near id=', ancestor-or-self::*[@id]/@id)"/>
+      <xsl:message terminate="no" select="concat('WARNING: Table cell with div - near element with id ', ancestor-or-self::*[@id][1]/@id)"/>
     </xsl:if>
     <xsl:if test="child::p and child::text()[normalize-space()!='']">
-      <xsl:message terminate="no" select="concat('WARNING: Table cell with mixed content - near id=', ancestor-or-self::*[@id]/@id)"/>
+      <xsl:message terminate="no" select="concat('WARNING: Table cell with mixed content - near element with id ',  ancestor-or-self::*[@id][1]/@id)"/>
     </xsl:if>
     <xsl:choose>
       <xsl:when test="$paraInTableCells">
