@@ -1736,7 +1736,7 @@
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>self::imggroup</String>
+														<String>self::imggroup|self::level|self::level1|self::level2|self::level3|self::level|self::level5|self::level6</String>
 													</field>
 													<field name="argValues">
 														<map>

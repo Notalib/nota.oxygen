@@ -2,7 +2,9 @@ package nota.oxygen.common.dtbook;
 
 import java.awt.Dimension;
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Iterator;
@@ -47,14 +49,19 @@ public class InsertImageGroupOperation extends BaseAuthorOperation {
 	public String getDescription() {
 		return "Insert an image group";
 	}
-
-	@Override
-	protected void doOperation() throws AuthorOperationException {
-		URL imageURL = getAuthorAccess().getWorkspaceAccess().chooseURL("Select image file", new String[] {"jpg", "png"}, "JPEG|PNG");
-		if (imageURL==null) return;
-		String relImageURL = getAuthorAccess().getUtilAccess().makeRelative(
-				getAuthorAccess().getDocumentController().getAuthorDocumentNode().getXMLBaseURL(),
-				imageURL);
+	
+	private void insertImageGroup(String relImageURL) throws AuthorOperationException
+	{
+		URL imageURL;
+		try {
+			imageURL = new URL(getAuthorAccess().getDocumentController().getAuthorDocumentNode().getXMLBaseURL(), relImageURL);
+		} catch (MalformedURLException e1) {
+			return;
+		}
+		if (relImageURL.contains("*")||relImageURL.contains("?"))
+		{
+			
+		}
 		String height = "";
 		String width = "";
 		Dimension imageDim = getImageDimension(imageURL);
@@ -65,7 +72,7 @@ public class InsertImageGroupOperation extends BaseAuthorOperation {
 		if (imggroupFragment==null) throw new AuthorOperationException(ARG_IMGGROUP_FRAGMENT+" argument is null");
 		String imggroupXml = imggroupFragment.replace("$image", relImageURL).replace("$height", height).replace("$width", width);
 		int offset = getAuthorAccess().getEditorAccess().getCaretOffset();
-		getAuthorAccess().getDocumentController().insertXMLFragment(imggroupXml, getAuthorAccess().getEditorAccess().getCaretOffset());
+		getAuthorAccess().getDocumentController().insertXMLFragment(imggroupXml, offset);
 		if (doFixup) {
 			try {
 				AuthorNode aNode = getAuthorAccess().getDocumentController().getNodeAtOffset(offset+1);
@@ -93,6 +100,74 @@ public class InsertImageGroupOperation extends BaseAuthorOperation {
 			catch (BadLocationException e) {
 				//Ignore
 			}
+		}
+		try {
+			AuthorNode aNode = getAuthorAccess().getDocumentController().getNodeAtOffset(offset+1);
+			if (aNode instanceof AuthorElement)
+			{
+				getAuthorAccess().getEditorAccess().setCaretPosition(aNode.getEndOffset()+1);
+			}
+		}
+		catch (BadLocationException e) {
+			//Ignore
+		}
+	}
+	
+	private String[] getURLsFromPattern(String relPattern) throws AuthorOperationException
+	{
+		URL patternURL;
+		try {
+			patternURL = new URL(getAuthorAccess().getDocumentController().getAuthorDocumentNode().getXMLBaseURL(), relPattern);
+		} catch (MalformedURLException e1) {
+			throw new AuthorOperationException("Could not construct URL from "+relPattern, e1);
+		}
+		String patternPath = patternURL.getPath();
+		if (patternPath=="") throw new AuthorOperationException("Patterns are only supported for file URLs");
+		File relF = new File(patternPath);
+		final String regEx = relF.getName().replace(".", "\\.").replace("*", ".*").replace("?", ".");
+		File d = relF.getParentFile();
+		if (!d.isDirectory()) throw new AuthorOperationException("Parent is unexpectedly not a directory");
+		if (!d.exists()) throw new AuthorOperationException("Parent directory does not exist");
+		FilenameFilter ff = new FilenameFilter() 
+		{
+			public boolean accept(File f, String n) 
+			{
+				return n.matches(regEx);
+			}
+		};
+		return d.list(ff);
+	}
+
+	@Override
+	protected void doOperation() throws AuthorOperationException {
+		URL imageURL = getAuthorAccess().getWorkspaceAccess().chooseURL("Select image file (use */? for wildcards)", new String[] {"jpg", "png"}, "JPEG|PNG");
+		if (imageURL==null) return;
+		String relImageURL = getAuthorAccess().getUtilAccess().makeRelative(
+				getAuthorAccess().getDocumentController().getAuthorDocumentNode().getXMLBaseURL(),
+				imageURL);
+		//String relImageURL = ro.sync.ecss.extensions.commons.ImageFileChooser.chooseImageFile(getAuthorAccess());
+		if (relImageURL==null) return;
+		if (relImageURL.contains("*")||relImageURL.contains("?"))
+		{
+			String[] relImageURLs = getURLsFromPattern(relImageURL);
+			if (relImageURLs.length==0)
+			{
+				showMessage("No images matches pattern "+relImageURL);
+				return;
+			}
+			
+			int res = getAuthorAccess().getWorkspaceAccess().showConfirmDialog(
+					getDescription(), "Do you wish to insert "+relImageURLs.length+" images matching "+relImageURL, new String[] {"Yes", "No"}, new int[] {1, 0});
+			if (res==0) return;
+			for (int i=0; i<relImageURLs.length; i++)
+			{
+				insertImageGroup(relImageURLs[i]);
+			}
+			
+		}
+		else
+		{
+			insertImageGroup(relImageURL);
 		}
 	}
 	

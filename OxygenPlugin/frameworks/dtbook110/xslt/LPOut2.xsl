@@ -8,6 +8,8 @@
   when false, the content of table cells are are text nodes and possibly inline elements
   ============================================================================== -->
   <xsl:param name="paraInTableCells" as="xs:boolean">true</xsl:param>
+  <xsl:param name="linkNoteAndRefs" as="xs:boolean">false</xsl:param>
+  <xsl:param name="linkAnnotationAndRefs" as="xs:boolean">false</xsl:param>
 
   <xsl:strip-space elements ="li td"/>
   <xsl:template match="/">
@@ -255,17 +257,41 @@
   <xsl:template match="note">
     <div class="note">
       <xsl:copy-of select="@id|@class"/>
-      <xsl:apply-templates/>
+      <xsl:choose>
+        <xsl:when test="not($linkNoteAndRefs)">
+          <xsl:apply-templates/>
+        </xsl:when>
+        <xsl:when test="descendant::span[@class='note_identifier']">
+          <xsl:apply-templates/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:element name="a">
+            <xsl:attribute name="href" select="concat('#a_', @id)"/>
+            <xsl:apply-templates/>
+          </xsl:element>
+        </xsl:otherwise>
+      </xsl:choose>
     </div>
+  </xsl:template>
+  
+  <xsl:template match="span[@class='note_identifier' and ancestor::note]">
+    <xsl:choose>
+      <xsl:when test="$linkNoteAndRefs">
+        <xsl:element name="a">
+          <xsl:attribute name="href" select="concat('#a_', ancestor::note/@id)"/>
+          <xsl:apply-templates/>
+        </xsl:element>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:apply-templates/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <!-- =========================================================================
   annotation
   ============================================================================== -->
   <xsl:template match="annotation">
-    <a>
-      <xsl:copy-of select="@id"/>
-    </a>
     <div class="annotation">
       <xsl:copy-of select="@id|@class"/>
       <xsl:apply-templates/>
@@ -276,17 +302,46 @@
   noteref
   ============================================================================== -->
   <xsl:template match="noteref">
-    <xsl:apply-templates/>
+    <xsl:variable name="idref" select="@idref"/>
+    <xsl:choose>
+      <xsl:when test="$linkNoteAndRefs">
+        <xsl:element name="a">
+          <xsl:if test="count(preceding::noteref[@idref=$idref])=0">
+            <xsl:attribute name="id" select="concat('a_', @idref)"/>
+          </xsl:if>
+          <xsl:attribute name="href" select="concat('#', @idref)"/>
+          <xsl:text>[note </xsl:text>
+          <xsl:apply-templates/>
+          <xsl:text>]</xsl:text>
+        </xsl:element>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:text>[note </xsl:text>
+        <xsl:apply-templates/>
+        <xsl:text>]</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <!-- =========================================================================
   annoref
   ============================================================================== -->
   <xsl:template match="annoref">
-    <a class="annoref">
-      <xsl:copy-of select="@id"/>
-      <xsl:apply-templates/>
-    </a>
+    <xsl:choose>
+      <xsl:when test="$linkAnnotationAndRefs">
+        <xsl:element name="a">
+          <xsl:attribute name="href" select="concat('#', @idref)"></xsl:attribute>
+          <xsl:text> [annotation </xsl:text>
+          <xsl:apply-templates/>
+          <xsl:text>]</xsl:text>
+        </xsl:element>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:text> [annotation </xsl:text>
+        <xsl:apply-templates/>
+        <xsl:text>]</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <!-- =========================================================================
