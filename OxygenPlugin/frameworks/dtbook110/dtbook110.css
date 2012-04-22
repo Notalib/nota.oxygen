@@ -550,7 +550,7 @@ list {
 
 li {
  display: list-item;
- list-style-position: outside;
+ list-style-position: inside;
  margin-top: 0.25em;
  margin-bottom: 0.25em;
 }
@@ -603,6 +603,7 @@ list > li > list > li > list[type='ul'] {
 list[bullet='none'], list > li > list[bullet='none'], list > li > list > li > list[bullet='none'] {
   list-style-type: none;
 }
+
 
 
 list > li > list, list li list {

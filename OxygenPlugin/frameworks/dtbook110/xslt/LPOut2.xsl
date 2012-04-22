@@ -177,6 +177,12 @@
       </xsl:when>
       <xsl:otherwise>
         <xsl:if test="not(child::levelhd)">
+          <xsl:variable name="depth">
+            <xsl:value-of select="count(ancestor::level)"/>
+          </xsl:variable>
+          <xsl:if test="1&lt;=$depth and $depth&lt;=6">
+            <xsl:element name="{concat('h', $depth)}">*</xsl:element>
+          </xsl:if>
           <h1>*</h1>
         </xsl:if>
         <xsl:apply-templates/>

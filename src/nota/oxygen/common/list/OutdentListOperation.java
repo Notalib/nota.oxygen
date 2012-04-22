@@ -1,19 +1,20 @@
 package nota.oxygen.common.list;
 
 
-import nota.oxygen.common.BaseAuthorOperation;
-import nota.oxygen.common.dtbook.v110.Dtbook110UniqueAttributesRecognizer;
+import java.util.List;
 
-import org.w3c.dom.Document;
+import nota.oxygen.common.BaseAuthorOperation;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
-import ro.sync.ecss.extensions.api.node.AttrValue;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
+import ro.sync.ecss.extensions.api.node.AuthorNode;
 
 
 /**
@@ -26,59 +27,60 @@ public class OutdentListOperation extends BaseAuthorOperation {
 	@Override
 	protected void doOperation() throws AuthorOperationException {
 		try {
-			AuthorElement aList = getNamedCommonParentElementOfSelection(listElement, null);
-			String listId = "";
-			AttrValue idAttr = aList.getAttribute("id");
-			if (idAttr!=null) listId = idAttr.getValue();
-			if (listId.equals("")) {
-				Dtbook110UniqueAttributesRecognizer uaReq = new Dtbook110UniqueAttributesRecognizer();
-				uaReq.activated(getAuthorAccess());
-				uaReq.assignUniqueIDs(aList.getStartOffset(), aList.getEndOffset(), true);
-				aList = getNamedCommonParentElementOfSelection(listElement, null);
-				listId = aList.getAttribute("id").getValue();
-			}
-			AuthorElement aParentList = (AuthorElement)aList.getParent().getParent();
-			if (!aParentList.getLocalName().equals(listElement)) {
-				showMessage("List not nested");
-				return;
-			}
-			Element parentList = deserializeElement(serialize(aParentList));
-			Document doc = parentList.getOwnerDocument();
-			Element list = getDescentantElementById(parentList, listId);
-			if (list==null) {
-				throw new AuthorOperationException("Unexpectedly could not re-find list in serialized xml");
-			}
-			Element parentItem = (Element)list.getParentNode();
-			if (parentItem.getParentNode()!=parentList || (!itemElement.equals(parentItem.getLocalName()))) {
-				throw new AuthorOperationException("Parent list item was unexpectedly not a child of parent list");
-			}
-			Element itemBefore = null;
-			Element itemAfter = null;
-			while (list.getPreviousSibling()!=null) {
-				Node prevSib = list.getPreviousSibling();
-				if (itemBefore==null ) itemBefore = doc.createElementNS(parentItem.getNamespaceURI(), parentItem.getLocalName());
-				
-				parentItem.removeChild(prevSib);
-				itemBefore.insertBefore(prevSib, itemBefore.getFirstChild());
-			}
-			while (list.getNextSibling()!=null) {
-				Node nextSib = list.getNextSibling();
-				if (itemAfter==null ) itemAfter = doc.createElementNS(parentItem.getNamespaceURI(), parentItem.getLocalName());
-				parentItem.removeChild(nextSib);
-				itemAfter.appendChild(nextSib);
-			}
-			if (itemBefore!=null) parentList.insertBefore(itemBefore, parentItem);
-			while (list.getFirstChild()!=null) {
-				Node firstChild = list.getFirstChild();
-				list.removeChild(firstChild);
-				parentList.insertBefore(firstChild, parentItem);
-			}
-			if (itemAfter!=null) parentList.insertBefore(itemAfter, parentItem);
-			parentList.removeChild(parentItem);
-			
 			AuthorDocumentController docCtrl = getAuthorAccess().getDocumentController();
-			docCtrl.deleteNode(aParentList);
-			docCtrl.insertXMLFragment(serialize(parentList), getAuthorAccess().getEditorAccess().getCaretOffset());	
+			AuthorElement list = getNamedCommonParentElementOfSelection(listElement, null);
+			List<AuthorNode> items = list.getContentNodes(); 
+			//showMessage(list.getParent().getName()+"=="+itemElement);
+			if (list.getParent().getName().equals(itemElement))
+			{
+				AuthorElement parentLiAElem = (AuthorElement)list.getParent();
+				int index = parentLiAElem.getContentNodes().indexOf(list);
+				if (items.size()>0)
+				{
+					Element parentLiElem = deserializeElement(serialize(parentLiAElem));
+					Element listElem = (Element)parentLiElem.getChildNodes().item(index);
+					String xml = "";
+					NodeList listChildren = listElem.getChildNodes();
+					for (int i=0; i<listChildren.getLength(); i++)
+					{
+						xml += serialize(listChildren.item(i));
+					}
+					parentLiElem.removeChild(listElem);
+					if (parentLiElem.getChildNodes().getLength()>0)
+					{
+						xml = serialize(parentLiElem) + xml;
+					}
+					docCtrl.deleteNode(parentLiAElem);
+					docCtrl.insertXMLFragment(xml, getAuthorAccess().getEditorAccess().getCaretOffset());
+				}
+			}
+			else
+			{
+				Element listElem = deserializeElement(serialize(list));
+				NodeList listChildren = listElem.getChildNodes();
+				String xml = "";
+				for (int i=0; i<listChildren.getLength(); i++)
+				{
+					Node node = listChildren.item(i);
+					if (node.getLocalName().equals(itemElement))
+					{
+						Element repl = listElem.getOwnerDocument().createElementNS(listElem.getNamespaceURI(), itemReplacementElement);
+						NodeList liChildren = listChildren.item(i).getChildNodes();
+						for (int j=0; j<liChildren.getLength(); j++)
+						{
+							repl.appendChild(liChildren.item(j).cloneNode(true));
+						}
+						xml += serialize(repl);
+					}
+					else
+					{
+						xml += serialize(node);
+					}
+				}
+				docCtrl.deleteNode(list);
+				docCtrl.insertXMLFragment(xml, getAuthorAccess().getEditorAccess().getCaretOffset());
+				
+			}
 		}
 		catch (AuthorOperationException e) {
 			throw e;
@@ -97,18 +99,22 @@ public class OutdentListOperation extends BaseAuthorOperation {
 			throws IllegalArgumentException {
 		listElement = (String)args.getArgumentValue(ARG_LIST_ELEMENT);
 		itemElement = (String)args.getArgumentValue(ARG_ITEM_ELEMENT);
+		itemReplacementElement = (String)args.getArgumentValue(ARG_ITEM_REPLACEMENT_ELEMENT);
 	}
 	
 	private static String ARG_LIST_ELEMENT = "list element";
 	private static String ARG_ITEM_ELEMENT = "item element";
+	private static String ARG_ITEM_REPLACEMENT_ELEMENT = "item replacement element";
 	private String listElement;
 	private String itemElement;
+	private String itemReplacementElement;
 
 	@Override
 	public ArgumentDescriptor[] getArguments() {
 		return new ArgumentDescriptor[] {
 				new ArgumentDescriptor(ARG_LIST_ELEMENT, ArgumentDescriptor.TYPE_STRING, "list element name"),
-				new ArgumentDescriptor(ARG_ITEM_ELEMENT, ArgumentDescriptor.TYPE_STRING, "item element name")
+				new ArgumentDescriptor(ARG_ITEM_ELEMENT, ArgumentDescriptor.TYPE_STRING, "item element name"),
+				new ArgumentDescriptor(ARG_ITEM_REPLACEMENT_ELEMENT, ArgumentDescriptor.TYPE_STRING, "item replacement element name")
 		};
 	}
 

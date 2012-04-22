@@ -33,34 +33,42 @@ public class IndentListOperation extends BaseAuthorOperation {
 			AuthorDocumentController docCtrl = getAuthorAccess().getDocumentController();
 			int selStart = getSelectionStart();
 			int selEnd = getSelectionEnd();
+			
 			AuthorElement list = getNamedCommonParentElementOfSelection(listElement, null);
 			if (list==null) {
 				throw new AuthorOperationException("Current selection has no common parent "+listElement+" element");
 			}
 			List<AuthorNode> items = list.getContentNodes();
 			int firstItemIndex = 0;
-			int lastItemIndex = items.size()-1;
-			for (int i=0; i<items.size(); i++) {
+			for (int i=0; i<items.size(); i++) 
+			{
 				AuthorNode item = items.get(i);
 				if (item.getType()!=AuthorNode.NODE_TYPE_ELEMENT) {
 					throw new AuthorOperationException("List contains non-element child");
 				}
-				boolean found = false;
-				if (item.getStartOffset()<=selStart && selStart<=item.getEndOffset()) {
-					showMessage("First Item: "+item.getStartOffset()+"-"+item.getEndOffset());
+				if (selStart<item.getEndOffset())
+				{
 					firstItemIndex = i;
-					found = true;
-				}
-				if (item.getStartOffset()<=selEnd && selEnd<=item.getEndOffset()) {
-					showMessage("Last Item: "+item.getStartOffset()+"-"+item.getEndOffset());
-					lastItemIndex = i;
-					found = true;
-				}
-				if (!found) {
-					showMessage("Other Item: "+item.getStartOffset()+"-"+item.getEndOffset());
+					break;
 				}
 			}
-
+			int lastItemIndex = firstItemIndex;
+			while (lastItemIndex<items.size())
+			{
+				AuthorNode item = items.get(lastItemIndex);
+				if (item.getType()!=AuthorNode.NODE_TYPE_ELEMENT) {
+					throw new AuthorOperationException("List contains non-element child");
+				}
+				if (item.getEndOffset()+2>=selEnd) break;
+				lastItemIndex++;
+			}
+//			String itemsMsg = "Items";
+//			for (int i=0; i<items.size(); i++)
+//			{
+//				AuthorNode item = items.get(i);
+//				itemsMsg += "\n"+i+" from "+item.getStartOffset()+" to "+item.getEndOffset();
+//			}
+//			showMessage("Indenting items "+firstItemIndex+" until "+lastItemIndex+"\n"+itemsMsg+"\nCurrent selection: "+selStart+"-"+selEnd);
 			String xml = serialize(list);
 			Element listElem = deserializeElement(xml);
 			Element li = null;

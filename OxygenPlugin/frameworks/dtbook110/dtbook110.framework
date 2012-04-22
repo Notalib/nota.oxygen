@@ -1583,10 +1583,10 @@
 											<String>IMAGE_INSERT_GROUP</String>
 										</field>
 										<field name="name">
-											<String>Insert image group</String>
+											<String>Insert image group(s)</String>
 										</field>
 										<field name="description">
-											<String>Inserts an image group, prompting for the URL of the image</String>
+											<String>Inserts image group(s), prompting for the URL of the image(s) - multiple images can be selected with wildcards</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -1715,10 +1715,10 @@
 											<String>IMAGE_INSERT</String>
 										</field>
 										<field name="name">
-											<String>Insert image </String>
+											<String>Insert image(s)</String>
 										</field>
 										<field name="description">
-											<String>Inserts an (additional) image in an image group</String>
+											<String>Inserts image(s) - multiple can be inserted using wildcards</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -2217,6 +2217,57 @@ the user will be required to confirm all pages</String>
 											</actionMode-array>
 										</field>
 									</action>
+									<action>
+										<field name="id">
+											<String>LIST_OUTDENT</String>
+										</field>
+										<field name="name">
+											<String>Outdent list</String>
+										</field>
+										<field name="description">
+											<String>Outdent list		</String>
+										</field>
+										<field name="largeIconPath">
+											<String>${frameworks}/dtbook2005/list_outdent.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>${frameworks}/dtbook2005/list_outdent.png</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>item element</String>
+																<String>li</String>
+															</entry>
+															<entry>
+																<String>item replacement element</String>
+																<String>p</String>
+															</entry>
+															<entry>
+																<String>list element</String>
+																<String>list</String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.list.OutdentListOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
 								</action-array>
 							</field>
 							<field name="menubarDescriptor">
@@ -2352,6 +2403,16 @@ the user will be required to confirm all pages</String>
 														<menuItem>
 															<field name="actionID">
 																<String>LIST_OL</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>LIST_INDENT</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>LIST_OUTDENT</String>
 															</field>
 														</menuItem>
 													</menuEntry-array>
@@ -2669,6 +2730,16 @@ the user will be required to confirm all pages</String>
 																<String>LIST_OL</String>
 															</field>
 														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>LIST_INDENT</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>LIST_OUTDENT</String>
+															</field>
+														</menuItem>
 													</menuEntry-array>
 												</field>
 											</menu>
@@ -2927,6 +2998,16 @@ the user will be required to confirm all pages</String>
 											<toolbarItem>
 												<field name="actionID">
 													<String>LIST_OL</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>LIST_INDENT</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>LIST_OUTDENT</String>
 												</field>
 											</toolbarItem>
 											<toolbarSeparator/>
@@ -3197,7 +3278,7 @@ the user will be required to confirm all pages</String>
 									<null/>
 								</field>
 								<field name="name">
-									<String>LPOut2 - p elements in table cells</String>
+									<String>LPOut2</String>
 								</field>
 								<field name="baseURL">
 									<String></String>
@@ -3268,7 +3349,7 @@ the user will be required to confirm all pages</String>
 											<field name="paramDescription">
 												<paramDescriptor>
 													<field name="localName">
-														<String>paraInTableCells</String>
+														<String>linkAnnotationAndRefs</String>
 													</field>
 													<field name="prefix">
 														<null/>
@@ -3279,96 +3360,33 @@ the user will be required to confirm all pages</String>
 												</paramDescriptor>
 											</field>
 											<field name="value">
-												<String>true</String>
+												<String>${ask('Create links between annotations and annorefs (true/false)?', generic, 'false')}</String>
 											</field>
 											<field name="hasXPathValue">
 												<Boolean>false</Boolean>
 											</field>
 										</transformationParameter>
-									</list>
-								</field>
-								<field name="cascadingStylesheets">
-									<String-array/>
-								</field>
-								<field name="xslTransformer">
-									<String>Saxon-EE</String>
-								</field>
-								<field name="extensionURLs">
-									<String-array/>
-								</field>
-							</scenario>
-							<scenario>
-								<field name="advancedOptionsMap">
-									<null/>
-								</field>
-								<field name="name">
-									<String>LPOut2 - inlines in table cells</String>
-								</field>
-								<field name="baseURL">
-									<String></String>
-								</field>
-								<field name="footerURL">
-									<String></String>
-								</field>
-								<field name="fOPMethod">
-									<String>pdf</String>
-								</field>
-								<field name="fOProcessorName">
-									<String>Apache FOP</String>
-								</field>
-								<field name="headerURL">
-									<String></String>
-								</field>
-								<field name="inputXSLURL">
-									<String>${frameworks}/dtbook110/xslt/LPOut2.xsl</String>
-								</field>
-								<field name="inputXMLURL">
-									<String>${currentFileURL}</String>
-								</field>
-								<field name="defaultScenario">
-									<Boolean>false</Boolean>
-								</field>
-								<field name="isFOPPerforming">
-									<Boolean>false</Boolean>
-								</field>
-								<field name="type">
-									<String>XSL</String>
-								</field>
-								<field name="saveAs">
-									<Boolean>true</Boolean>
-								</field>
-								<field name="openInBrowser">
-									<Boolean>false</Boolean>
-								</field>
-								<field name="outputFile">
-									<File>${cfn}.LPOut2.htm</File>
-								</field>
-								<field name="openOtherLocationInBrowser">
-									<Boolean>false</Boolean>
-								</field>
-								<field name="locationToOpenInBrowserURL">
-									<null/>
-								</field>
-								<field name="openInEditor">
-									<Boolean>true</Boolean>
-								</field>
-								<field name="showInHTMLPane">
-									<Boolean>false</Boolean>
-								</field>
-								<field name="showInXMLPane">
-									<Boolean>false</Boolean>
-								</field>
-								<field name="showInSVGPane">
-									<Boolean>false</Boolean>
-								</field>
-								<field name="showInResultSetPane">
-									<Boolean>false</Boolean>
-								</field>
-								<field name="useXSLTInput">
-									<Boolean>true</Boolean>
-								</field>
-								<field name="xsltParams">
-									<list>
+										<transformationParameter>
+											<field name="paramDescription">
+												<paramDescriptor>
+													<field name="localName">
+														<String>linkNoteAndRefs</String>
+													</field>
+													<field name="prefix">
+														<null/>
+													</field>
+													<field name="namespace">
+														<null/>
+													</field>
+												</paramDescriptor>
+											</field>
+											<field name="value">
+												<String>${ask('Create links between notes and noterefs (true/false)?', generic, 'false')}</String>
+											</field>
+											<field name="hasXPathValue">
+												<Boolean>false</Boolean>
+											</field>
+										</transformationParameter>
 										<transformationParameter>
 											<field name="paramDescription">
 												<paramDescriptor>
@@ -3384,7 +3402,7 @@ the user will be required to confirm all pages</String>
 												</paramDescriptor>
 											</field>
 											<field name="value">
-												<String>false</String>
+												<String>${ask('Paragraphs in table cells (true/false)?', generic, 'true')}</String>
 											</field>
 											<field name="hasXPathValue">
 												<Boolean>false</Boolean>
