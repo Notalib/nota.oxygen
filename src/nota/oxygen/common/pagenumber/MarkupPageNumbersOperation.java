@@ -21,7 +21,7 @@ import nota.oxygen.common.BaseAuthorOperation;
  */
 public class MarkupPageNumbersOperation extends BaseAuthorOperation {
 	
-	private static String ARG_PAGENUMBER_FRAGMENT = "pagenumber fragment - $pagenum is placeholder for the pagenumber, $id for pagenumber id";
+	private static String ARG_PAGENUMBER_FRAGMENT = "pagenumber fragment";
 	private String pagenumberFragment;
 	
 	private static String ARG_CANDIDATE_XPATH = "candidate xpath";
@@ -37,7 +37,7 @@ public class MarkupPageNumbersOperation extends BaseAuthorOperation {
 	@Override
 	public ArgumentDescriptor[] getArguments() {
 		return new ArgumentDescriptor[]{
-				new ArgumentDescriptor(ARG_PAGENUMBER_FRAGMENT, ArgumentDescriptor.TYPE_FRAGMENT, "Pagenumber xml fragment"),
+				new ArgumentDescriptor(ARG_PAGENUMBER_FRAGMENT, ArgumentDescriptor.TYPE_FRAGMENT, "Pagenumber xml fragment - $pagenum is placeholder for the pagenumber, $id for pagenumber id"),
 				new ArgumentDescriptor(ARG_CANDIDATE_XPATH, ArgumentDescriptor.TYPE_XPATH_EXPRESSION, "Candidate XPath"),
 				new ArgumentDescriptor(ARG_MARKUP_MODE, ArgumentDescriptor.TYPE_CONSTANT_LIST, "Markup mode", MARKUP_MODES, MARKUP_MODES[0]),
 				new ArgumentDescriptor(ARG_ID_PREFIX, ArgumentDescriptor.TYPE_STRING, "id prefix")
@@ -47,7 +47,7 @@ public class MarkupPageNumbersOperation extends BaseAuthorOperation {
 	@Override
 	public String getDescription() {
 		return "Find and markup pagenumbers";
-	}
+	} 
 	
 	private void doOperation(boolean automatic, boolean confirmOnlyOutOfSequence) throws AuthorOperationException {
 		AuthorDocumentController docCtrl = getAuthorAccess().getDocumentController();

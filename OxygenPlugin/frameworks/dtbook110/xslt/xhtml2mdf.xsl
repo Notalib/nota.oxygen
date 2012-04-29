@@ -16,8 +16,16 @@
             <xsl:when test="local-name()='ol' or local-name()='ul' or local-name()='li'">
                 <xsl:value-of select="1"/>
             </xsl:when>
-            <xsl:when test="local-name()='td' or local-name()='th' or local-name()='caption'">
+            <xsl:when test="local-name()='caption'">
                 <xsl:value-of select="1"/>
+            </xsl:when>
+            <xsl:when test="local-name()='table'">
+                <xsl:choose>
+                    <xsl:when test="descendant::*[local-name()='td' or local-name()='th']/*[local-name()='p']">
+                        <xsl:value-of select="0"/>
+                    </xsl:when>
+                    <xsl:otherwise><xsl:value-of select="1"/></xsl:otherwise>
+                </xsl:choose>
             </xsl:when>
             <xsl:when test="self::*[local-name='div' and @class='note']">
                 <xsl:value-of select="1"/>

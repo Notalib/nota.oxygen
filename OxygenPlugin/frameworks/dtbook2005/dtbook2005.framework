@@ -1764,6 +1764,10 @@
 																<String>page_</String>
 															</entry>
 															<entry>
+																<String>pagenumber fragment</String>
+																<String>&lt;pagenum xmlns="http://www.daisy.org/z3986/2005/dtbook/" page="normal" id="$id">$pagenum&lt;/pagenum></String>
+															</entry>
+															<entry>
 																<String>pagenumber fragment - $pagenum is placeholder for the pagenumber, $id for pagenumber id</String>
 																<String>&lt;pagenum xmlns="http://www.daisy.org/z3986/2005/dtbook/" page="normal" id="$id">$pagenum&lt;/pagenum></String>
 															</entry>
@@ -1914,6 +1918,10 @@ the user will be required to confirm when the next page number is out-of-sequenc
 																<String>page_</String>
 															</entry>
 															<entry>
+																<String>pagenumber fragment</String>
+																<String>&lt;pagenum xmlns="http://www.daisy.org/z3986/2005/dtbook/" page="normal" id="$id">$pagenum&lt;/pagenum></String>
+															</entry>
+															<entry>
 																<String>pagenumber fragment - $pagenum is placeholder for the pagenumber</String>
 																<String>&lt;pagenum xmlns="http://www.daisy.org/z3986/2005/dtbook/" page="normal" id="$id">$pagenum&lt;/pagenum></String>
 															</entry>
@@ -1972,6 +1980,10 @@ the user will be required to confirm all pages</String>
 															<entry>
 																<String>id prefix</String>
 																<String>page_</String>
+															</entry>
+															<entry>
+																<String>pagenumber fragment</String>
+																<String>&lt;pagenum xmlns="http://www.daisy.org/z3986/2005/dtbook/" page="normal" id="$id">$pagenum&lt;/pagenum></String>
 															</entry>
 															<entry>
 																<String>pagenumber fragment - $pagenum is placeholder for the pagenumber, $id for pagenumber id</String>
