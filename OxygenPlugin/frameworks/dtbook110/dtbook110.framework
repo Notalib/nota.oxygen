@@ -2280,6 +2280,53 @@ the user will be required to confirm all pages</String>
 											</actionMode-array>
 										</field>
 									</action>
+									<action>
+										<field name="id">
+											<String>ACRONYM_TEST</String>
+										</field>
+										<field name="name">
+											<String>Find next acronym</String>
+										</field>
+										<field name="description">
+											<String>Find next acronym</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<String>ctrl shift F10</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>XPath statement</String>
+																<String>//text()[matches(string(.), 'NATO|FN|USA')]</String>
+															</entry>
+															<entry>
+																<String>direction</String>
+																<String>forward</String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.XPathFindOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
 								</action-array>
 							</field>
 							<field name="menubarDescriptor">
@@ -2938,6 +2985,11 @@ the user will be required to confirm all pages</String>
 									</field>
 									<field name="toolbarEntriesDescriptorList">
 										<toolbarEntry-array>
+											<toolbarItem>
+												<field name="actionID">
+													<String>ACRONYM_TEST</String>
+												</field>
+											</toolbarItem>
 											<toolbarItem>
 												<field name="actionID">
 													<String>LEVEL_MARKUP_SAME_LEVEL</String>

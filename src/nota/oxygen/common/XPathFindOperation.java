@@ -70,7 +70,7 @@ public class XPathFindOperation extends BaseAuthorOperation {
 				getAuthorAccess().getEditorAccess().select(next.getStartOffset(), next.getEndOffset());
 			}
 		}
-		catch (Exception e) {
+		catch (Exception e) { 
 			throw new AuthorOperationException(
 					"Unexpected "+e.getClass().getName()+" occured: "+e.getMessage(),
 					e);

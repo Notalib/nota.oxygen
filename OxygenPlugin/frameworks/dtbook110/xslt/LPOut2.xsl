@@ -849,6 +849,8 @@
     <xsl:apply-templates mode="PAGENUM"/>
   </xsl:template>
   
+  <xsl:template match="text()" mode="PAGENUM"/>
+  
   <!-- In normal mode, only pagenums that are children of level are handled -->
   <xsl:template match="pagenum">
     <xsl:if test="parent::level">
