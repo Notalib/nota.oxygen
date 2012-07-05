@@ -49,7 +49,7 @@ public class InsertImageGroupOperation extends BaseAuthorOperation {
 	public String getDescription() {
 		return "Insert an image group";
 	}
-	
+	 
 	private void insertImageGroup(String relImageURL) throws AuthorOperationException
 	{
 		URL imageURL;

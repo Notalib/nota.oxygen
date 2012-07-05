@@ -3,6 +3,7 @@ package nota.oxygen.common.dtbook.v110;
 
 import ro.sync.ecss.extensions.api.AuthorExtensionStateListener;
 import ro.sync.ecss.extensions.api.ExtensionsBundle;
+import ro.sync.ecss.extensions.api.Extension;
 import ro.sync.ecss.extensions.api.UniqueAttributesRecognizer;
 
 /**
@@ -13,7 +14,7 @@ public class Dtbook110ExtensionBundle extends ExtensionsBundle {
 
 	@Override
 	public String getDocumentTypeID() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
 		return "dtbook110";
 	}
 

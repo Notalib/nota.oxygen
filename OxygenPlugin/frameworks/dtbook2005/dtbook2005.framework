@@ -20,7 +20,6 @@
 					</field>
 					<field name="classpath">
 						<String-array>
-							<String>${oxygenHome}/lib/oxygen.jar</String>
 							<String>${frameworks}/dtbook2005/OxygenDtbookActions.jar</String>
 							<String>${frameworks}/dtbook2005/sqljdbc4.jar</String>
 						</String-array>
