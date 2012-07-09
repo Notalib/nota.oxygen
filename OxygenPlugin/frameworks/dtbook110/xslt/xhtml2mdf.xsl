@@ -16,6 +16,9 @@
             <xsl:when test="local-name()='ol' or local-name()='ul' or local-name()='li'">
                 <xsl:value-of select="1"/>
             </xsl:when>
+            <xsl:when test="local-name()='dt' or local-name()='dd'">
+                <xsl:value-of select="1"/>
+            </xsl:when>
             <xsl:when test="local-name()='caption'">
                 <xsl:value-of select="1"/>
             </xsl:when>

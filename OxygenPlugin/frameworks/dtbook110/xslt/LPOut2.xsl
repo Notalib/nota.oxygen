@@ -528,7 +528,7 @@
   
       <xsl:choose>
         <xsl:when test="child::p|child::list">
-          <xsl:apply-templates><xsl:with-param name="postfixPagenum" select="false"/></xsl:apply-templates>
+          <xsl:apply-templates><xsl:with-param name="postfixPagenum" select="false()"/></xsl:apply-templates>
         </xsl:when>
   
         <xsl:otherwise>
@@ -698,7 +698,7 @@
   p
   ============================================================================== -->
   <xsl:template match="p">
-    <xsl:param name="postfixPagenum" select="true"/>
+    <xsl:param name="postfixPagenum" select="true()"/>
     <!--Det skal checkes om der er en precedingseperator eller empty line
     før der bliver dannet et nyt element
     
