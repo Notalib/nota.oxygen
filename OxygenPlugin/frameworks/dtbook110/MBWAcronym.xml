@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MarkupByWords>
+    <Fragment><acronym></acronym></Fragment>
+    <StartNode xpath="/dtbook/book"/>
+    <ExcludedParentElements>
+        <ExcludedParentElement><acronym/></ExcludedParentElement>
+    </ExcludedParentElements>   
+    <PositiveWords caseSensitive="yes">
+        <Word>NATO</Word>
+        <Word>FN</Word>
+        <Word>USA</Word>
+        <Word>EU</Word>
+    </PositiveWords>
+    <PossibleWords caseSensitive="yes">
+        <Word>SMK</Word>
+        <Word>LG</Word>
+        <Word>HTC</Word>
+    </PossibleWords>
+</MarkupByWords>
