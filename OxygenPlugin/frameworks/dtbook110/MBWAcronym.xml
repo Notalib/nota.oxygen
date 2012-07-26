@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <MarkupByWords>
+    <Message name="CAPTION">Markup acronyms by words</Message>
+    <Message name="POSITIVE_RESULT">Marked up $count acronyms by positive words</Message>
+    <Message name="POSSIBLE_QUESTION">Do you wish to mark up the possible word $word as an acronym?</Message>
+    <Message name="POSSIBLE_RESULT">Marked up $count acronyms by possible words</Message>
     <Fragment><acronym></acronym></Fragment>
     <StartNode xpath="/dtbook/book"/>
     <ExcludedParentElements>
         <ExcludedParentElement><acronym/></ExcludedParentElement>
     </ExcludedParentElements>   
-    <PositiveWords caseSensitive="yes">
+    <PositiveWords>
         <Word>NATO</Word>
         <Word>FN</Word>
         <Word>USA</Word>
         <Word>EU</Word>
+        <Word>PISA</Word>
     </PositiveWords>
-    <PossibleWords caseSensitive="yes">
+    <PossibleWords>
         <Word>SMK</Word>
         <Word>LG</Word>
         <Word>HTC</Word>

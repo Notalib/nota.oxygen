@@ -3,7 +3,7 @@
 <!-- Set property oxygen_installation_folder in Window->Preferences->Ant->Runtime->Properties -->
 <property name="oxygen_installation_folder" value="c:/oxygen/"/>
 <target name="dist">
- 	<jar destfile="OxygenDtbookActions.jar" basedir="./bin">
+ 	<jar destfile="OxygenDtbookActions.jar" basedir="./bin"> 
 		<fileset dir="bin" />
 		<fileset dir="." includes="doc/**" />
 	</jar>
@@ -20,7 +20,7 @@
 		<fileset dir="./OxygenPlugin/frameworks/dtbook2005/"/>
 	</delete> 
 	<copy file="OxygenDtbookActions.jar" todir="./OxygenPlugin/frameworks/dtbook2005/"/>
-	<copy file="OxygenDtbookActions.jar" todir="${oxygen_installation_folder}frameworks/dtbook2005"/>
+	<copy file="OxygenDtbookActions.jar" todir="${oxygen_installation_folder}frameworks/dtbook2005/" />
 	<copy todir="./OxygenPlugin/frameworks/dtbook2005/">
 		<fileset dir="${oxygen_installation_folder}frameworks/dtbook2005/">
 			<exclude name="OxygenDtbookActions.jar"/>

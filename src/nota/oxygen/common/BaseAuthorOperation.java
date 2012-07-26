@@ -267,7 +267,7 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 		return null;
 	}
 	
-	private static DOMImplementationLS getDOMImplementation() throws AuthorOperationException
+	protected static DOMImplementationLS getDOMImplementation() throws AuthorOperationException
 	{
 		try
 		{

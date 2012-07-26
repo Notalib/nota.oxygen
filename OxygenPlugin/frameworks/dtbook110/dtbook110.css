@@ -503,11 +503,11 @@ q {
 }
 
 annoref:before {
-   link:attr(idref);
+   link:"#" attr(idref);
    content: "ANNOREF:";
 }
 noteref:before {
-   link:attr(idref);
+   link:"#" attr(idref);
    content: "NOTEREF:";
 }
 noteref, annoref {

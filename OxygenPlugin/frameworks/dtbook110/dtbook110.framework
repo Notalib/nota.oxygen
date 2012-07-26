@@ -2281,13 +2281,13 @@ the user will be required to confirm all pages</String>
 									</action>
 									<action>
 										<field name="id">
-											<String>ACRONYM_TEST</String>
+											<String>MARKUP_ACRONYMS_BY_WORDS</String>
 										</field>
 										<field name="name">
-											<String>Find next acronym</String>
+											<String>Markup acronyms by words</String>
 										</field>
 										<field name="description">
-											<String>Find next acronym</String>
+											<String>Markup acronyms by words</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -2310,17 +2310,29 @@ the user will be required to confirm all pages</String>
 													<field name="argValues">
 														<map>
 															<entry>
-																<String>XPath statement</String>
-																<String>//text()[matches(string(.), 'NATO|FN|USA')]</String>
+																<String>excluded elements</String>
+																<String>acronym</String>
 															</entry>
 															<entry>
-																<String>direction</String>
-																<String>forward</String>
+																<String>markup fragment</String>
+																<String>&lt;acronym>&lt;/acronym></String>
+															</entry>
+															<entry>
+																<String>settings file</String>
+																<String>${frameworksDir}/dtbook110/MBWAcronym.xml</String>
+															</entry>
+															<entry>
+																<String>start node</String>
+																<String>/dtbook/book</String>
+															</entry>
+															<entry>
+																<String>word file</String>
+																<String>&lt;test>&lt;/test></String>
 															</entry>
 														</map>
 													</field>
 													<field name="operationID">
-														<String>nota.oxygen.common.XPathFindOperation</String>
+														<String>nota.oxygen.common.dtbook.MarkupByWordsOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -2986,7 +2998,7 @@ the user will be required to confirm all pages</String>
 										<toolbarEntry-array>
 											<toolbarItem>
 												<field name="actionID">
-													<String>ACRONYM_TEST</String>
+													<String>MARKUP_ACRONYMS_BY_WORDS</String>
 												</field>
 											</toolbarItem>
 											<toolbarItem>
