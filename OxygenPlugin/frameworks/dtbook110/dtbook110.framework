@@ -2281,25 +2281,25 @@ the user will be required to confirm all pages</String>
 									</action>
 									<action>
 										<field name="id">
-											<String>MARKUP_ACRONYMS_BY_WORDS</String>
+											<String>MARKUP_ACRONYMS_BY_WORD_DA</String>
 										</field>
 										<field name="name">
-											<String>Markup acronyms by words</String>
+											<String>Markup acronyms by word - da</String>
 										</field>
 										<field name="description">
-											<String>Markup acronyms by words</String>
+											<String>Markup acronyms by word - danish</String>
 										</field>
 										<field name="largeIconPath">
-											<String></String>
+											<String>${frameworks}/dtbook2005/acronym.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String></String>
+											<String>${frameworks}/dtbook2005/acronym.png</String>
 										</field>
 										<field name="accessKey">
-											<String></String>
+											<String>a</String>
 										</field>
 										<field name="accelerator">
-											<String>ctrl shift F10</String>
+											<null/>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
@@ -2310,24 +2310,8 @@ the user will be required to confirm all pages</String>
 													<field name="argValues">
 														<map>
 															<entry>
-																<String>excluded elements</String>
-																<String>acronym</String>
-															</entry>
-															<entry>
-																<String>markup fragment</String>
-																<String>&lt;acronym>&lt;/acronym></String>
-															</entry>
-															<entry>
 																<String>settings file</String>
-																<String>${frameworksDir}/dtbook110/MBWAcronym.xml</String>
-															</entry>
-															<entry>
-																<String>start node</String>
-																<String>/dtbook/book</String>
-															</entry>
-															<entry>
-																<String>word file</String>
-																<String>&lt;test>&lt;/test></String>
+																<String>${frameworkDir}/MBWAcronym-da.xml</String>
 															</entry>
 														</map>
 													</field>
@@ -2433,6 +2417,11 @@ the user will be required to confirm all pages</String>
 														<menuItem>
 															<field name="actionID">
 																<String>INLINE_ACRONYM_TOGGLE</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>MARKUP_ACRONYMS_BY_WORD_DA</String>
 															</field>
 														</menuItem>
 														<menuItem>
@@ -2767,6 +2756,11 @@ the user will be required to confirm all pages</String>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
+																<String>MARKUP_ACRONYMS_BY_WORD_DA</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
 																<String>MARKUP_AS_LINK</String>
 															</field>
 														</menuItem>
@@ -2996,11 +2990,6 @@ the user will be required to confirm all pages</String>
 									</field>
 									<field name="toolbarEntriesDescriptorList">
 										<toolbarEntry-array>
-											<toolbarItem>
-												<field name="actionID">
-													<String>MARKUP_ACRONYMS_BY_WORDS</String>
-												</field>
-											</toolbarItem>
 											<toolbarItem>
 												<field name="actionID">
 													<String>LEVEL_MARKUP_SAME_LEVEL</String>

@@ -2191,6 +2191,49 @@ the user will be required to confirm all pages</String>
 											</actionMode-array>
 										</field>
 									</action>
+									<action>
+										<field name="id">
+											<String>MARKUP_ACRONYMS_BY_WORD_DA</String>
+										</field>
+										<field name="name">
+											<String>Markup acronyms by words - da</String>
+										</field>
+										<field name="description">
+											<String>Markup acronyms by words - da</String>
+										</field>
+										<field name="largeIconPath">
+											<String>${framework}/acronym.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>${framework}/acronym.png</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>settings file</String>
+																<String>${frameworkDir}/MBWAcronym-da.xml</String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.dtbook.MarkupByWordsOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
 								</action-array>
 							</field>
 							<field name="menubarDescriptor">
@@ -2286,6 +2329,11 @@ the user will be required to confirm all pages</String>
 														<menuItem>
 															<field name="actionID">
 																<String>INLINE_ACRONYM_TOGGLE</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>MARKUP_ACRONYMS_BY_WORD_DA</String>
 															</field>
 														</menuItem>
 														<menuItem>
@@ -2601,6 +2649,11 @@ the user will be required to confirm all pages</String>
 														<menuItem>
 															<field name="actionID">
 																<String>INLINE_ACRONYM_TOGGLE</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>MARKUP_ACRONYMS_BY_WORD_DA</String>
 															</field>
 														</menuItem>
 														<menuItem>

@@ -48,9 +48,9 @@ public class MarkupByWordsOperation extends BaseAuthorOperation {
 	
 	@Override
 	protected void doOperation() throws AuthorOperationException {
-		getSettingsDocument();
-		markupPositives();
-		markupPossibles();
+		loadSettingsDocument();
+		markupByWords(getWords(WordTypes.Positive), false);
+		markupByWords(getWords(WordTypes.Possible), true);
 	}
 	
 	private void resetStart() throws AuthorOperationException {
@@ -62,21 +62,14 @@ public class MarkupByWordsOperation extends BaseAuthorOperation {
 	private int[] findNextOccurence(String[] words) throws AuthorOperationException	{
 		AuthorDocumentController docCtrl = getAuthorAccess().getDocumentController();
 		TextContentIterator itr = docCtrl.getTextContentIterator(startIndex, docCtrl.getAuthorDocumentNode().getEndOffset());
-//		boolean showMsg = true;
 		while (itr.hasNext()) {
 			TextContext nextContext = itr.next();
 			String next = nextContext.getText().toString();
 			if (nextContext.getTextStartOffset()<startIndex) {
 				next = next.substring(startIndex-nextContext.getTextStartOffset());
 			}
-//			if (showMsg) {
-//				if (!showOkCancelMessage("Test", "Finding text in "+next)) showMsg = false;
-//			}
 			Map<Integer, String> foundWords = new HashMap<Integer, String>();
 			for (int i=0; i<words.length; i++) {
-//				if (showMsg) {
-//					if (!showOkCancelMessage("Test", "Looking for "+words[i])) showMsg = false;
-//				}
 				Pattern pat = Pattern.compile("\\b"+words[i]+"\\b");
 				Matcher mat = pat.matcher(next);
 				if (mat.find()) foundWords.put(mat.start(), words[i]);
@@ -86,9 +79,7 @@ public class MarkupByWordsOperation extends BaseAuthorOperation {
 				firstIndexes.addAll(foundWords.keySet());
 				Collections.sort(firstIndexes);
 				int firstIndex = nextContext.getTextStartOffset()+firstIndexes.get(0);
-//				showMessage("Calculating lastIndex");
 				int lastIndex = firstIndex+foundWords.get(firstIndexes.get(0)).length()-1;
-//				showMessage("Setting startIndex");
 				startIndex = lastIndex;
 				return new int[] {firstIndex, lastIndex};
 			}
@@ -102,34 +93,9 @@ public class MarkupByWordsOperation extends BaseAuthorOperation {
 		docCtrl.surroundInFragment(getFragment(), startOffset, endOffset);
 	}
 	
-	
-	private void markupPositives() throws AuthorOperationException	{
+	private void markupByWords(String[] words, boolean prompt) throws AuthorOperationException {
 		resetStart();
 		int count = 0;
-		String[] words = getWords(WordTypes.Positive);
-		int res[] = findNextOccurence(words);
-		while (res.length==2) {
-			AuthorElement elem;
-			try {
-				elem = getElementAtOffset(res[0]);
-			} catch (BadLocationException e) {
-				throw new AuthorOperationException("Unexpectedly could not find element at offset "+res[0], e);
-			}
-			if (elem!=null) {
-				if (!isElementExcluded(elem)) {
-					markupWord(res[0], res[1]);
-					count++;
-				}
-			}
-			res = findNextOccurence(words);
-		}
-		showMessage(getMessage("POSITIVE_RESULT").replace("$count", ""+count));
-	}
-	
-	private void markupPossibles() throws AuthorOperationException {
-		resetStart();
-		int count = 0;
-		String[] words = getWords(WordTypes.Possible);
 		int res[] = findNextOccurence(words);
 		while (res.length==2) {
 			AuthorElement elem;
@@ -141,20 +107,23 @@ public class MarkupByWordsOperation extends BaseAuthorOperation {
 			if (elem!=null) {
 				if (!isElementExcluded(elem)) {
 					getAuthorAccess().getEditorAccess().select(res[0], res[1]+1);
-					String msg = getMessage("POSSIBLE_QUESTION").replace("$word", getAuthorAccess().getEditorAccess().getSelectedText());
-					int ans = showYesNoCancelMessage(getDescription(), msg, 1);
-					if (ans==1) {
+					boolean ok = true;
+					if (prompt) {
+						String msg = getMessage("POSSIBLE_QUESTION").replace("$word", getAuthorAccess().getEditorAccess().getSelectedText());
+						int ans = showYesNoCancelMessage(getMessage("CAPTION"), msg, 1);
+						if (ans==-1) break;
+						if (ans!=1) ok = false;
+					}
+					if (ok) {
 						markupWord(res[0], res[1]);
 						count++;
-					}
-					else if (ans==-1) {
-						break;
 					}
 				}
 			}
 			res = findNextOccurence(words);
 		}
-		showMessage(getMessage("POSSIBLE_RESULT").replace("$count", ""+count));
+		showMessage(getMessage("CAPTION"), getMessage(prompt?"POSSIBLE_RESULT":"POSITIVE_RESULT").replace("$count", ""+count));
+		
 	}
 	
 	protected String getMessage(String name) throws AuthorOperationException {
@@ -182,20 +151,24 @@ public class MarkupByWordsOperation extends BaseAuthorOperation {
 	
 	private Document settingsDocument;
 	
+	protected void loadSettingsDocument() throws AuthorOperationException {
+		InputStream is;
+		try {
+			is = new  FileInputStream(settingsFile);
+		} catch (FileNotFoundException e) {
+			throw new AuthorOperationException("Could not find settings file "+settingsFile);
+		}
+		DOMImplementationLS impl = getDOMImplementation();
+		LSParser builder = impl.createLSParser(DOMImplementationLS.MODE_SYNCHRONOUS, null);
+		LSInput input = impl.createLSInput();
+		input.setByteStream(is);
+		input.setEncoding("UTF-8");
+		settingsDocument =  builder.parse(input);
+	}
+	
 	protected Document getSettingsDocument() throws AuthorOperationException {
 		if (settingsDocument==null) {//Lazy loading of settings document
-			InputStream is;
-			try {
-				is = new  FileInputStream(settingsFile);
-			} catch (FileNotFoundException e) {
-				throw new AuthorOperationException("Could not find settings file "+settingsFile);
-			}
-			DOMImplementationLS impl = getDOMImplementation();
-			LSParser builder = impl.createLSParser(DOMImplementationLS.MODE_SYNCHRONOUS, null);
-			LSInput input = impl.createLSInput();
-			input.setByteStream(is);
-			input.setEncoding("UTF-8");
-			settingsDocument =  builder.parse(input);
+			loadSettingsDocument();
 		} 
 		return settingsDocument;
 	}
@@ -220,10 +193,10 @@ public class MarkupByWordsOperation extends BaseAuthorOperation {
 		xpathStatement = "count("+xpathStatement+")";
 		XPath xpath;
 		if (ns=="") {
-			xpath = getXPath("mns", ns);
+			xpath = getXPath();
 		}
 		else {
-			xpath = getXPath();
+			xpath = getXPath("mns", ns);
 		}
 		try {
 			return ((Double)xpath.evaluate(xpathStatement, getSettingsDocument(), XPathConstants.NUMBER))>0;
@@ -279,11 +252,7 @@ public class MarkupByWordsOperation extends BaseAuthorOperation {
  
 	@Override
 	public String getDescription() {
-		try {
-			return getMessage("CAPTION");
-		} catch (AuthorOperationException e) {
-			return "Markup by words";
-		}
+		return "Markup by words";
 	}
 
 	@Override

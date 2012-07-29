@@ -128,6 +128,10 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 		return answer==0;
 	}
 	
+	protected boolean showOkCancelMessage(String message) {
+		return showOkCancelMessage(getDescription(), message);
+	}
+	
 	protected int showYesNoCancelMessage(String title, String message, int defaultButton) {
 		int index = 0;
 		if (defaultButton==0) index = 1;
@@ -140,13 +144,21 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 				index);
 	}
 	
-	protected void showMessage(String message) {
-		
+	protected int showYesNoCancelMessage(String message, int defaultButton) {
+		return showYesNoCancelMessage(getDescription(), message, defaultButton);
+	}
+	
+	protected void showMessage(String title, String message){
 		getAuthorAccess().getWorkspaceAccess().showConfirmDialog(
-				getDescription(),
+				title,
 				message,
 				new String[] {"OK"},
 				new int[] {0});
+		
+	}
+	
+	protected void showMessage(String message) {
+		showMessage(getDescription(), message);
 	}
 	
 	/**
