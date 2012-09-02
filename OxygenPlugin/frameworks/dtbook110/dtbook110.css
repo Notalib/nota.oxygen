@@ -177,37 +177,53 @@ rearmatter {
 
 h1, h2, h3, h4, h5, h6, levelhd, bridgehead, hd {
   display: block;
+  border: 0.5px solid black;
   font-weight: bold;
   margin-bottom: 0.5em;
 }
 
+h1:before, h2:before, h3:before, h4:before, h5:before, h6:before {
+  display: block;
+  content: oxy_local-name() " class: " attr(class) " ";
+  border: 0.5px solid black;
+  padding: 0.2em;
+  font-weight: normal;
+}
+
+levelhd:before {
+  display: inline;
+  content: "levelhd depth: " attr(depth) " class: " attr(class) "\a";
+  padding: 0.2em;
+  font-weight: normal;
+}
+
+h1:before, level levelhd:before {
+  font-size: 0.5em;
+}
+
 h1, level levelhd {
-  font-size: 1.7em;
-  margin-top: 0.5em;
+  font-size: 1.8em;
+  margin-top: 1em;
 }
 h2, level level levelhd {
-  font-size: 1.5em;
-  margin-top: 0.4em;
+  font-size: 1.6em;
+  margin-
   color: green;
 }
 h3, level level level levelhd {
-  font-size: 1.4em;
-  margin-top: 0.25em;
+  font-size: 1.3em;
   color: blue;
 }
 h4, level level level level levelhd {
-  font-size: 1.3em;
-  margin-top: 0.25em;
+  font-size: 1.25em;
   color: maroon;
 }
 h5, level level level level level levelhd {
   font-size: 1.2em;
-  margin-top: 0.25em;
   color: purple;
 }
 h6, level level level level level level levelhd {
   font-size: 1.0em;
-  margin-top: 0.25em;
   color: navy;
 }
 
@@ -247,12 +263,13 @@ linenum:after {
 /* ------------------------------------------------------------- */
 
 div:before {
-    content: "DIV." attr(class) "\A";
+    content: "div." attr(class) "\A";
     font-size: smaller;
 }
 
 div {
   display: block;
+  padding-left:1em;
 }
 
 level:before {
@@ -264,9 +281,18 @@ level:before {
   padding: 0.2em;
 }
 
+level1:before, level2:before, level3:before, level4:before, level5:before, level6:before {
+  display: inline;
+  content: oxy_local-name() " class: " attr(class) " ";
+}
+
 level, level1, level2, level3, level4, level5, level6 {
   margin-top: 1em;
   display: block;
+  border: 1px solid black;
+  margin-top: 1em;
+  font-size: 0.8em;
+  padding: 0.2em;
 }
 
 p {
@@ -318,6 +344,8 @@ div sidebar, prodnote sidebar, sidebar sidebar, note sidebar, annotation sidebar
   clear: both;
   margin-left: 1em;
   margin-right: 1em;
+  font-size: smaller;
+  background-color:rgb(240,240,235);
 }
 
 frontmatter sidebar, bodymatter sidebar, rearmatter sidebar, level sidebar, level1 sidebar, level2 sidebar, level3 sidebar, level4 sidebar, level5 sidebar, level6 sidebar {
@@ -327,8 +355,8 @@ frontmatter sidebar, bodymatter sidebar, rearmatter sidebar, level sidebar, leve
 
 address {
   display: block;
-  margin-top:1em;
-  margin-bottom:1em;
+  margin:0.2em;
+  background-color:rgb(200,200,200);
 }
 
 note:before {
@@ -347,6 +375,7 @@ note {
 blockquote:before {
     content: "BLOCKQUOTE\A";
     font-size: smaller;
+    background-color:rgb(240,240,235);
 }
 
 blockquote {
@@ -354,6 +383,8 @@ blockquote {
   margin-left: 2em;
   margin-top: 0.6em;
   margin-bottom: 0.6em;
+  font-size: smaller;
+    background-color:rgb(240,240,235);
 }
 
 line {
@@ -503,11 +534,11 @@ q {
 }
 
 annoref:before {
-   link:"#" attr(idref);
+   link:attr(idref);
    content: "ANNOREF:";
 }
 noteref:before {
-   link:"#" attr(idref);
+   link:attr(idref);
    content: "NOTEREF:";
 }
 noteref, annoref {
@@ -773,6 +804,11 @@ poem, div.poem {
 	border: 1px dotted gray;
 }
 
+div.blockquote {
+    padding:1em;
+    font-size: smaller;
+    background-color:rgb(235,240,235);
+}
 div.stanza {
 	background-color:#CC0033;
 	color:white;
@@ -784,4 +820,14 @@ p.bridgehead {
 	color : gray;
 	font-size:large;
 }
-
+  
+  p.end_greeting {
+      font-style:italic;
+      color:grey;
+  }
+  p.end_greeting_signature {
+      font-style:italic;
+      color:grey;
+      padding-left:1em;
+  }
+  
