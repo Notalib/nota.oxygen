@@ -9,6 +9,7 @@ import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
+import ro.sync.ecss.extensions.api.node.AttrValue;
 import ro.sync.ecss.extensions.api.node.AuthorDocumentFragment;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
@@ -126,14 +127,15 @@ public class MarkupLevelHeadingOperation extends BaseAuthorOperation {
 		String nsAttr = "";
 		if (!ns.isEmpty()) nsAttr = " xmlns='"+ns+"'";
 		docCtrl.surroundInFragment("<"+newLevelName+nsAttr+" depth='"+depth+"'></"+newLevelName+">", firstAthElem.getStartOffset(), lastAthElem.getEndOffset());
-		docCtrl.renameElement(firstAthElem, newHeadingName);		
+		docCtrl.renameElement(firstAthElem, newHeadingName);
+		docCtrl.setAttribute("depth", new AttrValue(""+depth), firstAthElem);
 		getAuthorAccess().getEditorAccess().setCaretPosition(firstAthElem.getStartOffset()+1);
 	}
 
 	@Override
 	protected void doOperation() throws AuthorOperationException {
-		if (fixedLevelTags==null) throw new AuthorOperationException("Nanes of fixed level container elements are missing");
-		if (fixedHeadingTags==null) throw new AuthorOperationException("Nanes of fixed heading elements are missing");
+		if (fixedLevelTags==null) throw new AuthorOperationException("Names of fixed level container elements are missing");
+		if (fixedHeadingTags==null) throw new AuthorOperationException("Names of fixed heading elements are missing");
 		if (fixedLevelTags.length!=fixedHeadingTags.length) {
 			//showMessage("fixed levels: "+flt+" fixed headings: "+fht);
 			throw new AuthorOperationException(
@@ -196,6 +198,7 @@ public class MarkupLevelHeadingOperation extends BaseAuthorOperation {
 			return;
 		}
 		docCtrl.renameElement(firstAthElem, newHeadingName);
+		docCtrl.setAttribute("depth", new AttrValue(""+depth), firstAthElem);
 		parent = (AuthorElement)firstAthElem.getParent();
 		AuthorDocumentFragment newLevelContent 
 			= docCtrl.createDocumentFragment(firstAthElem.getStartOffset(), getLastChild(parent).getEndOffset());

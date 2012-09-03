@@ -182,21 +182,21 @@ h1, h2, h3, h4, h5, h6, levelhd, bridgehead, hd {
 }
 
 h1, level levelhd {
-  font-size: 1.7em;
+  font-size: 1.8em;
   margin-top: 0.5em;
 }
 h2, level level levelhd {
-  font-size: 1.5em;
+  font-size: 1.6em;
   margin-top: 0.4em;
   color: green;
 }
 h3, level level level levelhd {
-  font-size: 1.4em;
+  font-size: 1.3em;
   margin-top: 0.25em;
   color: blue;
 }
 h4, level level level level levelhd {
-  font-size: 1.3em;
+  font-size: 1.25em;
   margin-top: 0.25em;
   color: maroon;
 }
@@ -253,6 +253,7 @@ div:before {
 
 div {
   display: block;
+  padding-left:1em;
 }
 
 level:before {
@@ -318,6 +319,8 @@ div sidebar, prodnote sidebar, sidebar sidebar, note sidebar, annotation sidebar
   clear: both;
   margin-left: 1em;
   margin-right: 1em;
+  font-size: smaller;
+  background-color:rgb(240,240,235);
 }
 
 frontmatter sidebar, bodymatter sidebar, rearmatter sidebar, level sidebar, level1 sidebar, level2 sidebar, level3 sidebar, level4 sidebar, level5 sidebar, level6 sidebar {
@@ -327,8 +330,8 @@ frontmatter sidebar, bodymatter sidebar, rearmatter sidebar, level sidebar, leve
 
 address {
   display: block;
-  margin-top:1em;
-  margin-bottom:1em;
+  margin:0.2em;
+  background-color:rgb(200,200,200);
 }
 
 note:before {
@@ -347,6 +350,7 @@ note {
 blockquote:before {
     content: "BLOCKQUOTE\A";
     font-size: smaller;
+    background-color:rgb(240,240,235);
 }
 
 blockquote {
@@ -354,6 +358,8 @@ blockquote {
   margin-left: 2em;
   margin-top: 0.6em;
   margin-bottom: 0.6em;
+  font-size: smaller;
+    background-color:rgb(240,240,235);
 }
 
 line {
@@ -503,11 +509,11 @@ q {
 }
 
 annoref:before {
-   link:"#" attr(idref);
+   link:attr(idref);
    content: "ANNOREF:";
 }
 noteref:before {
-   link:"#" attr(idref);
+   link:attr(idref);
    content: "NOTEREF:";
 }
 noteref, annoref {
@@ -773,6 +779,11 @@ poem, div.poem {
 	border: 1px dotted gray;
 }
 
+div.blockquote {
+    padding:1em;
+    font-size: smaller;
+    background-color:rgb(235,240,235);
+}
 div.stanza {
 	background-color:#CC0033;
 	color:white;
@@ -785,3 +796,23 @@ p.bridgehead {
 	font-size:large;
 }
 
+levelhd:before{
+display: block;
+  content: "level depth: " attr(depth) " class: " attr(class) " ";
+  border: 0.5px solid black;
+  margin-top: 1em;
+  font-size: small;
+  padding: 0.2em;
+  font-weight:500;
+  }
+  
+  p.end_greeting {
+      font-style:italic;
+      color:grey;
+  }
+  p.end_greeting_signature {
+      font-style:italic;
+      color:grey;
+      padding-left:1em;
+  }
+  

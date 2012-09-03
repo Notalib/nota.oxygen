@@ -148,11 +148,6 @@ span.OEL{FONT-WEIGHT: bold;FONT-STYLE: italic;}
 			<xsl:apply-templates/>
 		</a>
 	</xsl:template>
-	<xsl:template match="strong">
-		<strong>
-			<xsl:apply-templates/>
-		</strong>
-	</xsl:template>
 	<xsl:template match="br">
 		<br/>
 		<xsl:apply-templates/>

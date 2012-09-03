@@ -5,6 +5,7 @@ import ro.sync.ecss.extensions.api.ArgumentsMap;
 import ro.sync.ecss.extensions.api.AuthorConstants;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
+import ro.sync.ecss.extensions.api.node.AttrValue;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
 import nota.oxygen.common.BaseAuthorOperation;
@@ -121,6 +122,7 @@ public class RemoveLevelHeadingOperation extends BaseAuthorOperation {
 			AuthorElement grandParent = (AuthorElement)parentLevel.getParent();
 			if (isLevelElement(previousSibling)) {
 				docCtrl.renameElement(firstAthElem, blockReplacementName);
+				docCtrl.removeAttribute("depth", firstAthElem);
 				int pos = getLastChildOrSelfEndOffset(previousSibling);
 				docCtrl.insertXMLFragment(serializeChildren(parentLevel), previousSibling, AuthorConstants.POSITION_INSIDE_LAST);
 				docCtrl.deleteNode(parentLevel);
@@ -129,6 +131,7 @@ public class RemoveLevelHeadingOperation extends BaseAuthorOperation {
 			else if (isLevelElement(grandParent)) {
 				int pos = parentLevel.getStartOffset();
 				docCtrl.renameElement(firstAthElem, blockReplacementName);
+				docCtrl.removeAttribute("depth", firstAthElem);
 				docCtrl.insertXMLFragment(serializeChildren(parentLevel), parentLevel, AuthorConstants.POSITION_AFTER);
 				docCtrl.deleteNode(parentLevel);
 				getAuthorAccess().getEditorAccess().setCaretPosition(pos+1);
