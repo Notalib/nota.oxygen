@@ -5,6 +5,13 @@
     version="2.0">
     <xsl:output method="text"/>
     
+    <xsl:template name="Nest">
+        <xsl:choose>
+            <xsl:when test="local-name()='div' and @class='page'"><xsl:text>yes</xsl:text></xsl:when>
+            <xsl:otherwise><xsl:text>no</xsl:text></xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
     <xsl:template name="IncludeInMDF">
         <xsl:choose>
             <xsl:when test="local-name()='h1' or local-name()='h2' or local-name()='h3' or local-name()='h4' or local-name()='h5' or local-name()='h6'">
@@ -30,7 +37,7 @@
                     <xsl:otherwise><xsl:value-of select="1"/></xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
-            <xsl:when test="self::*[local-name='div' and @class='note']">
+            <xsl:when test="local-name()='div' and (@class='note' or @class='page' or @class='area')">
                 <xsl:value-of select="1"/>
             </xsl:when>
             <xsl:when test="local-name()='span' and (@class='page-normal' or @class='page-special' or @class='page-front' or @class='noteref')">
@@ -55,6 +62,7 @@
                             <xsl:for-each select="@*">
                                 <xsl:copy/>
                             </xsl:for-each>
+                            <xsl:attribute name="nest"><xsl:call-template name="Nest"/></xsl:attribute>
                         </xsl:element>
                     </xsl:if>
                 </xsl:for-each-group>
@@ -120,8 +128,7 @@
                     <xsl:value-of select="concat('Level=0', $newline)"/>
                 </xsl:otherwise>
             </xsl:choose>
-            <!-- No elements are nested (is this corrent?) -->
-            <xsl:value-of select="concat('Nested=no', $newline)"/>
+            <xsl:value-of select="concat('Nested=', @nest, $newline)"/>
             <xsl:value-of select="concat('ID=yes', $newline)"/>
         </xsl:for-each>
     </xsl:template>
