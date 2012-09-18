@@ -54,6 +54,7 @@
         <xsl:variable name="img" select="//html:img[@usemap=concat('#', current()/@name)]"/>
         <xsl:variable name="width" as="xs:int" select="xs:int($sizeFactor*number($img/@width))"></xsl:variable>
         <xsl:variable name="height" as="xs:int" select="xs:int($sizeFactor*number($img/@height))"></xsl:variable>
+        <xsl:variable name="curPageSpan" select="preceding-sibling::*[1][self::html:span][@class='page-normal']"></xsl:variable>
         <div class="page">
             <xsl:copy-of select="@id"/>
             <xsl:attribute 
@@ -64,6 +65,9 @@
                     name="style" 
                     select="concat('height:', $height, 'px;width:', $width, 'px;')"/>
                 <xsl:apply-templates select="$img/@id|$img/@src|$img/@alt"/>
+                <xsl:if test="$curPageSpan and not($img/@alt)">
+                    <xsl:attribute name="alt"><xsl:value-of select="concat('Side ', $curPageSpan)"/></xsl:attribute>
+                </xsl:if>
             </img>
             <xsl:for-each select="html:area[@shape='rect']">
                 <xsl:sort select="position()" order="descending"/>

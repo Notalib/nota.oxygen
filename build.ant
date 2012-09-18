@@ -15,9 +15,13 @@
 	<copy todir="${oxygen_installation_folder}frameworks/dtbook110/">
 		<fileset dir="./OxygenPlugin/frameworks/dtbook110/"/>
 	</copy>
+	<copy todir="${oxygen_installation_folder}frameworks/xhtmlnota/">
+		<fileset dir="./OxygenPlugin/frameworks/xhtmlnota/"/>
+	</copy>
 	<delete>
 		<fileset dir="./OxygenPlugin/frameworks/dtbook110/"/>
 		<fileset dir="./OxygenPlugin/frameworks/dtbook2005/"/>
+		<fileset dir="./OxygenPlugin/frameworks/xhtmlnota/"/>
 	</delete> 
 	<copy file="OxygenDtbookActions.jar" todir="./OxygenPlugin/frameworks/dtbook2005/"/>
 	<copy file="OxygenDtbookActions.jar" todir="${oxygen_installation_folder}frameworks/dtbook2005/" />
@@ -28,6 +32,9 @@
 	</copy>
 	<copy todir="./OxygenPlugin/frameworks/dtbook110/">
 		<fileset dir="${oxygen_installation_folder}frameworks/dtbook110/"/>
+	</copy>
+	<copy todir="./OxygenPlugin/frameworks/xhtmlnota/">
+		<fileset dir="${oxygen_installation_folder}frameworks/xhtmlnota/"/>
 	</copy>
 	<zip destfile="dtbookpluginV2.2.zip" basedir="./OxygenPlugin"/>
 </target>
