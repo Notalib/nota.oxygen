@@ -36,6 +36,6 @@
 	<copy todir="./OxygenPlugin/frameworks/xhtmlnota/">
 		<fileset dir="${oxygen_installation_folder}frameworks/xhtmlnota/"/>
 	</copy>
-	<zip destfile="dtbookpluginV2.2.zip" basedir="./OxygenPlugin"/>
+	<zip destfile="dtbookpluginV2.3.zip" basedir="./OxygenPlugin"/>
 </target>
 </project> 
