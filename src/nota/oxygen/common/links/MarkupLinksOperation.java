@@ -38,7 +38,7 @@ public class MarkupLinksOperation extends BaseAuthorOperation {
 			Element root = getDomainListDocument().getDocumentElement();
 			if (root==null) 
 			{
-				domainList String[0];
+				domainList = new String[0];
 			}
 			else
 			{
