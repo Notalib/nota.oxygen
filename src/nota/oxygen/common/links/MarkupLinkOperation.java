@@ -1,5 +1,6 @@
-package nota.oxygen.common;
+package nota.oxygen.common.links;
 
+import nota.oxygen.common.BaseAuthorOperation;
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
