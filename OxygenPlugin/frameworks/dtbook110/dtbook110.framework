@@ -1384,6 +1384,10 @@
 													<field name="argValues">
 														<map>
 															<entry>
+																<String>external attribute name - leave empty if not available</String>
+																<String></String>
+															</entry>
+															<entry>
 																<String>link fragment</String>
 																<String>&lt;a>&lt;/a></String>
 															</entry>
@@ -1394,7 +1398,7 @@
 														</map>
 													</field>
 													<field name="operationID">
-														<String>nota.oxygen.common.MarkupLinkOperation</String>
+														<String>nota.oxygen.common.links.MarkupLinkOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>

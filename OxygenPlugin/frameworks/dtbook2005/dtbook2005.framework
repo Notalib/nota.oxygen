@@ -1335,7 +1335,7 @@
 															</entry>
 															<entry>
 																<String>link fragment</String>
-																<String>&lt;a xmlns="http://www.daisy.org/z3986/2005/dtbook/" external="true">&lt;/a></String>
+																<String>&lt;a xmlns="http://www.daisy.org/z3986/2005/dtbook/">&lt;/a></String>
 															</entry>
 															<entry>
 																<String>reference attribute name</String>
@@ -1344,7 +1344,7 @@
 														</map>
 													</field>
 													<field name="operationID">
-														<String>nota.oxygen.common.MarkupLinkOperation</String>
+														<String>nota.oxygen.common.links.MarkupLinkOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
