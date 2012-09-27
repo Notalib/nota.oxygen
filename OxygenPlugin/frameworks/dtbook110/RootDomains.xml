@@ -1,0 +1,1643 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<rootdomains>
+  <domain>
+    <suffix>.AC</suffix>
+    <type>country-code</type>
+    <description>Network Information Center (AC Domain Registry) c/o Cable and Wireless (Ascension Island)</description>
+  </domain>
+  <domain>
+    <suffix>.AD</suffix>
+    <type>country-code</type>
+    <description>Andorra Telecom</description>
+  </domain>
+  <domain>
+    <suffix>.AE</suffix>
+    <type>country-code</type>
+    <description>Telecommunication Regulatory Authority (TRA)</description>
+  </domain>
+  <domain>
+    <suffix>.AERO</suffix>
+    <type>sponsored</type>
+    <description>Societe Internationale de Telecommunications Aeronautique (SITA INC USA)</description>
+  </domain>
+  <domain>
+    <suffix>.AF</suffix>
+    <type>country-code</type>
+    <description>Ministry of Communications and IT</description>
+  </domain>
+  <domain>
+    <suffix>.AG</suffix>
+    <type>country-code</type>
+    <description>UHSA School of Medicine</description>
+  </domain>
+  <domain>
+    <suffix>.AI</suffix>
+    <type>country-code</type>
+    <description>Government of Anguilla</description>
+  </domain>
+  <domain>
+    <suffix>.AL</suffix>
+    <type>country-code</type>
+    <description>Electronic and Postal Communications Authority - AKEP</description>
+  </domain>
+  <domain>
+    <suffix>.AM</suffix>
+    <type>country-code</type>
+    <description>Internet Society</description>
+  </domain>
+  <domain>
+    <suffix>.AN</suffix>
+    <type>country-code</type>
+    <description>University of The Netherlands Antilles</description>
+  </domain>
+  <domain>
+    <suffix>.AO</suffix>
+    <type>country-code</type>
+    <description>Faculdade de Engenharia da Universidade Agostinho Neto</description>
+  </domain>
+  <domain>
+    <suffix>.AQ</suffix>
+    <type>country-code</type>
+    <description>Mott and Associates</description>
+  </domain>
+  <domain>
+    <suffix>.AR</suffix>
+    <type>country-code</type>
+    <description>Presidencia de la Nación – Secretaría Legal y Técnica</description>
+  </domain>
+  <domain>
+    <suffix>.ARPA</suffix>
+    <type>infrastructure</type>
+    <description>Internet Assigned Numbers Authority</description>
+  </domain>
+  <domain>
+    <suffix>.AS</suffix>
+    <type>country-code</type>
+    <description>AS Domain Registry</description>
+  </domain>
+  <domain>
+    <suffix>.ASIA</suffix>
+    <type>sponsored</type>
+    <description>DotAsia Organisation Ltd.</description>
+  </domain>
+  <domain>
+    <suffix>.AT</suffix>
+    <type>country-code</type>
+    <description>NIC.AT Internet Verwaltungs und Betriebsgesellschaft m.b.H</description>
+  </domain>
+  <domain>
+    <suffix>.AU</suffix>
+    <type>country-code</type>
+    <description>.au Domain Administration (auDA)</description>
+  </domain>
+  <domain>
+    <suffix>.AW</suffix>
+    <type>country-code</type>
+    <description>SETAR</description>
+  </domain>
+  <domain>
+    <suffix>.AX</suffix>
+    <type>country-code</type>
+    <description>Ålands landskapsregering</description>
+  </domain>
+  <domain>
+    <suffix>.AZ</suffix>
+    <type>country-code</type>
+    <description>IntraNS</description>
+  </domain>
+  <domain>
+    <suffix>.BA</suffix>
+    <type>country-code</type>
+    <description>Universtiy Telinformatic Centre (UTIC)</description>
+  </domain>
+  <domain>
+    <suffix>.BB</suffix>
+    <type>country-code</type>
+    <description>Government of Barbados Ministry of Economic Affairs and Development Telecommunications Unit</description>
+  </domain>
+  <domain>
+    <suffix>.BD</suffix>
+    <type>country-code</type>
+    <description>Ministry of Post & Telecommunications Bangladesh Secretariat</description>
+  </domain>
+  <domain>
+    <suffix>.BE</suffix>
+    <type>country-code</type>
+    <description>DNS BE vzw/asbl</description>
+  </domain>
+  <domain>
+    <suffix>.BF</suffix>
+    <type>country-code</type>
+    <description>ARCE-AutoritÈ de RÈgulation des Communications Electroniques</description>
+  </domain>
+  <domain>
+    <suffix>.BG</suffix>
+    <type>country-code</type>
+    <description>Register.BG</description>
+  </domain>
+  <domain>
+    <suffix>.BH</suffix>
+    <type>country-code</type>
+    <description>Telecommunications Regulatory Authority (TRA)</description>
+  </domain>
+  <domain>
+    <suffix>.BI</suffix>
+    <type>country-code</type>
+    <description>Centre National de l'Informatique</description>
+  </domain>
+  <domain>
+    <suffix>.BIZ</suffix>
+    <type>generic-restricted</type>
+    <description>NeuStar, Inc.</description>
+  </domain>
+  <domain>
+    <suffix>.BJ</suffix>
+    <type>country-code</type>
+    <description>Offices des Postes et Telecommunications</description>
+  </domain>
+  <domain>
+    <suffix>.BL</suffix>
+    <type>country-code</type>
+    <description>Not assigned</description>
+  </domain>
+  <domain>
+    <suffix>.BM</suffix>
+    <type>country-code</type>
+    <description>Registry General Ministry of Labour and Immigration</description>
+  </domain>
+  <domain>
+    <suffix>.BN</suffix>
+    <type>country-code</type>
+    <description>Jabatan Telekom Brunei</description>
+  </domain>
+  <domain>
+    <suffix>.BO</suffix>
+    <type>country-code</type>
+    <description>Agencia para el Desarrollo de la Información de la Sociedad en Bolivia</description>
+  </domain>
+  <domain>
+    <suffix>.BQ</suffix>
+    <type>country-code</type>
+    <description>Not assigned</description>
+  </domain>
+  <domain>
+    <suffix>.BR</suffix>
+    <type>country-code</type>
+    <description>Comite Gestor da Internet no Brasil</description>
+  </domain>
+  <domain>
+    <suffix>.BS</suffix>
+    <type>country-code</type>
+    <description>The College of the Bahamas</description>
+  </domain>
+  <domain>
+    <suffix>.BT</suffix>
+    <type>country-code</type>
+    <description>Ministry of Information and Communications</description>
+  </domain>
+  <domain>
+    <suffix>.BV</suffix>
+    <type>country-code</type>
+    <description>UNINETT Norid A/S</description>
+  </domain>
+  <domain>
+    <suffix>.BW</suffix>
+    <type>country-code</type>
+    <description>University of Botswana</description>
+  </domain>
+  <domain>
+    <suffix>.BY</suffix>
+    <type>country-code</type>
+    <description>Reliable Software Inc.</description>
+  </domain>
+  <domain>
+    <suffix>.BZ</suffix>
+    <type>country-code</type>
+    <description>University of Belize</description>
+  </domain>
+  <domain>
+    <suffix>.CA</suffix>
+    <type>country-code</type>
+    <description>Canadian Internet Registration Authority (CIRA) Autorite Canadienne pour les Enregistrements Internet (ACEI)</description>
+  </domain>
+  <domain>
+    <suffix>.CAT</suffix>
+    <type>sponsored</type>
+    <description>Fundacio puntCAT</description>
+  </domain>
+  <domain>
+    <suffix>.CC</suffix>
+    <type>country-code</type>
+    <description>eNIC Cocos (Keeling) Islands Pty. Ltd. d/b/a Island Internet Services</description>
+  </domain>
+  <domain>
+    <suffix>.CD</suffix>
+    <type>country-code</type>
+    <description>Office Congolais des Postes et Télécommunications - OCPT</description>
+  </domain>
+  <domain>
+    <suffix>.CF</suffix>
+    <type>country-code</type>
+    <description>Societe Centrafricaine de Telecommunications (SOCATEL)</description>
+  </domain>
+  <domain>
+    <suffix>.CG</suffix>
+    <type>country-code</type>
+    <description>ONPT Congo and Interpoint Switzerland</description>
+  </domain>
+  <domain>
+    <suffix>.CH</suffix>
+    <type>country-code</type>
+    <description>SWITCH The Swiss Education & Research Network</description>
+  </domain>
+  <domain>
+    <suffix>.CI</suffix>
+    <type>country-code</type>
+    <description>INP-HB Institut National Polytechnique Felix Houphouet Boigny</description>
+  </domain>
+  <domain>
+    <suffix>.CK</suffix>
+    <type>country-code</type>
+    <description>Telecom Cook Islands Ltd.</description>
+  </domain>
+  <domain>
+    <suffix>.CL</suffix>
+    <type>country-code</type>
+    <description>NIC Chile (University of Chile)</description>
+  </domain>
+  <domain>
+    <suffix>.CM</suffix>
+    <type>country-code</type>
+    <description>Cameroon Telecommunications (CAMTEL)</description>
+  </domain>
+  <domain>
+    <suffix>.CN</suffix>
+    <type>country-code</type>
+    <description>Computer Network Information Center, Chinese Academy of Sciences</description>
+  </domain>
+  <domain>
+    <suffix>.CO</suffix>
+    <type>country-code</type>
+    <description>.CO Internet S.A.S.</description>
+  </domain>
+  <domain>
+    <suffix>.COM</suffix>
+    <type>generic</type>
+    <description>VeriSign Global Registry Services</description>
+  </domain>
+  <domain>
+    <suffix>.COOP</suffix>
+    <type>sponsored</type>
+    <description>DotCooperation LLC</description>
+  </domain>
+  <domain>
+    <suffix>.CR</suffix>
+    <type>country-code</type>
+    <description>National Academy of Sciences Academia Nacional de Ciencias</description>
+  </domain>
+  <domain>
+    <suffix>.CU</suffix>
+    <type>country-code</type>
+    <description>CENIAInternet Industria y San Jose Capitolio Nacional</description>
+  </domain>
+  <domain>
+    <suffix>.CV</suffix>
+    <type>country-code</type>
+    <description>Agência Nacional das Comunicações (ANAC)</description>
+  </domain>
+  <domain>
+    <suffix>.CW</suffix>
+    <type>country-code</type>
+    <description>University of the Netherlands Antilles</description>
+  </domain>
+  <domain>
+    <suffix>.CX</suffix>
+    <type>country-code</type>
+    <description>Christmas Island Internet Administration Limited</description>
+  </domain>
+  <domain>
+    <suffix>.CY</suffix>
+    <type>country-code</type>
+    <description>University of Cyprus</description>
+  </domain>
+  <domain>
+    <suffix>.CZ</suffix>
+    <type>country-code</type>
+    <description>CZ.NIC, z.s.p.o</description>
+  </domain>
+  <domain>
+    <suffix>.DE</suffix>
+    <type>country-code</type>
+    <description>DENIC eG</description>
+  </domain>
+  <domain>
+    <suffix>.DJ</suffix>
+    <type>country-code</type>
+    <description>Djibouti Telecom S.A</description>
+  </domain>
+  <domain>
+    <suffix>.DK</suffix>
+    <type>country-code</type>
+    <description>Dansk Internet Forum</description>
+  </domain>
+  <domain>
+    <suffix>.DM</suffix>
+    <type>country-code</type>
+    <description>DotDM Corporation</description>
+  </domain>
+  <domain>
+    <suffix>.DO</suffix>
+    <type>country-code</type>
+    <description>Pontificia Universidad Catolica Madre y Maestra Recinto Santo Tomas de Aquino</description>
+  </domain>
+  <domain>
+    <suffix>.DZ</suffix>
+    <type>country-code</type>
+    <description>CERIST</description>
+  </domain>
+  <domain>
+    <suffix>.EC</suffix>
+    <type>country-code</type>
+    <description>NIC.EC (NICEC) S.A.</description>
+  </domain>
+  <domain>
+    <suffix>.EDU</suffix>
+    <type>sponsored</type>
+    <description>EDUCAUSE</description>
+  </domain>
+  <domain>
+    <suffix>.EE</suffix>
+    <type>country-code</type>
+    <description>National Institute of Chemical Physics and Biophysics</description>
+  </domain>
+  <domain>
+    <suffix>.EG</suffix>
+    <type>country-code</type>
+    <description>Egyptian Universities Network (EUN) Supreme Council of Universities</description>
+  </domain>
+  <domain>
+    <suffix>.EH</suffix>
+    <type>country-code</type>
+    <description>Not assigned</description>
+  </domain>
+  <domain>
+    <suffix>.ER</suffix>
+    <type>country-code</type>
+    <description>Eritrea Telecommunication Services Corporation (EriTel)</description>
+  </domain>
+  <domain>
+    <suffix>.ES</suffix>
+    <type>country-code</type>
+    <description>Red.es</description>
+  </domain>
+  <domain>
+    <suffix>.ET</suffix>
+    <type>country-code</type>
+    <description>Ethio telecom</description>
+  </domain>
+  <domain>
+    <suffix>.EU</suffix>
+    <type>country-code</type>
+    <description>EURid vzw/asbl</description>
+  </domain>
+  <domain>
+    <suffix>.FI</suffix>
+    <type>country-code</type>
+    <description>Finnish Communications Regulatory Authority</description>
+  </domain>
+  <domain>
+    <suffix>.FJ</suffix>
+    <type>country-code</type>
+    <description>The University of the South Pacific IT Services</description>
+  </domain>
+  <domain>
+    <suffix>.FK</suffix>
+    <type>country-code</type>
+    <description>Falkland Islands Government</description>
+  </domain>
+  <domain>
+    <suffix>.FM</suffix>
+    <type>country-code</type>
+    <description>FSM Telecommunications Corporation</description>
+  </domain>
+  <domain>
+    <suffix>.FO</suffix>
+    <type>country-code</type>
+    <description>FO Council</description>
+  </domain>
+  <domain>
+    <suffix>.FR</suffix>
+    <type>country-code</type>
+    <description>AFNIC (NIC France) - Immeuble International</description>
+  </domain>
+  <domain>
+    <suffix>.GA</suffix>
+    <type>country-code</type>
+    <description>Gabon Telecom</description>
+  </domain>
+  <domain>
+    <suffix>.GB</suffix>
+    <type>country-code</type>
+    <description>Reserved Domain - IANA</description>
+  </domain>
+  <domain>
+    <suffix>.GD</suffix>
+    <type>country-code</type>
+    <description>The National Telecommunications Regulatory Commission (NTRC)</description>
+  </domain>
+  <domain>
+    <suffix>.GE</suffix>
+    <type>country-code</type>
+    <description>Caucasus Online</description>
+  </domain>
+  <domain>
+    <suffix>.GF</suffix>
+    <type>country-code</type>
+    <description>Net Plus</description>
+  </domain>
+  <domain>
+    <suffix>.GG</suffix>
+    <type>country-code</type>
+    <description>Island Networks Ltd.</description>
+  </domain>
+  <domain>
+    <suffix>.GH</suffix>
+    <type>country-code</type>
+    <description>Network Computer Systems Limited</description>
+  </domain>
+  <domain>
+    <suffix>.GI</suffix>
+    <type>country-code</type>
+    <description>Sapphire Networks</description>
+  </domain>
+  <domain>
+    <suffix>.GL</suffix>
+    <type>country-code</type>
+    <description>TELE Greenland A/S</description>
+  </domain>
+  <domain>
+    <suffix>.GM</suffix>
+    <type>country-code</type>
+    <description>GM-NIC</description>
+  </domain>
+  <domain>
+    <suffix>.GN</suffix>
+    <type>country-code</type>
+    <description>Centre National des Sciences Halieutiques de Boussoura</description>
+  </domain>
+  <domain>
+    <suffix>.GOV</suffix>
+    <type>sponsored</type>
+    <description>General Services Administration Attn: QTDC, 2E08 (.gov Domain Registration)</description>
+  </domain>
+  <domain>
+    <suffix>.GP</suffix>
+    <type>country-code</type>
+    <description>Networking Technologies Group</description>
+  </domain>
+  <domain>
+    <suffix>.GQ</suffix>
+    <type>country-code</type>
+    <description>GETESA</description>
+  </domain>
+  <domain>
+    <suffix>.GR</suffix>
+    <type>country-code</type>
+    <description>ICS-FORTH GR</description>
+  </domain>
+  <domain>
+    <suffix>.GS</suffix>
+    <type>country-code</type>
+    <description>Government of South Georgia and South Sandwich Islands (GSGSSI)</description>
+  </domain>
+  <domain>
+    <suffix>.GT</suffix>
+    <type>country-code</type>
+    <description>Universidad del Valle de Guatemala</description>
+  </domain>
+  <domain>
+    <suffix>.GU</suffix>
+    <type>country-code</type>
+    <description>University of Guam Computer Center</description>
+  </domain>
+  <domain>
+    <suffix>.GW</suffix>
+    <type>country-code</type>
+    <description>Fundação IT & MEDIA Universidade de Bissao</description>
+  </domain>
+  <domain>
+    <suffix>.GY</suffix>
+    <type>country-code</type>
+    <description>University of Guyana</description>
+  </domain>
+  <domain>
+    <suffix>.HK</suffix>
+    <type>country-code</type>
+    <description>Hong Kong Internet Registration Corporation Ltd.</description>
+  </domain>
+  <domain>
+    <suffix>.HM</suffix>
+    <type>country-code</type>
+    <description>HM Domain Registry</description>
+  </domain>
+  <domain>
+    <suffix>.HN</suffix>
+    <type>country-code</type>
+    <description>Red de Desarrollo Sostenible Honduras</description>
+  </domain>
+  <domain>
+    <suffix>.HR</suffix>
+    <type>country-code</type>
+    <description>CARNet - Croatian Academic and Research Network</description>
+  </domain>
+  <domain>
+    <suffix>.HT</suffix>
+    <type>country-code</type>
+    <description>Consortium FDS/RDDH</description>
+  </domain>
+  <domain>
+    <suffix>.HU</suffix>
+    <type>country-code</type>
+    <description>Council of Hungarian Internet Providers (CHIP)</description>
+  </domain>
+  <domain>
+    <suffix>.ID</suffix>
+    <type>country-code</type>
+    <description>IDNIC-PPAU Mikroelektronika</description>
+  </domain>
+  <domain>
+    <suffix>.IE</suffix>
+    <type>country-code</type>
+    <description>University College Dublin Computing Services Computer Centre</description>
+  </domain>
+  <domain>
+    <suffix>.IL</suffix>
+    <type>country-code</type>
+    <description>Internet Society of Israel</description>
+  </domain>
+  <domain>
+    <suffix>.IM</suffix>
+    <type>country-code</type>
+    <description>Isle of Man Government</description>
+  </domain>
+  <domain>
+    <suffix>.IN</suffix>
+    <type>country-code</type>
+    <description>National Internet Exchange of India</description>
+  </domain>
+  <domain>
+    <suffix>.INFO</suffix>
+    <type>generic</type>
+    <description>Afilias Limited</description>
+  </domain>
+  <domain>
+    <suffix>.INT</suffix>
+    <type>sponsored</type>
+    <description>Internet Assigned Numbers Authority</description>
+  </domain>
+  <domain>
+    <suffix>.IO</suffix>
+    <type>country-code</type>
+    <description>IO Top Level Domain Registry Cable and Wireless</description>
+  </domain>
+  <domain>
+    <suffix>.IQ</suffix>
+    <type>country-code</type>
+    <description>Communications and Media Commission (CMC)</description>
+  </domain>
+  <domain>
+    <suffix>.IR</suffix>
+    <type>country-code</type>
+    <description>Institute for Research in Fundamental Sciences</description>
+  </domain>
+  <domain>
+    <suffix>.IS</suffix>
+    <type>country-code</type>
+    <description>ISNIC - Internet Iceland ltd.</description>
+  </domain>
+  <domain>
+    <suffix>.IT</suffix>
+    <type>country-code</type>
+    <description>IIT - CNR</description>
+  </domain>
+  <domain>
+    <suffix>.JE</suffix>
+    <type>country-code</type>
+    <description>Island Networks (Jersey) Ltd.</description>
+  </domain>
+  <domain>
+    <suffix>.JM</suffix>
+    <type>country-code</type>
+    <description>University of West Indies</description>
+  </domain>
+  <domain>
+    <suffix>.JO</suffix>
+    <type>country-code</type>
+    <description>National Information Technology Center (NITC)</description>
+  </domain>
+  <domain>
+    <suffix>.JOBS</suffix>
+    <type>sponsored</type>
+    <description>Employ Media LLC</description>
+  </domain>
+  <domain>
+    <suffix>.JP</suffix>
+    <type>country-code</type>
+    <description>Japan Registry Services Co., Ltd.</description>
+  </domain>
+  <domain>
+    <suffix>.KE</suffix>
+    <type>country-code</type>
+    <description>Kenya Network Information Center (KeNIC)</description>
+  </domain>
+  <domain>
+    <suffix>.KG</suffix>
+    <type>country-code</type>
+    <description>AsiaInfo Telecommunication Enterprise</description>
+  </domain>
+  <domain>
+    <suffix>.KH</suffix>
+    <type>country-code</type>
+    <description>Ministry of Post and Telecommunications</description>
+  </domain>
+  <domain>
+    <suffix>.KI</suffix>
+    <type>country-code</type>
+    <description>Ministry of Communications, Transport, and Tourism Development</description>
+  </domain>
+  <domain>
+    <suffix>.KM</suffix>
+    <type>country-code</type>
+    <description>Comores Telecom</description>
+  </domain>
+  <domain>
+    <suffix>.KN</suffix>
+    <type>country-code</type>
+    <description>Ministry of Finance, Sustainable Development Information & Technology</description>
+  </domain>
+  <domain>
+    <suffix>.KP</suffix>
+    <type>country-code</type>
+    <description>Star Joint Venture Company</description>
+  </domain>
+  <domain>
+    <suffix>.KR</suffix>
+    <type>country-code</type>
+    <description>Korea Internet & Security Agency (KISA)</description>
+  </domain>
+  <domain>
+    <suffix>.KW</suffix>
+    <type>country-code</type>
+    <description>Ministry of Communications</description>
+  </domain>
+  <domain>
+    <suffix>.KY</suffix>
+    <type>country-code</type>
+    <description>The Information and Communications Technology Authority</description>
+  </domain>
+  <domain>
+    <suffix>.KZ</suffix>
+    <type>country-code</type>
+    <description>Association of IT Companies of Kazakhstan</description>
+  </domain>
+  <domain>
+    <suffix>.LA</suffix>
+    <type>country-code</type>
+    <description>Lao National Internet Committee (LANIC) Science Technology and Environment Agency</description>
+  </domain>
+  <domain>
+    <suffix>.LB</suffix>
+    <type>country-code</type>
+    <description>American University of Beirut Computing and Networking Services</description>
+  </domain>
+  <domain>
+    <suffix>.LC</suffix>
+    <type>country-code</type>
+    <description>University of Puerto Rico</description>
+  </domain>
+  <domain>
+    <suffix>.LI</suffix>
+    <type>country-code</type>
+    <description>Universitaet Liechtenstein</description>
+  </domain>
+  <domain>
+    <suffix>.LK</suffix>
+    <type>country-code</type>
+    <description>Council for Information Technology LK Domain Registrar</description>
+  </domain>
+  <domain>
+    <suffix>.LR</suffix>
+    <type>country-code</type>
+    <description>Data Technology Solutions, Inc.</description>
+  </domain>
+  <domain>
+    <suffix>.LS</suffix>
+    <type>country-code</type>
+    <description>National University of Lesotho</description>
+  </domain>
+  <domain>
+    <suffix>.LT</suffix>
+    <type>country-code</type>
+    <description>Kaunas University of Technology Information Technology Development Institute</description>
+  </domain>
+  <domain>
+    <suffix>.LU</suffix>
+    <type>country-code</type>
+    <description>RESTENA</description>
+  </domain>
+  <domain>
+    <suffix>.LV</suffix>
+    <type>country-code</type>
+    <description>University of Latvia Institute of Mathematics and Computer Science Department of Network Solutions (DNS)</description>
+  </domain>
+  <domain>
+    <suffix>.LY</suffix>
+    <type>country-code</type>
+    <description>General Post and Telecommunication Company</description>
+  </domain>
+  <domain>
+    <suffix>.MA</suffix>
+    <type>country-code</type>
+    <description>Agence Nationale de Réglementation des Télécommunications (ANRT)</description>
+  </domain>
+  <domain>
+    <suffix>.MC</suffix>
+    <type>country-code</type>
+    <description>Gouvernement de Monaco Direction des Communications Electroniques</description>
+  </domain>
+  <domain>
+    <suffix>.MD</suffix>
+    <type>country-code</type>
+    <description>MoldData S.E.</description>
+  </domain>
+  <domain>
+    <suffix>.ME</suffix>
+    <type>country-code</type>
+    <description>Government of Montenegro</description>
+  </domain>
+  <domain>
+    <suffix>.MF</suffix>
+    <type>country-code</type>
+    <description>Not assigned</description>
+  </domain>
+  <domain>
+    <suffix>.MG</suffix>
+    <type>country-code</type>
+    <description>NIC-MG (Network Information Center Madagascar)</description>
+  </domain>
+  <domain>
+    <suffix>.MH</suffix>
+    <type>country-code</type>
+    <description>Cabinet Office</description>
+  </domain>
+  <domain>
+    <suffix>.MIL</suffix>
+    <type>sponsored</type>
+    <description>DoD Network Information Center</description>
+  </domain>
+  <domain>
+    <suffix>.MK</suffix>
+    <type>country-code</type>
+    <description>Ministry of Foreign Relations</description>
+  </domain>
+  <domain>
+    <suffix>.ML</suffix>
+    <type>country-code</type>
+    <description>SOTELMA</description>
+  </domain>
+  <domain>
+    <suffix>.MM</suffix>
+    <type>country-code</type>
+    <description>Ministry of Communications, Posts & Telegraphs</description>
+  </domain>
+  <domain>
+    <suffix>.MN</suffix>
+    <type>country-code</type>
+    <description>Datacom Co., Ltd.</description>
+  </domain>
+  <domain>
+    <suffix>.MO</suffix>
+    <type>country-code</type>
+    <description>Bureau of Telecommunications Regulation (DSRT)</description>
+  </domain>
+  <domain>
+    <suffix>.MOBI</suffix>
+    <type>sponsored</type>
+    <description>Afilias Technologies Limited dba dotMobi</description>
+  </domain>
+  <domain>
+    <suffix>.MP</suffix>
+    <type>country-code</type>
+    <description>Saipan Datacom, Inc.</description>
+  </domain>
+  <domain>
+    <suffix>.MQ</suffix>
+    <type>country-code</type>
+    <description>MEDIASERV</description>
+  </domain>
+  <domain>
+    <suffix>.MR</suffix>
+    <type>country-code</type>
+    <description>University of Nouakchott</description>
+  </domain>
+  <domain>
+    <suffix>.MS</suffix>
+    <type>country-code</type>
+    <description>MNI Networks Ltd.</description>
+  </domain>
+  <domain>
+    <suffix>.MT</suffix>
+    <type>country-code</type>
+    <description>NIC (Malta)</description>
+  </domain>
+  <domain>
+    <suffix>.MU</suffix>
+    <type>country-code</type>
+    <description>Internet Direct Ltd</description>
+  </domain>
+  <domain>
+    <suffix>.MUSEUM</suffix>
+    <type>sponsored</type>
+    <description>Museum Domain Management Association</description>
+  </domain>
+  <domain>
+    <suffix>.MV</suffix>
+    <type>country-code</type>
+    <description>Dhiraagu Pvt. Ltd. (DHIVEHINET)</description>
+  </domain>
+  <domain>
+    <suffix>.MW</suffix>
+    <type>country-code</type>
+    <description>Malawi Sustainable Development Network Programme (Malawi SDNP)</description>
+  </domain>
+  <domain>
+    <suffix>.MX</suffix>
+    <type>country-code</type>
+    <description>NIC-Mexico ITESM - Campus Monterrey</description>
+  </domain>
+  <domain>
+    <suffix>.MY</suffix>
+    <type>country-code</type>
+    <description>MYNIC Berhad</description>
+  </domain>
+  <domain>
+    <suffix>.MZ</suffix>
+    <type>country-code</type>
+    <description>Centro de Informatica de Universidade Eduardo Mondlane</description>
+  </domain>
+  <domain>
+    <suffix>.NA</suffix>
+    <type>country-code</type>
+    <description>Namibian Network Information Center</description>
+  </domain>
+  <domain>
+    <suffix>.NAME</suffix>
+    <type>generic-restricted</type>
+    <description>VeriSign Information Services, Inc.</description>
+  </domain>
+  <domain>
+    <suffix>.NC</suffix>
+    <type>country-code</type>
+    <description>Office des Postes et Telecommunications</description>
+  </domain>
+  <domain>
+    <suffix>.NE</suffix>
+    <type>country-code</type>
+    <description>SONITEL</description>
+  </domain>
+  <domain>
+    <suffix>.NET</suffix>
+    <type>generic</type>
+    <description>VeriSign Global Registry Services</description>
+  </domain>
+  <domain>
+    <suffix>.NF</suffix>
+    <type>country-code</type>
+    <description>Norfolk Island Data Services</description>
+  </domain>
+  <domain>
+    <suffix>.NG</suffix>
+    <type>country-code</type>
+    <description>Nigeria Internet Registration Association</description>
+  </domain>
+  <domain>
+    <suffix>.NI</suffix>
+    <type>country-code</type>
+    <description>Universidad Nacional del Ingernieria Centro de Computo</description>
+  </domain>
+  <domain>
+    <suffix>.NL</suffix>
+    <type>country-code</type>
+    <description>SIDN (Stichting Internet Domeinregistratie Nederland)</description>
+  </domain>
+  <domain>
+    <suffix>.NO</suffix>
+    <type>country-code</type>
+    <description>UNINETT Norid A/S</description>
+  </domain>
+  <domain>
+    <suffix>.NP</suffix>
+    <type>country-code</type>
+    <description>Mercantile Communications Pvt. Ltd.</description>
+  </domain>
+  <domain>
+    <suffix>.NR</suffix>
+    <type>country-code</type>
+    <description>CENPAC NET</description>
+  </domain>
+  <domain>
+    <suffix>.NU</suffix>
+    <type>country-code</type>
+    <description>The IUSN Foundation</description>
+  </domain>
+  <domain>
+    <suffix>.NZ</suffix>
+    <type>country-code</type>
+    <description>InternetNZ</description>
+  </domain>
+  <domain>
+    <suffix>.OM</suffix>
+    <type>country-code</type>
+    <description>Telecommunications Regulatory Authority (TRA)</description>
+  </domain>
+  <domain>
+    <suffix>.ORG</suffix>
+    <type>generic</type>
+    <description>Public Interest Registry (PIR)</description>
+  </domain>
+  <domain>
+    <suffix>.PA</suffix>
+    <type>country-code</type>
+    <description>Universidad Tecnologica de Panama</description>
+  </domain>
+  <domain>
+    <suffix>.PE</suffix>
+    <type>country-code</type>
+    <description>Red Cientifica Peruana</description>
+  </domain>
+  <domain>
+    <suffix>.PF</suffix>
+    <type>country-code</type>
+    <description>Gouvernement de la Polynésie française</description>
+  </domain>
+  <domain>
+    <suffix>.PG</suffix>
+    <type>country-code</type>
+    <description>PNG DNS Administration Vice Chancellors Office The Papua New Guinea University of Technology</description>
+  </domain>
+  <domain>
+    <suffix>.PH</suffix>
+    <type>country-code</type>
+    <description>PH Domain Foundation</description>
+  </domain>
+  <domain>
+    <suffix>.PK</suffix>
+    <type>country-code</type>
+    <description>PKNIC</description>
+  </domain>
+  <domain>
+    <suffix>.PL</suffix>
+    <type>country-code</type>
+    <description>Research and Academic Computer Network</description>
+  </domain>
+  <domain>
+    <suffix>.PM</suffix>
+    <type>country-code</type>
+    <description>AFNIC (NIC France) - Immeuble International</description>
+  </domain>
+  <domain>
+    <suffix>.PN</suffix>
+    <type>country-code</type>
+    <description>Pitcairn Island Administration</description>
+  </domain>
+  <domain>
+    <suffix>.POST</suffix>
+    <type>sponsored</type>
+    <description>Universal Postal Union</description>
+  </domain>
+  <domain>
+    <suffix>.PR</suffix>
+    <type>country-code</type>
+    <description>Gauss Research Laboratory Inc.</description>
+  </domain>
+  <domain>
+    <suffix>.PRO</suffix>
+    <type>generic-restricted</type>
+    <description>Registry Services Corporation dba RegistryPro</description>
+  </domain>
+  <domain>
+    <suffix>.PS</suffix>
+    <type>country-code</type>
+    <description>Ministry Of Telecommunications & Information Technology, Government Computer Center.</description>
+  </domain>
+  <domain>
+    <suffix>.PT</suffix>
+    <type>country-code</type>
+    <description>Fundação para a Computação Científica Nacional</description>
+  </domain>
+  <domain>
+    <suffix>.PW</suffix>
+    <type>country-code</type>
+    <description>Micronesia Investment and Development Corporation</description>
+  </domain>
+  <domain>
+    <suffix>.PY</suffix>
+    <type>country-code</type>
+    <description>NIC-PY</description>
+  </domain>
+  <domain>
+    <suffix>.QA</suffix>
+    <type>country-code</type>
+    <description>The Supreme Council of Information and Communication Technology (ictQATAR)</description>
+  </domain>
+  <domain>
+    <suffix>.RE</suffix>
+    <type>country-code</type>
+    <description>AFNIC (NIC France) - Immeuble International</description>
+  </domain>
+  <domain>
+    <suffix>.RO</suffix>
+    <type>country-code</type>
+    <description>National Institute for R&D in Informatics</description>
+  </domain>
+  <domain>
+    <suffix>.RS</suffix>
+    <type>country-code</type>
+    <description>Serbian National Register of Internet Domain Names (RNIDS)</description>
+  </domain>
+  <domain>
+    <suffix>.RU</suffix>
+    <type>country-code</type>
+    <description>Coordination Center for TLD RU</description>
+  </domain>
+  <domain>
+    <suffix>.RW</suffix>
+    <type>country-code</type>
+    <description>Rwanda Information Communication and Technology Association (RICTA)</description>
+  </domain>
+  <domain>
+    <suffix>.SA</suffix>
+    <type>country-code</type>
+    <description>Communications and Information Technology Commission</description>
+  </domain>
+  <domain>
+    <suffix>.SB</suffix>
+    <type>country-code</type>
+    <description>Solomon Telekom Company Limited</description>
+  </domain>
+  <domain>
+    <suffix>.SC</suffix>
+    <type>country-code</type>
+    <description>VCS Pty Ltd</description>
+  </domain>
+  <domain>
+    <suffix>.SD</suffix>
+    <type>country-code</type>
+    <description>Sudan Internet Society</description>
+  </domain>
+  <domain>
+    <suffix>.SE</suffix>
+    <type>country-code</type>
+    <description>The Internet Infrastructure Foundation</description>
+  </domain>
+  <domain>
+    <suffix>.SG</suffix>
+    <type>country-code</type>
+    <description>Singapore Network Information Centre (SGNIC) Pte Ltd</description>
+  </domain>
+  <domain>
+    <suffix>.SH</suffix>
+    <type>country-code</type>
+    <description>Government of St. Helena</description>
+  </domain>
+  <domain>
+    <suffix>.SI</suffix>
+    <type>country-code</type>
+    <description>Academic and Research Network of Slovenia (ARNES)</description>
+  </domain>
+  <domain>
+    <suffix>.SJ</suffix>
+    <type>country-code</type>
+    <description>UNINETT Norid A/S</description>
+  </domain>
+  <domain>
+    <suffix>.SK</suffix>
+    <type>country-code</type>
+    <description>SK-NIC, a.s.</description>
+  </domain>
+  <domain>
+    <suffix>.SL</suffix>
+    <type>country-code</type>
+    <description>Sierratel</description>
+  </domain>
+  <domain>
+    <suffix>.SM</suffix>
+    <type>country-code</type>
+    <description>Telecom Italia San Marino S.p.A.</description>
+  </domain>
+  <domain>
+    <suffix>.SN</suffix>
+    <type>country-code</type>
+    <description>Universite Cheikh Anta Diop NIC Senegal</description>
+  </domain>
+  <domain>
+    <suffix>.SO</suffix>
+    <type>country-code</type>
+    <description>Ministry of Post and Telecommunications</description>
+  </domain>
+  <domain>
+    <suffix>.SR</suffix>
+    <type>country-code</type>
+    <description>Telesur</description>
+  </domain>
+  <domain>
+    <suffix>.SS</suffix>
+    <type>country-code</type>
+    <description>Not assigned</description>
+  </domain>
+  <domain>
+    <suffix>.ST</suffix>
+    <type>country-code</type>
+    <description>Tecnisys</description>
+  </domain>
+  <domain>
+    <suffix>.SU</suffix>
+    <type>country-code</type>
+    <description>Russian Institute for Development of Public Networks (ROSNIIROS)</description>
+  </domain>
+  <domain>
+    <suffix>.SV</suffix>
+    <type>country-code</type>
+    <description>SVNet</description>
+  </domain>
+  <domain>
+    <suffix>.SX</suffix>
+    <type>country-code</type>
+    <description>SX Registry SA B.V.</description>
+  </domain>
+  <domain>
+    <suffix>.SY</suffix>
+    <type>country-code</type>
+    <description>National Agency for Network Services (NANS)</description>
+  </domain>
+  <domain>
+    <suffix>.SZ</suffix>
+    <type>country-code</type>
+    <description>University of Swaziland Department of Computer Science</description>
+  </domain>
+  <domain>
+    <suffix>.TC</suffix>
+    <type>country-code</type>
+    <description>Melrex TC</description>
+  </domain>
+  <domain>
+    <suffix>.TD</suffix>
+    <type>country-code</type>
+    <description>Société des télécommunications du Tchad (SOTEL TCHAD)</description>
+  </domain>
+  <domain>
+    <suffix>.TEL</suffix>
+    <type>sponsored</type>
+    <description>Telnic Ltd.</description>
+  </domain>
+  <domain>
+    <suffix>.TF</suffix>
+    <type>country-code</type>
+    <description>AFNIC (NIC France) - Immeuble International</description>
+  </domain>
+  <domain>
+    <suffix>.TG</suffix>
+    <type>country-code</type>
+    <description>Cafe Informatique et Telecommunications</description>
+  </domain>
+  <domain>
+    <suffix>.TH</suffix>
+    <type>country-code</type>
+    <description>Thai Network Information Center Foundation</description>
+  </domain>
+  <domain>
+    <suffix>.TJ</suffix>
+    <type>country-code</type>
+    <description>Information Technology Center</description>
+  </domain>
+  <domain>
+    <suffix>.TK</suffix>
+    <type>country-code</type>
+    <description>Telecommunication Tokelau Corporation (Teletok)</description>
+  </domain>
+  <domain>
+    <suffix>.TL</suffix>
+    <type>country-code</type>
+    <description>Ministry of Infrastructure Information and Technology Division</description>
+  </domain>
+  <domain>
+    <suffix>.TM</suffix>
+    <type>country-code</type>
+    <description>TM Domain Registry Ltd</description>
+  </domain>
+  <domain>
+    <suffix>.TN</suffix>
+    <type>country-code</type>
+    <description>Agence Tunisienne d'Internet</description>
+  </domain>
+  <domain>
+    <suffix>.TO</suffix>
+    <type>country-code</type>
+    <description>Government of the Kingdom of Tonga H.R.H. Crown Prince Tupouto'a c/o Consulate of Tonga</description>
+  </domain>
+  <domain>
+    <suffix>.TP</suffix>
+    <type>country-code</type>
+    <description>-</description>
+  </domain>
+  <domain>
+    <suffix>.TR</suffix>
+    <type>country-code</type>
+    <description>Middle East Technical University Department of Computer Engineering</description>
+  </domain>
+  <domain>
+    <suffix>.TRAVEL</suffix>
+    <type>sponsored</type>
+    <description>Tralliance Registry Management Company, LLC.</description>
+  </domain>
+  <domain>
+    <suffix>.TT</suffix>
+    <type>country-code</type>
+    <description>University of the West Indies Faculty of Engineering</description>
+  </domain>
+  <domain>
+    <suffix>.TV</suffix>
+    <type>country-code</type>
+    <description>Ministry of Finance and Tourism</description>
+  </domain>
+  <domain>
+    <suffix>.TW</suffix>
+    <type>country-code</type>
+    <description>Taiwan Network Information Center (TWNIC)</description>
+  </domain>
+  <domain>
+    <suffix>.TZ</suffix>
+    <type>country-code</type>
+    <description>Tanzania Network Information Centre (tzNIC)</description>
+  </domain>
+  <domain>
+    <suffix>.UA</suffix>
+    <type>country-code</type>
+    <description>Communication Systems Ltd</description>
+  </domain>
+  <domain>
+    <suffix>.UG</suffix>
+    <type>country-code</type>
+    <description>Uganda Online Ltd.</description>
+  </domain>
+  <domain>
+    <suffix>.UK</suffix>
+    <type>country-code</type>
+    <description>Nominet UK</description>
+  </domain>
+  <domain>
+    <suffix>.UM</suffix>
+    <type>country-code</type>
+    <description>Not assigned</description>
+  </domain>
+  <domain>
+    <suffix>.US</suffix>
+    <type>country-code</type>
+    <description>NeuStar, Inc.</description>
+  </domain>
+  <domain>
+    <suffix>.UY</suffix>
+    <type>country-code</type>
+    <description>SeCIU - Universidad de la Republica</description>
+  </domain>
+  <domain>
+    <suffix>.UZ</suffix>
+    <type>country-code</type>
+    <description>Computerization and Information Technologies Developing Center UZINFOCOM</description>
+  </domain>
+  <domain>
+    <suffix>.VA</suffix>
+    <type>country-code</type>
+    <description>Holy See Secretariat of State Internet Office of the Holy See</description>
+  </domain>
+  <domain>
+    <suffix>.VC</suffix>
+    <type>country-code</type>
+    <description>Ministry of Telecommunications, Science, Technology and Industry</description>
+  </domain>
+  <domain>
+    <suffix>.VE</suffix>
+    <type>country-code</type>
+    <description>Comisión Nacional de Telecomunicaciones (CONATEL)</description>
+  </domain>
+  <domain>
+    <suffix>.VG</suffix>
+    <type>country-code</type>
+    <description>Pinebrook Developments Ltd</description>
+  </domain>
+  <domain>
+    <suffix>.VI</suffix>
+    <type>country-code</type>
+    <description>Virgin Islands Public Telcommunications System c/o COBEX Internet Services</description>
+  </domain>
+  <domain>
+    <suffix>.VN</suffix>
+    <type>country-code</type>
+    <description>Ministry of Information and Communications of Socialist Republic of Viet Nam</description>
+  </domain>
+  <domain>
+    <suffix>.VU</suffix>
+    <type>country-code</type>
+    <description>Telecom Vanuatu Limited</description>
+  </domain>
+  <domain>
+    <suffix>.WF</suffix>
+    <type>country-code</type>
+    <description>AFNIC (NIC France) - Immeuble International</description>
+  </domain>
+  <domain>
+    <suffix>.WS</suffix>
+    <type>country-code</type>
+    <description>Government of Samoa Ministry of Foreign Affairs & Trade</description>
+  </domain>
+  <domain>
+    <suffix>.测试</suffix>
+    <type>test</type>
+    <description>Internet Assigned Numbers Authority</description>
+  </domain>
+  <domain>
+    <suffix>.परीक्षा</suffix>
+    <type>test</type>
+    <description>Internet Assigned Numbers Authority</description>
+  </domain>
+  <domain>
+    <suffix>.한국</suffix>
+    <type>country-code</type>
+    <description>KISA (Korea Internet & Security Agency)</description>
+  </domain>
+  <domain>
+    <suffix>.ভারত</suffix>
+    <type>country-code</type>
+    <description>National Internet Exchange of India</description>
+  </domain>
+  <domain>
+    <suffix>.বাংলা</suffix>
+    <type>country-code</type>
+    <description>Not assigned</description>
+  </domain>
+  <domain>
+    <suffix>.ИСПЫТАНИЕ</suffix>
+    <type>test</type>
+    <description>Internet Assigned Numbers Authority</description>
+  </domain>
+  <domain>
+    <suffix>.ҚАЗ</suffix>
+    <type>country-code</type>
+    <description>Association of IT Companies of Kazakhstan</description>
+  </domain>
+  <domain>
+    <suffix>.СРБ</suffix>
+    <type>country-code</type>
+    <description>Serbian National Register of Internet Domain Names (RNIDS)</description>
+  </domain>
+  <domain>
+    <suffix>.테스트</suffix>
+    <type>test</type>
+    <description>Internet Assigned Numbers Authority</description>
+  </domain>
+  <domain>
+    <suffix>.சிங்கப்பூர்</suffix>
+    <type>country-code</type>
+    <description>Singapore Network Information Centre (SGNIC) Pte Ltd</description>
+  </domain>
+  <domain>
+    <suffix>.טעסט</suffix>
+    <type>test</type>
+    <description>Internet Assigned Numbers Authority</description>
+  </domain>
+  <domain>
+    <suffix>.中国</suffix>
+    <type>country-code</type>
+    <description>China Internet Network Information Center</description>
+  </domain>
+  <domain>
+    <suffix>.中國</suffix>
+    <type>country-code</type>
+    <description>China Internet Network Information Center</description>
+  </domain>
+  <domain>
+    <suffix>.భారత్</suffix>
+    <type>country-code</type>
+    <description>National Internet Exchange of India</description>
+  </domain>
+  <domain>
+    <suffix>.ලංකා</suffix>
+    <type>country-code</type>
+    <description>LK Domain Registry</description>
+  </domain>
+  <domain>
+    <suffix>.測試</suffix>
+    <type>test</type>
+    <description>Internet Assigned Numbers Authority</description>
+  </domain>
+  <domain>
+    <suffix>.ભારત</suffix>
+    <type>country-code</type>
+    <description>National Internet Exchange of India</description>
+  </domain>
+  <domain>
+    <suffix>.भारत</suffix>
+    <type>country-code</type>
+    <description>National Internet Exchange of India</description>
+  </domain>
+  <domain>
+    <suffix>.آزمایشی</suffix>
+    <type>test</type>
+    <description>Internet Assigned Numbers Authority</description>
+  </domain>
+  <domain>
+    <suffix>.பரிட்சை</suffix>
+    <type>test</type>
+    <description>Internet Assigned Numbers Authority</description>
+  </domain>
+  <domain>
+    <suffix>.УКР</suffix>
+    <type>country-code</type>
+    <description>Not assigned</description>
+  </domain>
+  <domain>
+    <suffix>.香港</suffix>
+    <type>country-code</type>
+    <description>Hong Kong Internet Registration Corporation Ltd.</description>
+  </domain>
+  <domain>
+    <suffix>.ΔΟΚΙΜΉ</suffix>
+    <type>test</type>
+    <description>Internet Assigned Numbers Authority</description>
+  </domain>
+  <domain>
+    <suffix>.إختبار</suffix>
+    <type>test</type>
+    <description>Internet Assigned Numbers Authority</description>
+  </domain>
+  <domain>
+    <suffix>.台湾</suffix>
+    <type>country-code</type>
+    <description>Taiwan Network Information Center (TWNIC)</description>
+  </domain>
+  <domain>
+    <suffix>.台灣</suffix>
+    <type>country-code</type>
+    <description>Taiwan Network Information Center (TWNIC)</description>
+  </domain>
+  <domain>
+    <suffix>.МОН</suffix>
+    <type>country-code</type>
+    <description>Not assigned</description>
+  </domain>
+  <domain>
+    <suffix>.الجزائر</suffix>
+    <type>country-code</type>
+    <description>CERIST</description>
+  </domain>
+  <domain>
+    <suffix>.عمان</suffix>
+    <type>country-code</type>
+    <description>Telecommunications Regulatory Authority (TRA)</description>
+  </domain>
+  <domain>
+    <suffix>.ایران</suffix>
+    <type>country-code</type>
+    <description>Not assigned</description>
+  </domain>
+  <domain>
+    <suffix>.امارات</suffix>
+    <type>country-code</type>
+    <description>Telecommunications Regulatory Authority (TRA)</description>
+  </domain>
+  <domain>
+    <suffix>.پاکستان</suffix>
+    <type>country-code</type>
+    <description>Not assigned</description>
+  </domain>
+  <domain>
+    <suffix>.الاردن</suffix>
+    <type>country-code</type>
+    <description>National Information Technology Center (NITC)</description>
+  </domain>
+  <domain>
+    <suffix>.بھارت</suffix>
+    <type>country-code</type>
+    <description>National Internet Exchange of India</description>
+  </domain>
+  <domain>
+    <suffix>.المغرب</suffix>
+    <type>country-code</type>
+    <description>Agence Nationale de Réglementation des Télécommunications (ANRT)</description>
+  </domain>
+  <domain>
+    <suffix>.السعودية</suffix>
+    <type>country-code</type>
+    <description>Communications and Information Technology Commission</description>
+  </domain>
+  <domain>
+    <suffix>.مليسيا</suffix>
+    <type>country-code</type>
+    <description>MYNIC Berhad</description>
+  </domain>
+  <domain>
+    <suffix>.გე</suffix>
+    <type>country-code</type>
+    <description>Not assigned</description>
+  </domain>
+  <domain>
+    <suffix>.ไทย</suffix>
+    <type>country-code</type>
+    <description>Thai Network Information Center Foundation</description>
+  </domain>
+  <domain>
+    <suffix>.سورية</suffix>
+    <type>country-code</type>
+    <description>National Agency for Network Services (NANS)</description>
+  </domain>
+  <domain>
+    <suffix>.РФ</suffix>
+    <type>country-code</type>
+    <description>Coordination Center for TLD RU</description>
+  </domain>
+  <domain>
+    <suffix>.تونس</suffix>
+    <type>country-code</type>
+    <description>Agence Tunisienne d'Internet</description>
+  </domain>
+  <domain>
+    <suffix>.ਭਾਰਤ</suffix>
+    <type>country-code</type>
+    <description>National Internet Exchange of India</description>
+  </domain>
+  <domain>
+    <suffix>.مصر</suffix>
+    <type>country-code</type>
+    <description>National Telecommunication Regulatory Authority - NTRA</description>
+  </domain>
+  <domain>
+    <suffix>.قطر</suffix>
+    <type>country-code</type>
+    <description>Supreme Council for Communications and Information Technology (ictQATAR)</description>
+  </domain>
+  <domain>
+    <suffix>.இலங்கை</suffix>
+    <type>country-code</type>
+    <description>LK Domain Registry</description>
+  </domain>
+  <domain>
+    <suffix>.இந்தியா</suffix>
+    <type>country-code</type>
+    <description>National Internet Exchange of India</description>
+  </domain>
+  <domain>
+    <suffix>.新加坡</suffix>
+    <type>country-code</type>
+    <description>Singapore Network Information Centre (SGNIC) Pte Ltd</description>
+  </domain>
+  <domain>
+    <suffix>.فلسطين</suffix>
+    <type>country-code</type>
+    <description>Ministry of Telecom & Information Technology (MTIT)</description>
+  </domain>
+  <domain>
+    <suffix>.テスト</suffix>
+    <type>test</type>
+    <description>Internet Assigned Numbers Authority</description>
+  </domain>
+  <domain>
+    <suffix>.XXX</suffix>
+    <type>sponsored</type>
+    <description>ICM Registry LLC</description>
+  </domain>
+  <domain>
+    <suffix>.YE</suffix>
+    <type>country-code</type>
+    <description>TeleYemen</description>
+  </domain>
+  <domain>
+    <suffix>.YT</suffix>
+    <type>country-code</type>
+    <description>AFNIC (NIC France) - Immeuble International</description>
+  </domain>
+  <domain>
+    <suffix>.ZA</suffix>
+    <type>country-code</type>
+    <description>ZA Domain Name Authority</description>
+  </domain>
+  <domain>
+    <suffix>.ZM</suffix>
+    <type>country-code</type>
+    <description>ZAMNET Communication Systems Ltd.</description>
+  </domain>
+  <domain>
+    <suffix>.ZW</suffix>
+    <type>country-code</type>
+    <description>Postal and Telecommunications Regulatory Authority of Zimbabwe (POTRAZ)</description>
+  </domain>
+</rootdomains>
