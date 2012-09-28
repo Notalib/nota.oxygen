@@ -2326,6 +2326,61 @@ the user will be required to confirm all pages</String>
 											</actionMode-array>
 										</field>
 									</action>
+									<action>
+										<field name="id">
+											<String>MARKUP_LINKS</String>
+										</field>
+										<field name="name">
+											<String>Markup links</String>
+										</field>
+										<field name="description">
+											<String>Automatically find and markup links</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>domain list file</String>
+																<String>${frameworkDir}/RootDomains.xml</String>
+															</entry>
+															<entry>
+																<String>link fragment</String>
+																<String>&lt;a>&lt;/a></String>
+															</entry>
+															<entry>
+																<String>reference attribute name</String>
+																<String>href</String>
+															</entry>
+															<entry>
+																<String>start node xpath</String>
+																<String>/dtbook/book</String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.links.MarkupLinksOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
 								</action-array>
 							</field>
 							<field name="menubarDescriptor">
@@ -3050,6 +3105,11 @@ the user will be required to confirm all pages</String>
 											<toolbarItem>
 												<field name="actionID">
 													<String>MARKUP_AS_LINK</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>MARKUP_LINKS</String>
 												</field>
 											</toolbarItem>
 											<toolbarSeparator/>

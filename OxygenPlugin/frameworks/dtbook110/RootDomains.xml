@@ -118,7 +118,7 @@
   <domain>
     <suffix>.BD</suffix>
     <type>country-code</type>
-    <description>Ministry of Post & Telecommunications Bangladesh Secretariat</description>
+    <description>Ministry of Post &amp; Telecommunications Bangladesh Secretariat</description>
   </domain>
   <domain>
     <suffix>.BE</suffix>
@@ -248,7 +248,7 @@
   <domain>
     <suffix>.CH</suffix>
     <type>country-code</type>
-    <description>SWITCH The Swiss Education & Research Network</description>
+    <description>SWITCH The Swiss Education &amp; Research Network</description>
   </domain>
   <domain>
     <suffix>.CI</suffix>
@@ -523,7 +523,7 @@
   <domain>
     <suffix>.GW</suffix>
     <type>country-code</type>
-    <description>Fundação IT & MEDIA Universidade de Bissao</description>
+    <description>Fundação IT &amp; MEDIA Universidade de Bissao</description>
   </domain>
   <domain>
     <suffix>.GY</suffix>
@@ -673,7 +673,7 @@
   <domain>
     <suffix>.KN</suffix>
     <type>country-code</type>
-    <description>Ministry of Finance, Sustainable Development Information & Technology</description>
+    <description>Ministry of Finance, Sustainable Development Information &amp; Technology</description>
   </domain>
   <domain>
     <suffix>.KP</suffix>
@@ -683,7 +683,7 @@
   <domain>
     <suffix>.KR</suffix>
     <type>country-code</type>
-    <description>Korea Internet & Security Agency (KISA)</description>
+    <description>Korea Internet &amp; Security Agency (KISA)</description>
   </domain>
   <domain>
     <suffix>.KW</suffix>
@@ -808,7 +808,7 @@
   <domain>
     <suffix>.MM</suffix>
     <type>country-code</type>
-    <description>Ministry of Communications, Posts & Telegraphs</description>
+    <description>Ministry of Communications, Posts &amp; Telegraphs</description>
   </domain>
   <domain>
     <suffix>.MN</suffix>
@@ -1028,7 +1028,7 @@
   <domain>
     <suffix>.PS</suffix>
     <type>country-code</type>
-    <description>Ministry Of Telecommunications & Information Technology, Government Computer Center.</description>
+    <description>Ministry Of Telecommunications &amp; Information Technology, Government Computer Center.</description>
   </domain>
   <domain>
     <suffix>.PT</suffix>
@@ -1058,7 +1058,7 @@
   <domain>
     <suffix>.RO</suffix>
     <type>country-code</type>
-    <description>National Institute for R&D in Informatics</description>
+    <description>National Institute for R&amp;D in Informatics</description>
   </domain>
   <domain>
     <suffix>.RS</suffix>
@@ -1358,7 +1358,7 @@
   <domain>
     <suffix>.WS</suffix>
     <type>country-code</type>
-    <description>Government of Samoa Ministry of Foreign Affairs & Trade</description>
+    <description>Government of Samoa Ministry of Foreign Affairs &amp; Trade</description>
   </domain>
   <domain>
     <suffix>.测试</suffix>
@@ -1373,7 +1373,7 @@
   <domain>
     <suffix>.한국</suffix>
     <type>country-code</type>
-    <description>KISA (Korea Internet & Security Agency)</description>
+    <description>KISA (Korea Internet &amp; Security Agency)</description>
   </domain>
   <domain>
     <suffix>.ভারত</suffix>
@@ -1603,7 +1603,7 @@
   <domain>
     <suffix>.فلسطين</suffix>
     <type>country-code</type>
-    <description>Ministry of Telecom & Information Technology (MTIT)</description>
+    <description>Ministry of Telecom &amp; Information Technology (MTIT)</description>
   </domain>
   <domain>
     <suffix>.テスト</suffix>
