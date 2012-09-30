@@ -5,17 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.text.BadLocationException;
-import javax.xml.xpath.XPathExpressionException;
 
+import nota.oxygen.common.BaseAuthorOperation;
+
+import org.apache.commons.validator.routines.EmailValidator;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -30,18 +27,23 @@ import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.content.TextContentIterator;
 import ro.sync.ecss.extensions.api.content.TextContext;
+import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
-import nota.oxygen.common.BaseAuthorOperation;
 
+/**
+ * Operation to find and markup hyperlinks, including external http and https links, internal # links and e-mail links
+ * @author OHA
+ *
+ */
 public class MarkupLinksOperation extends BaseAuthorOperation {
 
 	private int startIndex = 0;
 	
-	private void resetStart() throws AuthorOperationException {
+	private int getStartOffset() throws AuthorOperationException {
 		AuthorNode start = getStartNode();
 		if (start==null) throw new AuthorOperationException("Found not find suitable start node");
-		startIndex = start.getStartOffset();
-	}
+		return start.getStartOffset();
+	} 
 	
 	protected AuthorNode getStartNode() throws AuthorOperationException {
 		AuthorNode res = getAuthorAccess().getDocumentController().getAuthorDocumentNode();
@@ -52,25 +54,45 @@ public class MarkupLinksOperation extends BaseAuthorOperation {
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
 		return "Find and markup hyperlinks";
+	}
+	
+	private void markupLink(int startIndex, int endIndex) throws AuthorOperationException {
+		getAuthorAccess().getEditorAccess().select(startIndex, endIndex);
+		String text = getAuthorAccess().getEditorAccess().getSelectedText();
+		URI link = expandLink(text);
+		Element linkElem = getLinkElement();
+		linkElem.setAttribute(refAttributeName, link.toString());
+		if (!externalAttributeName.equals("")) {
+			if (isInternalLink(link)) {
+				linkElem.setAttribute(externalAttributeName, "false");
+			}
+			else {
+				linkElem.setAttribute(externalAttributeName, "true");
+			}
+		}
+		getAuthorAccess().getDocumentController().surroundInFragment(serialize(linkElem), startIndex, endIndex);
 	}
 
 	@Override
 	protected void doOperation() throws AuthorOperationException {
-		resetStart();
+		int foundCount = 0; 
+		startIndex = getAuthorAccess().getEditorAccess().getCaretOffset();
+		if (startIndex<getStartOffset()) startIndex = getStartOffset();
 		int[] res = findNextOccurence();
 		while (res.length==2) {
-			showMessage("Found an occurance");
-			String link;
-			try {
-				link = getAuthorAccess().getDocumentController().getText(res[0], res[1]-res[0]);
-				if (!showOkCancelMessage("Found link "+link)) break;
-			} catch (BadLocationException e) {
-				throw new AuthorOperationException(e.getMessage());
+			foundCount++;
+			getAuthorAccess().getEditorAccess().select(res[0], res[1]);
+			int ans = showYesNoCancelMessage(getDescription(), "Do you wish to mark up link '"+getAuthorAccess().getEditorAccess().getSelectedText()+"'?", 1);
+			if (ans==1) {
+				markupLink(res[0], res[1]);
+			}
+			else if (ans==-1) {
+				break;
 			}
 			res = findNextOccurence();
 		}
+		if (foundCount==0) showMessage(getDescription(), "Found no links to mark up");
 	}
 	
 	String[] domainList;
@@ -92,14 +114,14 @@ public class MarkupLinksOperation extends BaseAuthorOperation {
 				{
 					Node n = domains.item(i);
 					Element d = (Element)n;
-					Node name = d.getElementsByTagName("name").item(0);
-					if (name==null)
+					Node suffix = d.getElementsByTagName("suffix").item(0);
+					if (suffix==null)
 					{
 						domainList[i] = "";
 					}
 					else
 					{
-						domainList[i] = name.getTextContent();
+						domainList[i] = suffix.getTextContent().toLowerCase();
 					}
 				}
 			}
@@ -107,44 +129,78 @@ public class MarkupLinksOperation extends BaseAuthorOperation {
 		return domainList;
 	}
 	
+	private URI expandLink(URI link) throws AuthorOperationException {
+		URI res;
+		res = expandExternalLink(link);
+		if (res!=null) return res;
+		res = expandInternalLink(link);
+		if (res!=null) return res;
+		return expandMailLink(link);
+	}
 	
-	private boolean isExternalLink(URI link, String[] domains) {
-		if (!link.isAbsolute()) return false;
+	private URI expandExternalLink(URI link) throws AuthorOperationException {
+		String[] domains = getDomainList();
 		if (link.getScheme()==null) {
-			if (link.getPath()!=null) return true;
-			for (int i=0; i<domains.length; i++){
-				if (link.getHost().toLowerCase().endsWith("."+domains[i])) return true; 
+			try
+			{
+				link = new URI("http://"+link.toString());
 			}
-			return false;
+			catch (URISyntaxException e)
+			{
+				return null;
+			}
+			if (!link.isAbsolute()) return null;
+			if (link.getHost()==null) return null;
+			if (link.getUserInfo()!=null) return null;
+			for (int i=0; i<domains.length; i++) {
+				if (link.getHost().toLowerCase().endsWith(domains[i])) return link; 
+			}
+			return null;
 		}
 		else if (link.getScheme().equals("http") || link.getScheme().equals("https")) {
-			return true;
+			return link;
 		}
-		return false;
+		return null;
 	}
 	
-	private boolean isInternalLink(URI link)
-	{
-		if (link.getScheme()!=null) return false;
-		if (link.getSchemeSpecificPart()!=null) return false;
-		if (link.getFragment()==null) return false;
-		return true;
+	private boolean isInternalLink(URI link) throws AuthorOperationException {
+		return expandInternalLink(link)!=null;
 	}
 	
-	private boolean isMailLink(URI link)
-	{
-		if (link.getScheme()==null || link.getScheme().equals("mailto"))
-		{
-			if (link.isOpaque() && link.getHost()!=null && link.getPort()==-1 && link.getUserInfo()!=null)
+	
+	private URI expandInternalLink(URI link) throws AuthorOperationException {
+		if (link.getScheme()!=null) return null;
+		if (link.getSchemeSpecificPart()!=null) return null;
+		if (link.getFragment()==null) return null;
+		return link;
+	}
+	
+	private URI expandMailLink(URI link) throws AuthorOperationException {
+		if (link.getScheme()==null) {
+			try
 			{
-				if (!link.getUserInfo().contains(":")) return true;
+				link = new URI("mailto:"+link.toString());
+			}
+			catch (URISyntaxException e)
+			{
+				return null;
 			}
 		}
-		return false;
+		if (link.getScheme().equals("mailto"))
+		{
+			if (link.getFragment()!=null) return null;
+			if (link.getSchemeSpecificPart()==null) return null;
+			if (EmailValidator.getInstance(false).isValid(link.getSchemeSpecificPart())) return link; 
+		}
+		return null;
 	}
 	
-	private boolean isLink(String linkCandidate, String[] domains) {
-		if (linkCandidate==null) return false;
+	private boolean isLink(String linkCandidate) throws AuthorOperationException {
+		return expandLink(linkCandidate)!=null;
+	}
+	
+	private URI expandLink(String linkCandidate) throws AuthorOperationException {
+		if (linkCandidate==null) return null;
 		URI link;
 		try
 		{
@@ -152,37 +208,35 @@ public class MarkupLinksOperation extends BaseAuthorOperation {
 		}
 		catch (URISyntaxException e)
 		{
-			return false;
+			return null;
 		}
-		if (isExternalLink(link, domains)) return true;
-		if (isInternalLink(link)) return true;
-		if (isMailLink(link)) return true;
-		return false;
+		return expandLink(link);
 	}
-
 	
 	private int[] findNextOccurence() throws AuthorOperationException
 	{
-		String[] domains = getDomainList();
 		AuthorDocumentController docCtrl = getAuthorAccess().getDocumentController();
 		TextContentIterator itr = docCtrl.getTextContentIterator(startIndex, docCtrl.getAuthorDocumentNode().getEndOffset());
 		while (itr.hasNext()) {
 			TextContext nextContext = itr.next();
+			try {
+				AuthorElement elem = getElementAtOffset(nextContext.getTextStartOffset());
+				if (elem.getLocalName().equals(linkLocalName)) continue;
+			} catch (BadLocationException e) {
+				throw new AuthorOperationException(e.getMessage(), e);
+			}
 			String next = nextContext.getText().toString();
 			if (nextContext.getTextStartOffset()<startIndex) {
 				next = next.substring(startIndex-nextContext.getTextStartOffset());
 			}
-			Pattern pat = Pattern.compile("\\b\\w[\\w\\./@;:]+\\w\\b");
+			Pattern pat = Pattern.compile("\\b\\w[\\w.;/?:@=&$-_+!*'(),]+\\w\\b");
 			Matcher mat = pat.matcher(next);
 			while (mat.find()) {
-				if (show) {
-					if (!showOkCancelMessage("Checking candidate "+mat.group())) show = false;
-				}
-						
-				if (isLink(mat.group(), domains)) {
+				if (isLink(mat.group())) {
+					startIndex = nextContext.getTextStartOffset()+mat.end();
 					return new int[] {
 							nextContext.getTextStartOffset()+mat.start(), 
-							nextContext.getTextStartOffset()+mat.end()};
+							startIndex};
 				}
 			}
 		}
@@ -213,11 +267,21 @@ public class MarkupLinksOperation extends BaseAuthorOperation {
 		return domainListDocument;
 	}
 
+	private Element getLinkElement() throws AuthorOperationException{
+		return deserializeElement(linkFragment);
+	}
 
 	@Override
 	protected void parseArguments(ArgumentsMap args)
 			throws IllegalArgumentException {
 		linkFragment = (String)args.getArgumentValue(ARG_LINK_FRAGMENT);
+		try {
+			Element linkElem = deserializeElement(linkFragment);
+			linkLocalName = linkElem.getLocalName();
+		}
+		catch (AuthorOperationException e) {
+			linkLocalName = "";
+		}
 		refAttributeName = (String)args.getArgumentValue(ARG_REF_ATTRIBUTE_NAME);
 		externalAttributeName = (String)args.getArgumentValue(ARG_EXTERNAL_ATTRIBUTE_NAME);
 		if (externalAttributeName==null) externalAttributeName = "";
@@ -233,6 +297,7 @@ public class MarkupLinksOperation extends BaseAuthorOperation {
 	private static String ARG_START_NODE_XPATH = "start node xpath";
 
 	private String linkFragment;
+	private String linkLocalName;
 	private String refAttributeName;
 	private String externalAttributeName;
 	private String domainListFile;

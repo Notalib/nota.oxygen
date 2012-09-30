@@ -22,6 +22,8 @@
 						<String-array>
 							<String>${frameworks}/dtbook2005/OxygenDtbookActions.jar</String>
 							<String>${frameworks}/dtbook2005/sqljdbc4.jar</String>
+							<String>${frameworks}/dtbook2005/commons-validator-1.4.0.jar</String>
+							<String>${framework}/commons-validator-1.4.0.jar</String>
 						</String-array>
 					</field>
 					<field name="authorExtensionDescriptor">
@@ -1290,7 +1292,7 @@
 									</action>
 									<action>
 										<field name="id">
-											<String>LINK_MARKUP</String>
+											<String>MARKUP_LINK</String>
 										</field>
 										<field name="name">
 											<String>Markup as link</String>
@@ -1308,7 +1310,7 @@
 											<String></String>
 										</field>
 										<field name="accelerator">
-											<null/>
+											<String>ctrl shift L</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
@@ -2234,6 +2236,65 @@ the user will be required to confirm all pages</String>
 											</actionMode-array>
 										</field>
 									</action>
+									<action>
+										<field name="id">
+											<String>MARKUP_LINKS</String>
+										</field>
+										<field name="name">
+											<String>Find and markup links</String>
+										</field>
+										<field name="description">
+											<String>Automatically find and markup links</String>
+										</field>
+										<field name="largeIconPath">
+											<String>${frameworks}/dtbook2005/link.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>${frameworks}/dtbook2005/link.png</String>
+										</field>
+										<field name="accessKey">
+											<String>l</String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>domain list file</String>
+																<String>${frameworksDir}/dtbook110/RootDomains.xml</String>
+															</entry>
+															<entry>
+																<String>external attribute name - leave empty if not available</String>
+																<String>external</String>
+															</entry>
+															<entry>
+																<String>link fragment</String>
+																<String>&lt;a  xmlns="http://www.daisy.org/z3986/2005/dtbook/">&lt;/a></String>
+															</entry>
+															<entry>
+																<String>reference attribute name</String>
+																<String>href</String>
+															</entry>
+															<entry>
+																<String>start node xpath</String>
+																<String>/dtbook/book</String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.links.MarkupLinksOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
 								</action-array>
 							</field>
 							<field name="menubarDescriptor">
@@ -2343,7 +2404,12 @@ the user will be required to confirm all pages</String>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>LINK_MARKUP</String>
+																<String>MARKUP_LINK</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>MARKUP_LINKS</String>
 															</field>
 														</menuItem>
 													</menuEntry-array>
@@ -2658,7 +2724,12 @@ the user will be required to confirm all pages</String>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>LINK_MARKUP</String>
+																<String>MARKUP_LINK</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>MARKUP_LINKS</String>
 															</field>
 														</menuItem>
 													</menuEntry-array>
@@ -2932,7 +3003,7 @@ the user will be required to confirm all pages</String>
 											</toolbarItem>
 											<toolbarItem>
 												<field name="actionID">
-													<String>LINK_MARKUP</String>
+													<String>MARKUP_LINK</String>
 												</field>
 											</toolbarItem>
 											<toolbarSeparator/>
