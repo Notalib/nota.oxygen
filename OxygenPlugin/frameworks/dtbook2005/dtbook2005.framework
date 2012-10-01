@@ -1295,7 +1295,7 @@
 											<String>MARKUP_LINK</String>
 										</field>
 										<field name="name">
-											<String>Markup as link</String>
+											<String>Markup as hyperlink</String>
 										</field>
 										<field name="description">
 											<String>&lt;a href=""></String>
@@ -1310,7 +1310,7 @@
 											<String></String>
 										</field>
 										<field name="accelerator">
-											<String>ctrl shift L</String>
+											<String>ctrl shift H</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
@@ -2241,7 +2241,7 @@ the user will be required to confirm all pages</String>
 											<String>MARKUP_LINKS</String>
 										</field>
 										<field name="name">
-											<String>Find and markup links</String>
+											<String>Find and markup hyperlinks</String>
 										</field>
 										<field name="description">
 											<String>Automatically find and markup links</String>
@@ -2253,7 +2253,7 @@ the user will be required to confirm all pages</String>
 											<String>${frameworks}/dtbook2005/link.png</String>
 										</field>
 										<field name="accessKey">
-											<String>l</String>
+											<String>h</String>
 										</field>
 										<field name="accelerator">
 											<null/>
