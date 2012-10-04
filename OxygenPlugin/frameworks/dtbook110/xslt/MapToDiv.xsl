@@ -65,9 +65,14 @@
                     name="style" 
                     select="concat('height:', $height, 'px;width:', $width, 'px;')"/>
                 <xsl:apply-templates select="$img/@id|$img/@src|$img/@alt"/>
-                <xsl:if test="$curPageSpan and not($img/@alt)">
-                    <xsl:attribute name="alt"><xsl:value-of select="concat('Side ', $curPageSpan)"/></xsl:attribute>
-                </xsl:if>
+                <xsl:choose>
+                    <xsl:when test="$curPageSpan and not($img/@alt)">
+                        <xsl:attribute name="alt"><xsl:value-of select="concat('Side ', $curPageSpan)"/></xsl:attribute>
+                    </xsl:when>
+                    <xsl:when test="starts-with($img/@usemap, '#image')">
+                        <xsl:attribute name="alt"><xsl:value-of select="concat('Side ', substring($img/@usemap, 7))"/></xsl:attribute>
+                    </xsl:when>
+                </xsl:choose>
             </img>
             <xsl:for-each select="html:area[@shape='rect']">
                 <xsl:sort select="position()" order="descending"/>

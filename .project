@@ -24,11 +24,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>oxygen.zip</name>
-			<type>1</type>
-			<location>F:/Projects/subversion/ProduktionTools/OxygenTools/OxygenDtbookActions/oxygen.zip</location>
-		</link>
-	</linkedResources>
 </projectDescription>
