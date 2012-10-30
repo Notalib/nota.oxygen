@@ -3,7 +3,11 @@
 <!-- Set property oxygen_installation_folder in Window->Preferences->Ant->Runtime->Properties -->
 <property name="oxygen_installation_folder" value="c:/oxygen/"/>
 <target name="dist">
+	<property name="version-number" value="2.6"/>
  	<jar destfile="${oxygen_installation_folder}frameworks/dtbook2005/OxygenDtbookActions.jar" basedir="./bin"> 
+ 		<manifest>
+			<attribute name="Implementation-Version" value="${version-number}" />
+ 		</manifest>
 		<fileset dir="bin" />
 		<fileset dir="." includes="doc/**" />
 	</jar>
@@ -32,6 +36,6 @@
 	<copy todir="./OxygenPlugin/frameworks/xhtmlnota/">
 		<fileset dir="${oxygen_installation_folder}frameworks/xhtmlnota/"/>
 	</copy> 
-	<zip destfile="dtbookpluginV2.5.zip" basedir="./OxygenPlugin"/>
+	<zip destfile="dtbookpluginV${version-number}.zip" basedir="./OxygenPlugin"/>
 </target>
 </project> 
