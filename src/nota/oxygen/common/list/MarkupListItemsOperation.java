@@ -6,8 +6,6 @@ import java.util.List;
 import nota.oxygen.common.BaseAuthorOperation;
 
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
