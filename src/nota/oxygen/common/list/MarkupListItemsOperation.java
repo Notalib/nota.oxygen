@@ -6,6 +6,7 @@ import java.util.List;
 import nota.oxygen.common.BaseAuthorOperation;
 
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
@@ -69,9 +70,8 @@ public class MarkupListItemsOperation extends BaseAuthorOperation {
 					Element itemElem = deserializeElement(serialize(item));
 					if (itemElem.getFirstChild() instanceof Element) {
 						Element e = (Element)itemElem.getFirstChild();
-						NodeList eChildren = e.getChildNodes();
-						for (int i=0; i<eChildren.getLength(); i++) {
-							itemElem.insertBefore(e.removeChild(eChildren.item(i)), e);
+						while (e.hasChildNodes()) {
+							itemElem.insertBefore(e.removeChild(e.getFirstChild()), e);
 						}
 						itemElem.removeChild(e);
 					}

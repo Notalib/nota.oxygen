@@ -783,6 +783,10 @@
 																<String>&lt;li/></String>
 															</entry>
 															<entry>
+																<String>keep substitutes</String>
+																<String>no</String>
+															</entry>
+															<entry>
 																<String>list fragment</String>
 																<String>&lt;list  type="ul" bullet="none"/></String>
 															</entry>
