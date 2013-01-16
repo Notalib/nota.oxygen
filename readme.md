@@ -8,4 +8,4 @@ Oxygen version 14.0 is supported, may also work with earlier versions.
 
 ## License
 
-dtbookOxygen is copyright [Nota](http://nota.nu/) and distritributed under [LGPL version 3](/Notalib/LYT/blob/master/lgpl-license.txt).
+dtbookOxygen is copyright [Nota](http://nota.nu/) and distritributed under [LGPL version 3](/Notalib/dtbookOxygen/blob/master/lgpl-license.txt).
