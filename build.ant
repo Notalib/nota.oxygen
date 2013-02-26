@@ -3,7 +3,7 @@
 <!-- Set property oxygen_installation_folder in Window->Preferences->Ant->Runtime->Properties -->
 <property name="oxygen_installation_folder" value="c:/oxygen/"/>
 <target name="dist">
-	<property name="version-number" value="2.6"/>
+	<property name="version-number" value="2.7"/>
  	<jar destfile="${oxygen_installation_folder}frameworks/dtbook2005/OxygenDtbookActions.jar" basedir="./bin"> 
  		<manifest>
 			<attribute name="Implementation-Version" value="${version-number}" />
