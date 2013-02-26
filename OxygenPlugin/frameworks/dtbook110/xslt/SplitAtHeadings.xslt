@@ -18,7 +18,7 @@
         <xsl:variable name="hrefPrefix" select="concat(substring-before(document-uri(/), '.'), '-')"/>
         <xsl:variable name="headings" select="html:h1|html:h2"></xsl:variable>
         <xsl:for-each select="$headings">
-            <xsl:result-document href="{concat($hrefPrefix,index-of($headings,.),'.htm')}">
+            <xsl:result-document href="{concat($hrefPrefix,1+count(preceding::html:h1)+count(preceding::html:h2),'.htm')}">
                 <html>
                     <xsl:call-template name="head"/>
                     <body>
