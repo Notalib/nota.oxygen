@@ -2,8 +2,22 @@
 <project name="dtbookOxygen" default="dist">
 <!-- Set property oxygen_installation_folder in Window->Preferences->Ant->Runtime->Properties -->
 <property name="oxygen_installation_folder" value="c:/oxygen/"/>
+<property name="version-number" value="2.8.0"/>
 <target name="dist">
-	<property name="version-number" value="2.7"/>
+ 	<jar destfile="./OxygenPlugin/frameworks/dtbook2005/OxygenDtbookActions.jar" basedir="./bin"> 
+ 		<manifest>
+			<attribute name="Implementation-Version" value="${version-number}" />
+ 		</manifest>
+		<fileset dir="bin" />
+		<fileset dir="." includes="doc/**" />
+	</jar>
+	<copy todir="./OxygenPlugin/frameworks/dtbook110/" file="./OxygenPlugin/frameworks/dtbook2005/OxygenDtbookActions.jar"/>
+	<copy todir="./OxygenPlugin/frameworks/xhtmlnota/" file="./OxygenPlugin/frameworks/dtbook2005/OxygenDtbookActions.jar"/>
+	<zip destfile="./updatesite/dtbook110_${version-number}.zip" basedir="./OxygenPlugin/frameworks" includes="dtbook110/**"/>
+	<zip destfile="./updatesite/dtbook2005_${version-number}.zip" basedir="./OxygenPlugin/frameworks" includes="dtbook2005/**"/>
+	<zip destfile="./updatesite/xhtmlnota_${version-number}.zip" basedir="./OxygenPlugin/frameworks" includes="xhtmlnota/**"/>
+</target>
+<target name="debug">
  	<jar destfile="${oxygen_installation_folder}frameworks/dtbook2005/OxygenDtbookActions.jar" basedir="./bin"> 
  		<manifest>
 			<attribute name="Implementation-Version" value="${version-number}" />

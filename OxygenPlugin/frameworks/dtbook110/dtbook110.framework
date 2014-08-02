@@ -20,9 +20,9 @@
 					</field>
 					<field name="classpath">
 						<String-array>
-							<String>${frameworks}/dtbook2005/OxygenDtbookActions.jar</String>
-							<String>${frameworks}/dtbook2005/sqljdbc4.jar</String>
-							<String>${frameworks}/dtbook2005/commons-validator-1.4.0.jar</String>
+							<String>${frameworks}/dtbook110/OxygenDtbookActions.jar</String>
+							<String>${frameworks}/dtbook110/sqljdbc4.jar</String>
+							<String>${frameworks}/dtbook110/commons-validator-1.4.0.jar</String>
 						</String-array>
 					</field>
 					<field name="authorExtensionDescriptor">
@@ -58,10 +58,10 @@
 											<String>Toggle &lt;span lang='xx'></String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook2005/inline_foreign_language.png</String>
+											<String>${frameworks}/dtbook110/inline_foreign_language.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook2005/inline_foreign_language.png</String>
+											<String>${frameworks}/dtbook110/inline_foreign_language.png</String>
 										</field>
 										<field name="accessKey">
 											<String></String>
@@ -112,10 +112,10 @@
 											<String>Toggle &lt;acronym></String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook2005/acronym.png</String>
+											<String>${frameworks}/dtbook110/acronym.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook2005/acronym.png</String>
+											<String>${frameworks}/dtbook110/acronym.png</String>
 										</field>
 										<field name="accessKey">
 											<String>A</String>
@@ -166,10 +166,10 @@
 											<String>Toggle &lt;em></String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook2005/em.PNG</String>
+											<String>${frameworks}/dtbook110/em.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook2005/em.PNG</String>
+											<String>${frameworks}/dtbook110/em.png</String>
 										</field>
 										<field name="accessKey">
 											<String></String>
@@ -224,10 +224,10 @@
 											<String>Toggle &lt;strong></String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook2005/strong.PNG</String>
+											<String>${frameworks}/dtbook110/strong.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook2005/strong.PNG</String>
+											<String>${frameworks}/dtbook110/strong.png</String>
 										</field>
 										<field name="accessKey">
 											<String></String>
@@ -731,10 +731,10 @@
 											<String>Markup as pre-formatted list</String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook2005/list_pl.png</String>
+											<String>${frameworks}/dtbook110/list_pl.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook2005/list_pl.png</String>
+											<String>${frameworks}/dtbook110/list_pl.png</String>
 										</field>
 										<field name="accessKey">
 											<String></String>
@@ -810,10 +810,10 @@
 											<String>Indent list		</String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook2005/list_indent.png</String>
+											<String>${frameworks}/dtbook110/list_indent.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook2005/list_indent.png</String>
+											<String>${frameworks}/dtbook110/list_indent.png</String>
 										</field>
 										<field name="accessKey">
 											<String></String>
@@ -857,10 +857,10 @@
 											<String>Markup as ordered list</String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook2005/list_ol.png</String>
+											<String>${frameworks}/dtbook110/list_ol.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook2005/list_ol.png</String>
+											<String>${frameworks}/dtbook110/list_ol.png</String>
 										</field>
 										<field name="accessKey">
 											<String></String>
@@ -932,10 +932,10 @@
 											<String>Markup as un-ordered list</String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook2005/list_ul.png</String>
+											<String>${frameworks}/dtbook110/list_ul.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook2005/list_ul.png</String>
+											<String>${frameworks}/dtbook110/list_ul.png</String>
 										</field>
 										<field name="accessKey">
 											<String></String>
@@ -1142,10 +1142,10 @@
 											<String>Toggle &lt;span class='roman'></String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook2005/roman.png</String>
+											<String>${frameworks}/dtbook110/roman.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook2005/roman.png</String>
+											<String>${frameworks}/dtbook110/roman.png</String>
 										</field>
 										<field name="accessKey">
 											<String></String>
@@ -1196,10 +1196,10 @@
 											<String>Toggle &lt;span class='roman'></String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook2005/roman.png</String>
+											<String>${frameworks}/dtbook110/roman.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook2005/roman.png</String>
+											<String>${frameworks}/dtbook110/roman.png</String>
 										</field>
 										<field name="accessKey">
 											<String></String>
@@ -1250,10 +1250,10 @@
 											<String>Toggle &lt;sup></String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook2005/sup.png</String>
+											<String>${frameworks}/dtbook110/sup.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook2005/sup.png</String>
+											<String>${frameworks}/dtbook110/sup.png</String>
 										</field>
 										<field name="accessKey">
 											<String>p</String>
@@ -1304,10 +1304,10 @@
 											<String>Toggle &lt;sub></String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook2005/sub.png</String>
+											<String>${frameworks}/dtbook110/sub.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook2005/sub.png</String>
+											<String>${frameworks}/dtbook110/sub.png</String>
 										</field>
 										<field name="accessKey">
 											<String>p</String>
@@ -1358,10 +1358,10 @@
 											<String>&lt;a href=""></String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook2005/link.png</String>
+											<String>${frameworks}/dtbook110/link.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook2005/link.png</String>
+											<String>${frameworks}/dtbook110/link.png</String>
 										</field>
 										<field name="accessKey">
 											<String></String>
@@ -1420,10 +1420,10 @@
 											<String>Make current element as heading in a new sub-level</String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook2005/h_plus.png</String>
+											<String>${frameworks}/dtbook110/h_plus.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook2005/h_plus.png</String>
+											<String>${frameworks}/dtbook110/h_plus.png</String>
 										</field>
 										<field name="accessKey">
 											<String></String>
@@ -1479,10 +1479,10 @@
 											<String>Make the current element the heading of a new level at the same depth as the containing level</String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook2005/h.png</String>
+											<String>${frameworks}/dtbook110/h.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook2005/h.png</String>
+											<String>${frameworks}/dtbook110/h.png</String>
 										</field>
 										<field name="accessKey">
 											<String></String>
@@ -1538,10 +1538,10 @@
 											<String>Removes the level of which the current element is heading, marging it with its predesessor or parent</String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook2005/h_x.png</String>
+											<String>${frameworks}/dtbook110/h_x.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook2005/h_x.png</String>
+											<String>${frameworks}/dtbook110/h_x.png</String>
 										</field>
 										<field name="accessKey">
 											<String></String>
@@ -2194,10 +2194,10 @@ the user will be required to confirm all pages</String>
 											<String>Toggle &lt;span class='note_identifier'></String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook2005/note_identifier.png</String>
+											<String>${frameworks}/dtbook110/note_identifier.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook2005/note_identifier.png</String>
+											<String>${frameworks}/dtbook110/note_identifier.png</String>
 										</field>
 										<field name="accessKey">
 											<String></String>
@@ -2248,10 +2248,10 @@ the user will be required to confirm all pages</String>
 											<String>Outdent list		</String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook2005/list_outdent.png</String>
+											<String>${frameworks}/dtbook110/list_outdent.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook2005/list_outdent.png</String>
+											<String>${frameworks}/dtbook110/list_outdent.png</String>
 										</field>
 										<field name="accessKey">
 											<String></String>
@@ -2299,10 +2299,10 @@ the user will be required to confirm all pages</String>
 											<String>Markup acronyms by word - danish</String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook2005/acronym.png</String>
+											<String>${frameworks}/dtbook110/acronym.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook2005/acronym.png</String>
+											<String>${frameworks}/dtbook110/acronym.png</String>
 										</field>
 										<field name="accessKey">
 											<String>a</String>
@@ -2342,10 +2342,10 @@ the user will be required to confirm all pages</String>
 											<String>Automatically find and markup hyperlinks</String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook2005/link.png</String>
+											<String>${frameworks}/dtbook110/link.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook2005/link.png</String>
+											<String>${frameworks}/dtbook110/link.png</String>
 										</field>
 										<field name="accessKey">
 											<String>h</String>
