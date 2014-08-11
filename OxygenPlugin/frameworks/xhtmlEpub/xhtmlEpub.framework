@@ -1,30 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<serialized version="14.0" xml:space="preserve">
-	<map>
+<serialized version="16.0" xml:space="preserve">
+	<serializableOrderedMap>
 		<entry>
 			<String>document.types</String>
 			<documentTypeDescriptor-array>
 				<documentTypeDescriptor>
+					<field name="extensionPatch">
+						<null/>
+					</field>
 					<field name="name">
-						<String>XHTML Nota</String>
+						<String>XHTML</String>
 					</field>
 					<field name="schemaDescriptor">
 						<docTypeSchema>
 							<field name="type">
-								<Integer>1</Integer>
+								<Integer>9</Integer>
 							</field>
 							<field name="uri">
-								<String>${frameworks}/xhtml/dtd/xhtml1-strict.dtd</String>
+								<String>${framework}/xhtml5%20(epub3)/epub-xhtml-30.nvdl</String>
 							</field>
 						</docTypeSchema>
 					</field>
 					<field name="classpath">
 						<String-array>
-							<String>${frameworks}/xhtml/xhtml-node-customizer.jar</String>
-							<String>${frameworks}/xhtml/xhtml.jar</String>
-							<String>${frameworks}/xhtml/resources/</String>
-							<String>${frameworks}/xhtml/i18n/</String>
+							<String>${framework}/resources/</String>
+							<String>${framework}/i18n/</String>
+							<String>${framework}/xhtml.jar</String>
 						</String-array>
+					</field>
+					<field name="parentClassLoaderID">
+						<null/>
 					</field>
 					<field name="authorExtensionDescriptor">
 						<authorExtension>
@@ -32,10 +37,10 @@
 								<cssFile-array>
 									<cssFile>
 										<field name="href">
-											<String>${frameworks}/xhtml/css/xhtml.css</String>
+											<String>${framework}/css/xhtml.css</String>
 										</field>
 										<field name="title">
-											<String>XHTML default</String>
+											<String>Default</String>
 										</field>
 										<field name="alternate">
 											<Boolean>false</Boolean>
@@ -43,7 +48,18 @@
 									</cssFile>
 									<cssFile>
 										<field name="href">
-											<String>${frameworks}/xhtml/css/hideColspec.css</String>
+											<String>${framework}/css/show_colspec.css</String>
+										</field>
+										<field name="title">
+											<String>Show cols</String>
+										</field>
+										<field name="alternate">
+											<Boolean>true</Boolean>
+										</field>
+									</cssFile>
+									<cssFile>
+										<field name="href">
+											<String>${framework}/css/hide_colspec.css</String>
 										</field>
 										<field name="title">
 											<String>Hide cols</String>
@@ -70,7 +86,7 @@
 											<String>${i18n(bold_description)}</String>
 										</field>
 										<field name="largeIconPath">
-											<String>/images/Bold20.gif</String>
+											<String>/images/Bold20.png</String>
 										</field>
 										<field name="smallIconPath">
 											<String>/images/Bold16.gif</String>
@@ -79,7 +95,7 @@
 											<String>B</String>
 										</field>
 										<field name="accelerator">
-											<String>ctrl B</String>
+											<String>M1 B</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
@@ -88,12 +104,12 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>element</String>
 																<String>&lt;b xmlns="http://www.w3.org/1999/xhtml"/></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.ToggleSurroundWithElementOperation</String>
@@ -113,7 +129,7 @@
 											<String>${i18n(italic_description)}</String>
 										</field>
 										<field name="largeIconPath">
-											<String>/images/Italic20.gif</String>
+											<String>/images/Italic20.png</String>
 										</field>
 										<field name="smallIconPath">
 											<String>/images/Italic16.gif</String>
@@ -122,7 +138,7 @@
 											<String>I</String>
 										</field>
 										<field name="accelerator">
-											<String>ctrl I</String>
+											<String>M1 I</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
@@ -131,12 +147,12 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>element</String>
 																<String>&lt;i xmlns="http://www.w3.org/1999/xhtml"/></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.ToggleSurroundWithElementOperation</String>
@@ -156,7 +172,7 @@
 											<String>${i18n(underline_description)}</String>
 										</field>
 										<field name="largeIconPath">
-											<String>/images/Underline20.gif</String>
+											<String>/images/Underline20.png</String>
 										</field>
 										<field name="smallIconPath">
 											<String>/images/Underline16.gif</String>
@@ -165,7 +181,7 @@
 											<String>U</String>
 										</field>
 										<field name="accelerator">
-											<String>ctrl U</String>
+											<String>M1 U</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
@@ -174,12 +190,12 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>element</String>
 																<String>&lt;u xmlns="http://www.w3.org/1999/xhtml"/></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.ToggleSurroundWithElementOperation</String>
@@ -199,7 +215,7 @@
 											<String>${i18n(paragraph_description)}</String>
 										</field>
 										<field name="largeIconPath">
-											<String>/images/Paragraph20.gif</String>
+											<String>/images/Paragraph20.png</String>
 										</field>
 										<field name="smallIconPath">
 											<String>/images/Paragraph16.gif</String>
@@ -208,7 +224,7 @@
 											<String>P</String>
 										</field>
 										<field name="accelerator">
-											<String>ctrl shift P</String>
+											<String>M1 M2 P</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
@@ -217,7 +233,7 @@
 														<String>ancestor-or-self::*:p[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;p xmlns="http://www.w3.org/1999/xhtml"/></String>
@@ -230,7 +246,7 @@
 																<String>insertPosition</String>
 																<String>After</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
@@ -241,12 +257,12 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;p xmlns="http://www.w3.org/1999/xhtml"/></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -284,7 +300,7 @@
 														<String>self::*:ol[namespace-uri()= 'http://www.w3.org/1999/xhtml'] | self::*:ul[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;li xmlns="http://www.w3.org/1999/xhtml">&lt;ul>&lt;li/>&lt;/ul>&lt;/li></String>
@@ -293,7 +309,7 @@
 																<String>insertPosition</String>
 																<String>Inside as first child</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
@@ -304,7 +320,7 @@
 														<String>self::*:dl[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;dt xmlns="http://www.w3.org/1999/xhtml"/>&lt;dd xmlns="http://www.w3.org/1999/xhtml">&lt;ul>&lt;li/>&lt;/ul>&lt;/dd></String>
@@ -313,7 +329,7 @@
 																<String>insertPosition</String>
 																<String>Inside as first child</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
@@ -324,12 +340,12 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;ul xmlns="http://www.w3.org/1999/xhtml">&lt;li/>&lt;/ul></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -367,7 +383,7 @@
 														<String>self::*:ol[namespace-uri()= 'http://www.w3.org/1999/xhtml'] | self::*:ul[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;li xmlns="http://www.w3.org/1999/xhtml">&lt;ol>&lt;li/>&lt;/ol>&lt;/li></String>
@@ -376,7 +392,7 @@
 																<String>insertPosition</String>
 																<String>Inside as first child</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
@@ -387,7 +403,7 @@
 														<String>self::*:dl[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;dt xmlns="http://www.w3.org/1999/xhtml"/>&lt;dd xmlns="http://www.w3.org/1999/xhtml">&lt;ol>&lt;li/>&lt;/ol>&lt;/dd></String>
@@ -396,7 +412,7 @@
 																<String>insertPosition</String>
 																<String>Inside as first child</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
@@ -407,12 +423,12 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;ol xmlns="http://www.w3.org/1999/xhtml">&lt;li/>&lt;/ol></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -450,12 +466,12 @@
 														<String>self::*:ul[namespace-uri()= 'http://www.w3.org/1999/xhtml'] | self::*:ol[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;li xmlns="http://www.w3.org/1999/xhtml"/></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -466,7 +482,7 @@
 														<String>ancestor-or-self::*:li[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;li xmlns="http://www.w3.org/1999/xhtml"/></String>
@@ -479,7 +495,7 @@
 																<String>insertPosition</String>
 																<String>After</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
@@ -490,7 +506,7 @@
 														<String>self::*:dl[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;dt xmlns="http://www.w3.org/1999/xhtml"/>&lt;dd xmlns="http://www.w3.org/1999/xhtml"/></String>
@@ -499,7 +515,7 @@
 																<String>insertPosition</String>
 																<String>Inside as first child</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
@@ -510,7 +526,7 @@
 														<String>ancestor-or-self::node()[self::*:dt | self::*:dd][namespace-uri()='http://www.w3.org/1999/xhtml'][1]</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;dt xmlns="http://www.w3.org/1999/xhtml"/>&lt;dd xmlns="http://www.w3.org/1999/xhtml"/></String>
@@ -523,7 +539,7 @@
 																<String>insertPosition</String>
 																<String>After</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
@@ -558,10 +574,10 @@
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>self::*:blockquote| self::*:body| self::*:button| self::*:dd| self::*:del| self::*:div| self::*:fieldset| self::*:form| self::*:ins| self::*:li| self::*:map| self::*:noscript| self::*:object| self::*:td| self::*:th| self::*:p</String>
+														<String>oxy:allows-child-element("*:table")</String>
 													</field>
 													<field name="argValues">
-														<map/>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertTableOperation</String>
@@ -572,13 +588,13 @@
 									</action>
 									<action>
 										<field name="id">
-											<String>insert.table.row</String>
+											<String>insert.table.row.below</String>
 										</field>
 										<field name="name">
-											<String>${i18n(insert.table.row)}</String>
+											<String>${i18n(insert.table.row.below)}</String>
 										</field>
 										<field name="description">
-											<String>${i18n(insert.table.row_description)}</String>
+											<String>${i18n(insert.table.row.below_description)}</String>
 										</field>
 										<field name="largeIconPath">
 											<String>/images/TableRow20.gif</String>
@@ -599,7 +615,7 @@
 														<String>self::*:thead[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>header row</String>
 																<String>yes</String>
@@ -612,7 +628,7 @@
 																<String>namespace</String>
 																<String>http://www.w3.org/1999/xhtml</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertRowOperation</String>
@@ -623,7 +639,7 @@
 														<String>self::*:tbody[namespace-uri()='http://www.w3.org/1999/xhtml'] | self::*:tfoot[namespace-uri()='http://www.w3.org/1999/xhtml'] | self::*:table[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>header row</String>
 																<String>no</String>
@@ -640,7 +656,7 @@
 																<String>namespace</String>
 																<String>http://www.w3.org/1999/xhtml</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertRowOperation</String>
@@ -651,7 +667,7 @@
 														<String>ancestor-or-self::*:tr[namespace-uri()='http://www.w3.org/1999/xhtml'][1][parent::*:thead]</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>header row</String>
 																<String>yes</String>
@@ -668,7 +684,7 @@
 																<String>namespace</String>
 																<String>http://www.w3.org/1999/xhtml</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertRowOperation</String>
@@ -679,7 +695,7 @@
 														<String>ancestor-or-self::*:tr[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>header row</String>
 																<String>no</String>
@@ -696,7 +712,7 @@
 																<String>namespace</String>
 																<String>http://www.w3.org/1999/xhtml</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertRowOperation</String>
@@ -734,12 +750,12 @@
 														<String>self::*:tr[namespace-uri()='http://www.w3.org/1999/xhtml'][parent::*:thead]</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;th xmlns="http://www.w3.org/1999/xhtml"/></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -750,12 +766,12 @@
 														<String>self::*:tr[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;td xmlns="http://www.w3.org/1999/xhtml"/></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -766,12 +782,12 @@
 														<String>self::*:thead[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;tr xmlns="http://www.w3.org/1999/xhtml">&lt;th/>&lt;/tr></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -782,12 +798,12 @@
 														<String>(self::*:tbody | self::*:tfoot | self::*:table)[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;tr xmlns="http://www.w3.org/1999/xhtml">&lt;td/>&lt;/tr></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -798,7 +814,7 @@
 														<String>ancestor-or-self::node()[namespace-uri()='http://www.w3.org/1999/xhtml'][self::*:th | self::*:td][1][self::*:th]</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;th xmlns="http://www.w3.org/1999/xhtml"/></String>
@@ -811,7 +827,7 @@
 																<String>insertPosition</String>
 																<String>After</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
@@ -822,7 +838,7 @@
 														<String>ancestor-or-self::*:td[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;td xmlns="http://www.w3.org/1999/xhtml"/></String>
@@ -835,7 +851,7 @@
 																<String>insertPosition</String>
 																<String>After</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
@@ -855,7 +871,7 @@
 											<String>${i18n(insert.image_description)}</String>
 										</field>
 										<field name="largeIconPath">
-											<String>/images/Image20.gif</String>
+											<String>/images/Image20.png</String>
 										</field>
 										<field name="smallIconPath">
 											<String>/images/Image16.gif</String>
@@ -873,7 +889,7 @@
 														<String>self::*:a| self::*:abbr| self::*:acronym| self::*:address| self::*:b| self::*:bdo| self::*:big| self::*:button| self::*:caption| self::*:cite| self::*:code| self::*:dd| self::*:del| self::*:dfn| self::*:div| self::*:dt| self::*:em| self::*:fieldset| self::*:h1| self::*:h2| self::*:h3| self::*:h4| self::*:h5| self::*:h6| self::*:i| self::*:ins| self::*:kbd| self::*:label| self::*:legend| self::*:li| self::*:object| self::*:p| self::*:q| self::*:samp| self::*:small| self::*:span| self::*:strong| self::*:sub| self::*:sup| self::*:td| self::*:th| self::*:tt| self::*:var | self::*:body</String>
 													</field>
 													<field name="argValues">
-														<map/>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.xhtml.InsertImgOperation</String>
@@ -911,7 +927,7 @@
 														<String>ancestor-or-self::*:tr[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map/>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.JoinRowCellsOperation</String>
@@ -949,12 +965,12 @@
 														<String>ancestor-or-self::*:td[namespace-uri()= 'http://www.w3.org/1999/xhtml'] | ancestor-or-self::*:th[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>Split point</String>
 																<String>Left</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.SplitLeftRightOperation</String>
@@ -992,12 +1008,12 @@
 														<String>ancestor-or-self::*:td[namespace-uri()= 'http://www.w3.org/1999/xhtml'] | ancestor-or-self::*:th[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>Split point</String>
 																<String>Right</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.SplitLeftRightOperation</String>
@@ -1036,12 +1052,12 @@
 ancestor-or-self::*:tr[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>Join direction</String>
 																<String>Above</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.JoinCellAboveBelowOperation</String>
@@ -1080,12 +1096,12 @@ ancestor-or-self::*:tr[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 ancestor-or-self::*:tr[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>Join direction</String>
 																<String>Below</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.JoinCellAboveBelowOperation</String>
@@ -1123,12 +1139,12 @@ ancestor-or-self::*:tr[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 														<String>ancestor-or-self::*:td[namespace-uri()= 'http://www.w3.org/1999/xhtml'] | ancestor-or-self::*:th[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>Split point</String>
 																<String>Below</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.SplitCellAboveBelowOperation</String>
@@ -1166,12 +1182,12 @@ ancestor-or-self::*:tr[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 														<String>ancestor-or-self::*:td[namespace-uri()= 'http://www.w3.org/1999/xhtml'] | ancestor-or-self::*:th[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>Split point</String>
 																<String>Above</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.SplitCellAboveBelowOperation</String>
@@ -1182,13 +1198,13 @@ ancestor-or-self::*:tr[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 									</action>
 									<action>
 										<field name="id">
-											<String>insert.table.column</String>
+											<String>insert.table.column.after</String>
 										</field>
 										<field name="name">
-											<String>${i18n(insert.table.column)}</String>
+											<String>${i18n(insert.table.column.after)}</String>
 										</field>
 										<field name="description">
-											<String>${i18n(insert.table.column_description)}</String>
+											<String>${i18n(insert.table.column.after_description)}</String>
 										</field>
 										<field name="largeIconPath">
 											<String>/images/TableColumn20.gif</String>
@@ -1209,12 +1225,12 @@ ancestor-or-self::*:tr[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 														<String>ancestor-or-self::*:tr[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>namespace</String>
 																<String>http://www.w3.org/1999/xhtml</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertColumnOperation</String>
@@ -1253,7 +1269,7 @@ ancestor-or-self::*:tr[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 ancestor-or-self::*:tr | ancestor-or-self::*:td)[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map/>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.DeleteColumnOperation</String>
@@ -1292,7 +1308,7 @@ ancestor-or-self::*:tr | ancestor-or-self::*:td)[namespace-uri()='http://www.w3.
 ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map/>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.DeleteRowOperation</String>
@@ -1330,7 +1346,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 														<String>ancestor-or-self::*:p[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;h1 xmlns="http://www.w3.org/1999/xhtml"/></String>
@@ -1343,7 +1359,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 																<String>insertPosition</String>
 																<String>After</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
@@ -1354,12 +1370,12 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;h1 xmlns="http://www.w3.org/1999/xhtml"/></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -1397,7 +1413,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 														<String>ancestor-or-self::*:p[namespace-uri()= 'http://www.w3.org/1999/xhtml'][1]</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;h2 xmlns="http://www.w3.org/1999/xhtml"/></String>
@@ -1410,7 +1426,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 																<String>insertPosition</String>
 																<String>After</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
@@ -1421,12 +1437,12 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;h2 xmlns="http://www.w3.org/1999/xhtml"/></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -1464,7 +1480,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 														<String>ancestor-or-self::*:p[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;h3 xmlns="http://www.w3.org/1999/xhtml"/></String>
@@ -1477,7 +1493,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 																<String>insertPosition</String>
 																<String>After</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
@@ -1488,12 +1504,12 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;h3 xmlns="http://www.w3.org/1999/xhtml"/></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -1531,7 +1547,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 														<String>ancestor-or-self::*:p[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;h4 xmlns="http://www.w3.org/1999/xhtml"/></String>
@@ -1544,7 +1560,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 																<String>insertPosition</String>
 																<String>After</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
@@ -1555,12 +1571,12 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;h4 xmlns="http://www.w3.org/1999/xhtml"/></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -1598,7 +1614,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 														<String>ancestor-or-self::*:p[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;h5 xmlns="http://www.w3.org/1999/xhtml"/></String>
@@ -1611,7 +1627,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 																<String>insertPosition</String>
 																<String>After</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
@@ -1622,12 +1638,12 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;h5 xmlns="http://www.w3.org/1999/xhtml"/></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -1665,7 +1681,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 														<String>ancestor-or-self::*:p[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;h6 xmlns="http://www.w3.org/1999/xhtml"/></String>
@@ -1678,7 +1694,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 																<String>insertPosition</String>
 																<String>After</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
@@ -1689,12 +1705,12 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;h6 xmlns="http://www.w3.org/1999/xhtml"/></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -1732,7 +1748,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 														<String>self::*:ol[namespace-uri()= 'http://www.w3.org/1999/xhtml'] | self::*:ul[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;li xmlns="http://www.w3.org/1999/xhtml">&lt;dl>&lt;dt/>&lt;dd/>&lt;/dl>&lt;/li></String>
@@ -1741,7 +1757,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 																<String>insertPosition</String>
 																<String>Inside as first child</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
@@ -1752,12 +1768,12 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;dl xmlns="http://www.w3.org/1999/xhtml">&lt;dt/>&lt;dd/>&lt;/dl></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
@@ -1777,7 +1793,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 											<String>${i18n(insert.equation_description)}</String>
 										</field>
 										<field name="largeIconPath">
-											<String>/images/Equation20.gif</String>
+											<String>/images/Equation20.png</String>
 										</field>
 										<field name="smallIconPath">
 											<String>/images/Equation16.gif</String>
@@ -1795,7 +1811,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map/>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.xhtml.InsertEquationOperation</String>
@@ -1833,15 +1849,519 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 														<String>true()</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>URL pattern</String>
 																<String>http://dev.w3.org/html5/spec/Overview.html#the-{Element_name}-element</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.ShowElementDocumentationOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>play.media</String>
+										</field>
+										<field name="name">
+											<String>${i18n(play.media.resource)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(play.media.desc)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>${framework}/css/img/play_media.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::object</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>resourcePath</String>
+																<String>@data</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.OpenInSystemAppOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>play.audio</String>
+										</field>
+										<field name="name">
+											<String>${i18n(play.media.resource)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(play.media.desc)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>${framework}/css/img/play_audio.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::audio</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>resourcePath</String>
+																<String>@src</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.OpenInSystemAppOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>play.video</String>
+										</field>
+										<field name="name">
+											<String>${i18n(play.media.resource)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(play.media.desc)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>${framework}/css/img/play_video.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::video</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>resourcePath</String>
+																<String>@src</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.OpenInSystemAppOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>sort</String>
+										</field>
+										<field name="name">
+											<String>${i18n(sort)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(sort_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/Sort20.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/Sort16.png</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>oxy:current-selected-element()[self::*:tbody] |
+oxy:current-selected-element()[self::*:thead] |
+oxy:current-selected-element()[self::*:table] |
+oxy:current-selected-element()[self::*:tfoot] |
+ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*:ul | self::*:ol]
+[1][self::*:tbody | self::*:tfoot | self::*:thead]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap/>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.XHTMLTableSortOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>oxy:current-selected-element()[self::*:ol] |
+oxy:current-selected-element()[self::*:ul] |
+ancestor-or-self::*:ol | ancestor-or-self::*:ul</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap/>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.sort.XHTMLListSortOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>sort_table</String>
+										</field>
+										<field name="name">
+											<String>${i18n(sort)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(sort_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/Sort20.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/Sort16.png</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>oxy:current-selected-element()[self::*:tbody] |
+oxy:current-selected-element()[self::*:thead] |
+oxy:current-selected-element()[self::*:table] |
+oxy:current-selected-element()[self::*:tfoot] |
+ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*:ul | self::*:ol]
+[1][self::*:tbody | self::*:tfoot | self::*:thead]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap/>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.XHTMLTableSortOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>table.collapse.colspec</String>
+										</field>
+										<field name="name">
+											<String>${i18n(table.toggle.colspec)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(table.toggle.colspec_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/Expanded16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>1</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>.</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>-oxy-visible-colspecs</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.RemovePseudoClassOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>table.expand.colspec</String>
+										</field>
+										<field name="name">
+											<String>${i18n(table.toggle.colspec)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(table.toggle.colspec_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/Collapsed16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>1</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>.</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>-oxy-visible-colspecs</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SetPseudoClassOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>insert.table.row.above</String>
+										</field>
+										<field name="name">
+											<String>${i18n(insert.table.row.above)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(insert.table.row.above_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/TableRowAbove20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/TableRowAbove16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:thead[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>header row</String>
+																<String>yes</String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Inside as first child</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.w3.org/1999/xhtml</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertRowOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:tbody[namespace-uri()='http://www.w3.org/1999/xhtml'] | self::*:tfoot[namespace-uri()='http://www.w3.org/1999/xhtml'] | self::*:table[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>header row</String>
+																<String>no</String>
+															</entry>
+															<entry>
+																<String>insertLocation</String>
+																<String></String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Inside as first child</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.w3.org/1999/xhtml</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertRowOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*:tr[namespace-uri()='http://www.w3.org/1999/xhtml'][1][parent::*:thead]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>header row</String>
+																<String>yes</String>
+															</entry>
+															<entry>
+																<String>insertLocation</String>
+																<String>ancestor-or-self::*:tr[namespace-uri()='http://www.w3.org/1999/xhtml'][1][parent::*:thead]</String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Before</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.w3.org/1999/xhtml</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertRowOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*:tr[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>header row</String>
+																<String>no</String>
+															</entry>
+															<entry>
+																<String>insertLocation</String>
+																<String>ancestor-or-self::*:tr[namespace-uri()='http://www.w3.org/1999/xhtml'][1]</String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Before</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.w3.org/1999/xhtml</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertRowOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>insert.table.column.before</String>
+										</field>
+										<field name="name">
+											<String>${i18n(insert.table.column.before)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(insert.table.column.before_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/TableColumnBefore20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/TableColumnBefore16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*:tr[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>insertPosition</String>
+																<String>Before</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.w3.org/1999/xhtml</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertColumnOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -1852,13 +2372,13 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 							<field name="menubarDescriptor">
 								<menu>
 									<field name="label">
-										<String>XHTML Nota</String>
+										<String>XHTML</String>
 									</field>
 									<field name="accessKey">
 										<String></String>
 									</field>
 									<field name="iconPath">
-										<String></String>
+										<null/>
 									</field>
 									<field name="menuEntriesDescriptorList">
 										<menuEntry-array>
@@ -1991,19 +2511,31 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 																<String>insert.table</String>
 															</field>
 														</menuItem>
+														<menuSeparator/>
 														<menuItem>
 															<field name="actionID">
-																<String>insert.table.row</String>
+																<String>insert.table.row.above</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>insert.table.column</String>
+																<String>insert.table.row.below</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>insert.table.entry</String>
+																<String>delete.table.row</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.table.column.before</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.table.column.after</String>
 															</field>
 														</menuItem>
 														<menuItem>
@@ -2011,9 +2543,10 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 																<String>delete.table.column</String>
 															</field>
 														</menuItem>
+														<menuSeparator/>
 														<menuItem>
 															<field name="actionID">
-																<String>delete.table.row</String>
+																<String>insert.table.entry</String>
 															</field>
 														</menuItem>
 														<menuSeparator/>
@@ -2073,6 +2606,112 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 									</field>
 									<field name="menuEntriesDescriptorList">
 										<menuEntry-array>
+											<menuItem>
+												<field name="actionID">
+													<String>insert.table.row.below</String>
+												</field>
+											</menuItem>
+											<menuItem>
+												<field name="actionID">
+													<String>insert.table.column.after</String>
+												</field>
+											</menuItem>
+											<menu>
+												<field name="label">
+													<String>${i18n(table)}</String>
+												</field>
+												<field name="accessKey">
+													<String></String>
+												</field>
+												<field name="iconPath">
+													<String>/images/Table16.gif</String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.table.row.above</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.table.row.below</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>delete.table.row</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.table.column.before</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.table.column.after</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>delete.table.column</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.table.entry</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>table.join.row.cells</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>table.join.cell.above</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>table.join.cell.below</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>table.split.left</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>table.split.right</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>table.split.above</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>table.split.below</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>sort_table</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+											</menu>
+											<menuSeparator/>
 											<menu>
 												<field name="label">
 													<String>${i18n(headings)}</String>
@@ -2130,92 +2769,20 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 											</menuItem>
 											<menuItem>
 												<field name="actionID">
+													<String>insert.table</String>
+												</field>
+											</menuItem>
+											<menuItem>
+												<field name="actionID">
 													<String>insert.equation</String>
 												</field>
 											</menuItem>
 											<menuSeparator/>
-											<menu>
-												<field name="label">
-													<String>${i18n(table)}</String>
+											<menuItem>
+												<field name="actionID">
+													<String>sort</String>
 												</field>
-												<field name="accessKey">
-													<String></String>
-												</field>
-												<field name="iconPath">
-													<String>/images/Table16.gif</String>
-												</field>
-												<field name="menuEntriesDescriptorList">
-													<menuEntry-array>
-														<menuItem>
-															<field name="actionID">
-																<String>insert.table</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>insert.table.row</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>insert.table.column</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>insert.table.entry</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>delete.table.column</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>delete.table.row</String>
-															</field>
-														</menuItem>
-														<menuSeparator/>
-														<menuItem>
-															<field name="actionID">
-																<String>table.join.row.cells</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>table.join.cell.above</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>table.join.cell.below</String>
-															</field>
-														</menuItem>
-														<menuSeparator/>
-														<menuItem>
-															<field name="actionID">
-																<String>table.split.left</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>table.split.right</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>table.split.above</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>table.split.below</String>
-															</field>
-														</menuItem>
-													</menuEntry-array>
-												</field>
-											</menu>
+											</menuItem>
 											<menuSeparator/>
 											<menuItem>
 												<field name="actionID">
@@ -2308,6 +2875,11 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 											</toolbar>
 											<toolbarItem>
 												<field name="actionID">
+													<String>paragraph</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
 													<String>insert.image</String>
 												</field>
 											</toolbarItem>
@@ -2340,17 +2912,23 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 											<toolbarSeparator/>
 											<toolbarItem>
 												<field name="actionID">
+													<String>sort</String>
+												</field>
+											</toolbarItem>
+											<toolbarSeparator/>
+											<toolbarItem>
+												<field name="actionID">
 													<String>insert.table</String>
 												</field>
 											</toolbarItem>
 											<toolbarItem>
 												<field name="actionID">
-													<String>insert.table.row</String>
+													<String>insert.table.row.below</String>
 												</field>
 											</toolbarItem>
 											<toolbarItem>
 												<field name="actionID">
-													<String>insert.table.column</String>
+													<String>insert.table.column.after</String>
 												</field>
 											</toolbarItem>
 											<toolbarItem>
@@ -2440,7 +3018,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 													</list>
 												</field>
 												<field name="actionID">
-													<String>insert.table.row</String>
+													<String>insert.table.row.below</String>
 												</field>
 												<field name="alias">
 													<String>${i18n(row.wizard)}</String>
@@ -2503,15 +3081,15 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 					</field>
 					<field name="xmlCatalogs">
 						<String-array>
-							<String>${frameworks}/xhtml/dtd/xhtmlcatalog.xml</String>
-							<String>${frameworks}/xhtml/relaxng/catalog.xml</String>
-							<String>${frameworks}/xhtml/nvdl/catalog.xml</String>
+							<String>${framework}/dtd/xhtmlcatalog.xml</String>
+							<String>${framework}/relaxng/catalog.xml</String>
+							<String>${framework}/nvdl/catalog.xml</String>
 							<String>${frameworks}/xhtml11/dtd/xhtmlcatalog.xml</String>
 							<String>${frameworks}/xhtml11/schema/xhtmlcatalog.xml</String>
 						</String-array>
 					</field>
 					<field name="description">
-						<String>An extension of HTML as an XML language.</String>
+						<String>An extension of HTML as an XML language. </String>
 					</field>
 					<field name="doctypeRules">
 						<documentTypeRule-array>
@@ -2541,6 +3119,32 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 									<String>*</String>
 								</field>
 							</documentTypeRule>
+							<documentTypeRule>
+								<field name="namespace">
+									<String>http://www.w3.org/1999/xhtml</String>
+								</field>
+								<field name="rootElem">
+									<String>*</String>
+								</field>
+								<field name="fileName">
+									<String>*</String>
+								</field>
+								<field name="publicID">
+									<String>*</String>
+								</field>
+								<field name="javaRuleClass">
+									<String></String>
+								</field>
+								<field name="attributeLocalName">
+									<String>*</String>
+								</field>
+								<field name="attributeNamespace">
+									<String>*</String>
+								</field>
+								<field name="attributeValue">
+									<String>*</String>
+								</field>
+							</documentTypeRule>
 						</documentTypeRule-array>
 					</field>
 					<field name="scenarios">
@@ -2550,7 +3154,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 									<null/>
 								</field>
 								<field name="name">
-									<String>XHTML to MDF</String>
+									<String>XHTML to DITA concept</String>
 								</field>
 								<field name="baseURL">
 									<String></String>
@@ -2568,7 +3172,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 									<String></String>
 								</field>
 								<field name="inputXSLURL">
-									<String>${frameworks}/dtbook110/xslt/xhtml2mdf.xsl</String>
+									<String>${frameworks}/dita/DITA-OT/plugins/h2d/preprocess.xsl</String>
 								</field>
 								<field name="inputXMLURL">
 									<String>${currentFileURL}</String>
@@ -2589,7 +3193,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 									<Boolean>false</Boolean>
 								</field>
 								<field name="outputFile">
-									<File>${cfn}.mdf</File>
+									<null/>
 								</field>
 								<field name="openOtherLocationInBrowser">
 									<Boolean>false</Boolean>
@@ -2616,13 +3220,58 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 									<Boolean>true</Boolean>
 								</field>
 								<field name="xsltParams">
-									<list/>
+									<list>
+										<transformationParameter>
+											<field name="paramDescription">
+												<paramDescriptor>
+													<field name="localName">
+														<String>FILENAME</String>
+													</field>
+													<field name="prefix">
+														<null/>
+													</field>
+													<field name="namespace">
+														<null/>
+													</field>
+												</paramDescriptor>
+											</field>
+											<field name="value">
+												<String>${cfn}.htm</String>
+											</field>
+											<field name="hasXPathValue">
+												<Boolean>false</Boolean>
+											</field>
+										</transformationParameter>
+										<transformationParameter>
+											<field name="paramDescription">
+												<paramDescriptor>
+													<field name="localName">
+														<String>infotype</String>
+													</field>
+													<field name="prefix">
+														<null/>
+													</field>
+													<field name="namespace">
+														<null/>
+													</field>
+												</paramDescriptor>
+											</field>
+											<field name="value">
+												<String>concept</String>
+											</field>
+											<field name="hasXPathValue">
+												<Boolean>false</Boolean>
+											</field>
+										</transformationParameter>
+									</list>
 								</field>
 								<field name="cascadingStylesheets">
-									<String-array/>
+									<String-array>
+										<String>${frameworks}/dita/DITA-OT/plugins/h2d/h2d.xsl</String>
+									</String-array>
 								</field>
 								<field name="xslTransformer">
-									<String>Saxon-PE</String>
+									<String>Saxon6.5.5</String>
 								</field>
 								<field name="extensionURLs">
 									<String-array/>
@@ -2633,7 +3282,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 									<null/>
 								</field>
 								<field name="name">
-									<String>Image map to div</String>
+									<String>XHTML to DITA reference</String>
 								</field>
 								<field name="baseURL">
 									<String></String>
@@ -2651,7 +3300,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 									<String></String>
 								</field>
 								<field name="inputXSLURL">
-									<String>${frameworks}/dtbook110/xslt/MapToDiv.xsl</String>
+									<String>${frameworks}/dita/DITA-OT/plugins/h2d/preprocess.xsl</String>
 								</field>
 								<field name="inputXMLURL">
 									<String>${currentFileURL}</String>
@@ -2672,7 +3321,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 									<Boolean>false</Boolean>
 								</field>
 								<field name="outputFile">
-									<File>${cfn}_div.htm</File>
+									<null/>
 								</field>
 								<field name="openOtherLocationInBrowser">
 									<Boolean>false</Boolean>
@@ -2699,13 +3348,58 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 									<Boolean>true</Boolean>
 								</field>
 								<field name="xsltParams">
-									<list/>
+									<list>
+										<transformationParameter>
+											<field name="paramDescription">
+												<paramDescriptor>
+													<field name="localName">
+														<String>FILENAME</String>
+													</field>
+													<field name="prefix">
+														<null/>
+													</field>
+													<field name="namespace">
+														<null/>
+													</field>
+												</paramDescriptor>
+											</field>
+											<field name="value">
+												<String>${cfn}.htm</String>
+											</field>
+											<field name="hasXPathValue">
+												<Boolean>false</Boolean>
+											</field>
+										</transformationParameter>
+										<transformationParameter>
+											<field name="paramDescription">
+												<paramDescriptor>
+													<field name="localName">
+														<String>infotype</String>
+													</field>
+													<field name="prefix">
+														<null/>
+													</field>
+													<field name="namespace">
+														<null/>
+													</field>
+												</paramDescriptor>
+											</field>
+											<field name="value">
+												<String>reference</String>
+											</field>
+											<field name="hasXPathValue">
+												<Boolean>false</Boolean>
+											</field>
+										</transformationParameter>
+									</list>
 								</field>
 								<field name="cascadingStylesheets">
-									<String-array/>
+									<String-array>
+										<String>${frameworks}/dita/DITA-OT/plugins/h2d/h2d.xsl</String>
+									</String-array>
 								</field>
 								<field name="xslTransformer">
-									<String>Saxon-PE</String>
+									<String>Saxon6.5.5</String>
 								</field>
 								<field name="extensionURLs">
 									<String-array/>
@@ -2716,7 +3410,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 									<null/>
 								</field>
 								<field name="name">
-									<String>Split at headings</String>
+									<String>XHTML to DITA task</String>
 								</field>
 								<field name="baseURL">
 									<String></String>
@@ -2734,7 +3428,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 									<String></String>
 								</field>
 								<field name="inputXSLURL">
-									<String>${frameworks}/dtbook110/xslt/SplitAtHeadings.xslt</String>
+									<String>${frameworks}/dita/DITA-OT/plugins/h2d/preprocess.xsl</String>
 								</field>
 								<field name="inputXMLURL">
 									<String>${currentFileURL}</String>
@@ -2749,13 +3443,13 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 									<String>XSL</String>
 								</field>
 								<field name="saveAs">
-									<Boolean>false</Boolean>
+									<Boolean>true</Boolean>
 								</field>
 								<field name="openInBrowser">
 									<Boolean>false</Boolean>
 								</field>
 								<field name="outputFile">
-									<File>${cfn}_div.htm</File>
+									<null/>
 								</field>
 								<field name="openOtherLocationInBrowser">
 									<Boolean>false</Boolean>
@@ -2764,7 +3458,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 									<null/>
 								</field>
 								<field name="openInEditor">
-									<Boolean>false</Boolean>
+									<Boolean>true</Boolean>
 								</field>
 								<field name="showInHTMLPane">
 									<Boolean>false</Boolean>
@@ -2782,13 +3476,186 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 									<Boolean>true</Boolean>
 								</field>
 								<field name="xsltParams">
-									<list/>
+									<list>
+										<transformationParameter>
+											<field name="paramDescription">
+												<paramDescriptor>
+													<field name="localName">
+														<String>FILENAME</String>
+													</field>
+													<field name="prefix">
+														<null/>
+													</field>
+													<field name="namespace">
+														<null/>
+													</field>
+												</paramDescriptor>
+											</field>
+											<field name="value">
+												<String>${cfn}.htm</String>
+											</field>
+											<field name="hasXPathValue">
+												<Boolean>false</Boolean>
+											</field>
+										</transformationParameter>
+										<transformationParameter>
+											<field name="paramDescription">
+												<paramDescriptor>
+													<field name="localName">
+														<String>infotype</String>
+													</field>
+													<field name="prefix">
+														<null/>
+													</field>
+													<field name="namespace">
+														<null/>
+													</field>
+												</paramDescriptor>
+											</field>
+											<field name="value">
+												<String>task</String>
+											</field>
+											<field name="hasXPathValue">
+												<Boolean>false</Boolean>
+											</field>
+										</transformationParameter>
+									</list>
 								</field>
 								<field name="cascadingStylesheets">
-									<String-array/>
+									<String-array>
+										<String>${frameworks}/dita/DITA-OT/plugins/h2d/h2d.xsl</String>
+									</String-array>
 								</field>
 								<field name="xslTransformer">
-									<String>Saxon-PE</String>
+									<String>Saxon6.5.5</String>
+								</field>
+								<field name="extensionURLs">
+									<String-array/>
+								</field>
+							</scenario>
+							<scenario>
+								<field name="advancedOptionsMap">
+									<null/>
+								</field>
+								<field name="name">
+									<String>XHTML to DITA topic</String>
+								</field>
+								<field name="baseURL">
+									<String></String>
+								</field>
+								<field name="footerURL">
+									<String></String>
+								</field>
+								<field name="fOPMethod">
+									<String>pdf</String>
+								</field>
+								<field name="fOProcessorName">
+									<String>Apache FOP</String>
+								</field>
+								<field name="headerURL">
+									<String></String>
+								</field>
+								<field name="inputXSLURL">
+									<String>${frameworks}/dita/DITA-OT/plugins/h2d/preprocess.xsl</String>
+								</field>
+								<field name="inputXMLURL">
+									<String>${currentFileURL}</String>
+								</field>
+								<field name="defaultScenario">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="isFOPPerforming">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="type">
+									<String>XSL</String>
+								</field>
+								<field name="saveAs">
+									<Boolean>true</Boolean>
+								</field>
+								<field name="openInBrowser">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="outputFile">
+									<null/>
+								</field>
+								<field name="openOtherLocationInBrowser">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="locationToOpenInBrowserURL">
+									<null/>
+								</field>
+								<field name="openInEditor">
+									<Boolean>true</Boolean>
+								</field>
+								<field name="showInHTMLPane">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="showInXMLPane">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="showInSVGPane">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="showInResultSetPane">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="useXSLTInput">
+									<Boolean>true</Boolean>
+								</field>
+								<field name="xsltParams">
+									<list>
+										<transformationParameter>
+											<field name="paramDescription">
+												<paramDescriptor>
+													<field name="localName">
+														<String>FILENAME</String>
+													</field>
+													<field name="prefix">
+														<null/>
+													</field>
+													<field name="namespace">
+														<null/>
+													</field>
+												</paramDescriptor>
+											</field>
+											<field name="value">
+												<String>${cfn}.htm</String>
+											</field>
+											<field name="hasXPathValue">
+												<Boolean>false</Boolean>
+											</field>
+										</transformationParameter>
+										<transformationParameter>
+											<field name="paramDescription">
+												<paramDescriptor>
+													<field name="localName">
+														<String>infotype</String>
+													</field>
+													<field name="prefix">
+														<null/>
+													</field>
+													<field name="namespace">
+														<null/>
+													</field>
+												</paramDescriptor>
+											</field>
+											<field name="value">
+												<String>topic</String>
+											</field>
+											<field name="hasXPathValue">
+												<Boolean>false</Boolean>
+											</field>
+										</transformationParameter>
+									</list>
+								</field>
+								<field name="cascadingStylesheets">
+									<String-array>
+										<String>${frameworks}/dita/DITA-OT/plugins/h2d/h2d.xsl</String>
+									</String-array>
+								</field>
+								<field name="xslTransformer">
+									<String>Saxon6.5.5</String>
 								</field>
 								<field name="extensionURLs">
 									<String-array/>
@@ -2836,7 +3703,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 						<null/>
 					</field>
 					<field name="priority">
-						<Integer>3</Integer>
+						<Integer>2</Integer>
 					</field>
 					<field name="xmlNodeCustomizerExtension">
 						<null/>
@@ -2844,8 +3711,11 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 					<field name="externalObjectInsertionHandler">
 						<null/>
 					</field>
+					<field name="customAttributeValueEditor">
+						<null/>
+					</field>
 				</documentTypeDescriptor>
 			</documentTypeDescriptor-array>
 		</entry>
-	</map>
+	</serializableOrderedMap>
 </serialized>

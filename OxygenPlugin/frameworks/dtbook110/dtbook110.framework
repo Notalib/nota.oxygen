@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<serialized version="14.0" xml:space="preserve">
-	<map>
+<serialized version="16.0" xml:space="preserve">
+	<serializableOrderedMap>
 		<entry>
 			<String>document.types</String>
 			<documentTypeDescriptor-array>
 				<documentTypeDescriptor>
+					<field name="extensionPatch">
+						<null/>
+					</field>
 					<field name="name">
 						<String>dtbook110</String>
 					</field>
@@ -20,10 +23,13 @@
 					</field>
 					<field name="classpath">
 						<String-array>
-							<String>${frameworks}/dtbook110/OxygenDtbookActions.jar</String>
+							<String>${frameworks}/dtbook110/nota.oxygen.jar</String>
 							<String>${frameworks}/dtbook110/sqljdbc4.jar</String>
 							<String>${frameworks}/dtbook110/commons-validator-1.4.0.jar</String>
 						</String-array>
+					</field>
+					<field name="parentClassLoaderID">
+						<null/>
 					</field>
 					<field name="authorExtensionDescriptor">
 						<authorExtension>
@@ -76,7 +82,7 @@
 														<String>self::span[@lang]|parent::span[@lang]</String>
 													</field>
 													<field name="argValues">
-														<map/>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.DeleteParentElementOperation</String>
@@ -87,12 +93,12 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;span lang="xx">&lt;/span></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -130,7 +136,7 @@
 														<String>parent::acronym|self::acronym</String>
 													</field>
 													<field name="argValues">
-														<map/>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.DeleteParentElementOperation</String>
@@ -141,12 +147,12 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;acronym>&lt;/acronym></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -184,7 +190,7 @@
 														<String>parent::em|self::em</String>
 													</field>
 													<field name="argValues">
-														<map/>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.DeleteParentElementOperation</String>
@@ -195,7 +201,7 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;em>&lt;/em></String>
@@ -204,7 +210,7 @@
 																<String>schemaAware</String>
 																<String>false</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -242,7 +248,7 @@
 														<String>parent::strong|self::strong</String>
 													</field>
 													<field name="argValues">
-														<map/>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.DeleteParentElementOperation</String>
@@ -253,12 +259,12 @@
 														<String>not(ancestor-or-self::strong)</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;strong>&lt;/strong></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -296,7 +302,7 @@
 														<String>ancestor-or-self::*:tr</String>
 													</field>
 													<field name="argValues">
-														<map/>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.JoinRowCellsOperation</String>
@@ -334,12 +340,12 @@
 														<String>ancestor-or-self::*:td | ancestor-or-self::*:th</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>Split point</String>
 																<String>Left</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.SplitLeftRightOperation</String>
@@ -377,12 +383,12 @@
 														<String>ancestor-or-self::*:td | ancestor-or-self::*:th</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>Split point</String>
 																<String>Right</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.SplitLeftRightOperation</String>
@@ -420,12 +426,12 @@
 														<String>ancestor-or-self::*:td | ancestor-or-self::*:th</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>Join direction</String>
 																<String>Above</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.JoinCellAboveBelowOperation</String>
@@ -463,12 +469,12 @@
 														<String>ancestor-or-self::*:td | ancestor-or-self::*:th</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>Join direction</String>
 																<String>Below</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.JoinCellAboveBelowOperation</String>
@@ -506,12 +512,12 @@
 														<String>ancestor-or-self::*:td | ancestor-or-self::*:th</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>Split point</String>
 																<String>Below</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.SplitCellAboveBelowOperation</String>
@@ -549,12 +555,12 @@
 														<String>ancestor-or-self::*:td | ancestor-or-self::*:th</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>Split point</String>
 																<String>Above</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.SplitCellAboveBelowOperation</String>
@@ -592,12 +598,12 @@
 														<String>ancestor-or-self::*:tr</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>namespace</String>
 																<String></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.table.InsertColumnOperation</String>
@@ -635,7 +641,7 @@
 														<String>(ancestor-or-self::*:th | ancestor-or-self::*:td)</String>
 													</field>
 													<field name="argValues">
-														<map/>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.DeleteColumnOperation</String>
@@ -673,7 +679,7 @@
 														<String>ancestor-or-self::*:tr</String>
 													</field>
 													<field name="argValues">
-														<map/>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.DeleteRowOperation</String>
@@ -711,7 +717,7 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map/>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.table.FixTableHeadersOperation</String>
@@ -749,7 +755,7 @@
 														<String>ancestor-or-self::list[@type='pl']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>item element</String>
 																<String>li</String>
@@ -762,7 +768,7 @@
 																<String>list sibling elements</String>
 																<String>address annotation author blockquote byline dateline div dl epigraph lic line linegroup list note p poem prodnote sidebar table</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.list.RemoveListMarkupOperation</String>
@@ -773,7 +779,7 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>elements to substitute</String>
 																<String>p</String>
@@ -790,7 +796,7 @@
 																<String>list fragment</String>
 																<String>&lt;list  type="ul" bullet="none"/></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.list.MarkupListItemsOperation</String>
@@ -828,7 +834,7 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>item element</String>
 																<String>li</String>
@@ -837,7 +843,7 @@
 																<String>list element</String>
 																<String>list</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.list.IndentListOperation</String>
@@ -875,7 +881,7 @@
 														<String>ancestor-or-self::list[@type='ol']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>item element</String>
 																<String>li</String>
@@ -888,7 +894,7 @@
 																<String>list sibling elements</String>
 																<String>address annotation author blockquote byline dateline div dl epigraph lic line linegroup list note p poem prodnote sidebar table</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.list.RemoveListMarkupOperation</String>
@@ -899,7 +905,7 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>elements to substitute</String>
 																<String>p div</String>
@@ -912,7 +918,7 @@
 																<String>list fragment</String>
 																<String>&lt;list type='ol'/></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.list.MarkupListItemsOperation</String>
@@ -950,7 +956,7 @@
 														<String>ancestor-or-self::list[@type='ul']</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>item element</String>
 																<String>li</String>
@@ -963,7 +969,7 @@
 																<String>list sibling elements</String>
 																<String>address annotation author blockquote byline dateline div dl epigraph lic line linegroup list note p poem prodnote sidebar table</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.list.RemoveListMarkupOperation</String>
@@ -974,7 +980,7 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>elements to substitute</String>
 																<String>p div</String>
@@ -987,7 +993,7 @@
 																<String>list fragment</String>
 																<String>&lt;list type='ul'/></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.list.MarkupListItemsOperation</String>
@@ -1025,7 +1031,7 @@
 														<String>self::*:thead</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>header row</String>
 																<String>yes</String>
@@ -1038,7 +1044,7 @@
 																<String>namespace</String>
 																<String></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertRowOperation</String>
@@ -1049,7 +1055,7 @@
 														<String>self::*:tbody | self::*:tfoot | self::*:table</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>header row</String>
 																<String>no</String>
@@ -1066,7 +1072,7 @@
 																<String>namespace</String>
 																<String></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertRowOperation</String>
@@ -1077,7 +1083,7 @@
 														<String>ancestor-or-self::*:tr[1][parent::*:thead]</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>header row</String>
 																<String>yes</String>
@@ -1094,7 +1100,7 @@
 																<String>namespace</String>
 																<String></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertRowOperation</String>
@@ -1105,7 +1111,7 @@
 														<String>ancestor-or-self::*:tr</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>header row</String>
 																<String>no</String>
@@ -1122,7 +1128,7 @@
 																<String>namespace</String>
 																<String></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertRowOperation</String>
@@ -1160,7 +1166,7 @@
 														<String>self::span[@class='roman']|parent::span[@class='roman']</String>
 													</field>
 													<field name="argValues">
-														<map/>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.DeleteParentElementOperation</String>
@@ -1171,12 +1177,12 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;span class="roman">&lt;/span></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -1214,7 +1220,7 @@
 														<String>self::span[@class='roman']|parent::span[@class='roman']</String>
 													</field>
 													<field name="argValues">
-														<map/>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.DeleteParentElementOperation</String>
@@ -1225,12 +1231,12 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;span class="roman">&lt;/span></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -1268,7 +1274,7 @@
 														<String>self::sup|parent::sup</String>
 													</field>
 													<field name="argValues">
-														<map/>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.DeleteParentElementOperation</String>
@@ -1279,12 +1285,12 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;sup>&lt;/sup></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -1322,7 +1328,7 @@
 														<String>self::sub|parent::sub</String>
 													</field>
 													<field name="argValues">
-														<map/>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.DeleteParentElementOperation</String>
@@ -1333,12 +1339,12 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;sub>&lt;/sub></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -1376,7 +1382,7 @@
 														<String>self::a|parent::a</String>
 													</field>
 													<field name="argValues">
-														<map/>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.DeleteParentElementOperation</String>
@@ -1387,7 +1393,7 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>external attribute name - leave empty if not available</String>
 																<String></String>
@@ -1400,7 +1406,7 @@
 																<String>reference attribute name</String>
 																<String>href</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.links.MarkupLinkOperation</String>
@@ -1438,7 +1444,7 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fixed-heading-tags</String>
 																<String>h1|h2|h3|h4|h5|h6</String>
@@ -1459,7 +1465,7 @@
 																<String>level-type</String>
 																<String>sub-level</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.dtbook.MarkupLevelHeadingOperation</String>
@@ -1497,7 +1503,7 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fixed-heading-tags</String>
 																<String>h1|h2|h3|h4|h5|h6</String>
@@ -1518,7 +1524,7 @@
 																<String>level-type</String>
 																<String>same-level</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.dtbook.MarkupLevelHeadingOperation</String>
@@ -1532,7 +1538,7 @@
 											<String>LEVEL_REMOVE_LEVEL_MARKUP</String>
 										</field>
 										<field name="name">
-											<String>Remove level markup</String>
+											<String>Remove level mark-up</String>
 										</field>
 										<field name="description">
 											<String>Removes the level of which the current element is heading, marging it with its predesessor or parent</String>
@@ -1556,7 +1562,7 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>block-replacement-name</String>
 																<String>p</String>
@@ -1577,7 +1583,7 @@
 																<String>generic-level-tag</String>
 																<String>level</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.dtbook.RemoveLevelHeadingOperation</String>
@@ -1615,7 +1621,7 @@
 														<String>self::level|self::level1|self::level2|self::level3|self::level4|self::level5|self::level6</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fixup mode</String>
 																<String>yes</String>
@@ -1628,7 +1634,7 @@
   &lt;prodnote render="optional">&lt;/prodnote>
 &lt;/imggroup></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.dtbook.InsertImageGroupOperation</String>
@@ -1666,7 +1672,7 @@
 														<String>self::pagenum[parent::p]</String>
 													</field>
 													<field name="argValues">
-														<map/>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.SplitParentAtSelfOperation</String>
@@ -1704,12 +1710,12 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>XPath statement</String>
 																<String>//pagenum[not(parent::level or parent::level1 or parent::level2 or parent::level3 or parent::level4 or parent::level5 or parent::level6)]</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.XPathFindOperation</String>
@@ -1747,7 +1753,7 @@
 														<String>self::imggroup|self::level|self::level1|self::level2|self::level3|self::level|self::level5|self::level6</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fixup mode</String>
 																<String>no</String>
@@ -1756,7 +1762,7 @@
 																<String>imggroup fragment</String>
 																<String>&lt;img src="$image" alt="ALTTEXT" width="$width" height="$height"/></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.dtbook.InsertImageGroupOperation</String>
@@ -1794,7 +1800,7 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>Markup mode</String>
 																<String>Fully automatic</String>
@@ -1815,7 +1821,7 @@
 																<String>pagenumber fragment - $pagenum is placeholder for the pagenumber, $id for pagenumber id</String>
 																<String>&lt;pagenum page="normal" id="$id">$pagenum&lt;/pagenum></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.pagenumber.MarkupPageNumbersOperation</String>
@@ -1853,7 +1859,7 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>XPath statement</String>
 																<String>//pagenum</String>
@@ -1862,7 +1868,7 @@
 																<String>direction</String>
 																<String>forward</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.XPathFindOperation</String>
@@ -1900,7 +1906,7 @@
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>XPath statement</String>
 																<String>//pagenum</String>
@@ -1909,7 +1915,7 @@
 																<String>direction</String>
 																<String>reverse</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.XPathFindOperation</String>
@@ -1948,7 +1954,7 @@ the user will be required to confirm when the next page number is out-of-sequenc
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>Markup mode</String>
 																<String>Confirm when out-of-sequence</String>
@@ -1969,7 +1975,7 @@ the user will be required to confirm when the next page number is out-of-sequenc
 																<String>pagenumber fragment - $pagenum is placeholder for the pagenumber, $id for pagenumber id</String>
 																<String>&lt;pagenum page="normal" id="$id">$pagenum&lt;/pagenum></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.pagenumber.MarkupPageNumbersOperation</String>
@@ -2008,7 +2014,7 @@ the user will be required to confirm all pages</String>
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>Markup mode</String>
 																<String>Confirm all</String>
@@ -2029,7 +2035,7 @@ the user will be required to confirm all pages</String>
 																<String>pagenumber fragment - $pagenum is placeholder for the pagenumber, $id for pagenumber id</String>
 																<String>&lt;pagenum page="normal" id="$id">$pagenum&lt;/pagenum></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.pagenumber.MarkupPageNumbersOperation</String>
@@ -2067,12 +2073,12 @@ the user will be required to confirm all pages</String>
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>pagenum xpath</String>
 																<String>//pagenum</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.pagenumber.ShowPageNumberReportOperation</String>
@@ -2110,7 +2116,7 @@ the user will be required to confirm all pages</String>
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>note fragment</String>
 																<String>&lt;note>&lt;/note></String>
@@ -2119,7 +2125,7 @@ the user will be required to confirm all pages</String>
 																<String>note identifier fragment</String>
 																<String>&lt;span class="note_identifier">&lt;/span></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.notes.MarkupNoteOperation</String>
@@ -2157,7 +2163,7 @@ the user will be required to confirm all pages</String>
 														<String>//*[ancestor-or-self::note]</String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>note identifier xpath</String>
 																<String>.//span[@class='note_identifier']</String>
@@ -2174,7 +2180,7 @@ the user will be required to confirm all pages</String>
 																<String>noteref fragment</String>
 																<String>&lt;noteref idref="#$idref">&lt;/noteref></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.notes.FindNoterefOperation</String>
@@ -2212,7 +2218,7 @@ the user will be required to confirm all pages</String>
 														<String>self::span[@class='note_identifier']|parent::span[@class='note_identifier']</String>
 													</field>
 													<field name="argValues">
-														<map/>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.DeleteParentElementOperation</String>
@@ -2223,12 +2229,12 @@ the user will be required to confirm all pages</String>
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
 																<String>&lt;span class="note_identifier">&lt;/span></String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
@@ -2266,7 +2272,7 @@ the user will be required to confirm all pages</String>
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>item element</String>
 																<String>li</String>
@@ -2279,7 +2285,7 @@ the user will be required to confirm all pages</String>
 																<String>list element</String>
 																<String>list</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.list.OutdentListOperation</String>
@@ -2317,12 +2323,12 @@ the user will be required to confirm all pages</String>
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>settings file</String>
 																<String>${frameworkDir}/MBWAcronym-da.xml</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.dtbook.MarkupByWordsOperation</String>
@@ -2360,7 +2366,7 @@ the user will be required to confirm all pages</String>
 														<String></String>
 													</field>
 													<field name="argValues">
-														<map>
+														<serializableOrderedMap>
 															<entry>
 																<String>domain list file</String>
 																<String>${frameworkDir}/RootDomains.xml</String>
@@ -2377,7 +2383,7 @@ the user will be required to confirm all pages</String>
 																<String>start node xpath</String>
 																<String>/dtbook/book</String>
 															</entry>
-														</map>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.common.links.MarkupLinksOperation</String>
@@ -3652,12 +3658,15 @@ the user will be required to confirm all pages</String>
 							</scenario>
 							<scenario>
 								<field name="advancedOptionsMap">
-									<map>
+									<serializableOrderedMap>
 										<entry>
 											<String>Saxon-EE</String>
 											<xsltSaxonSAAdvancedOptions>
 												<field name="sourceValidation">
 													<String>saxon.source.lax.schema.based.validation</String>
+												</field>
+												<field name="schemaVersion">
+													<String>1.0</String>
 												</field>
 												<field name="treatResultValidationErrorsAsWarnings">
 													<Boolean>false</Boolean>
@@ -3669,6 +3678,9 @@ the user will be required to confirm all pages</String>
 													<Boolean>false</Boolean>
 												</field>
 												<field name="allowCallsOnExtensionFunctions">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="registerSaxonCEExtensions">
 													<Boolean>true</Boolean>
 												</field>
 												<field name="showVersionWarnings">
@@ -3692,6 +3704,9 @@ the user will be required to confirm all pages</String>
 												<field name="traceXPathExpression">
 													<Boolean>true</Boolean>
 												</field>
+												<field name="expandAttributeDefaults">
+													<Boolean>false</Boolean>
+												</field>
 												<field name="errorRecoverPolicy">
 													<String>saxon.recover.with.warning</String>
 												</field>
@@ -3712,7 +3727,7 @@ the user will be required to confirm all pages</String>
 												</field>
 											</xsltSaxonSAAdvancedOptions>
 										</entry>
-									</map>
+									</serializableOrderedMap>
 								</field>
 								<field name="name">
 									<String>Downgrade</String>
@@ -3795,12 +3810,15 @@ the user will be required to confirm all pages</String>
 							</scenario>
 							<scenario>
 								<field name="advancedOptionsMap">
-									<map>
+									<serializableOrderedMap>
 										<entry>
 											<String>Saxon-EE</String>
 											<xsltSaxonSAAdvancedOptions>
 												<field name="sourceValidation">
 													<String>saxon.source.lax.schema.based.validation</String>
+												</field>
+												<field name="schemaVersion">
+													<String>1.0</String>
 												</field>
 												<field name="treatResultValidationErrorsAsWarnings">
 													<Boolean>false</Boolean>
@@ -3812,6 +3830,9 @@ the user will be required to confirm all pages</String>
 													<Boolean>false</Boolean>
 												</field>
 												<field name="allowCallsOnExtensionFunctions">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="registerSaxonCEExtensions">
 													<Boolean>true</Boolean>
 												</field>
 												<field name="showVersionWarnings">
@@ -3835,6 +3856,9 @@ the user will be required to confirm all pages</String>
 												<field name="traceXPathExpression">
 													<Boolean>true</Boolean>
 												</field>
+												<field name="expandAttributeDefaults">
+													<Boolean>false</Boolean>
+												</field>
 												<field name="errorRecoverPolicy">
 													<String>saxon.recover.with.warning</String>
 												</field>
@@ -3855,7 +3879,7 @@ the user will be required to confirm all pages</String>
 												</field>
 											</xsltSaxonSAAdvancedOptions>
 										</entry>
-									</map>
+									</serializableOrderedMap>
 								</field>
 								<field name="name">
 									<String>dtbook110</String>
@@ -3940,12 +3964,15 @@ the user will be required to confirm all pages</String>
 							</scenario>
 							<scenario>
 								<field name="advancedOptionsMap">
-									<map>
+									<serializableOrderedMap>
 										<entry>
 											<String>Saxon-EE</String>
 											<xsltSaxonSAAdvancedOptions>
 												<field name="sourceValidation">
 													<String>saxon.source.lax.schema.based.validation</String>
+												</field>
+												<field name="schemaVersion">
+													<String>1.0</String>
 												</field>
 												<field name="treatResultValidationErrorsAsWarnings">
 													<Boolean>false</Boolean>
@@ -3957,6 +3984,9 @@ the user will be required to confirm all pages</String>
 													<Boolean>false</Boolean>
 												</field>
 												<field name="allowCallsOnExtensionFunctions">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="registerSaxonCEExtensions">
 													<Boolean>true</Boolean>
 												</field>
 												<field name="showVersionWarnings">
@@ -3980,6 +4010,9 @@ the user will be required to confirm all pages</String>
 												<field name="traceXPathExpression">
 													<Boolean>true</Boolean>
 												</field>
+												<field name="expandAttributeDefaults">
+													<Boolean>false</Boolean>
+												</field>
 												<field name="errorRecoverPolicy">
 													<String>saxon.recover.with.warning</String>
 												</field>
@@ -4000,7 +4033,7 @@ the user will be required to confirm all pages</String>
 												</field>
 											</xsltSaxonSAAdvancedOptions>
 										</entry>
-									</map>
+									</serializableOrderedMap>
 								</field>
 								<field name="name">
 									<String>E-Braille with decimal numbering</String>
@@ -4085,12 +4118,15 @@ the user will be required to confirm all pages</String>
 							</scenario>
 							<scenario>
 								<field name="advancedOptionsMap">
-									<map>
+									<serializableOrderedMap>
 										<entry>
 											<String>Saxon-EE</String>
 											<xsltSaxonSAAdvancedOptions>
 												<field name="sourceValidation">
 													<String>saxon.source.lax.schema.based.validation</String>
+												</field>
+												<field name="schemaVersion">
+													<String>1.0</String>
 												</field>
 												<field name="treatResultValidationErrorsAsWarnings">
 													<Boolean>false</Boolean>
@@ -4102,6 +4138,9 @@ the user will be required to confirm all pages</String>
 													<Boolean>false</Boolean>
 												</field>
 												<field name="allowCallsOnExtensionFunctions">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="registerSaxonCEExtensions">
 													<Boolean>true</Boolean>
 												</field>
 												<field name="showVersionWarnings">
@@ -4125,6 +4164,9 @@ the user will be required to confirm all pages</String>
 												<field name="traceXPathExpression">
 													<Boolean>true</Boolean>
 												</field>
+												<field name="expandAttributeDefaults">
+													<Boolean>false</Boolean>
+												</field>
 												<field name="errorRecoverPolicy">
 													<String>saxon.recover.with.warning</String>
 												</field>
@@ -4145,7 +4187,7 @@ the user will be required to confirm all pages</String>
 												</field>
 											</xsltSaxonSAAdvancedOptions>
 										</entry>
-									</map>
+									</serializableOrderedMap>
 								</field>
 								<field name="name">
 									<String>E-Braille without decimal numbering</String>
@@ -4383,8 +4425,11 @@ the user will be required to confirm all pages</String>
 					<field name="externalObjectInsertionHandler">
 						<null/>
 					</field>
+					<field name="customAttributeValueEditor">
+						<null/>
+					</field>
 				</documentTypeDescriptor>
 			</documentTypeDescriptor-array>
 		</entry>
-	</map>
+	</serializableOrderedMap>
 </serialized>

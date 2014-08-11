@@ -1,0 +1,165 @@
+
+
+   html5.flow.class |= html5.grouping.class
+   html5.grouping.class |= html5.p | html5.hr | html5.pre | html5.blockquote | html5.ul | html5.ol | html5.dl | html5.div | html5.figure | html5.table
+   
+   html5.grouping.attrs &= html5.global.attrs
+      
+   html5.p =
+## The p element represents a paragraph.
+ element p { html5.p.attlist & html5.p.content }
+   html5.p.attlist &= html5.grouping.attrs
+   html5.p.content = html5.phrasing.model
+   
+   html5.hr =
+## The hr element represents a paragraph-level thematic break, e.g. a scene change in a story, or a transition to another topic within a section of a reference book.
+ element hr { html5.hr.attlist }
+   html5.hr.attlist = html5.grouping.attrs
+
+   html5.pre =
+## The pre element represents a block of preformatted text, in which structure is represented by typographic conventions rather than by elements.
+ element pre { html5.pre.attlist & html5.pre.content }
+   html5.pre.attlist = html5.grouping.attrs
+   html5.pre.content = html5.phrasing.model
+
+   html5.blockquote =
+## The blockquote element represents a section that is quoted from another source.
+ element blockquote { html5.blockquote.attlist & html5.blockquote.content }
+   html5.blockquote.attlist = html5.grouping.attrs & html5.cite.attr?
+   html5.blockquote.content = html5.flow.model
+
+   html5.ul =
+## The ul element represents a list of items, where the order of the items is not important that is, where changing the order would not materially change the meaning of the document.
+ element ul { html5.ul.attlist & html5.ul.content }
+   html5.ul.attlist = html5.grouping.attrs
+   html5.ul.content = html5.li*
+
+   html5.li =
+## The li element represents a list item. If its parent element is an ol, ul, or menu element, then the element is an item of the parent element's list, as defined for those elements. Otherwise, the list item has no defined list-related relationship to any other li element.
+ element li { html5.li.attlist & html5.li.content }
+   html5.li.attlist = html5.global.attrs 
+   html5.li.content = html5.flow.model
+
+   html5.ol =
+## The ol element represents a list of items, where the items have been intentionally ordered, such that changing the order would change the meaning of the document.
+ element ol { html5.ol.attlist & html5.ol.content }
+   html5.ol.attlist = html5.grouping.attrs & html5.ol.start.attr? & html5.ol.reversed.attr? & ol.type.attr?
+   html5.ol.start.attr = attribute start { datatype.integer }
+   html5.ol.reversed.attr = attribute reversed { 'reversed' | '' }
+   ol.type.attr = attribute type {'1' | 'a' | 'A' | 'i' | 'I' }
+   html5.ol.content = html5.oli*
+
+   html5.oli =
+## The li element represents a list item. If its parent element is an ol, ul, or menu element, then the element is an item of the parent element's list, as defined for those elements. Otherwise, the list item has no defined list-related relationship to any other li element.
+ element li { html5.oli.attlist & html5.oli.content }
+   html5.oli.attlist = html5.global.attrs & html5.oli.attrs.value?
+   html5.oli.attrs.value = attribute value { datatype.integer }
+   html5.oli.content = html5.flow.model
+
+   html5.dl =
+## The dl element represents an association list consisting of zero or more name-value groups (a description list). Each group must consist of one or more names (dt elements) followed by one or more values (dd elements). Within a single dl element, there should not be more than one dt element for each name.
+ element dl { html5.dl.attlist & html5.dl.content }
+   html5.dl.attlist = html5.grouping.attrs
+   html5.dl.content = (html5.dt+ , html5.dd+)*
+
+   html5.dt =
+## The dt element represents the term, or name, part of a term-description group in a description list (dl element).
+ element dt { html5.dt.attlist & html5.dt.content }
+   html5.dt.attlist = html5.global.attrs
+   html5.dt.content = html5.phrasing.model
+
+   html5.dd =
+## The dd element represents the description, definition, or value, part of a term-description group in a description list (dl element).
+ element dd { html5.dd.attlist & html5.dd.content }
+   html5.dd.phrasing =
+## The dd element represents the description, definition, or value, part of a term-description group in a description list (dl element).
+ element dd { html5.dd.phrasing.content & html5.dd.attlist }
+   html5.dd.attlist = html5.global.attrs
+   html5.dd.content = html5.flow.model
+   html5.dd.phrasing.content = html5.phrasing.model
+
+   html5.div =
+## The div element has no special meaning at all. It represents its children. It can be used with the class, lang, and title attributes to mark up semantics common to a group of consecutive elements.
+ element div { html5.div.attlist & html5.div.content }
+   html5.div.attlist = html5.grouping.attrs
+   html5.div.content = html5.flow.model
+
+   html5.figure =
+## The figure element represents some flow content, optionally with a caption, that is self-contained and is typically referenced as a single unit from the main flow of the document.
+ element figure { html5.figure.attlist & html5.figure.content }
+   html5.figure.attlist = html5.grouping.attrs
+   html5.figure.content = ( html5.figcaption, html5.flow.model ) | ( html5.flow.model, html5.figcaption? )
+		
+   html5.figcaption =
+## The figcaption element represents a caption or legend for the rest of the contents of the figcaption element's parent figure element, if any.
+ element figcaption { html5.figcaption.attlist & html5.figcaption.content }
+   html5.figcaption.attlist = html5.global.attrs
+   html5.figcaption.content = html5.flow.model
+      
+   html5.table =
+## The table element represents data with more than one dimension, in the form of a table.
+ element table { table.attlist & table.content }
+   table.attlist &= html5.grouping.attrs & html5.table.border.attr?
+   html5.table.border.attr = attribute border { '1' | '' }
+   table.content = (html5.caption?, html5.colgroup*, html5.thead?, 
+      ((html5.tfoot, ( html5.tbody* | html5.tr+ ))|(( html5.tbody* | html5.tr+ ), html5.tfoot?))) 
+
+   html5.caption =
+## The caption element represents the title of the table that is its parent, if it has a parent and that is a table element.
+ element caption { html5.caption.attlist & html5.caption.content }
+   html5.caption.attlist &= html5.global.attrs
+   html5.caption.content = html5.flow.model
+      
+   html5.colgroup =
+## The colgroup element represents a group of one or more columns in the table that is its parent, if it has a parent and that is a table element.
+ element colgroup { html5.colgroup.attlist & html5.colgroup.content }
+   html5.colgroup.attlist &= html5.global.attrs   
+   html5.colgroup.content = html5.col* | html5.colspan.col.span.attr?
+                     
+   html5.col =
+## If a col element has a parent and that is a colgroup element that itself has a parent that is a table element, then the col element represents one or more columns in the column group represented by that colgroup.
+ element col { html5.col.attlist }
+   html5.col.attlist &= html5.global.attrs & html5.colspan.col.span.attr?  
+            
+   html5.thead =
+## The thead element represents the block of rows that consist of the column labels (headers) for the parent table element, if the thead element has a parent and it is a table.
+ element thead { html5.thead.attlist & html5.thead.content }
+   html5.thead.attlist &= html5.grouping.attrs  
+   html5.thead.content = html5.tr* 
+      
+   html5.tfoot =
+## The tfoot element represents the block of rows that consist of the column summaries (footers) for the parent table element, if the tfoot element has a parent and it is a table.
+ element tfoot { html5.tfoot.attlist & html5.tfoot.content }
+   html5.tfoot.attlist &= ( html5.grouping.attrs )
+   html5.tfoot.content = ( html5.tr* )
+
+   html5.tbody =
+## The tbody element represents a block of rows that consist of a body of data for the parent table element, if the tbody element has a parent and it is a table.
+ element tbody { html5.tbody.attlist & html5.tbody.content  }
+   html5.tbody.attlist &= ( html5.grouping.attrs )
+   html5.tbody.content = ( html5.tr* )
+      
+   html5.tr =
+## The tr element represents a row of cells in a table.
+ element tr { html5.tr.attlist & html5.tr.content }
+   html5.tr.attlist &= html5.grouping.attrs
+   html5.tr.content = ( html5.td | html5.th )* 
+   
+   html5.td =
+## The td element represents a data cell in a table.
+ element td { html5.td.attlist & html5.td.content }
+   html5.td.attlist &= html5.global.attrs & html5.table.colspan.attr? & html5.table.rowspan.attr? & html5.table.headers.attr?
+   html5.td.content = ( html5.flow.model )
+
+   html5.th =
+## The th element represents a header cell in a table.
+ element th { html5.th.content & html5.th.attlist }
+   html5.th.attlist &= html5.global.attrs & html5.table.colspan.attr? & html5.table.rowspan.attr? & html5.table.scope.attr? & html5.table.headers.attr?    
+   html5.th.content = ( html5.flow.model )
+
+   html5.colspan.col.span.attr = attribute span { datatype.positive.integer }   
+   html5.table.colspan.attr = attribute colspan { datatype.positive.integer }
+   html5.table.rowspan.attr = attribute rowspan { datatype.non-negative.integer }   
+   html5.table.headers.attr = attribute headers { datatype.IDREFS }   
+   html5.table.scope.attr = attribute scope { 'row' | 'col' | 'rowgroup' | 'colgroup' }
+   html5.table.abbr.attr = attribute abbr { string }

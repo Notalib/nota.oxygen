@@ -1,0 +1,189 @@
+
+
+   html5.flow.class |= html5.embed.flow.class
+   html5.phrasing.class |= html5.embed.phrasing.class
+
+   html5.embed.flow.class |= html5.audio.flow | html5.video.flow | html5.object.flow | html5.canvas.flow 
+      | html5.map.flow | html5.area | html5.iframe | html5.img | html5.embed
+   html5.embed.phrasing.class |= html5.audio.phrasing | html5.video.phrasing | html5.object.phrasing | html5.canvas.phrasing 
+      | html5.map.phrasing | html5.area | html5.iframe | html5.img | html5.embed 
+
+
+   
+   html5.video.flow =
+## A video element is used for playing videos or movies, and audio files with captions.
+ element video { html5.video.attlist & html5.video.flow.content }
+   html5.video.phrasing =
+## A video element is used for playing videos or movies, and audio files with captions.
+ element video { html5.video.attlist & html5.video.phrasing.content }
+   html5.video.attlist &= html5.global.attrs & html5.av.common.attrs & html5.video.poster.attr? & html5.dimension.attrs
+   html5.video.poster.attr = attribute poster { datatype.html5.URL.spaces }	   
+   html5.video.flow.content = html5.av.source, html5.track*, html5.flow.model
+   html5.video.phrasing.content = html5.av.source, html5.track*, html5.phrasing.model
+
+
+
+   html5.audio.flow =
+## An audio element represents a sound or audio stream.
+ element audio { html5.audio.attlist & html5.audio.flow.content }
+   html5.audio.phrasing =
+## An audio element represents a sound or audio stream.
+ element audio { html5.audio.attlist & html5.audio.phrasing.content }
+   html5.audio.attlist &= html5.global.attrs & html5.av.common.attrs   		
+   html5.audio.flow.content = html5.av.source, html5.track*, html5.flow.model
+   html5.audio.phrasing.content = html5.av.source, html5.track*, html5.phrasing.model
+
+   html5.av.source = html5.src.attr | html5.source*
+   
+   html5.av.common.attrs =  html5.av.autoplay.attr? & html5.av.preload.attr? 
+      & html5.av.controls.attr? & html5.av.loop.attr? & html5.av.mediagroup.attr?
+      & html5.av.muted.attr?
+		
+		
+   html5.track =
+## The track element allows authors to specify explicit external timed text tracks for media elements. It does not represent anything on its own.
+ element track { html5.track.attlist }	
+   html5.track.attlist &= html5.global.attrs & html5.track.kind.attr? & html5.src.attr & html5.track.default.attr? 
+      & html5.track.srclang.attr? & html5.track.label.attr?
+
+   html5.track.kind.attr = attribute kind { 'subtitles' | 'captions' | 'descriptions' | 'chapters' | 'metadata' }   
+   html5.track.srclang.attr = attribute srclang { datatype.languagecode }
+   html5.track.label.attr = attribute label { datatype.string  }
+   html5.track.default.attr = attribute default { 'default' | '' }
+
+
+   html5.av.autoplay.attr = attribute autoplay { 'autoplay' | '' }
+   html5.av.preload.attr = attribute preload { 'none' | 'metadata' | 'auto' | '' }			
+   html5.av.controls.attr  = attribute controls  { 'controls' | '' }			
+   html5.av.loop.attr = attribute loop { 'loop' | '' }
+   html5.av.mediagroup.attr = attribute mediagroup { datatype.string }
+   html5.av.muted.attr = attribute muted { 'muted' | '' }
+				
+   html5.source =
+## The source element allows authors to specify multiple alternative media resources for media elements. It does not represent anything on its own.
+ element source { html5.source.attlist }
+   html5.source.attlist &= html5.global.attrs & html5.src.attr & html5.type.mime.attr? & html5.media.attr?
+
+
+   
+   
+   html5.img =
+## An img element represents an image.
+ element img { html5.img.attlist }
+   html5.img.attlist &= html5.global.attrs & html5.dimension.attrs & html5.src.attr & html5.alt.attr? & html5.usemap.attr? & html5.img.ismap.attr?    
+   html5.img.ismap.attr = attribute ismap { 'ismap' | '' }
+   
+   
+      
+   html5.embed =
+## The embed element represents an integration point for an external (typically non-HTML) application or interactive content.
+ element embed { html5.embed.attlist }
+   html5.embed.attlist &= html5.global.attrs & html5.src.attr? & html5.type.mime.attr? & html5.dimension.attrs & html5.embed.attrs.other*		
+   html5.embed.attrs.other = empty #TODO		
+
+
+
+   html5.object.flow =
+## The object element can represent an external resource, which, depending on the type of the resource, will either be treated as an image, as a nested browsing context, or as an external resource to be processed by a plugin.
+ element object { html5.object.flow.content & html5.object.attlist }
+   html5.object.phrasing =
+## The object element can represent an external resource, which, depending on the type of the resource, will either be treated as an image, as a nested browsing context, or as an external resource to be processed by a plugin.
+ element object { html5.object.phrasing.content & html5.object.attlist }
+   html5.object.attlist &= html5.global.attrs & (( html5.object.data.attr & html5.type.mime.attr? ) | html5.type.mime.attr ) 
+      & html5.dimension.attrs & html5.usemap.attr? & html5.name.context.attr? & html5.forms.form.attr?
+   html5.object.data.attr = attribute data { datatype.html5.URL.spaces }
+   
+   html5.object.flow.content = html5.param*, html5.flow.model
+   html5.object.phrasing.content = html5.param*, html5.phrasing.model
+
+   html5.param =
+## The param element defines parameters for plugins invoked by object elements. It does not represent anything on its own.
+ element param { html5.param.attlist }
+   html5.param.attlist &= html5.global.attrs & html5.param.name.attr & html5.param.value.attr
+   html5.param.name.attr = attribute name { string }
+   html5.param.value.attr = attribute value { string }
+
+
+   html5.canvas.flow =
+## The canvas element provides scripts with a resolution-dependent bitmap canvas, which can be used for rendering graphs, game graphics, or other visual images on the fly.
+ element canvas { html5.canvas.attlist & html5.canvas.flow.content }
+   html5.canvas.phrasing =
+## The canvas element provides scripts with a resolution-dependent bitmap canvas, which can be used for rendering graphs, game graphics, or other visual images on the fly.
+ element canvas { html5.canvas.attlist & html5.canvas.phrasing.content }	
+   html5.canvas.attlist = html5.global.attrs & html5.dimension.attrs
+   html5.canvas.flow.content	= html5.flow.model	
+   html5.canvas.phrasing.content = html5.phrasing.model
+
+
+   html5.map.flow =
+## The map element, in conjunction with any area element descendants, defines an image map. The element represents its children.
+ element map { html5.map.flow.content & html5.map.attlist }
+   html5.map.phrasing  =
+## The map element, in conjunction with any area element descendants, defines an image map. The element represents its children.
+ element map { html5.map.phrasing.content & html5.map.attlist }
+   html5.map.attlist &= html5.global.attrs & html5.name.id.attr
+   html5.map.flow.content = html5.flow.model
+   html5.map.phrasing.content = html5.phrasing.model
+
+
+   html5.area =
+## The area element represents either a hyperlink with some text and a corresponding area on an image map, or a dead area on an image map.
+ element area { html5.area.attlist }
+   html5.area.attlist &= html5.global.attrs & (html5.alt.attr & html5.href.attr)? & html5.target.attr? & html5.rel.attr? 
+      & html5.media.attr? & html5.hreflang.attr? & html5.type.mime.attr? & html5.area.shape.attrs?
+		
+   html5.area.shape.attrs =
+      ( html5.area.shape.rect.attr?  & html5.area.coords.rect.attr )
+      |( html5.area.shape.circle.attr & html5.area.coords.circle.attr )
+      |( html5.area.shape.poly.attr & html5.area.coords.poly.attr )
+      |( html5.area.shape.default.attr )
+					
+   html5.area.shape.rect.attr = attribute shape { 'rect' }
+   html5.area.coords.rect.attr = attribute coords { datatype.html5.coords.rectangle }
+   html5.area.shape.circle.attr = attribute shape { 'circle' }
+   html5.area.coords.circle.attr = attribute coords { datatype.html5.coords.circle }
+   html5.area.shape.poly.attr = attribute shape { 'poly' }			
+   html5.area.coords.poly.attr = attribute coords {datatype.html5.coords.poly}
+   html5.area.shape.default.attr = attribute shape { 'default' }
+			
+
+
+   html5.iframe =
+## The iframe element represents a nested browsing context.
+ element iframe { html5.iframe.attlist & html5.iframe.content}
+   html5.iframe.attlist &= html5.global.attrs & html5.src.attr? & html5.name.context.attr? 
+      & html5.dimension.attrs & html5.iframe.sandbox.attr? & html5.iframe.seamless.attr? 
+      & html5.iframe.srcdoc.attr?
+   html5.iframe.seamless.attr = attribute seamless { 'seamless' | '' }
+   html5.iframe.sandbox.attr = attribute sandbox
+      { list { 'allow-top-navigation'?, 'allow-same-origin'?, 'allow-forms'?, 'allow-scripts'? }
+      | list { 'allow-top-navigation'?, 'allow-same-origin'?, 'allow-scripts'?, 'allow-forms'? }
+      | list { 'allow-top-navigation'?, 'allow-forms'?, 'allow-same-origin'?, 'allow-scripts'? }
+      | list { 'allow-top-navigation'?, 'allow-forms'?, 'allow-scripts'?, 'allow-same-origin'? }
+      | list { 'allow-top-navigation'?, 'allow-scripts'?, 'allow-same-origin'?, 'allow-forms'? }
+      | list { 'allow-top-navigation'?, 'allow-scripts'?, 'allow-forms'?, 'allow-same-origin'? }
+      | list { 'allow-same-origin'?, 'allow-top-navigation'?, 'allow-forms'?, 'allow-scripts'? }
+      | list { 'allow-same-origin'?, 'allow-top-navigation'?, 'allow-scripts'?, 'allow-forms'? }
+      | list { 'allow-forms'?, 'allow-top-navigation'?, 'allow-same-origin'?, 'allow-scripts'? }
+      | list { 'allow-forms'?, 'allow-top-navigation'?, 'allow-scripts'?, 'allow-same-origin'? }
+      | list { 'allow-scripts'?, 'allow-top-navigation'?, 'allow-same-origin'?, 'allow-forms'? }
+      | list { 'allow-scripts'?, 'allow-top-navigation'?, 'allow-forms'?, 'allow-same-origin'? }
+      | list { 'allow-same-origin'?, 'allow-forms'?, 'allow-top-navigation'?, 'allow-scripts'? }
+      | list { 'allow-same-origin'?, 'allow-scripts'?, 'allow-top-navigation'?, 'allow-forms'? }
+      | list { 'allow-forms'?, 'allow-same-origin'?, 'allow-top-navigation'?, 'allow-scripts'? }
+      | list { 'allow-forms'?, 'allow-scripts'?, 'allow-top-navigation'?, 'allow-same-origin'? }
+      | list { 'allow-scripts'?, 'allow-same-origin'?, 'allow-top-navigation'?, 'allow-forms'? }
+      | list { 'allow-scripts'?, 'allow-forms'?, 'allow-top-navigation'?, 'allow-same-origin'? }
+      | list { 'allow-same-origin'?, 'allow-forms'?, 'allow-scripts'?, 'allow-top-navigation'? }
+      | list { 'allow-same-origin'?, 'allow-scripts'?, 'allow-forms'?, 'allow-top-navigation'? }
+      | list { 'allow-forms'?, 'allow-same-origin'?, 'allow-scripts'?, 'allow-top-navigation'? }
+      | list { 'allow-forms'?, 'allow-scripts'?, 'allow-same-origin'?, 'allow-top-navigation'? }
+      | list { 'allow-scripts'?, 'allow-same-origin'?, 'allow-forms'?, 'allow-top-navigation'? }
+      | list { 'allow-scripts'?, 'allow-forms'?, 'allow-same-origin'?, 'allow-top-navigation'? }
+      } 
+   html5.iframe.srcdoc.attr	= attribute srcdoc { datatype.html5.iframe.srcdoc.xml }
+   
+   html5.iframe.content = html5.iframe.content.xml
+   html5.iframe.content.html = datatype.text 
+   html5.iframe.content.xml = empty 
+   

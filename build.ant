@@ -1,55 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="dtbookOxygen" default="dist">
-<!-- Set property oxygen_installation_folder in Window->Preferences->Ant->Runtime->Properties -->
-<property name="oxygen_installation_folder" value="c:/oxygen/"/>
-<property name="version-number" value="2.8.0"/>
-<target name="dist">
- 	<jar destfile="./OxygenPlugin/frameworks/dtbook2005/OxygenDtbookActions.jar" basedir="./bin"> 
- 		<manifest>
-			<attribute name="Implementation-Version" value="${version-number}" />
- 		</manifest>
-		<fileset dir="bin" />
-		<fileset dir="." includes="doc/**" />
-	</jar>
-	<copy todir="./OxygenPlugin/frameworks/dtbook110/" file="./OxygenPlugin/frameworks/dtbook2005/OxygenDtbookActions.jar"/>
-	<copy todir="./OxygenPlugin/frameworks/xhtmlnota/" file="./OxygenPlugin/frameworks/dtbook2005/OxygenDtbookActions.jar"/>
-	<zip destfile="./updatesite/dtbook110_${version-number}.zip" basedir="./OxygenPlugin/frameworks" includes="dtbook110/**"/>
-	<zip destfile="./updatesite/dtbook2005_${version-number}.zip" basedir="./OxygenPlugin/frameworks" includes="dtbook2005/**"/>
-	<zip destfile="./updatesite/xhtmlnota_${version-number}.zip" basedir="./OxygenPlugin/frameworks" includes="xhtmlnota/**"/>
-</target>
-<target name="debug">
- 	<jar destfile="${oxygen_installation_folder}frameworks/dtbook2005/OxygenDtbookActions.jar" basedir="./bin"> 
- 		<manifest>
-			<attribute name="Implementation-Version" value="${version-number}" />
- 		</manifest>
-		<fileset dir="bin" />
-		<fileset dir="." includes="doc/**" />
-	</jar>
-	<copy todir="${oxygen_installation_folder}frameworks/dtbook2005/">
-		<fileset dir="./OxygenPlugin/frameworks/dtbook2005/">
-			<exclude name="OxygenDtbookActions.jar"/>
-		</fileset>
-	</copy>
-	<copy todir="${oxygen_installation_folder}frameworks/dtbook110/">
-		<fileset dir="./OxygenPlugin/frameworks/dtbook110/"/>
-	</copy>
-	<copy todir="${oxygen_installation_folder}frameworks/xhtmlnota/">
-		<fileset dir="./OxygenPlugin/frameworks/xhtmlnota/"/>
-	</copy>
-	<delete>
-		<fileset dir="./OxygenPlugin/frameworks/dtbook110/"/>
-		<fileset dir="./OxygenPlugin/frameworks/dtbook2005/"/>
-		<fileset dir="./OxygenPlugin/frameworks/xhtmlnota/"/>
-	</delete> 
-	<copy todir="./OxygenPlugin/frameworks/dtbook2005/">
-		<fileset dir="${oxygen_installation_folder}frameworks/dtbook2005/"/>
-	</copy>
-	<copy todir="./OxygenPlugin/frameworks/dtbook110/">
-		<fileset dir="${oxygen_installation_folder}frameworks/dtbook110/"/>
-	</copy>
-	<copy todir="./OxygenPlugin/frameworks/xhtmlnota/">
-		<fileset dir="${oxygen_installation_folder}frameworks/xhtmlnota/"/>
-	</copy> 
-	<zip destfile="dtbookpluginV${version-number}.zip" basedir="./OxygenPlugin"/>
-</target>
-</project> 
+	<!-- Set property oxygen_installation_folder in Window->Preferences->Ant->Runtime->Properties -->
+	<property name="oxygen_installation_folder" value="c:/oxygen/" />
+	<property name="version-number" value="2.8.0" />
+	<target name="dist">
+		<jar destfile="./OxygenPlugin/frameworks/dtbook2005/nota.oxygen.jar" basedir="./bin">
+			<manifest>
+				<attribute name="Implementation-Version" value="${version-number}" />
+			</manifest>
+			<fileset dir="bin" />
+			<fileset dir="." includes="doc/**" />
+		</jar>
+		<copy todir="./OxygenPlugin/frameworks/dtbook110/" file="./OxygenPlugin/frameworks/dtbook2005/nota.oxygen.jar" />
+		<zip destfile="./updatesite/dtbook110_${version-number}.zip" basedir="./OxygenPlugin/frameworks" includes="dtbook110/**" />
+		<zip destfile="./updatesite/dtbook2005_${version-number}.zip" basedir="./OxygenPlugin/frameworks" includes="dtbook2005/**" />
+	</target>
+	<target name="syncFrameworks">
+		<available file="${oxygen_installation_folder}frameworks/dtbook110/dtbook110.framework" property="dtbook110.exists"/>
+		<available file="${oxygen_installation_folder}frameworks/dtbook2005/dtbook2005.framework" property="dtbook2005.exists"/>
+		<available file="${oxygen_installation_folder}frameworks/xhtmlEpub/xhtmlEpub.framework" property="xhtmlEpub.exists"/>
+		<antcall target="syncDtbook110"/>
+	</target>
+	<target name="syncDtbook110" if="dtbook110.exists">
+		<copy todir="${oxygen_installation_folder}frameworks/dtbook110/">
+			<fileset dir="./OxygenPlugin/frameworks/dtbook110/"/>
+		</copy>
+		<copy todir="./OxygenPlugin/frameworks/dtbook110/">
+			<fileset dir="${oxygen_installation_folder}frameworks/dtbook110/"/>
+		</copy>
+	</target>
+</project>
