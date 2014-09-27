@@ -70,41 +70,4 @@ END USER LICENSE AGREEMENT
 
 ]]></xt:license>
     </xt:extension>
-<<<<<<< HEAD
-    <xt:extension id="dk.nota.oxygen.xhtmlnota">
-        <xt:location href="xhtmlnota_2.7.0.zip"/>
-        <xt:version>2.7.0</xt:version>
-        <xt:oxy_version>14.0+</xt:oxy_version>
-        <xt:type>framework</xt:type>
-        <xt:author>Ole Holst Andersen</xt:author>
-        <xt:name>xhtml nota framework</xt:name>
-        <xt:description xmlns="http://www.w3.org/1999/xhtml">
-        	<p>Framework for xhtml, Nota specific</p>
-        </xt:description>
-        <xt:license>
-<![CDATA[
-
-END USER LICENSE AGREEMENT
-
-]]></xt:license>
-    </xt:extension>
-    <xt:extension id="dk.nota.oxygen.xhtmlnota">
-        <xt:location href="xhtmlnota_2.8.0.zip"/>
-        <xt:version>2.8.0</xt:version>
-        <xt:oxy_version>14.0+</xt:oxy_version>
-        <xt:type>framework</xt:type>
-        <xt:author>Ole Holst Andersen</xt:author>
-        <xt:name>xhtml nota framework</xt:name>
-        <xt:description xmlns="http://www.w3.org/1999/xhtml">
-        	<p>Framework for xhtml, Nota specific</p>
-        </xt:description>
-        <xt:license>
-<![CDATA[
-
-END USER LICENSE AGREEMENT
-
-]]></xt:license>
-    </xt:extension>
-=======
->>>>>>> 20fa5f81740eb594a694ac1349dc0914cd8ea0cb
 </xt:extensions>
