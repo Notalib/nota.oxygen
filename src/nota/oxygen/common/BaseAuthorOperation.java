@@ -90,6 +90,11 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 		return selEnd;
 	}
 	
+	private int temp()
+	{
+		return 0;
+	}
+	
 	/**
 	 * Gets the end of the current selection
 	 * @return The end of the current selection
@@ -99,7 +104,8 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 		int selStart = getAuthorAccess().getEditorAccess().getSelectionStart();
 		int selEnd = getAuthorAccess().getEditorAccess().getSelectionEnd();
 		if (selStart<selEnd) return selEnd;
-		return selStart;
+		int i = temp();
+		return selStart+i;
 	}
 
 	@Override

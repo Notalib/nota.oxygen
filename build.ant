@@ -16,6 +16,7 @@
 	<zip destfile="./updatesite/dtbook110_${version-number}.zip" basedir="./OxygenPlugin/frameworks" includes="dtbook110/**"/>
 	<zip destfile="./updatesite/dtbook2005_${version-number}.zip" basedir="./OxygenPlugin/frameworks" includes="dtbook2005/**"/>
 	<zip destfile="./updatesite/xhtmlnota_${version-number}.zip" basedir="./OxygenPlugin/frameworks" includes="xhtmlnota/**"/>
+	<zip destfile="./updatesite/dicts_${version-number}.zip" basedir="./OxygenPlugin" includes="dicts/**"/>
 </target>
 <target name="debug">
  	<jar destfile="${oxygen_installation_folder}frameworks/dtbook2005/OxygenDtbookActions.jar" basedir="./bin"> 
