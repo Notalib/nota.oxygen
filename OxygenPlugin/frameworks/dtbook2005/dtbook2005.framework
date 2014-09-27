@@ -20,10 +20,9 @@
 					</field>
 					<field name="classpath">
 						<String-array>
-							<String>${frameworks}/dtbook2005/OxygenDtbookActions.jar</String>
+							<String>${frameworks}/dtbook2005/nota.oxygen.jar</String>
 							<String>${frameworks}/dtbook2005/sqljdbc4.jar</String>
 							<String>${frameworks}/dtbook2005/commons-validator-1.4.0.jar</String>
-							<String>${framework}/commons-validator-1.4.0.jar</String>
 						</String-array>
 					</field>
 					<field name="authorExtensionDescriptor">

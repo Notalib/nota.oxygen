@@ -70,6 +70,7 @@ END USER LICENSE AGREEMENT
 
 ]]></xt:license>
     </xt:extension>
+<<<<<<< HEAD
     <xt:extension id="dk.nota.oxygen.xhtmlnota">
         <xt:location href="xhtmlnota_2.7.0.zip"/>
         <xt:version>2.7.0</xt:version>
@@ -104,4 +105,6 @@ END USER LICENSE AGREEMENT
 
 ]]></xt:license>
     </xt:extension>
+=======
+>>>>>>> 20fa5f81740eb594a694ac1349dc0914cd8ea0cb
 </xt:extensions>
