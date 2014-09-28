@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="dtbookOxygen" default="dist">
+<project name="dtbook.frameworks" default="dist">
 	<!-- Set property oxygen_installation_folder in Window->Preferences->Ant->Runtime->Properties -->
 	<property name="oxygen_installation_folder" value="c:/oxygen/" />
 	<property name="version-number" value="2.8.0" />
