@@ -12,12 +12,7 @@
         <xt:description xmlns="http://www.w3.org/1999/xhtml">
         	<p>Framework for dtbook v1.1.0, being the textual content file format of ANSI/NISO Z39.86-2002</p>
         </xt:description>
-        <xt:license>
-<![CDATA[
-
-END USER LICENSE AGREEMENT
-
-]]></xt:license>
+        <xt:license><![CDATA[END USER LICENSE AGREEMENT]]></xt:license>
     </xt:extension>
     <xt:extension id="dk.nota.oxygen.dtbook110">
         <xt:location href="dtbook110_2.8.0.zip"/>
@@ -29,12 +24,19 @@ END USER LICENSE AGREEMENT
         <xt:description xmlns="http://www.w3.org/1999/xhtml">
         	<p>Framework for dtbook v1.1.0, being the textual content file format of ANSI/NISO Z39.86-2002</p>
         </xt:description>
-        <xt:license>
-<![CDATA[
-
-END USER LICENSE AGREEMENT
-
-]]></xt:license>
+        <xt:license><![CDATA[END USER LICENSE AGREEMENT]]></xt:license>
+    </xt:extension>
+    <xt:extension id="dk.nota.oxygen.dtbook110">
+        <xt:location href="dtbook110_2.9.0.zip"/>
+        <xt:version>2.9.0</xt:version>
+        <xt:oxy_version>14.0+</xt:oxy_version>
+        <xt:type>framework</xt:type>
+        <xt:author>Ole Holst Andersen</xt:author>
+        <xt:name>dtbook 1.1.0 framework</xt:name>
+        <xt:description xmlns="http://www.w3.org/1999/xhtml">
+        	<p>Framework for dtbook v1.1.0, being the textual content file format of ANSI/NISO Z39.86-2002</p>
+        </xt:description>
+        <xt:license><![CDATA[END USER LICENSE AGREEMENT]]></xt:license>
     </xt:extension>
     <xt:extension id="dk.nota.oxygen.dtbook2005">
         <xt:location href="dtbook2005_2.7.0.zip"/>
@@ -46,12 +48,7 @@ END USER LICENSE AGREEMENT
         <xt:description xmlns="http://www.w3.org/1999/xhtml">
         	<p>Framework for dtbook v2005, being the textual content file format of ANSI/NISO Z39.86-2005</p>
         </xt:description>
-        <xt:license>
-<![CDATA[
-
-END USER LICENSE AGREEMENT
-
-]]></xt:license>
+        <xt:license><![CDATA[END USER LICENSE AGREEMENT]]></xt:license>
     </xt:extension>
     <xt:extension id="dk.nota.oxygen.dtbook2005">
         <xt:location href="dtbook2005_2.8.0.zip"/>
@@ -63,11 +60,18 @@ END USER LICENSE AGREEMENT
         <xt:description xmlns="http://www.w3.org/1999/xhtml">
         	<p>Framework for dtbook v2005, being the textual content file format of ANSI/NISO Z39.86-2005</p>
         </xt:description>
-        <xt:license>
-<![CDATA[
-
-END USER LICENSE AGREEMENT
-
-]]></xt:license>
+        <xt:license><![CDATA[END USER LICENSE AGREEMENT]]></xt:license>
+    </xt:extension>
+    <xt:extension id="dk.nota.oxygen.dtbook2005">
+        <xt:location href="dtbook2005_2.9.0.zip"/>
+        <xt:version>2.9.0</xt:version>
+        <xt:oxy_version>14.0+</xt:oxy_version>
+        <xt:type>framework</xt:type>
+        <xt:author>Ole Holst Andersen</xt:author>
+        <xt:name>dtbook 2005 framework</xt:name>
+        <xt:description xmlns="http://www.w3.org/1999/xhtml">
+        	<p>Framework for dtbook v2005, being the textual content file format of ANSI/NISO Z39.86-2005</p>
+        </xt:description>
+        <xt:license><![CDATA[END USER LICENSE AGREEMENT]]></xt:license>
     </xt:extension>
 </xt:extensions>

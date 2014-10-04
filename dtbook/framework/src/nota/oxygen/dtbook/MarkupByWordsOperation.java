@@ -1,4 +1,4 @@
-package nota.oxygen.common.dtbook;
+package nota.oxygen.dtbook;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

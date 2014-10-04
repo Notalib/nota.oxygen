@@ -1468,7 +1468,7 @@
 														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
-														<String>nota.oxygen.common.dtbook.MarkupLevelHeadingOperation</String>
+														<String>nota.oxygen.dtbook.MarkupLevelHeadingOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -1527,7 +1527,7 @@
 														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
-														<String>nota.oxygen.common.dtbook.MarkupLevelHeadingOperation</String>
+														<String>nota.oxygen.dtbook.MarkupLevelHeadingOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -1586,7 +1586,7 @@
 														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
-														<String>nota.oxygen.common.dtbook.RemoveLevelHeadingOperation</String>
+														<String>nota.oxygen.dtbook.RemoveLevelHeadingOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -1637,7 +1637,7 @@
 														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
-														<String>nota.oxygen.common.dtbook.InsertImageGroupOperation</String>
+														<String>nota.oxygen.dtbook.InsertImageGroupOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -1765,7 +1765,7 @@
 														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
-														<String>nota.oxygen.common.dtbook.InsertImageGroupOperation</String>
+														<String>nota.oxygen.dtbook.InsertImageGroupOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -2331,7 +2331,7 @@ the user will be required to confirm all pages</String>
 														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
-														<String>nota.oxygen.common.dtbook.MarkupByWordsOperation</String>
+														<String>nota.oxygen.dtbook.MarkupByWordsOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -4387,7 +4387,7 @@ the user will be required to confirm all pages</String>
 						<null/>
 					</field>
 					<field name="extensionsBundleClassName">
-						<String>nota.oxygen.common.dtbook.v110.Dtbook110ExtensionBundle</String>
+						<String>nota.oxygen.dtbook.v110.Dtbook110ExtensionBundle</String>
 					</field>
 					<field name="useImposedInitialPage">
 						<Boolean>true</Boolean>

@@ -5,7 +5,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathException;
 
 import nota.oxygen.common.BaseAuthorOperation;
-import nota.oxygen.common.dtbook.v2005.Dtbook2005UniqueAttributesRecognizer;
+import nota.oxygen.dtbook.v2005.Dtbook2005UniqueAttributesRecognizer;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

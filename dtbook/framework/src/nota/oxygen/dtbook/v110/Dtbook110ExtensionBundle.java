@@ -1,4 +1,4 @@
-package nota.oxygen.common.dtbook.v110;
+package nota.oxygen.dtbook.v110;
 
 
 import ro.sync.ecss.extensions.api.AuthorExtensionStateListener;

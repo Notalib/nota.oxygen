@@ -1,9 +1,9 @@
-package nota.oxygen.common.dtbook.v2005;
+package nota.oxygen.dtbook.v110;
 
 import ro.sync.ecss.extensions.api.UniqueAttributesRecognizer;
 
 /**
- * Generates id for the elements in the current selection using a {@link Dtbook2005UniqueAttributesRecognizer}
+ * Generates id for the elements in the current selection using a {@link Dtbook110UniqueAttributesRecognizer}
  * @author Ole Holst Andersen (oha@nota.nu)
  */
 public class GenerateIDsOperation extends
@@ -11,7 +11,7 @@ public class GenerateIDsOperation extends
 
 	@Override
 	protected UniqueAttributesRecognizer getUniqueAttributesRecognizer() {
-		return new Dtbook2005UniqueAttributesRecognizer();
+		return new Dtbook110UniqueAttributesRecognizer();
 	}
 
 }

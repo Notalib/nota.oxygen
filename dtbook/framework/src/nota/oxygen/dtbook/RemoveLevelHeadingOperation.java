@@ -1,4 +1,4 @@
-package nota.oxygen.common.dtbook;
+package nota.oxygen.dtbook;
 
 import nota.oxygen.common.BaseAuthorOperation;
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;

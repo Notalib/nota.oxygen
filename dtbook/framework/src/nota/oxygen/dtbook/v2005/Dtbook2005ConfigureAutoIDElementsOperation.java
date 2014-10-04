@@ -1,4 +1,4 @@
-package nota.oxygen.common.dtbook.v2005;
+package nota.oxygen.dtbook.v2005;
 
 import ro.sync.ecss.extensions.commons.id.ConfigureAutoIDElementsOperation;
 import ro.sync.ecss.extensions.commons.id.GenerateIDElementsInfo;
