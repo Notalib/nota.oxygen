@@ -4,17 +4,18 @@
 	<property name="oxygen_installation_folder" value="c:/oxygen/" />
 	<property name="version-number" value="2.8.0" />
 	<target name="dist">
-		<jar destfile="./OxygenPlugin/frameworks/dtbook2005/nota.oxygen.jar" basedir="./bin">
+		<jar destfile="./frameworks/dtbook2005/nota.oxygen.jar" basedir="./bin">
 			<manifest>
 				<attribute name="Implementation-Version" value="${version-number}" />
 			</manifest>
 			<fileset dir="bin" />
 			<fileset dir="." includes="doc/**" />
 		</jar>
-		<copy todir="./OxygenPlugin/frameworks/dtbook110/" file="./OxygenPlugin/frameworks/dtbook2005/nota.oxygen.jar" />
-		<zip destfile="./updatesite/dtbook110_${version-number}.zip" basedir="./OxygenPlugin/frameworks" includes="dtbook110/**" />
-		<zip destfile="./updatesite/dtbook2005_${version-number}.zip" basedir="./OxygenPlugin/frameworks" includes="dtbook2005/**" />
+		<copy todir="./frameworks/dtbook110/" file="./frameworks/dtbook2005/nota.oxygen.jar" />
+		<zip destfile="./updatesite/dtbook110_${version-number}.zip" basedir="./frameworks" includes="dtbook110/**" />
+		<zip destfile="./updatesite/dtbook2005_${version-number}.zip" basedir="./frameworks" includes="dtbook2005/**" />
 	</target>
+	<!--
 	<target name="syncFrameworks">
 		<available file="${oxygen_installation_folder}frameworks/dtbook110/dtbook110.framework" property="dtbook110.exists"/>
 		<available file="${oxygen_installation_folder}frameworks/dtbook2005/dtbook2005.framework" property="dtbook2005.exists"/>
@@ -28,4 +29,5 @@
 			<fileset dir="${oxygen_installation_folder}frameworks/dtbook110/"/>
 		</copy>
 	</target>
+	-->
 </project>
