@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plugin SYSTEM "../plugin.dtd">
+<plugin
+    id="nota_oxygen_epub_plugins_Spellcheck"
+    name="Spellcheck ePub"
+    description="Spellcheck xhtml files in an ePub document"
+    version="0.0.1"
+    vendor="Nota"
+    class="nota.oxygen.epub.plugins.SpellcheckPlugin"
+    classLoaderType="preferReferencedResources" >
+    <runtime>
+        <library name="lib/nota.oxygen.jar"/>
+        <!--<library name="../bin"/>-->
+    </runtime>
+    <extension type="WorkspaceAccess" class="nota.oxygen.epub.plugins.SpellcheckPluginExtension"/>
+</plugin>

@@ -1,0 +1,188 @@
+
+
+
+   html5.flow.class |= html5.phrasing.class | html5.a.flow
+   
+   html5.phrasing.class |= datatype.text | html5.a.phrasing | html5.em | html5.strong | html5.small | html5.cite  
+      | html5.q  | html5.dfn | html5.abbr | html5.time | html5.code | html5.var | html5.samp 
+      | html5.kbd | html5.sup | html5.sub | html5.i | html5.b | html5.mark | html5.bdo | html5.bdi | html5.span  
+      | html5.br | html5.wbr | html5.s | html5.u | html5.ruby
+   
+   html5.phrasing.attrs &= html5.global.attrs
+   
+   
+   html5.a.flow =
+## If the a element has an href attribute, then it represents a hyperlink (a hypertext anchor).
+ element a { html5.a.flow.attlist & html5.a.flow.content }
+   html5.a.flow.attlist &= html5.global.attrs & html5.a.attrs 
+   html5.a.flow.content = html5.flow.model
+   html5.a.phrasing =
+## If the a element has an href attribute, then it represents a hyperlink (a hypertext anchor).
+ element a { html5.a.phrasing.attlist & html5.a.phrasing.content }
+   html5.a.phrasing.attlist &= html5.phrasing.attrs & html5.a.attrs
+   html5.a.phrasing.content = html5.phrasing.model
+   html5.a.attrs &= ( html5.href.attr & ( html5.hreflang.attr? & html5.target.attr? 
+      & html5.rel.attr? & html5.media.attr? & html5.type.mime.attr? ))?
+
+   html5.abbr =
+## The abbr element represents an abbreviation or acronym, optionally with its expansion. The title attribute may be used to provide an expansion of the abbreviation. The attribute, if specified, must contain an expansion of the abbreviation, and nothing else.
+ element abbr { html5.abbr.attlist & html5.abbr.content }
+   html5.abbr.attlist &= html5.phrasing.attrs
+   html5.abbr.content = html5.phrasing.model
+   
+   html5.b =
+## The b element represents a span of text to which attention is being drawn for utilitarian purposes without conveying any extra importance and with no implication of an alternate voice or mood, such as key words in a document abstract, product names in a review, actionable words in interactive text-driven software, or an article lede.
+ element b { html5.b.attlist & html5.b.content }
+   html5.b.attlist &= html5.phrasing.attrs
+   html5.b.content = html5.phrasing.model
+      
+   html5.bdo =
+## The bdo element represents explicit text directionality formatting control for its children. It allows authors to override the Unicode bidirectional algorithm by explicitly specifying a direction override. [BIDI]
+ element bdo { html5.bdo.attlist & html5.bdo.content }
+   html5.bdo.attlist &= html5.phrasing.attrs 					
+   html5.bdo.content = html5.phrasing.model
+   
+   html5.bdi =
+## The bdi element represents a span of text that is to be isolated from its surroundings for the purposes of bidirectional text formatting. [BIDI]
+ element bdi { html5.bdi.attlist & html5.bdi.content }
+   html5.bdi.attlist &= html5.phrasing.attrs 					
+   html5.bdi.content = html5.phrasing.model
+
+   html5.br =
+## The br element represents a line break.
+ element br { html5.br.attlist }
+   html5.br.attlist &= html5.phrasing.attrs
+      
+   html5.cite =
+## The cite element represents the title of a work (e.g. a book, a paper, an essay, a poem, a score, a song, a script, a film, a TV show, a game, a sculpture, a painting, a theatre production, a play, an opera, a musical, an exhibition, a legal case report, etc). This can be a work that is being quoted or referenced in detail (i.e. a citation), or it can just be a work that is mentioned in passing.
+ element cite { html5.cite.attlist & html5.cite.content }
+   html5.cite.attlist &= html5.phrasing.attrs
+   html5.cite.content = html5.phrasing.model
+   
+   html5.code =
+## The code element represents a fragment of computer code. This could be an XML element name, a filename, a computer program, or any other string that a computer would recognize.
+ element code { html5.code.attlist & html5.code.content }
+   html5.code.attlist &= html5.phrasing.attrs    
+   html5.code.content = html5.phrasing.model
+   
+   html5.dfn =
+## The dfn element represents the defining instance of a term. The paragraph, description list group, or section that is the nearest ancestor of the dfn element must also contain the definition(s) for the term given by the dfn element.
+ element dfn { html5.dfn.attlist & html5.dfn.content }
+   html5.dfn.attlist &= html5.phrasing.attrs
+   html5.dfn.content = html5.phrasing.model
+   
+   html5.em =
+## The em element represents stress emphasis of its contents.
+ element em { html5.em.attlist & html5.em.content }
+   html5.em.attlist &= html5.phrasing.attrs
+   html5.em.content = html5.phrasing.model
+
+   html5.i =
+## The i element represents a span of text in an alternate voice or mood, or otherwise offset from the normal prose in a manner indicating a different quality of text, such as a taxonomic designation, a technical term, an idiomatic phrase from another language, a thought, or a ship name in Western texts.
+ element i { html5.i.attlist & html5.i.content }
+   html5.i.attlist &= html5.phrasing.attrs
+   html5.i.content = html5.phrasing.model
+
+   html5.kbd =
+## The kbd element represents user input (typically keyboard input, although it may also be used to represent other input, such as voice commands).
+ element kbd { html5.kbd.attlist & html5.kbd.content }
+   html5.kbd.attlist &= html5.phrasing.attrs
+   html5.kbd.content = html5.phrasing.model
+
+   html5.mark =
+## The mark element represents a run of text in one document marked or highlighted for reference purposes, due to its relevance in another context. When used in a quotation or other block of text referred to from the prose, it indicates a highlight that was not originally present but which has been added to bring the reader's attention to a part of the text that might not have been considered important by the original author when the block was originally written, but which is now under previously unexpected scrutiny. When used in the main prose of a document, it indicates a part of the document that has been highlighted due to its likely relevance to the user's current activity.
+ element mark { html5.mark.attlist & html5.mark.content }
+   html5.mark.attlist &= html5.phrasing.attrs
+   html5.mark.content = html5.phrasing.model
+
+   html5.strong =
+## The strong element represents strong importance for its contents.
+ element strong { html5.strong.attlist & html5.strong.content }
+   html5.strong.attlist &= html5.phrasing.attrs
+   html5.strong.content = html5.phrasing.model
+
+   html5.small =
+## The small element represents side comments such as small print.
+ element small { html5.small.attlist & html5.small.content }
+   html5.small.attlist &= html5.phrasing.attrs
+   html5.small.content = html5.phrasing.model
+
+   html5.q =
+## The q element represents some phrasing content quoted from another source.
+ element q { html5.q.attlist & html5.q.content }
+   html5.q.attlist &= html5.phrasing.attrs & html5.cite.attr?	 
+   html5.q.content = html5.phrasing.model
+
+   html5.s =
+## The s element represents contents that are no longer accurate or no longer relevant.
+ element s { html5.s.attlist & html5.s.content }
+   html5.s.attlist &= html5.phrasing.attrs
+   html5.s.content = html5.phrasing.model
+
+   html5.samp =
+## The samp element represents (sample) output from a program or computing system.
+ element samp { html5.samp.attlist & html5.samp.content }
+   html5.samp.attlist &= html5.phrasing.attrs
+   html5.samp.content = html5.phrasing.model
+
+   html5.sub = element sub { html5.sub.attlist & html5.sub.content }
+   html5.sub.attlist &= html5.phrasing.attrs
+   html5.sub.content = html5.phrasing.model
+
+   html5.sup = element sup { html5.sup.attlist & html5.sup.content }
+   html5.sup.attlist &= html5.phrasing.attrs
+   html5.sup.content = html5.phrasing.model
+
+   html5.span =
+## The span element doesn't mean anything on its own, but can be useful when used together with the global attributes, e.g. class, lang, or dir. It represents its children.
+ element span { html5.span.attlist & html5.span.content }
+   html5.span.attlist &= html5.phrasing.attrs
+   html5.span.content = html5.phrasing.model
+
+   html5.time =
+## The time element represents either a time on a 24 hour clock, or a precise date in the proleptic Gregorian calendar, optionally with a time and a time-zone offset. [GREGORIAN]
+ element time { html5.time.attlist & html5.time.content }
+   html5.time.attlist &= html5.phrasing.attrs & 
+      ((html5.time.pubdate.attr & html5.time.datetime.attr.date-optional-time?)
+      | (html5.time.datetime.attr.date-or-time?))   
+   html5.time.pubdate.attr = attribute pubdate { 'pubdate' | '' }
+   html5.time.datetime.attr.date-optional-time = attribute datetime { datatype.html5.date.optional.time }
+   html5.time.datetime.attr.date-or-time = attribute datetime { datatype.html5.date.or.time }
+   html5.time.content = html5.phrasing.model
+
+   html5.var =
+## The var element represents a variable. This could be an actual variable in a mathematical expression or programming context, an identifier representing a constant, a function parameter, or just be a term used as a placeholder in prose.
+ element var { html5.var.attlist & html5.var.content }
+   html5.var.attlist &= html5.phrasing.attrs
+   html5.var.content = html5.phrasing.model
+
+   html5.wbr =
+## The wbr element represents a line break opportunity.
+ element wbr { html5.wbr.attlist }
+   html5.wbr.attlist &= html5.phrasing.attrs
+   
+   html5.u =
+## The u element represents a span of text with an unarticulated, though explicitly rendered, non-textual annotation, such as labeling the text as being a proper name in Chinese text (a Chinese proper name mark), or labeling the text as being misspelt.
+ element u { html5.u.attlist & html5.u.content }
+   html5.u.attlist = html5.phrasing.attrs
+   html5.u.content = html5.phrasing.model
+   
+   
+   html5.ruby =
+## The ruby element allows one or more spans of phrasing content to be marked with ruby annotations. Ruby annotations are short runs of text presented alongside base text, primarily used in East Asian typography as a guide for pronunciation or to include other annotations. In Japanese, this form of typography is also known as furigana.
+ element ruby { html5.ruby.attlist & html5.ruby.content }
+   html5.ruby.attlist = html5.phrasing.attrs
+   html5.ruby.content = ((html5.phrasing.model, (html5.rt | (html5.rp, html5.rt, html5.rp)))+)
+
+   html5.rt =
+## The rt element marks the ruby text component of a ruby annotation.
+ element rt { html5.rt.attlist & html5.rt.content }
+   html5.rt.attlist &= html5.phrasing.attrs
+   html5.rt.content = html5.phrasing.model
+
+   html5.rp =
+## The rp element can be used to provide parentheses around a ruby text component of a ruby annotation, to be shown by user agents that don't support ruby annotations.
+ element rp { html5.rp.attlist & html5.rp.content }
+   html5.rp.attlist &= html5.phrasing.attrs
+   html5.rp.content = html5.phrasing.model
+   
