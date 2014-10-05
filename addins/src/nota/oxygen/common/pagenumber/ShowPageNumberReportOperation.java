@@ -24,11 +24,19 @@ public class ShowPageNumberReportOperation extends BaseAuthorOperation {
 
 	private static String ARG_PAGENUM_XPATH = "pagenum xpath";
 	private String pagenumXPath;
+	
+	private static String ARG_PAGENUM_CLASS_ATTRIBUTE = "pagenum class attribute";
+	private String pagenumClassAttribute;
+	
+	private static String ARG_PAGENUM_LABEL_ATTRIBUTE = "pagenum label attribute";
+	private String pagenumLabelAttribute;
 
 	@Override
 	public ArgumentDescriptor[] getArguments() {
 		return new ArgumentDescriptor[] {
-				new ArgumentDescriptor(ARG_PAGENUM_XPATH, ArgumentDescriptor.TYPE_XPATH_EXPRESSION, "XPath expression to find pagenumbers", null, "//pagenum")
+				new ArgumentDescriptor(ARG_PAGENUM_XPATH, ArgumentDescriptor.TYPE_XPATH_EXPRESSION, "XPath expression to find pagenumbers", null, "//pagenum"),
+				new ArgumentDescriptor(ARG_PAGENUM_CLASS_ATTRIBUTE, ArgumentDescriptor.TYPE_STRING, "Attribute that holds pagebreak class", null, "page"),
+				new ArgumentDescriptor(ARG_PAGENUM_LABEL_ATTRIBUTE, ArgumentDescriptor.TYPE_STRING, "Attribute that holds pagebreak label - if empty the label is the element content", null, "")
 		};
 	}
  
@@ -42,6 +50,8 @@ public class ShowPageNumberReportOperation extends BaseAuthorOperation {
 	protected void parseArguments(ArgumentsMap args)
 			throws IllegalArgumentException {
 		pagenumXPath = (String)args.getArgumentValue(ARG_PAGENUM_XPATH);
+		pagenumClassAttribute = (String)args.getArgumentValue(ARG_PAGENUM_CLASS_ATTRIBUTE);
+		pagenumLabelAttribute = (String)args.getArgumentValue(ARG_PAGENUM_LABEL_ATTRIBUTE);
 	}
 
 	@Override
@@ -56,10 +66,15 @@ public class ShowPageNumberReportOperation extends BaseAuthorOperation {
 			if (pagenums[i] instanceof AuthorElement) {
 				AuthorElement pn = (AuthorElement)pagenums[i];
 				String page = "";
-				if (pn.getAttribute("page")!=null) page = pn.getAttribute("page").getValue();
+				if (pn.getAttribute(pagenumClassAttribute)!=null) page = pn.getAttribute(pagenumClassAttribute).getValue();
 				if (pnDict.get(page)==null) pnDict.put(page,  new ArrayList<String>());
 				try {
-					pnDict.get(page).add(pn.getTextContent());
+					if (pn.getAttribute(pagenumLabelAttribute) != null) {
+						pnDict.get(page).add(pn.getAttribute(pagenumLabelAttribute).getValue());
+					}
+					else {
+						pnDict.get(page).add(pn.getTextContent());
+					}
 				} catch (BadLocationException e) {
 					// Do nothing
 				}

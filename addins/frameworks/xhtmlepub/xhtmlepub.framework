@@ -26,6 +26,7 @@
 							<String>${framework}/resources/</String>
 							<String>${framework}/i18n/</String>
 							<String>${framework}/xhtml.jar</String>
+							<String>${framework}/nota.oxygen.jar</String>
 						</String-array>
 					</field>
 					<field name="parentClassLoaderID">
@@ -2367,6 +2368,166 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											</actionMode-array>
 										</field>
 									</action>
+									<action>
+										<field name="id">
+											<String>notes.noteref.find</String>
+										</field>
+										<field name="name">
+											<String>${i18n(notes.noteref.find)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(notes.noteref.find.description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*[@epub:type="note"]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>note identifier xpath</String>
+																<String>.//span[@epub:type='note_identifier']</String>
+															</entry>
+															<entry>
+																<String>note xpath</String>
+																<String>ancestor-or-self::*[@epub:type="note"]</String>
+															</entry>
+															<entry>
+																<String>noteref candidate xpath</String>
+																<String>//text()[contains(string(.), '$noteident') and ancestor::body]</String>
+															</entry>
+															<entry>
+																<String>noteref fragment</String>
+																<String>&lt;a xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" epub:type="noteref" href="#$idref">&lt;/a></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.notes.FindNoterefOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>notes.identifier.toggle</String>
+										</field>
+										<field name="name">
+											<String>${i18n(notes.identifier.toggle)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(notes.identifier.toggle.description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::span[@epub:type='note_identifier']|parent::span[@epub:type='note_identifier']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap/>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.DeleteElementOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*[@epub:type='note']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;span xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" epub:type="note_identifier">&lt;/span></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>pagenum.report</String>
+										</field>
+										<field name="name">
+											<String>${i18n(pagenum.report)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(pagenum.report.description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>pagenum class attribute</String>
+																<String>class</String>
+															</entry>
+															<entry>
+																<String>pagenum label attribute</String>
+																<String>title</String>
+															</entry>
+															<entry>
+																<String>pagenum xpath</String>
+																<String>//*[@epub:type='pagebreak']</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.pagenumber.ShowPageNumberReportOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
 								</action-array>
 							</field>
 							<field name="menubarDescriptor">
@@ -2589,6 +2750,38 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 													</menuEntry-array>
 												</field>
 											</menu>
+											<menuSeparator/>
+											<menu>
+												<field name="label">
+													<String>${i18n(notes)}</String>
+												</field>
+												<field name="accessKey">
+													<String></String>
+												</field>
+												<field name="iconPath">
+													<String></String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>notes.identifier.toggle</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>notes.noteref.find</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+											</menu>
+											<menuSeparator/>
+											<menuItem>
+												<field name="actionID">
+													<String>pagenum.report</String>
+												</field>
+											</menuItem>
 										</menuEntry-array>
 									</field>
 								</menu>
@@ -2775,6 +2968,17 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											<menuItem>
 												<field name="actionID">
 													<String>insert.equation</String>
+												</field>
+											</menuItem>
+											<menuSeparator/>
+											<menuItem>
+												<field name="actionID">
+													<String>notes.identifier.toggle</String>
+												</field>
+											</menuItem>
+											<menuItem>
+												<field name="actionID">
+													<String>notes.noteref.find</String>
 												</field>
 											</menuItem>
 											<menuSeparator/>
@@ -3676,10 +3880,10 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 						<String>ro.sync.ecss.extensions.xhtml.XHTMLExtensionsBundle</String>
 					</field>
 					<field name="useImposedInitialPage">
-						<Boolean>false</Boolean>
+						<Boolean>true</Boolean>
 					</field>
 					<field name="imposedInitialPage">
-						<String>Text</String>
+						<String>Author</String>
 					</field>
 					<field name="elementLocatorExtension">
 						<null/>

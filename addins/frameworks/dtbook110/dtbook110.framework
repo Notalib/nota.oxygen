@@ -172,10 +172,10 @@
 											<String>Toggle &lt;em></String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook110/em.png</String>
+											<String>/images/Italic20.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook110/em.png</String>
+											<String>/images/Italic16.gif</String>
 										</field>
 										<field name="accessKey">
 											<String></String>
@@ -230,10 +230,10 @@
 											<String>Toggle &lt;strong></String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook110/strong.png</String>
+											<String>/images/Bold20.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook110/strong.png</String>
+											<String>/images/Bold16.gif</String>
 										</field>
 										<field name="accessKey">
 											<String></String>
@@ -813,7 +813,7 @@
 											<String>Indent list</String>
 										</field>
 										<field name="description">
-											<String>Indent list		</String>
+											<String>Indent list</String>
 										</field>
 										<field name="largeIconPath">
 											<String>${frameworks}/dtbook110/list_indent.png</String>
@@ -863,10 +863,10 @@
 											<String>Markup as ordered list</String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook110/list_ol.png</String>
+											<String>/images/OrderedList20.gif</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook110/list_ol.png</String>
+											<String>/images/OrderedList16.gif</String>
 										</field>
 										<field name="accessKey">
 											<String></String>
@@ -938,10 +938,10 @@
 											<String>Markup as un-ordered list</String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook110/list_ul.png</String>
+											<String>/images/UnorderedList20.gif</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook110/list_ul.png</String>
+											<String>/images/UnorderedList16.gif</String>
 										</field>
 										<field name="accessKey">
 											<String></String>
