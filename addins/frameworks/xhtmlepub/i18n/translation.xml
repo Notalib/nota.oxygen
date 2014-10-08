@@ -1051,4 +1051,20 @@
 		<comment>Pagenumber report action description</comment>
 		<val lang="en_US">Shows a report on the occurence of pagenumbers in the current file</val>
 	</key>
+	<key type="action" value="columns">
+		<comment>Columns word</comment>
+		<val lang="en_US">Columns</val>
+	</key>
+	<key type="action" value="rows">
+		<comment>Rows word</comment>
+		<val lang="en_US">Rows</val>
+	</key>
+	<key type="action" value="header.rows">
+		<comment>Header rows word</comment>
+		<val lang="en_US">Header Rows</val>
+	</key>
+	<key type="action" value="footer.rows">
+		<comment>Footer rows word</comment>
+		<val lang="en_US">Footer Rows</val>
+	</key>
 </translation>
