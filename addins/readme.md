@@ -30,8 +30,8 @@ In order to debug, you need to create a debug configuration of type "Java Applic
 
 - Name: oxygen
 - Main: Project nota.oxygen, Main class ro.sync.exml.Oxygen
-- Arguments: VM Arguments: "-Dcom.oxygenxml.app.descriptor=ro.sync.exml.EditorFrameDescriptor -Xmx1024m 
--XX:MaxPermSize=384m"
+- Arguments: VM Arguments:
+  - `-Dcom.oxygenxml.app.descriptor=ro.sync.exml.EditorFrameDescriptor -Xmx1024m -XX:MaxPermSize=384m`
 
 When you debug using this configuraion, oxygen should open. 
 
