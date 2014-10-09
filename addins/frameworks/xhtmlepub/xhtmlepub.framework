@@ -578,10 +578,39 @@
 														<String>oxy:allows-child-element("*:table")</String>
 													</field>
 													<field name="argValues">
-														<serializableOrderedMap/>
+														<serializableOrderedMap>
+															<entry>
+																<String>table body fragment</String>
+																<String>&lt;tbody xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+															<entry>
+																<String>table cell fragment</String>
+																<String>&lt;td xmlns="http://www.w3.org/1999/xhtml">CELL&lt;/td></String>
+															</entry>
+															<entry>
+																<String>table footer fragment</String>
+																<String>&lt;tfoot xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+															<entry>
+																<String>table fragment</String>
+																<String>&lt;table xmlns="http://www.w3.org/1999/xhtml">&lt;caption>CAPTION&lt;/caption>&lt;/table></String>
+															</entry>
+															<entry>
+																<String>table header cell fragment</String>
+																<String>&lt;td xmlns="http://www.w3.org/1999/xhtml">HEADER&lt;/td></String>
+															</entry>
+															<entry>
+																<String>table header fragment</String>
+																<String>&lt;thead xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+															<entry>
+																<String>table row fragment</String>
+																<String>&lt;tr xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertTableOperation</String>
+														<String>nota.oxygen.common.table.InsertTableOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
