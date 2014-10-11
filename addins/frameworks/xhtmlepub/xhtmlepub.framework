@@ -1373,6 +1373,17 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
+														<String>parent::*:section[namespace-uri()= 'http://www.w3.org/1999/xhtml']|parent::*:body[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap/>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.epub.headings.InsertHeadingOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
 														<String>ancestor-or-self::*:p[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
 													</field>
 													<field name="argValues">

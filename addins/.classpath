@@ -13,5 +13,10 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="var" path="ECLIPSE_HOME"/>
+	<classpathentry kind="lib" path="frameworks/xhtmlepub/xhtml.jar" sourcepath="/oxygen-sdk-samples-archetype/oxygen-sample-framework/samples/Oxygen Default Frameworks/src">
+		<attributes>
+			<attribute name="javadoc_location" value="https://www.oxygenxml.com/InstData/Editor/SDK/javadoc"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
