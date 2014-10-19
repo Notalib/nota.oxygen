@@ -1367,7 +1367,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 											<String></String>
 										</field>
 										<field name="accelerator">
-											<null/>
+											<String>M1 M2 1</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
@@ -1422,7 +1422,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 											<String></String>
 										</field>
 										<field name="accelerator">
-											<null/>
+											<String>M1 M2 2</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
@@ -1505,7 +1505,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 											<String></String>
 										</field>
 										<field name="accelerator">
-											<null/>
+											<String>M1 M2 3</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
@@ -1588,7 +1588,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 											<String></String>
 										</field>
 										<field name="accelerator">
-											<null/>
+											<String>M1 M2 4</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
@@ -1671,7 +1671,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 											<String></String>
 										</field>
 										<field name="accelerator">
-											<null/>
+											<String>M1 M2 5</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
@@ -1754,7 +1754,7 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 											<String></String>
 										</field>
 										<field name="accelerator">
-											<null/>
+											<String>M1 M2 6</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
