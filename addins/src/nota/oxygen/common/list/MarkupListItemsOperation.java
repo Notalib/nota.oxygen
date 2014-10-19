@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nota.oxygen.common.BaseAuthorOperation;
+import nota.oxygen.common.Utils;
 
 import org.w3c.dom.Element;
 
@@ -65,7 +66,7 @@ public class MarkupListItemsOperation extends BaseAuthorOperation {
 					//remove the original element that was surrounded with the item element,
 					//keeping its children as children of the item element
 					AuthorElement item = (AuthorElement)elem.getParent();
-					Element itemElem = deserializeElement(serialize(item));
+					Element itemElem = Utils.deserializeElement(serialize(item));
 					if (itemElem.getFirstChild() instanceof Element) {
 						Element e = (Element)itemElem.getFirstChild();
 						while (e.hasChildNodes()) {
@@ -73,7 +74,7 @@ public class MarkupListItemsOperation extends BaseAuthorOperation {
 						}
 						itemElem.removeChild(e);
 					}
-					docCtrl.insertXMLFragment(serialize(itemElem), item, AuthorConstants.POSITION_BEFORE);
+					docCtrl.insertXMLFragment(Utils.serialize(itemElem), item, AuthorConstants.POSITION_BEFORE);
 					docCtrl.deleteNode(item);
 				}
 				childIndex++;

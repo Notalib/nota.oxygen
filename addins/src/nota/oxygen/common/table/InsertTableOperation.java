@@ -15,6 +15,7 @@ import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
 import nota.oxygen.common.BaseAuthorOperation;
+import nota.oxygen.common.Utils;
 
 /**
  * @author OHA
@@ -77,9 +78,9 @@ public class InsertTableOperation extends BaseAuthorOperation {
 	
 	private void insertRows(int rows, int cols, String cellFragment, Element rowContainer) throws AuthorOperationException {
 		for (int r = 0; r < rows; r++) {
-			Element row = deserializeElement(tableRowFragment);
+			Element row = Utils.deserializeElement(tableRowFragment);
 			for (int c = 0; c < cols; c++) {
-				Element cell = deserializeElement(tableCellFragment);
+				Element cell = Utils.deserializeElement(tableCellFragment);
 				row.appendChild(row.getOwnerDocument().importNode(cell,  true));
 			}
 			rowContainer.appendChild(rowContainer.getOwnerDocument().importNode(row, true));
@@ -113,23 +114,23 @@ public class InsertTableOperation extends BaseAuthorOperation {
 		int rows = rowsModel.getNumber().intValue();
 		int headerRows = headerRowsModel.getNumber().intValue();
 		int footerRows = footerRowsModel.getNumber().intValue();
-		Element table = deserializeElement(tableFragment);
+		Element table = Utils.deserializeElement(tableFragment);
 		if (headerRows > 0)
 		{
-			Element header = deserializeElement(tableHeaderFragment);
+			Element header = Utils.deserializeElement(tableHeaderFragment);
 			insertRows(headerRows,  cols, tableHeaderCellFragment, header);
 			table.appendChild(table.getOwnerDocument().importNode(header, true));
 		}
-		Element body = deserializeElement(tableBodyFragment);
+		Element body = Utils.deserializeElement(tableBodyFragment);
 		insertRows(rows,  cols, tableCellFragment, body);
 		table.appendChild(table.getOwnerDocument().importNode(body, true));
 		if (footerRows > 0)
 		{
-			Element footer = deserializeElement(tableFooterFragment);
+			Element footer = Utils.deserializeElement(tableFooterFragment);
 			insertRows(footerRows,  cols, tableHeaderCellFragment, footer);
 			table.appendChild(table.getOwnerDocument().importNode(footer, true));
 		}
-		getAuthorAccess().getDocumentController().insertXMLFragment(serialize(table), getAuthorAccess().getEditorAccess().getCaretOffset());
+		getAuthorAccess().getDocumentController().insertXMLFragment(Utils.serialize(table), getAuthorAccess().getEditorAccess().getCaretOffset());
 		getAuthorAccess().getDocumentController().endCompoundEdit(); 
 	}
 

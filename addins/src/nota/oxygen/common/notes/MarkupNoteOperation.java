@@ -1,6 +1,7 @@
 package nota.oxygen.common.notes;
 
 import nota.oxygen.common.BaseAuthorOperation;
+import nota.oxygen.common.Utils;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -60,7 +61,7 @@ public class MarkupNoteOperation extends BaseAuthorOperation {
 	
 	private void tryToFindNoteIdentifier(AuthorElement note) throws AuthorOperationException {
 		if (note==null) return;
-		Element noteElem = deserializeElement(serialize(note));
+		Element noteElem = Utils.deserializeElement(serialize(note));
 		Node firstChildElement = noteElem.getFirstChild();
 		if (firstChildElement==null) return;
 		if (firstChildElement.getNodeType()!=Node.ELEMENT_NODE) return;
@@ -69,7 +70,7 @@ public class MarkupNoteOperation extends BaseAuthorOperation {
 		if (firstText.getNodeType()!=Node.TEXT_NODE) return;
 		if (firstText.getTextContent().trim().isEmpty()) return;
 		firstChildElement.removeChild(firstText);
-		Element noteIdentifierElement = (Element)noteElem.getOwnerDocument().importNode( deserializeElement(noteIdentifierFragment), true);
+		Element noteIdentifierElement = (Element)noteElem.getOwnerDocument().importNode( Utils.deserializeElement(noteIdentifierFragment), true);
 		String text = firstText.getTextContent();
 		if (text.indexOf(' ')!=-1) {
 			Text restTextNode = noteElem.getOwnerDocument().createTextNode(text.substring(text.indexOf(' ')));
@@ -79,7 +80,7 @@ public class MarkupNoteOperation extends BaseAuthorOperation {
 		noteIdentifierElement.insertBefore(noteElem.getOwnerDocument().createTextNode(text), noteIdentifierElement.getFirstChild());
 		firstChildElement.insertBefore(noteIdentifierElement, firstChildElement.getFirstChild());
 		AuthorDocumentController docCtrl = getAuthorAccess().getDocumentController();
-		docCtrl.insertXMLFragment(serialize(noteElem), note, AuthorConstants.POSITION_BEFORE);
+		docCtrl.insertXMLFragment(Utils.serialize(noteElem), note, AuthorConstants.POSITION_BEFORE);
 		docCtrl.deleteNode(note);
 	}
 	

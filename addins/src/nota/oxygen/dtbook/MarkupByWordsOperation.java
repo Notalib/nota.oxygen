@@ -17,6 +17,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 
 import nota.oxygen.common.BaseAuthorOperation;
+import nota.oxygen.common.Utils;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -128,7 +129,7 @@ public class MarkupByWordsOperation extends BaseAuthorOperation {
 	
 	protected String getMessage(String name) throws AuthorOperationException {
 		try {
-			String res = getXPath().evaluate("/MarkupByWords/Message[@name='"+name+"']", getSettingsDocument());
+			String res = Utils.getXPath().evaluate("/MarkupByWords/Message[@name='"+name+"']", getSettingsDocument());
 			if (res!=null) return res;
 		} catch (XPathExpressionException e) {
 			throw new AuthorOperationException("Could not find message "+name+":"+e.getMessage(), e);
@@ -140,7 +141,7 @@ public class MarkupByWordsOperation extends BaseAuthorOperation {
 		String startNodeXpath;
 		AuthorNode res = getAuthorAccess().getDocumentController().getAuthorDocumentNode();
 		try {
-			startNodeXpath = (String)getXPath().evaluate("/MarkupByWords/StartNode/@xpath", getSettingsDocument());
+			startNodeXpath = (String)Utils.getXPath().evaluate("/MarkupByWords/StartNode/@xpath", getSettingsDocument());
 		} catch (XPathExpressionException e) {
 			return res;
 		}
@@ -158,7 +159,7 @@ public class MarkupByWordsOperation extends BaseAuthorOperation {
 		} catch (FileNotFoundException e) {
 			throw new AuthorOperationException("Could not find settings file "+settingsFile);
 		}
-		DOMImplementationLS impl = getDOMImplementation();
+		DOMImplementationLS impl = Utils.getDOMImplementation();
 		LSParser builder = impl.createLSParser(DOMImplementationLS.MODE_SYNCHRONOUS, null);
 		LSInput input = impl.createLSInput();
 		input.setByteStream(is);
@@ -179,7 +180,7 @@ public class MarkupByWordsOperation extends BaseAuthorOperation {
 		if (list.getLength()>0) {
 			Element frag = (Element)list.item(0);
 			for (int i=0; 0<frag.getChildNodes().getLength();i++) {
-				if (frag.getChildNodes().item(i) instanceof Element) return serialize(frag.getChildNodes().item(i));
+				if (frag.getChildNodes().item(i) instanceof Element) return Utils.serialize(frag.getChildNodes().item(i));
 			}
 		}
 		throw new AuthorOperationException("Found no usable Fragment in settings file "+settingsFile);
@@ -193,10 +194,10 @@ public class MarkupByWordsOperation extends BaseAuthorOperation {
 		xpathStatement = "count("+xpathStatement+")";
 		XPath xpath;
 		if (ns=="") {
-			xpath = getXPath();
+			xpath = Utils.getXPath();
 		}
 		else {
-			xpath = getXPath("mns", ns);
+			xpath = Utils.getXPath("mns", ns);
 		}
 		try {
 			return ((Double)xpath.evaluate(xpathStatement, getSettingsDocument(), XPathConstants.NUMBER))>0;

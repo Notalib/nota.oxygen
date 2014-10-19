@@ -10,7 +10,26 @@ import javax.xml.namespace.NamespaceContext;
  */
 public class ManualNamespaceContext implements NamespaceContext {
 
-	Map<String,String> _prefixNSMap = new HashMap<String,String>(); 
+	Map<String,String> _prefixNSMap = new HashMap<String,String>();
+
+	
+	/**
+	 * Creates a {@link ManualNamespaceContext} initialized with no prefix/name-space pair
+	 */	
+	public ManualNamespaceContext()
+	{
+	}
+	
+
+	/**
+	 * Creates a {@link ManualNamespaceContext} initialized with one prefix/name-space pair
+	 * @param prefix	The prefix part of the pair
+	 * @param ns	    The name-space part of the pair
+	 */	
+	public ManualNamespaceContext(String prefix, String ns)
+	{
+		mapPrefix(prefix, ns);
+	}
 
 	/**
 	 * Creates a {@link ManualNamespaceContext} initialized with prefix/name-space pairs from a given {@link Map}

@@ -1,6 +1,7 @@
 package nota.oxygen.dtbook;
 
 import nota.oxygen.common.BaseAuthorOperation;
+import nota.oxygen.common.Utils;
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
 import ro.sync.ecss.extensions.api.AuthorConstants;
@@ -89,7 +90,7 @@ public class RemoveLevelHeadingOperation extends BaseAuthorOperation {
 	
 	protected int getLastChildOrSelfEndOffset(AuthorElement elem) {
 		if (elem!=null) return elem.getEndOffset();
-		AuthorNode lastChild = getLastChild(elem);
+		AuthorNode lastChild = Utils.getLastChild(elem);
 		if (lastChild!=null) return lastChild.getEndOffset();
 		return 0;
 	}
@@ -117,7 +118,7 @@ public class RemoveLevelHeadingOperation extends BaseAuthorOperation {
 				showMessage("Current heading is unexpectedly not the child of a level element (parent is a "+parentLevel.getLocalName()+")");
 				return;
 			}			
-			AuthorElement previousSibling = getPreviousSibling(parentLevel);
+			AuthorElement previousSibling = Utils.getPreviousSibling(parentLevel);
 			AuthorElement grandParent = (AuthorElement)parentLevel.getParent();
 			if (isLevelElement(previousSibling)) {
 				docCtrl.renameElement(firstAthElem, blockReplacementName);
