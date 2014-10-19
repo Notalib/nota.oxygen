@@ -16,7 +16,6 @@ import nota.oxygen.epub.EpubUtils;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
@@ -345,25 +344,26 @@ public class InsertHeadingOperation extends BaseAuthorOperation {
 					headingStartOffset,
 					lastNode.getEndOffset());
 			AuthorElement newSection = (AuthorElement)lastNode.getParent();
+			int offset = newSection.getStartOffset();
 			if (!subLevel) {
 				AuthorDocumentFragment newSectionFragment = ctrl.createDocumentFragment(newSection, true);
 				ctrl.deleteNode(newSection);
-				ctrl.insertFragment(parentSection.getEndOffset()+1, newSectionFragment);
+				offset = parentSection.getEndOffset()+1;
+				ctrl.insertFragment(offset, newSectionFragment);
 			}
 			AddNavigationEntries(
 					headingText, 
 					newSection.getAttribute("id").getValue(), 
 					parentSection.getAttribute("id").getValue(), 
 					subLevel);
-			getAuthorAccess().getEditorAccess().setCaretPosition(headingStartOffset);
+			getAuthorAccess().getEditorAccess().setCaretPosition(offset+2);
+			Utils.bringFocusToDocumentTab(getAuthorAccess());
 		} 
 		catch (BadLocationException e) {
 			throw new AuthorOperationException(
 					String.format("Unexpected BadLocationException while moving new level section: %s", e.getMessage()),
 					e);
 		}
-		
-		
 	}
 
 }

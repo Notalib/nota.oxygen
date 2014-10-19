@@ -1,8 +1,10 @@
 package nota.oxygen.common;
 
+import java.awt.Component;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JTabbedPane;
 import javax.swing.text.BadLocationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
@@ -23,6 +25,7 @@ import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.node.AuthorDocumentFragment;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
+import ro.sync.exml.workspace.api.editor.page.author.WSAuthorEditorPageBase;
 
 public class Utils {
 
@@ -300,6 +303,35 @@ public class Utils {
 			res += serialize(children.item(i));
 		}
 		return res;
+	}
+
+	public static void bringFocusToDocumentTab(AuthorAccess authorAccess) {
+		bringFocusToDocumentTab(authorAccess.getEditorAccess());
+	}
+	
+	public static void bringFocusToDocumentTab(WSAuthorEditorPageBase editor) {
+		Object compObject = editor.getAuthorComponent();
+		TabbedPaneChildComponentPair pair = getTabbedPaneAncestor((compObject instanceof Component ? (Component)compObject : null));
+		if (pair != null) {
+			pair.TabbedPane.setSelectedComponent(pair.ChildComponent);
+		}
+	}
+	
+	private static class TabbedPaneChildComponentPair {
+		public JTabbedPane TabbedPane;
+		public Component ChildComponent;
+	}
+	
+	private static TabbedPaneChildComponentPair getTabbedPaneAncestor(Component component) {
+		if (component == null) return null;
+		if (component.getParent() == null) return null;
+		if (component.getParent() instanceof JTabbedPane) {
+			TabbedPaneChildComponentPair res = new TabbedPaneChildComponentPair();
+			res.ChildComponent = component;
+			res.TabbedPane = (JTabbedPane)component.getParent();
+			return res;
+		}
+		return getTabbedPaneAncestor(component.getParent());
 	}
 
 }
