@@ -22,6 +22,7 @@ import org.w3c.dom.ls.LSSerializer;
 import ro.sync.ecss.extensions.api.AuthorAccess;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
+import ro.sync.ecss.extensions.api.node.AuthorDocument;
 import ro.sync.ecss.extensions.api.node.AuthorDocumentFragment;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
@@ -332,6 +333,24 @@ public class Utils {
 			return res;
 		}
 		return getTabbedPaneAncestor(component.getParent());
+	}
+
+	public static void replaceRoot(Document doc, AuthorAccess authorAccess) 
+			throws AuthorOperationException {
+		String xml = serialize(doc);
+		AuthorDocumentController ctrl = authorAccess.getDocumentController();
+		ctrl.beginCompoundEdit();
+		try {
+			ctrl.replaceRoot(ctrl.createNewDocumentFragmentInContext(xml, 0));
+			AuthorDocument authorDoc = ctrl.getAuthorDocumentNode();
+			ctrl.getUniqueAttributesProcessor().assignUniqueIDs(authorDoc.getStartOffset(), authorDoc.getEndOffset(), false);
+			
+		}
+		catch (Exception e) {
+			ctrl.cancelCompoundEdit();
+			throw e;
+		}
+		ctrl.endCompoundEdit();
 	}
 
 }

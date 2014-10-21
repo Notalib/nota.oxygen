@@ -23,7 +23,6 @@ import ro.sync.ecss.extensions.api.ArgumentsMap;
 import ro.sync.ecss.extensions.api.AuthorAccess;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
-import ro.sync.ecss.extensions.api.node.AuthorDocument;
 import ro.sync.ecss.extensions.api.node.AuthorDocumentFragment;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
@@ -38,6 +37,17 @@ public class InsertHeadingOperation extends BaseAuthorOperation {
 	
 	private static String ARG_HEADING_OPERATION_TYPE = "heading operation type";
 	private String headingOperationType;
+	
+	private static String SUBLEVEL_OPERATION_TYPE = "Sublevel";
+	private static String SAME_LEVEL_OPERATION_TYPE = "Same level";
+	
+	private boolean isSubLevel() {
+		return SUBLEVEL_OPERATION_TYPE.equals(headingOperationType);
+	}
+	
+	private boolean isSameLevel() {
+		return SAME_LEVEL_OPERATION_TYPE.equals(headingOperationType);
+	}
 
 	private static String ARG_PREVIOUS_HEADING_XPATH = "previous heading xpath";
 	private String previousHeadingXPath;
@@ -47,7 +57,7 @@ public class InsertHeadingOperation extends BaseAuthorOperation {
 		return new ArgumentDescriptor[]{
 				new ArgumentDescriptor(ARG_HEADER_FRAGMENT, ArgumentDescriptor.TYPE_FRAGMENT, "Table fragment"),
 				new ArgumentDescriptor(ARG_PARENT_SECTION_XPATH, ArgumentDescriptor.TYPE_XPATH_EXPRESSION, "Parent section XPath"),
-				new ArgumentDescriptor(ARG_HEADING_OPERATION_TYPE, ArgumentDescriptor.TYPE_CONSTANT_LIST, "Heading operation type", new String[] {"Same level", "Sublevel"}, "Same level"),
+				new ArgumentDescriptor(ARG_HEADING_OPERATION_TYPE, ArgumentDescriptor.TYPE_CONSTANT_LIST, "Heading operation type", new String[] {SAME_LEVEL_OPERATION_TYPE, SUBLEVEL_OPERATION_TYPE}, "Same level"),
 				new ArgumentDescriptor(ARG_PREVIOUS_HEADING_XPATH, ArgumentDescriptor.TYPE_XPATH_EXPRESSION, "Previous heading XPath")
 				};
 	}
@@ -82,15 +92,46 @@ public class InsertHeadingOperation extends BaseAuthorOperation {
 				showMessage("The selected element is not a direct child of a section");
 				return;
 			}
-			switch (headingOperationType) {
-			case "Same level":
-				doLevelOperation(headingCandidate, parentSection, false);
-				break;
-			case "Sublevel":
-				doLevelOperation(headingCandidate, parentSection, true);
-				break;
-			default:
-				throw new AuthorOperationException(String.format("Unknown operation type %s", headingOperationType));
+			try {
+				if (findElementByXPath(previousHeadingXPath) == null) {
+					showMessage("The selected element is before the heading of it's parent section");
+					return;
+				}
+				AuthorDocumentController ctrl = getAuthorAccess().getDocumentController();
+				String headingText  = headingCandidate.getTextContent();
+				ctrl.surroundInFragment(
+						headerFragment, 
+						headingCandidate.getStartOffset()+1, 
+						headingCandidate.getEndOffset()-1);
+				AuthorDocumentFragment headingFragment = ctrl.createDocumentFragment(headingCandidate.getContentNodes().get(0), true);
+				int headingStartOffset = headingCandidate.getStartOffset();
+				ctrl.deleteNode(headingCandidate);
+				ctrl.insertFragment(headingStartOffset, headingFragment);
+				List<AuthorNode> nodes = parentSection.getContentNodes();
+				AuthorNode lastNode = nodes.get(nodes.size()-1);
+				ctrl.surroundInFragment(
+						String.format("<%s xmlns='%s'/>", parentSection.getLocalName(), parentSection.getNamespace()),
+						headingStartOffset,
+						lastNode.getEndOffset());
+				AuthorElement newSection = (AuthorElement)lastNode.getParent();
+				int offset = newSection.getStartOffset();
+				if (!isSubLevel()) {
+					AuthorDocumentFragment newSectionFragment = ctrl.createDocumentFragment(newSection, true);
+					ctrl.deleteNode(newSection);
+					offset = parentSection.getEndOffset()+1;
+					ctrl.insertFragment(offset, newSectionFragment);
+				}
+				AddNavigationEntries(
+						headingText, 
+						newSection.getAttribute("id").getValue(), 
+						parentSection.getAttribute("id").getValue());
+				getAuthorAccess().getEditorAccess().setCaretPosition(offset+2);
+				Utils.bringFocusToDocumentTab(getAuthorAccess());
+			} 
+			catch (BadLocationException e) {
+				throw new AuthorOperationException(
+						String.format("Unexpected BadLocationException while moving new level section: %s", e.getMessage()),
+						e);
 			}
 		}
 		catch (AuthorOperationException e) {
@@ -130,7 +171,7 @@ public class InsertHeadingOperation extends BaseAuthorOperation {
 	
 	private static String NCX_NS = "http://www.daisy.org/z3986/2005/ncx/";
 	
-	private boolean AddNcxNavigationEntries(Document ncx, String headingText, String sectionId, String previousSectionId, boolean subLevel)
+	private boolean AddNcxNavigationEntries(Document ncx, String headingText, String sectionId, String previousSectionId)
 			throws AuthorOperationException {
 		try {
 			URL ncxUrl = new URL(ncx.getDocumentURI());
@@ -171,7 +212,7 @@ public class InsertHeadingOperation extends BaseAuthorOperation {
 			Element content = ncx.createElementNS(NCX_NS, "content");
 			content.setAttribute("src", srcValue);
 			navPoint.appendChild(content);
-			if (subLevel) {
+			if (isSubLevel()) {
 				NodeList childNavPoints = prevSecNavPoint.getElementsByTagNameNS(NCX_NS, "navPoint");
 				if (childNavPoints.getLength() == 0) {
 					prevSecNavPoint.appendChild(navPoint);
@@ -180,7 +221,7 @@ public class InsertHeadingOperation extends BaseAuthorOperation {
 					prevSecNavPoint.insertBefore(navPoint, childNavPoints.item(0));
 				}
 			}
-			else {
+			else if (isSameLevel()) {
 				prevSecNavPoint.getParentNode().insertBefore(navPoint, prevSecNavPoint.getNextSibling());
 			}
 			InsertNcxPlayOrder(navPoint, ncxXPath);
@@ -198,7 +239,7 @@ public class InsertHeadingOperation extends BaseAuthorOperation {
 	
 	private static String XHTML_NS = "http://www.w3.org/1999/xhtml";
 	
-	private boolean AddXHTMLNavNavigationEntries(Document nav, String headingText, String sectionId, String previousSectionId, boolean subLevel)
+	private boolean AddXHTMLNavNavigationEntries(Document nav, String headingText, String sectionId, String previousSectionId)
 			throws AuthorOperationException {
 		try {
 			URL navUrl = new URL(nav.getDocumentURI());
@@ -231,7 +272,7 @@ public class InsertHeadingOperation extends BaseAuthorOperation {
 			a.setAttribute("href", hrefValue);
 			Element li = nav.createElementNS(XHTML_NS, "li");
 			li.appendChild(a);
-			if (subLevel) {
+			if (headingOperationType.equals(SUBLEVEL_OPERATION_TYPE)) {
 				Element ol;
 				NodeList ols = prevSecLi.getElementsByTagNameNS(XHTML_NS, "ol");
 				if (ols.getLength() > 0) {
@@ -249,8 +290,11 @@ public class InsertHeadingOperation extends BaseAuthorOperation {
 					ol.appendChild(li);
 				}
 			}
-			else {
+			else if (headingOperationType.equals(SAME_LEVEL_OPERATION_TYPE)) {
 				prevSecLi.getParentNode().insertBefore(li, prevSecLi.getNextSibling());
+			}
+			else {
+				throw new AuthorOperationException(String.format("Unknown operation type %s", headingOperationType));
 			}
 			return true;
 		}
@@ -265,7 +309,7 @@ public class InsertHeadingOperation extends BaseAuthorOperation {
 		}
 	}
 	
-	private void AddNavigationEntries(String headingText, String sectionId, String previousSectionId, boolean subLevel) 
+	private void AddNavigationEntries(String headingText, String sectionId, String previousSectionId) 
 			throws AuthorOperationException {
 		AuthorAccess opfAccess = EpubUtils.getAuthorDocument(
 				getAuthorAccess(), 
@@ -281,20 +325,8 @@ public class InsertHeadingOperation extends BaseAuthorOperation {
 			Document ncx = Utils.deserializeDocument(
 					Utils.serialize(ncxAccess, ncxAccess.getDocumentController().getAuthorDocumentNode()),
 					ncxAccess.getEditorAccess().getEditorLocation().toString());
-			if (AddNcxNavigationEntries(ncx, headingText, sectionId, previousSectionId, subLevel)) {
-				String ncxXml = Utils.serialize(ncx.getDocumentElement());
-				ncxAccess.getDocumentController().beginCompoundEdit();
-				try {
-					ncxAccess.getDocumentController().replaceRoot(
-							ncxAccess.getDocumentController().createNewDocumentFragmentInContext(ncxXml, 0));
-					AuthorDocument doc = ncxAccess.getDocumentController().getAuthorDocumentNode();
-					ncxAccess.getDocumentController().getUniqueAttributesProcessor().assignUniqueIDs(
-							doc.getStartOffset(), doc.getEndOffset(), false);
-				} catch (Exception e) {
-					ncxAccess.getDocumentController().cancelCompoundEdit();
-					throw e;
-				}
-				ncxAccess.getDocumentController().endCompoundEdit();
+			if (AddNcxNavigationEntries(ncx, headingText, sectionId, previousSectionId)) {
+				Utils.replaceRoot(ncx, ncxAccess);
 			}
 		}
 		AuthorAccess navAccess = EpubUtils.getXHTMLNavDocument(opfAccess);
@@ -303,66 +335,12 @@ public class InsertHeadingOperation extends BaseAuthorOperation {
 			Document nav = Utils.deserializeDocument(
 					Utils.serialize(navAccess, navAccess.getDocumentController().getAuthorDocumentNode()),
 					navAccess.getEditorAccess().getEditorLocation().toString());
-			if (AddXHTMLNavNavigationEntries(nav, headingText, sectionId, previousSectionId, subLevel)) {
-				String navXml = Utils.serialize(nav.getDocumentElement());
-				navAccess.getDocumentController().beginCompoundEdit();
-				try {
-					navAccess.getDocumentController().replaceRoot(
-							navAccess.getDocumentController().createNewDocumentFragmentInContext(navXml, 0));
-				} catch (Exception e) {
-					navAccess.getDocumentController().cancelCompoundEdit();
-				}
-				navAccess.getDocumentController().endCompoundEdit();
+			if (AddXHTMLNavNavigationEntries(nav, headingText, sectionId, previousSectionId)) {
+				Utils.replaceRoot(nav,  navAccess);
 			}
 		}
 		if (!foundOne) {
 			showMessage("Found no navigation documents in epub container");
-		}
-	}
-	
-	private void doLevelOperation(AuthorElement headingCandidate, AuthorElement parentSection, boolean subLevel) 
-			throws AuthorOperationException {
-		try {
-			if (findElementByXPath(previousHeadingXPath) == null) {
-				showMessage("The selected element is before the heading of it's parent section");
-				return;
-			}
-			AuthorDocumentController ctrl = getAuthorAccess().getDocumentController();
-			String headingText  = headingCandidate.getTextContent();
-			ctrl.surroundInFragment(
-					headerFragment, 
-					headingCandidate.getStartOffset()+1, 
-					headingCandidate.getEndOffset()-1);
-			AuthorDocumentFragment headingFragment = ctrl.createDocumentFragment(headingCandidate.getContentNodes().get(0), true);
-			int headingStartOffset = headingCandidate.getStartOffset();
-			ctrl.deleteNode(headingCandidate);
-			ctrl.insertFragment(headingStartOffset, headingFragment);
-			List<AuthorNode> nodes = parentSection.getContentNodes();
-			AuthorNode lastNode = nodes.get(nodes.size()-1);
-			ctrl.surroundInFragment(
-					String.format("<%s xmlns='%s'/>", parentSection.getLocalName(), parentSection.getNamespace()),
-					headingStartOffset,
-					lastNode.getEndOffset());
-			AuthorElement newSection = (AuthorElement)lastNode.getParent();
-			int offset = newSection.getStartOffset();
-			if (!subLevel) {
-				AuthorDocumentFragment newSectionFragment = ctrl.createDocumentFragment(newSection, true);
-				ctrl.deleteNode(newSection);
-				offset = parentSection.getEndOffset()+1;
-				ctrl.insertFragment(offset, newSectionFragment);
-			}
-			AddNavigationEntries(
-					headingText, 
-					newSection.getAttribute("id").getValue(), 
-					parentSection.getAttribute("id").getValue(), 
-					subLevel);
-			getAuthorAccess().getEditorAccess().setCaretPosition(offset+2);
-			Utils.bringFocusToDocumentTab(getAuthorAccess());
-		} 
-		catch (BadLocationException e) {
-			throw new AuthorOperationException(
-					String.format("Unexpected BadLocationException while moving new level section: %s", e.getMessage()),
-					e);
 		}
 	}
 
