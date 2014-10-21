@@ -22,6 +22,7 @@ import org.w3c.dom.ls.LSSerializer;
 import ro.sync.ecss.extensions.api.AuthorAccess;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
+import ro.sync.ecss.extensions.api.node.AttrValue;
 import ro.sync.ecss.extensions.api.node.AuthorDocument;
 import ro.sync.ecss.extensions.api.node.AuthorDocumentFragment;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
@@ -95,7 +96,8 @@ public class Utils {
 		}
 		return null;
 	}
-	public static DOMImplementationLS getDOMImplementation() throws AuthorOperationException
+	
+	public static DOMImplementationLS getDOMImplementationLS() throws AuthorOperationException
 	{
 		try
 		{
@@ -120,7 +122,7 @@ public class Utils {
 	public static Document deserializeDocument(String xml, String docUri) throws AuthorOperationException {
 		try
 		{
-			DOMImplementationLS impl = getDOMImplementation();
+			DOMImplementationLS impl = getDOMImplementationLS();
 			LSParser builder = impl.createLSParser(DOMImplementationLS.MODE_SYNCHRONOUS, null);
 			LSInput input = impl.createLSInput();
 			input.setStringData(xml);
@@ -235,7 +237,7 @@ public class Utils {
 	 */
 	public static String serialize(Node input) throws AuthorOperationException
 	{
-		LSSerializer writer = getDOMImplementation().createLSSerializer();
+		LSSerializer writer = getDOMImplementationLS().createLSSerializer();
 		writer.getDomConfig().setParameter("xml-declaration", false);
 		return writer.writeToString(input);
 	}
@@ -351,6 +353,23 @@ public class Utils {
 			throw e;
 		}
 		ctrl.endCompoundEdit();
+	}
+	
+	public static AuthorElement getDecendantAuthorElementById(AuthorElement parent, String id) {
+		if (id == null) return null;
+		if (parent == null) return null;
+		for (AuthorNode node : parent.getContentNodes()) {
+			if (node instanceof AuthorElement) {
+				AuthorElement elem = (AuthorElement)node;
+				AttrValue val = elem.getAttribute("id");
+				if (val != null) {
+					if (id.equals(val.getValue())) return elem;
+				}
+				elem = getDecendantAuthorElementById(elem,  id);
+				if (elem != null) return elem;
+			}
+		}
+		return null;
 	}
 
 }

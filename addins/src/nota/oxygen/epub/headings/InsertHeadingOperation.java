@@ -169,8 +169,6 @@ public class InsertHeadingOperation extends BaseAuthorOperation {
 		navPoint.setAttribute("playOrder", String.format("%d", playOrder));
 	}
 	
-	private static String NCX_NS = "http://www.daisy.org/z3986/2005/ncx/";
-	
 	private boolean AddNcxNavigationEntries(Document ncx, String headingText, String sectionId, String previousSectionId)
 			throws AuthorOperationException {
 		try {
@@ -178,7 +176,7 @@ public class InsertHeadingOperation extends BaseAuthorOperation {
 			URL docUrl = getAuthorAccess().getEditorAccess().getEditorLocation();
 			Element prevSecNavPoint = null;
 			Element prevSecContent = null;
-			XPath ncxXPath = Utils.getXPath("ncx", NCX_NS);
+			XPath ncxXPath = Utils.getXPath("ncx", EpubUtils.NCX_NS);
 			NodeList navPointSrcs = (NodeList)ncxXPath.compile("//ncx:navPoint/ncx:content/@src").evaluate(ncx, XPathConstants.NODESET);
 			for (int i = 0; i < navPointSrcs.getLength(); i++) {
 				Attr srcAttribute = (Attr)navPointSrcs.item(i);
@@ -203,17 +201,17 @@ public class InsertHeadingOperation extends BaseAuthorOperation {
 			}
 			String srcValue = prevSecContent.getAttribute("src");
 			srcValue = String.format("%s#%s", srcValue.substring(0, srcValue.indexOf('#')-1), sectionId);
-			Element navPoint = ncx.createElementNS(NCX_NS, "navPoint");
-			Element text = ncx.createElementNS(NCX_NS, "text");
+			Element navPoint = ncx.createElementNS(EpubUtils.NCX_NS, "navPoint");
+			Element text = ncx.createElementNS(EpubUtils.NCX_NS, "text");
 			text.setTextContent(headingText);
-			Element navLabel = ncx.createElementNS(NCX_NS, "navLabel");
+			Element navLabel = ncx.createElementNS(EpubUtils.NCX_NS, "navLabel");
 			navLabel.appendChild(text);
 			navPoint.appendChild(navLabel);
-			Element content = ncx.createElementNS(NCX_NS, "content");
+			Element content = ncx.createElementNS(EpubUtils.NCX_NS, "content");
 			content.setAttribute("src", srcValue);
 			navPoint.appendChild(content);
 			if (isSubLevel()) {
-				NodeList childNavPoints = prevSecNavPoint.getElementsByTagNameNS(NCX_NS, "navPoint");
+				NodeList childNavPoints = prevSecNavPoint.getElementsByTagNameNS(EpubUtils.NCX_NS, "navPoint");
 				if (childNavPoints.getLength() == 0) {
 					prevSecNavPoint.appendChild(navPoint);
 				}
@@ -237,14 +235,12 @@ public class InsertHeadingOperation extends BaseAuthorOperation {
 		}
 	}
 	
-	private static String XHTML_NS = "http://www.w3.org/1999/xhtml";
-	
 	private boolean AddXHTMLNavNavigationEntries(Document nav, String headingText, String sectionId, String previousSectionId)
 			throws AuthorOperationException {
 		try {
 			URL navUrl = new URL(nav.getDocumentURI());
 			URL docUrl = getAuthorAccess().getEditorAccess().getEditorLocation();
-			XPath xhtmlXPath = Utils.getXPath("x", XHTML_NS);
+			XPath xhtmlXPath = Utils.getXPath("x", EpubUtils.XHTML_NS);
 			Element prevSecA = null;
 			NodeList hrefs = (NodeList)xhtmlXPath.compile("//x:li/x:a/@href").evaluate(nav, XPathConstants.NODESET);
 			for (int i = 0; i < hrefs.getLength(); i++) {
@@ -267,22 +263,22 @@ public class InsertHeadingOperation extends BaseAuthorOperation {
 					"%s#%s",
 					hrefValue.substring(0,  hrefValue.indexOf('#')),
 					sectionId);
-			Element a = nav.createElementNS(XHTML_NS, "a");
+			Element a = nav.createElementNS(EpubUtils.XHTML_NS, "a");
 			a.setTextContent(headingText);
 			a.setAttribute("href", hrefValue);
-			Element li = nav.createElementNS(XHTML_NS, "li");
+			Element li = nav.createElementNS(EpubUtils.XHTML_NS, "li");
 			li.appendChild(a);
 			if (headingOperationType.equals(SUBLEVEL_OPERATION_TYPE)) {
 				Element ol;
-				NodeList ols = prevSecLi.getElementsByTagNameNS(XHTML_NS, "ol");
+				NodeList ols = prevSecLi.getElementsByTagNameNS(EpubUtils.XHTML_NS, "ol");
 				if (ols.getLength() > 0) {
 					 ol = (Element)ols.item(0);
 				}
 				else {
-					ol = nav.createElementNS(XHTML_NS, "ol");
+					ol = nav.createElementNS(EpubUtils.XHTML_NS, "ol");
 					prevSecLi.appendChild(ol);
 				}
-				NodeList lis = ol.getElementsByTagNameNS(XHTML_NS, "li");
+				NodeList lis = ol.getElementsByTagNameNS(EpubUtils.XHTML_NS, "li");
 				if (lis.getLength() > 0) {
 					ol.insertBefore(li, lis.item(0));
 				}

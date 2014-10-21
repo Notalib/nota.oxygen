@@ -253,7 +253,7 @@ public class MarkupLinksOperation extends BaseAuthorOperation {
 		} catch (FileNotFoundException e) {
 			throw new AuthorOperationException("Could not find domain list file "+domainListFile);
 		}
-		DOMImplementationLS impl = Utils.getDOMImplementation();
+		DOMImplementationLS impl = Utils.getDOMImplementationLS();
 		LSParser builder = impl.createLSParser(DOMImplementationLS.MODE_SYNCHRONOUS, null);
 		LSInput input = impl.createLSInput();
 		input.setByteStream(is);
