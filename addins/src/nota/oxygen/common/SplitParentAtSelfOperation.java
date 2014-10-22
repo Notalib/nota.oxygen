@@ -50,7 +50,7 @@ public class SplitParentAtSelfOperation extends BaseAuthorOperation {
 				AuthorElement eParent = (AuthorElement)aNode;
 //				showMessage("Parent element: "+serialize(eParent));
 //				showMessage("Grand parent: "+serialize(eParent.getParent()));
-				Element parent = deserializeElement(serialize(eParent));
+				Element parent = Utils.deserializeElement(serialize(eParent));
 				int insertPoint = eParent.getStartOffset();
 				docCtrl.deleteNode(eParent);
 				Element cur = null;
@@ -77,7 +77,7 @@ public class SplitParentAtSelfOperation extends BaseAuthorOperation {
 					next = cur.getNextSibling();
 				}
 				parent.removeChild(cur);
-				docCtrl.insertXMLFragment(serialize(parent)+serialize(cur)+serialize(parentSplit), insertPoint);
+				docCtrl.insertXMLFragment(Utils.serialize(parent)+Utils.serialize(cur)+Utils.serialize(parentSplit), insertPoint);
 				eCur = findElementByXPath("//*[@dk.nota.oxygen.id='"+idVal+"']");
 				if (eCur==null) throw new AuthorOperationException("Unexpectedly could not find the element at which the split was made");
 				getAuthorAccess().getEditorAccess().select(eCur.getStartOffset(), eCur.getEndOffset());

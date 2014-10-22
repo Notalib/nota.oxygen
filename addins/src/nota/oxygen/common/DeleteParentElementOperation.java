@@ -29,11 +29,11 @@ public class DeleteParentElementOperation extends BaseAuthorOperation {
 			if (aNode == null) {
 				throw new AuthorOperationException("Unexpectedly could not find parent element");
 			}
-			Element xElem = (Element)deserializeElement(serialize(aNode));
+			Element xElem = (Element)Utils.deserializeElement(serialize(aNode));
 			String xml = "";
 			NodeList children = xElem.getChildNodes();
 			for (int i=0; i<children.getLength(); i++) {
-				xml += serialize(children.item(i));
+				xml += Utils.serialize(children.item(i));
 			}
 			//showMessage("Deleting element "+xElem.getLocalName());
 			docCtrl.deleteNode(aNode);

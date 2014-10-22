@@ -4,8 +4,8 @@ package nota.oxygen.common.list;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import nota.oxygen.common.BaseAuthorOperation;
+import nota.oxygen.common.Utils;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -70,7 +70,7 @@ public class IndentListOperation extends BaseAuthorOperation {
 //			}
 //			showMessage("Indenting items "+firstItemIndex+" until "+lastItemIndex+"\n"+itemsMsg+"\nCurrent selection: "+selStart+"-"+selEnd);
 			String xml = serialize(list);
-			Element listElem = deserializeElement(xml);
+			Element listElem = Utils.deserializeElement(xml);
 			Element li = null;
 			NodeList children = listElem.getChildNodes();
 			List<Node> childrenToMove = new ArrayList<Node>();
@@ -91,7 +91,7 @@ public class IndentListOperation extends BaseAuthorOperation {
 				nestedListElem.appendChild(listElem.removeChild(c));
 			}
 			docCtrl.deleteNode(list);
-			docCtrl.insertXMLFragment(serialize(listElem), edtAccess.getCaretOffset());
+			docCtrl.insertXMLFragment(Utils.serialize(listElem), edtAccess.getCaretOffset());
 		}
 		catch (Exception e)
 		{

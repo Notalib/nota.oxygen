@@ -5,6 +5,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathException;
 
 import nota.oxygen.common.BaseAuthorOperation;
+import nota.oxygen.common.Utils;
 import nota.oxygen.dtbook.v2005.Dtbook2005UniqueAttributesRecognizer;
 
 import org.w3c.dom.Element;
@@ -31,11 +32,11 @@ public class FixTableHeadersOperation extends BaseAuthorOperation {
 	private void initXPath(Element tableElement) {
 		String ns = tableElement.getNamespaceURI();
 		if (ns != null) {
-			xpath = getXPath("d", ns);
+			xpath = Utils.getXPath("d", ns);
 			prefix = "d:";
 		}
 		else {
-			xpath = getXPath();
+			xpath = Utils.getXPath();
 			prefix = "";
 		}
 	}
@@ -111,7 +112,7 @@ public class FixTableHeadersOperation extends BaseAuthorOperation {
 			uaReq.assignUniqueIDs(tableAElem.getStartOffset(), tableAElem.getEndOffset(), false);
 
 			String tableXml = docCtrl.serializeFragmentToXML(docCtrl.createDocumentFragment(tableAElem, true));
-			Element tableXmlElem = deserializeElement(tableXml);
+			Element tableXmlElem = Utils.deserializeElement(tableXml);
 			if (tableXmlElem==null) throw new AuthorOperationException("Could not deserialize table Element to DOM");
 			
 			initXPath(tableXmlElem);
@@ -131,7 +132,7 @@ public class FixTableHeadersOperation extends BaseAuthorOperation {
 				}
 			}
 
-			tableXml = serialize(tableXmlElem);
+			tableXml = Utils.serialize(tableXmlElem);
 
 			docCtrl.deleteNode(tableAElem);
 			docCtrl.insertXMLFragment(tableXml, getAuthorAccess().getEditorAccess().getCaretOffset());

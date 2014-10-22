@@ -3,8 +3,8 @@ package nota.oxygen.common.list;
 
 import java.util.ArrayList;
 
-
 import nota.oxygen.common.BaseAuthorOperation;
+import nota.oxygen.common.Utils;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -32,7 +32,7 @@ public class RemoveListMarkupOperation extends BaseAuthorOperation {
 				throw new AuthorOperationException(
 						"The current selection is not inside a list");
 			}
-			Element list = deserializeElement(serialize(listAuthElem));
+			Element list = Utils.deserializeElement(serialize(listAuthElem));
 			String xml = "";
 			for (int i=0; i<list.getChildNodes().getLength(); i++) {
 				Node child = list.getChildNodes().item(i);
@@ -43,7 +43,7 @@ public class RemoveListMarkupOperation extends BaseAuthorOperation {
 						Node firstChild = elemChild.getChildNodes().item(0);
 						if (isListSiblingElement(firstChild))						{
 							for (int j=0; j<elemChild.getChildNodes().getLength(); j++) {
-								xml += serialize(elemChild.getChildNodes().item(j));
+								xml += Utils.serialize(elemChild.getChildNodes().item(j));
 							}
 						}
 						else {
@@ -51,12 +51,12 @@ public class RemoveListMarkupOperation extends BaseAuthorOperation {
 							for (int j=0; j<elemChild.getChildNodes().getLength(); j++) {
 								p.appendChild(elemChild.getChildNodes().item(j).cloneNode(true));
 							}
-							xml += serialize(p);
+							xml += Utils.serialize(p);
 						}
 						continue;
 					}
 				}
-				xml += serialize(child);
+				xml += Utils.serialize(child);
 				
 			}
 			docCtrl.deleteNode(listAuthElem);

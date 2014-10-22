@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 import javax.swing.text.BadLocationException;
 
 import nota.oxygen.common.BaseAuthorOperation;
+import nota.oxygen.common.Utils;
 
 import org.apache.commons.validator.routines.EmailValidator;
 import org.w3c.dom.Document;
@@ -71,7 +72,7 @@ public class MarkupLinksOperation extends BaseAuthorOperation {
 				linkElem.setAttribute(externalAttributeName, "true");
 			}
 		}
-		getAuthorAccess().getDocumentController().surroundInFragment(serialize(linkElem), startIndex, endIndex);
+		getAuthorAccess().getDocumentController().surroundInFragment(Utils.serialize(linkElem), startIndex, endIndex);
 	}
 
 	@Override
@@ -252,7 +253,7 @@ public class MarkupLinksOperation extends BaseAuthorOperation {
 		} catch (FileNotFoundException e) {
 			throw new AuthorOperationException("Could not find domain list file "+domainListFile);
 		}
-		DOMImplementationLS impl = getDOMImplementation();
+		DOMImplementationLS impl = Utils.getDOMImplementationLS();
 		LSParser builder = impl.createLSParser(DOMImplementationLS.MODE_SYNCHRONOUS, null);
 		LSInput input = impl.createLSInput();
 		input.setByteStream(is);
@@ -268,7 +269,7 @@ public class MarkupLinksOperation extends BaseAuthorOperation {
 	}
 
 	private Element getLinkElement() throws AuthorOperationException{
-		return deserializeElement(linkFragment);
+		return Utils.deserializeElement(linkFragment);
 	}
 
 	@Override
@@ -276,7 +277,7 @@ public class MarkupLinksOperation extends BaseAuthorOperation {
 			throws IllegalArgumentException {
 		linkFragment = (String)args.getArgumentValue(ARG_LINK_FRAGMENT);
 		try {
-			Element linkElem = deserializeElement(linkFragment);
+			Element linkElem = Utils.deserializeElement(linkFragment);
 			linkLocalName = linkElem.getLocalName();
 		}
 		catch (AuthorOperationException e) {

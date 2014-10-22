@@ -1367,48 +1367,36 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 											<String></String>
 										</field>
 										<field name="accelerator">
-											<null/>
+											<String>M1 M2 1</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::*:p[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+														<String>self::*:p[parent::*:section and preceding-sibling::*:h1]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
-																<String>fragment</String>
+																<String>header fragment</String>
 																<String>&lt;h1 xmlns="http://www.w3.org/1999/xhtml"/></String>
 															</entry>
 															<entry>
-																<String>insertLocation</String>
-																<String>ancestor-or-self::*:p[namespace-uri()= 'http://www.w3.org/1999/xhtml'][1]</String>
+																<String>heading operation type</String>
+																<String>Same level</String>
 															</entry>
 															<entry>
-																<String>insertPosition</String>
-																<String>After</String>
+																<String>parent section xpath</String>
+																<String>parent::section</String>
+															</entry>
+															<entry>
+																<String>previous heading xpath</String>
+																<String>preceding-sibling::h1</String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
-													</field>
-												</actionMode>
-												<actionMode>
-													<field name="xpathCondition">
-														<String></String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>fragment</String>
-																<String>&lt;h1 xmlns="http://www.w3.org/1999/xhtml"/></String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+														<String>nota.oxygen.epub.headings.InsertHeadingOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -1434,48 +1422,64 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 											<String></String>
 										</field>
 										<field name="accelerator">
-											<null/>
+											<String>M1 M2 2</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::*:p[namespace-uri()= 'http://www.w3.org/1999/xhtml'][1]</String>
+														<String>self::*:p[parent::*:section and preceding-sibling::*:h2]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
-																<String>fragment</String>
+																<String>header fragment</String>
 																<String>&lt;h2 xmlns="http://www.w3.org/1999/xhtml"/></String>
 															</entry>
 															<entry>
-																<String>insertLocation</String>
-																<String>ancestor-or-self::*:p[namespace-uri()= 'http://www.w3.org/1999/xhtml'][1]</String>
+																<String>heading operation type</String>
+																<String>Same level</String>
 															</entry>
 															<entry>
-																<String>insertPosition</String>
-																<String>After</String>
+																<String>parent section xpath</String>
+																<String>parent::section</String>
+															</entry>
+															<entry>
+																<String>previous heading xpath</String>
+																<String>preceding-sibling::h2</String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+														<String>nota.oxygen.epub.headings.InsertHeadingOperation</String>
 													</field>
 												</actionMode>
 												<actionMode>
 													<field name="xpathCondition">
-														<String></String>
+														<String>self::*:p[parent::*:section and preceding-sibling::*:h1]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
-																<String>fragment</String>
+																<String>header fragment</String>
 																<String>&lt;h2 xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+															<entry>
+																<String>heading operation type</String>
+																<String>Sublevel</String>
+															</entry>
+															<entry>
+																<String>parent section xpath</String>
+																<String>parent::section</String>
+															</entry>
+															<entry>
+																<String>previous heading xpath</String>
+																<String>preceding-sibling::h1</String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+														<String>nota.oxygen.epub.headings.InsertHeadingOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -1501,48 +1505,64 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 											<String></String>
 										</field>
 										<field name="accelerator">
-											<null/>
+											<String>M1 M2 3</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::*:p[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+														<String>self::*:p[parent::*:section and preceding-sibling::*:h3]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
-																<String>fragment</String>
+																<String>header fragment</String>
 																<String>&lt;h3 xmlns="http://www.w3.org/1999/xhtml"/></String>
 															</entry>
 															<entry>
-																<String>insertLocation</String>
-																<String>ancestor-or-self::*:p[namespace-uri()= 'http://www.w3.org/1999/xhtml'][1]</String>
+																<String>heading operation type</String>
+																<String>Same level</String>
 															</entry>
 															<entry>
-																<String>insertPosition</String>
-																<String>After</String>
+																<String>parent section xpath</String>
+																<String>parent::section</String>
+															</entry>
+															<entry>
+																<String>previous heading xpath</String>
+																<String>preceding-sibling::h3</String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+														<String>nota.oxygen.epub.headings.InsertHeadingOperation</String>
 													</field>
 												</actionMode>
 												<actionMode>
 													<field name="xpathCondition">
-														<String></String>
+														<String>self::*:p[parent::*:section and preceding-sibling::*:h2]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
-																<String>fragment</String>
+																<String>header fragment</String>
 																<String>&lt;h3 xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+															<entry>
+																<String>heading operation type</String>
+																<String>Sublevel</String>
+															</entry>
+															<entry>
+																<String>parent section xpath</String>
+																<String>parent::section</String>
+															</entry>
+															<entry>
+																<String>previous heading xpath</String>
+																<String>preceding-sibling::h2</String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+														<String>nota.oxygen.epub.headings.InsertHeadingOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -1568,48 +1588,64 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 											<String></String>
 										</field>
 										<field name="accelerator">
-											<null/>
+											<String>M1 M2 4</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::*:p[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+														<String>self::*:p[parent::*:section and preceding-sibling::*:h4]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
-																<String>fragment</String>
+																<String>header fragment</String>
 																<String>&lt;h4 xmlns="http://www.w3.org/1999/xhtml"/></String>
 															</entry>
 															<entry>
-																<String>insertLocation</String>
-																<String>ancestor-or-self::*:p[namespace-uri()= 'http://www.w3.org/1999/xhtml'][1]</String>
+																<String>heading operation type</String>
+																<String>Same level</String>
 															</entry>
 															<entry>
-																<String>insertPosition</String>
-																<String>After</String>
+																<String>parent section xpath</String>
+																<String>parent::section</String>
+															</entry>
+															<entry>
+																<String>previous heading xpath</String>
+																<String>preceding-sibling::h4</String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+														<String>nota.oxygen.epub.headings.InsertHeadingOperation</String>
 													</field>
 												</actionMode>
 												<actionMode>
 													<field name="xpathCondition">
-														<String></String>
+														<String>self::*:p[parent::*:section and preceding-sibling::*:h3]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
-																<String>fragment</String>
+																<String>header fragment</String>
 																<String>&lt;h4 xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+															<entry>
+																<String>heading operation type</String>
+																<String>Sublevel</String>
+															</entry>
+															<entry>
+																<String>parent section xpath</String>
+																<String>parent::section</String>
+															</entry>
+															<entry>
+																<String>previous heading xpath</String>
+																<String>preceding-sibling::h3</String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+														<String>nota.oxygen.epub.headings.InsertHeadingOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -1635,48 +1671,64 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 											<String></String>
 										</field>
 										<field name="accelerator">
-											<null/>
+											<String>M1 M2 5</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::*:p[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+														<String>self::*:p[parent::*:section and preceding-sibling::*:h5]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
-																<String>fragment</String>
+																<String>header fragment</String>
 																<String>&lt;h5 xmlns="http://www.w3.org/1999/xhtml"/></String>
 															</entry>
 															<entry>
-																<String>insertLocation</String>
-																<String>ancestor-or-self::*:p[namespace-uri()= 'http://www.w3.org/1999/xhtml'][1]</String>
+																<String>heading operation type</String>
+																<String>Same level</String>
 															</entry>
 															<entry>
-																<String>insertPosition</String>
-																<String>After</String>
+																<String>parent section xpath</String>
+																<String>parent::section</String>
+															</entry>
+															<entry>
+																<String>previous heading xpath</String>
+																<String>preceding-sibling::h5</String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+														<String>nota.oxygen.epub.headings.InsertHeadingOperation</String>
 													</field>
 												</actionMode>
 												<actionMode>
 													<field name="xpathCondition">
-														<String></String>
+														<String>self::*:p[parent::*:section and preceding-sibling::*:h4]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
-																<String>fragment</String>
+																<String>header fragment</String>
 																<String>&lt;h5 xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+															<entry>
+																<String>heading operation type</String>
+																<String>Sublevel</String>
+															</entry>
+															<entry>
+																<String>parent section xpath</String>
+																<String>parent::section</String>
+															</entry>
+															<entry>
+																<String>previous heading xpath</String>
+																<String>preceding-sibling::h4</String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+														<String>nota.oxygen.epub.headings.InsertHeadingOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -1702,48 +1754,64 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 											<String></String>
 										</field>
 										<field name="accelerator">
-											<null/>
+											<String>M1 M2 6</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::*:p[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+														<String>self::*:p[parent::*:section and preceding-sibling::*:h6]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
-																<String>fragment</String>
+																<String>header fragment</String>
 																<String>&lt;h6 xmlns="http://www.w3.org/1999/xhtml"/></String>
 															</entry>
 															<entry>
-																<String>insertLocation</String>
-																<String>ancestor-or-self::*:p[namespace-uri()= 'http://www.w3.org/1999/xhtml'][1]</String>
+																<String>heading operation type</String>
+																<String>Same level</String>
 															</entry>
 															<entry>
-																<String>insertPosition</String>
-																<String>After</String>
+																<String>parent section xpath</String>
+																<String>parent::section</String>
+															</entry>
+															<entry>
+																<String>previous heading xpath</String>
+																<String>preceding-sibling::h6</String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+														<String>nota.oxygen.epub.headings.InsertHeadingOperation</String>
 													</field>
 												</actionMode>
 												<actionMode>
 													<field name="xpathCondition">
-														<String></String>
+														<String>self::*:p[parent::*:section and preceding-sibling::*:h5]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
-																<String>fragment</String>
+																<String>header fragment</String>
 																<String>&lt;h6 xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+															<entry>
+																<String>heading operation type</String>
+																<String>Sublevel</String>
+															</entry>
+															<entry>
+																<String>parent section xpath</String>
+																<String>parent::section</String>
+															</entry>
+															<entry>
+																<String>previous heading xpath</String>
+																<String>preceding-sibling::h5</String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+														<String>nota.oxygen.epub.headings.InsertHeadingOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -2557,6 +2625,44 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											</actionMode-array>
 										</field>
 									</action>
+									<action>
+										<field name="id">
+											<String>id.configure</String>
+										</field>
+										<field name="name">
+											<String>${i18n(id.configure)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(id.configure.description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap/>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.epub.XHTMLConfigureAutoIDElementsOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
 								</action-array>
 							</field>
 							<field name="menubarDescriptor">
@@ -2811,6 +2917,26 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 													<String>pagenum.report</String>
 												</field>
 											</menuItem>
+											<menu>
+												<field name="label">
+													<String>${i18n(id.menu)}</String>
+												</field>
+												<field name="accessKey">
+													<String></String>
+												</field>
+												<field name="iconPath">
+													<String></String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>id.configure</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+											</menu>
 										</menuEntry-array>
 									</field>
 								</menu>
@@ -3906,7 +4032,7 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 						<null/>
 					</field>
 					<field name="extensionsBundleClassName">
-						<String>ro.sync.ecss.extensions.xhtml.XHTMLExtensionsBundle</String>
+						<String>nota.oxygen.epub.XHTMLExtensionsBundle</String>
 					</field>
 					<field name="useImposedInitialPage">
 						<Boolean>true</Boolean>

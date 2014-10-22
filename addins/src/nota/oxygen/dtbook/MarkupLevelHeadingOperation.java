@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.text.BadLocationException;
 
 import nota.oxygen.common.BaseAuthorOperation;
+import nota.oxygen.common.Utils;
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
@@ -201,11 +202,11 @@ public class MarkupLevelHeadingOperation extends BaseAuthorOperation {
 		docCtrl.setAttribute("depth", new AttrValue(""+depth), firstAthElem);
 		parent = (AuthorElement)firstAthElem.getParent();
 		AuthorDocumentFragment newLevelContent 
-			= docCtrl.createDocumentFragment(firstAthElem.getStartOffset(), getLastChild(parent).getEndOffset());
+			= docCtrl.createDocumentFragment(firstAthElem.getStartOffset(), Utils.getLastChild(parent).getEndOffset());
 		String nsAttr = "";
 		if (!ns.isEmpty()) nsAttr = " xmlns='"+ns+"'";
 		String newLevelXml = "<"+newLevelName+nsAttr+" depth='"+depth+"'>"+docCtrl.serializeFragmentToXML(newLevelContent)+"</"+newLevelName+">";
-		docCtrl.delete(firstAthElem.getStartOffset(), getLastChild(parent).getEndOffset());
+		docCtrl.delete(firstAthElem.getStartOffset(), Utils.getLastChild(parent).getEndOffset());
 		docCtrl.insertXMLFragment(newLevelXml, parent.getEndOffset()+1);		
 	}
 

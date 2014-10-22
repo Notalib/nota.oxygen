@@ -80,7 +80,19 @@
         <xt:oxy_version>14.0+</xt:oxy_version>
         <xt:type>framework</xt:type>
         <xt:author>Ole Holst Andersen</xt:author>
-        <xt:name>dtbook 2005 framework</xt:name>
+        <xt:name>xhtml epub framework</xt:name>
+        <xt:description xmlns="http://www.w3.org/1999/xhtml">
+        	<p>Framework for xhtml, when the textual content file format of ePub 3 in the context of the nordic specification for ePub 3</p>
+        </xt:description>
+        <xt:license><![CDATA[END USER LICENSE AGREEMENT]]></xt:license>
+    </xt:extension>
+    <xt:extension id="dk.nota.oxygen.ncx">
+        <xt:location href="ncx_2.9.0.zip"/>
+        <xt:version>2.9.0</xt:version>
+        <xt:oxy_version>14.0+</xt:oxy_version>
+        <xt:type>framework</xt:type>
+        <xt:author>Ole Holst Andersen</xt:author>
+        <xt:name>ncx framework</xt:name>
         <xt:description xmlns="http://www.w3.org/1999/xhtml">
         	<p>Framework for xhtml, when the textual content file format of ePub 3 in the context of the nordic specification for ePub 3</p>
         </xt:description>

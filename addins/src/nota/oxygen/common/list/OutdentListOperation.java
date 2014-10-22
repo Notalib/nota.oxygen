@@ -4,6 +4,7 @@ package nota.oxygen.common.list;
 import java.util.List;
 
 import nota.oxygen.common.BaseAuthorOperation;
+import nota.oxygen.common.Utils;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -37,18 +38,18 @@ public class OutdentListOperation extends BaseAuthorOperation {
 				int index = parentLiAElem.getContentNodes().indexOf(list);
 				if (items.size()>0)
 				{
-					Element parentLiElem = deserializeElement(serialize(parentLiAElem));
+					Element parentLiElem = Utils.deserializeElement(serialize(parentLiAElem));
 					Element listElem = (Element)parentLiElem.getChildNodes().item(index);
 					String xml = "";
 					NodeList listChildren = listElem.getChildNodes();
 					for (int i=0; i<listChildren.getLength(); i++)
 					{
-						xml += serialize(listChildren.item(i));
+						xml += Utils.serialize(listChildren.item(i));
 					}
 					parentLiElem.removeChild(listElem);
 					if (parentLiElem.getChildNodes().getLength()>0)
 					{
-						xml = serialize(parentLiElem) + xml;
+						xml = Utils.serialize(parentLiElem) + xml;
 					}
 					docCtrl.deleteNode(parentLiAElem);
 					docCtrl.insertXMLFragment(xml, getAuthorAccess().getEditorAccess().getCaretOffset());
@@ -56,7 +57,7 @@ public class OutdentListOperation extends BaseAuthorOperation {
 			}
 			else
 			{
-				Element listElem = deserializeElement(serialize(list));
+				Element listElem = Utils.deserializeElement(serialize(list));
 				NodeList listChildren = listElem.getChildNodes();
 				String xml = "";
 				for (int i=0; i<listChildren.getLength(); i++)
@@ -70,11 +71,11 @@ public class OutdentListOperation extends BaseAuthorOperation {
 						{
 							repl.appendChild(liChildren.item(j).cloneNode(true));
 						}
-						xml += serialize(repl);
+						xml += Utils.serialize(repl);
 					}
 					else
 					{
-						xml += serialize(node);
+						xml += Utils.serialize(node);
 					}
 				}
 				docCtrl.deleteNode(list);
