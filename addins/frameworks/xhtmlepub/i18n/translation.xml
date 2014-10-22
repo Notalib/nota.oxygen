@@ -1067,4 +1067,12 @@
 		<comment>Footer rows word</comment>
 		<val lang="en_US">Footer Rows</val>
 	</key>
+	<key type="action" value="id.menu">
+		<comment>ID menu</comment>
+		<val lang="en_US">ID...</val>
+	</key>
+	<key type="action" value="id.configure">
+		<comment>Footer rows word</comment>
+		<val lang="en_US">Configure id attributes</val>
+	</key>
 </translation>

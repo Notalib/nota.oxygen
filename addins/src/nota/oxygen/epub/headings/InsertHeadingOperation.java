@@ -55,7 +55,7 @@ public class InsertHeadingOperation extends BaseAuthorOperation {
 	@Override
 	public ArgumentDescriptor[] getArguments() {
 		return new ArgumentDescriptor[]{
-				new ArgumentDescriptor(ARG_HEADER_FRAGMENT, ArgumentDescriptor.TYPE_FRAGMENT, "Table fragment"),
+				new ArgumentDescriptor(ARG_HEADER_FRAGMENT, ArgumentDescriptor.TYPE_FRAGMENT, "Header fragment"),
 				new ArgumentDescriptor(ARG_PARENT_SECTION_XPATH, ArgumentDescriptor.TYPE_XPATH_EXPRESSION, "Parent section XPath"),
 				new ArgumentDescriptor(ARG_HEADING_OPERATION_TYPE, ArgumentDescriptor.TYPE_CONSTANT_LIST, "Heading operation type", new String[] {SAME_LEVEL_OPERATION_TYPE, SUBLEVEL_OPERATION_TYPE}, "Same level"),
 				new ArgumentDescriptor(ARG_PREVIOUS_HEADING_XPATH, ArgumentDescriptor.TYPE_XPATH_EXPRESSION, "Previous heading XPath")
