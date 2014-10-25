@@ -1,18 +1,28 @@
 package nota.oxygen.epub;
 
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.text.BadLocationException;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpressionException;
 
 import nota.oxygen.common.Utils;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import ro.sync.ecss.extensions.api.AuthorAccess;
+import ro.sync.ecss.extensions.api.AuthorDocumentController;
+import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.access.AuthorWorkspaceAccess;
 import ro.sync.ecss.extensions.api.node.AttrValue;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
@@ -128,27 +138,142 @@ public class EpubUtils {
 //			return "List of Pages";
 //		}
 //	}
-//	
-//	private static Element createNavLabel(String text, Document ncx) {
-//		Element navLabelElement = ncx.createElementNS(NCX_NS, "navLabel");
-//		Element textElement = ncx.createElementNS(NCX_NS, "text");
-//		textElement.setTextContent(text);
-//		navLabelElement.appendChild(textElement);
-//		return navLabelElement;
-//	}
+	
+	private static Element createNavLabel(String text, Document ncx) {
+		Element navLabelElement = ncx.createElementNS(NCX_NS, "navLabel");
+		Element textElement = ncx.createElementNS(NCX_NS, "text");
+		textElement.setTextContent(text);
+		navLabelElement.appendChild(textElement);
+		return navLabelElement;
+	}
 //	
 //	private static int addNavsToNcx(AuthorNode textNode, Element navMapContainer, Element pageList, int playOrder) {
 //		playOrder++;
 //		
 //		return playOrder;
 //	}
-//	
-//	public static Document generateNcx(AuthorAccess opfAccess) throws AuthorOperationException {
+	
+	private static class NavigationUpdator {
+		public AuthorAccess opfAccess;
+		public Document ncx;
+		public Document nav;
+		public List<Element> navPoints = new ArrayList<Element>();
+		public List<Element> pageTargets = new ArrayList<Element>();
+		public List<Element> tocItems = new ArrayList<Element>();
+		public List<Element> pagebreakItems = new ArrayList<Element>();
+		private int playOrder = 0;
+		
+		private class NavPointPair {
+			public Element ncxNavPoint;
+			public Element navLi;
+		}
+		
+		private URI getPackageFileUri() {
+			try {
+				return opfAccess.getEditorAccess().getEditorLocation().toURI();
+			} catch (URISyntaxException e) {
+				return null;
+			}
+		}
+		
+		private Element createNavLabel(String text) {
+			Element navLabelElement = ncx.createElementNS(NCX_NS, "navLabel");
+			Element textElement = ncx.createElementNS(NCX_NS, "text");
+			textElement.setTextContent(text);
+			navLabelElement.appendChild(textElement);
+			return navLabelElement;
+		}
+		
+		private void addPageTargets(AuthorElement elem, URI textDocUri) {
+			AttrValue epubType = elem.getAttribute("epub:type");
+			if (epubType != null) {
+				if (epubType.getValue().equals("pagebreak")) {
+					String src = getSrc(elem, textDocUri);
+					if (src != null) {
+						playOrder++;
+						String text = (elem.getAttribute("title")!=null) ? elem.getAttribute("title").getValue() : "-";
+						Element pageTarget = ncx.createElementNS(NCX_NS, "pageTarget");
+						pageTarget.setAttribute("playOrder", String.format("%d", playOrder));
+						pageTarget.appendChild(createNavLabel(text));
+						Element content = ncx.createElementNS(NCX_NS, "content");
+						content.setAttribute("src", src);
+						pageTarget.appendChild(content);
+						pageTargets.add(pageTarget);
+						Element pageLi = nav.createElementNS(XHTML_NS, "li");
+						Element a = nav.createElementNS(XHTML_NS, "a");
+						a.setTextContent(test);
+						a.setAttribute("href", src);
+						pageLi.appendChild(a);
+						pagebreakItems.add(pageLi);
+					}
+				}
+			}
+			for (AuthorNode node : elem.getContentNodes()) {
+				if (node instanceof AuthorElement) addPageTargets((AuthorElement)node, textDocUri);
+			}
+		}
+		
+		private String getSrc(AuthorElement elem, URI textDocUri) {
+			if (elem.getAttribute("id") == null) return null;
+			return String.format("%s#%s", textDocUri.toString(), elem.getAttribute("id").getValue());
+			
+		}
+		
+		private NavPointPair getNavPoint(AuthorElement section, URI textDocUri) {
+			String src = getSrc(section, textDocUri);
+			if (src == null) return null;
+			playOrder++;
+			String text = "***";
+			for (int d = 1; d <= 6; d++) {
+				AuthorElement[] hxs = section.getElementsByLocalName(String.format("h%d", d));
+				if (hxs.length > 0) {
+					try {
+						text = hxs[0].getTextContent();
+						break;
+					} catch (BadLocationException e) {
+						continue;
+					}
+				}
+			}
+			NavPointPair res = new NavPointPair();
+			res.ncxNavPoint = ncx.createElementNS(NCX_NS, "navPoint");
+			res.ncxNavPoint.appendChild(createNavLabel(text));
+			res.ncxNavPoint.setAttribute("playOrder", String.format("%d", playOrder));
+			Element content = ncx.createElementNS(NCX_NS, "content");
+			content.setAttribute("src", src);
+			res.navLi = nav.createElementNS(XHTML_NS, "li");
+			Element a = nav.createElementNS(XHTML_NS, "a");
+			a.setTextContent(text);
+			a.setAttribute("href", src);
+			res.navLi.appendChild(a);
+			for (AuthorNode node : section.getContentNodes()) {
+				Element ol = null;
+				if (node instanceof AuthorElement) {
+					AuthorElement elem = (AuthorElement)node;
+					if (elem.getLocalName().equals("section")) {
+						NavPointPair npp = getNavPoint(elem, textDocUri);
+						res.ncxNavPoint.appendChild(npp.ncxNavPoint);
+						if (ol == null) {
+							ol = nav.createElementNS(XHTML_NS, "ol");
+							res.navLi.appendChild(ol);
+						}
+						ol.appendChild(npp.navLi);
+					}
+					else {
+						addPageTargets(elem, textDocUri);
+					}
+				}
+			}
+			return res;
+		}
+	}
+	
+	public static void updateNavDocx(Document ncx, Document nav, AuthorAccess opfAccess) throws AuthorOperationException {
 //		try {
 //			AuthorDocumentController opfCtrl = opfAccess.getDocumentController();
 //			URI opfUri = opfAccess.getEditorAccess().getEditorLocation().toURI();
-//			Document ncx = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 //			Element root = ncx.createElementNS(NCX_NS, "ncx");
+//			
 //			AuthorElement opfRoot = opfCtrl.getAuthorDocumentNode().getRootElement();
 //			if (opfRoot == null) {
 //				throw new AuthorOperationException("Package file has no root element");
@@ -200,7 +325,7 @@ public class EpubUtils {
 //					e);
 //		}
 //		
-//	}
+	}
 
 	public static String XHTML_NS = "http://www.w3.org/1999/xhtml";
 	public static String NCX_NS = "http://www.daisy.org/z3986/2005/ncx/";
