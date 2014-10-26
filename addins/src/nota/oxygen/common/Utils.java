@@ -1,8 +1,14 @@
 package nota.oxygen.common;
 
 import java.awt.Component;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JTabbedPane;
 import javax.swing.text.BadLocationException;
@@ -346,7 +352,6 @@ public class Utils {
 			ctrl.replaceRoot(ctrl.createNewDocumentFragmentInContext(xml, 0));
 			AuthorDocument authorDoc = ctrl.getAuthorDocumentNode();
 			ctrl.getUniqueAttributesProcessor().assignUniqueIDs(authorDoc.getStartOffset(), authorDoc.getEndOffset(), false);
-			
 		}
 		catch (Exception e) {
 			ctrl.cancelCompoundEdit();
@@ -370,6 +375,85 @@ public class Utils {
 			}
 		}
 		return null;
+	}
+
+	public static Document getDOMDocument(AuthorAccess authorAccess) throws AuthorOperationException {
+		if (authorAccess == null) return null;
+		return deserializeDocument(
+				serialize(authorAccess, authorAccess.getDocumentController().getAuthorDocumentNode()),
+				authorAccess.getEditorAccess().getEditorLocation().toString());
+	}
+	
+	public static Element[] getChildElementsByNameNS(Element parent, String namespaceURI, String localName) {
+		List<Element> res = new ArrayList<Element>(); 
+		NodeList nodes = parent.getChildNodes();
+		for (int i = 0; i < nodes.getLength(); i++) {
+			Node node = nodes.item(i);
+			if (node instanceof Element && node.getLocalName().equals(localName) && node.getNamespaceURI().equals(namespaceURI)) {
+				res.add((Element)node);
+			}
+		}
+		return res.toArray(new Element[0]);
+	}
+
+	public static Element getChildElementByNameNS(Element parent, String namespaceURI, String localName) {
+		Element[] childElements = getChildElementsByNameNS(parent, namespaceURI, localName);
+		if (childElements.length > 0) return childElements[0];
+		return null;
+	}
+	
+	public static String relativizeURI(String base, String target) {
+		String baseZip = getZipUrl(base);
+		String targetZip = getZipUrl(target);
+		if (baseZip != null && targetZip != null) {
+			boolean sameZipFile;
+			try {
+				URL baseZipUrl = new URL(baseZip.substring(4, baseZip.length()-6));
+				URL targetZipUrl = new URL(targetZip.substring(4, targetZip.length()-6));
+				sameZipFile = baseZipUrl.sameFile(targetZipUrl);
+			}
+			catch (MalformedURLException e) {
+				sameZipFile = baseZip.equals(targetZip);
+			}
+			if (sameZipFile) {
+				return relativizeURI(getUrlRelToZip(base).toString(), getUrlRelToZip(target).toString());
+			}
+		}
+		URI baseURI = URI.create(base).resolve(".");
+		URI targetURI = URI.create(target);
+		URI result = baseURI.relativize(targetURI);
+		return result.toString();
+	}
+	
+	private static Pattern ZIP_URL_REGEX = Pattern.compile("^(zip:file:[^!]+!/)(.+)$");
+	
+	public static String getUrlRelToZip(String url) {
+		Matcher m = ZIP_URL_REGEX.matcher(url);
+		return m.matches() ? ("/" + m.group(2)) : null; 
+	}
+	
+	public static URL getUrlRelToZip(URL url) {
+		if (url == null) return null;
+		try {
+			return new URL(getUrlRelToZip(url.toString()));
+		} catch (MalformedURLException e) {
+			return null;
+		}
+	}
+	
+	public static String getZipUrl(String url) {
+		Matcher m = ZIP_URL_REGEX.matcher(url);
+		return m.matches() ? m.group(1) : null; 
+	}
+	
+	public static URL getZipUrl(URL url)
+	{
+		if (url == null) return null;
+		try {
+			return new URL(getZipUrl(url.toString()));
+		} catch (MalformedURLException e) {
+			return null;
+		}
 	}
 
 }
