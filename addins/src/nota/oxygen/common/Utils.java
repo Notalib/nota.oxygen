@@ -28,11 +28,13 @@ import org.w3c.dom.ls.LSSerializer;
 import ro.sync.ecss.extensions.api.AuthorAccess;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
+import ro.sync.ecss.extensions.api.UniqueAttributesProcessor;
 import ro.sync.ecss.extensions.api.node.AttrValue;
 import ro.sync.ecss.extensions.api.node.AuthorDocument;
 import ro.sync.ecss.extensions.api.node.AuthorDocumentFragment;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
+import ro.sync.ecss.extensions.commons.id.DefaultUniqueAttributesRecognizer;
 import ro.sync.exml.workspace.api.editor.page.author.WSAuthorEditorPageBase;
 
 public class Utils {
@@ -400,29 +402,6 @@ public class Utils {
 		Element[] childElements = getChildElementsByNameNS(parent, namespaceURI, localName);
 		if (childElements.length > 0) return childElements[0];
 		return null;
-	}
-	
-	public static String relativizeURI(String base, String target) {
-		String baseZip = getZipUrl(base);
-		String targetZip = getZipUrl(target);
-		if (baseZip != null && targetZip != null) {
-			boolean sameZipFile;
-			try {
-				URL baseZipUrl = new URL(baseZip.substring(4, baseZip.length()-6));
-				URL targetZipUrl = new URL(targetZip.substring(4, targetZip.length()-6));
-				sameZipFile = baseZipUrl.sameFile(targetZipUrl);
-			}
-			catch (MalformedURLException e) {
-				sameZipFile = baseZip.equals(targetZip);
-			}
-			if (sameZipFile) {
-				return relativizeURI(getUrlRelToZip(base).toString(), getUrlRelToZip(target).toString());
-			}
-		}
-		URI baseURI = URI.create(base).resolve(".");
-		URI targetURI = URI.create(target);
-		URI result = baseURI.relativize(targetURI);
-		return result.toString();
 	}
 	
 	private static Pattern ZIP_URL_REGEX = Pattern.compile("^(zip:file:[^!]+!/)(.+)$");

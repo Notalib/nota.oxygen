@@ -1072,7 +1072,23 @@
 		<val lang="en_US">ID...</val>
 	</key>
 	<key type="action" value="id.configure">
-		<comment>Footer rows word</comment>
+		<comment>Configure id</comment>
 		<val lang="en_US">Configure id attributes</val>
+	</key>
+	<key type="action" value="navigation.update">
+		<comment>Update navigation action name</comment>
+		<val lang="en_US">Update navigation documents</val>
+	</key>
+	<key type="action" value="navigation.update.description">
+		<comment>Update navigation action description</comment>
+		<val lang="en_US">Update navigation documents (NCX and xhtml navigation documents) to match the current structure of the text documents in the ePub spine</val>
+	</key>
+	<key type="action" value="header.remove">
+		<comment>Remove header action name</comment>
+		<val lang="en_US">Remove header</val>
+	</key>
+	<key type="action" value="header.remove.description">
+		<comment>Remove header action description</comment>
+		<val lang="en_US">Remove header and corresponding section, turning the header into a paragraph</val>
 	</key>
 </translation>

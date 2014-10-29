@@ -23,7 +23,6 @@ import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.node.AttrValue;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
-import ro.sync.ecss.extensions.commons.operations.text.ToLowerCaseOperation;
 
 public class UpdateNavigationDocumentsOperation extends BaseAuthorOperation {
 
@@ -86,6 +85,7 @@ public class UpdateNavigationDocumentsOperation extends BaseAuthorOperation {
 		}
 		ncxAccess.getDocumentController().endCompoundEdit();
 		xhtmlNavAccess.getDocumentController().endCompoundEdit();
+		Utils.bringFocusToDocumentTab(getAuthorAccess());
 	}
 	
 	private Element createSkeletonNcxRootElement() throws AuthorOperationException {
@@ -281,9 +281,13 @@ public class UpdateNavigationDocumentsOperation extends BaseAuthorOperation {
 	private List<TocItem> getTocItems(AuthorAccess textDocAccess, AuthorAccess opfAccess) 
 			throws AuthorOperationException {
 		try {
-			URI textDocUri = URI.create(Utils.relativizeURI(
-					opfAccess.getEditorAccess().getEditorLocation().toString(), 
-					textDocAccess.getEditorAccess().getEditorLocation().toString()));
+			URI textDocUri = URI.create(
+					getAuthorAccess().getUtilAccess().makeRelative(
+							opfAccess.getEditorAccess().getEditorLocation(), 
+							textDocAccess.getEditorAccess().getEditorLocation()));
+//			URI textDocUri = URI.create(Utils.relativizeURI(
+//					opfAccess.getEditorAccess().getEditorLocation().toString(), 
+//					textDocAccess.getEditorAccess().getEditorLocation().toString()));
 			List<TocItem> res = new ArrayList<TocItem>();
 			AuthorElement htmlElem = textDocAccess.getDocumentController().getAuthorDocumentNode().getRootElement();
 			if (htmlElem != null) {
@@ -328,6 +332,9 @@ public class UpdateNavigationDocumentsOperation extends BaseAuthorOperation {
 		item.epubType = (sectionElement.getAttribute("epub:type")!=null) ? sectionElement.getAttribute("epub:type").getValue() : "";
 		item.order = playOrder;
 		item.text = "***";
+		if (sectionElement.getAttribute("id") == null && !"body".equals(sectionElement.getLocalName())) {
+			textDocCtrl.getUniqueAttributesProcessor().assignUniqueIDs(sectionElement.getStartOffset()-1, sectionElement.getEndOffset()+1, true);
+		}
 		item.targetUri = getTargetUri(sectionElement, textDocUri);
 		for (AuthorNode node : textDocCtrl.findNodesByXPath("h1|h2|h3|h4|h5|h6", sectionElement, true, true, true, true)) {
 			AuthorElement hx = (AuthorElement)node;

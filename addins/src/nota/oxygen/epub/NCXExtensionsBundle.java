@@ -27,7 +27,9 @@ public class NCXExtensionsBundle extends ExtensionsBundle {
 
 	@Override
 	public UniqueAttributesRecognizer getUniqueAttributesIdentifier() {
-		if (uniqueAttributesRecognizer == null) uniqueAttributesRecognizer = new NCXUniqueAttributesRecognizer();
+		if (uniqueAttributesRecognizer == null) {
+			uniqueAttributesRecognizer = new NCXUniqueAttributesRecognizer();
+		}
 		return uniqueAttributesRecognizer;
 	}
 	

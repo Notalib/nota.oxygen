@@ -42,7 +42,7 @@ public class EpubUtils {
 		WSEditor editor = wa.getEditorAccess(docUrl);
 		if (editor == null)
 		{
-			if (!wa.open(docUrl)) return null;
+			if (!wa.open(docUrl, WSEditor.PAGE_AUTHOR)) return null;
 			editor = wa.getEditorAccess(docUrl);
 			if (editor == null) return null;
 		}
