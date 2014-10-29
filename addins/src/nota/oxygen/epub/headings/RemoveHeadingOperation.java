@@ -43,6 +43,9 @@ public class RemoveHeadingOperation extends BaseAuthorOperation {
 	@Override
 	protected void doOperation() throws AuthorOperationException {
 		try {
+			int selectionStartBefore = getAuthorAccess().getEditorAccess().getSelectionStart();
+			int selectionEndBefore = getAuthorAccess().getEditorAccess().getSelectionEnd();
+			int selectionOffset = 0;
 			AuthorElement heading;
 			try {
 				 heading = getCurrentElement();
@@ -86,11 +89,14 @@ public class RemoveHeadingOperation extends BaseAuthorOperation {
 			if (prevSiblingWhenSection != null) {
 				//if the preceding element of section is also a section, merge section with this
 				getAuthorAccess().getDocumentController().insertFragment(prevSiblingWhenSection.getEndOffset(), sectionContentFragment);
+				selectionOffset = -2;
 			}
 			else {
 				//insert
 				getAuthorAccess().getDocumentController().insertFragment(sectionStartOffset, sectionContentFragment);
+				selectionOffset = -1;
 			}
+			getAuthorAccess().getEditorAccess().select(selectionStartBefore+selectionOffset, selectionEndBefore+selectionOffset);
 		}
 		catch (AuthorOperationException e) {
 			throw e;

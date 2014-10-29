@@ -12,6 +12,7 @@ import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.node.AuthorDocumentFragment;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
+import sun.font.SunLayoutEngine;
 
 public class InsertHeadingOperation extends BaseAuthorOperation {
 
@@ -60,6 +61,7 @@ public class InsertHeadingOperation extends BaseAuthorOperation {
 		try {
 			int selectionStartBefore = getAuthorAccess().getEditorAccess().getSelectionStart();
 			int selectionEndBefore = getAuthorAccess().getEditorAccess().getSelectionEnd();
+			int selectionOffset = 0;
 			AuthorElement headingCandidate;
 			try {
 				 headingCandidate = getCurrentElement();
@@ -99,8 +101,12 @@ public class InsertHeadingOperation extends BaseAuthorOperation {
 					ctrl.deleteNode(newSection);
 					offset = parentSection.getEndOffset()+1;
 					ctrl.insertFragment(offset, newSectionFragment);
+					selectionOffset = 2;
 				}
-				getAuthorAccess().getEditorAccess().select(selectionStartBefore, selectionEndBefore);
+				else if (SUBLEVEL_OPERATION_TYPE.equals(headingOperationType)) {
+					selectionOffset = 1;
+				}
+				getAuthorAccess().getEditorAccess().select(selectionStartBefore+selectionOffset, selectionEndBefore+selectionOffset);
 			} 
 			catch (BadLocationException e) {
 				throw new AuthorOperationException(
