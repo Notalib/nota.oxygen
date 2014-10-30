@@ -1,5 +1,6 @@
 @import "html_cals_table.css";
 @import "links.css";
+@namespace epub "http://www.idpf.org/2007/ops";
 
 /*Defines an anchor*/
 a {
@@ -517,9 +518,19 @@ h6 {
     background-color:inherit;
 }
 
+h1:before {
+	content: "h1: ";
+	color: red;
+}
+
 h1 {
     font-size: 2em;
-    margin:1em 0;
+    margin: 1em 0;
+}
+
+h2:before {
+	content: "h2: ";
+	color: red;
 }
 
 h2 {
@@ -527,9 +538,19 @@ h2 {
     margin:0.75em 0;
 }
 
+h3:before {
+	content: "h3: ";
+	color: red;
+}
+
 h3 {
     font-size: 1.5em;
     margin:0.5em 0;
+}
+
+h4:before {
+	content: "h4: ";
+	color: red;
 }
 
 h4 {
@@ -537,9 +558,19 @@ h4 {
     margin: 0.5em 0;
 }
 
+h5:before {
+	content: "h5: ";
+	color: red;
+}
+
 h5 {
     font-size: 1em;
     margin: 0.5em 0;
+}
+
+h6:before {
+	content: "h6: ";
+	color: red;
 }
 
 h6 {
@@ -1015,4 +1046,21 @@ audio:before{
 video:before {
     content: 
     oxy_button(actionID, "play.video", transparent, true);
+}
+
+/* 
+ * Page numbers
+ */
+div[epub|type="pagebreak"] {
+	border: solid;
+	text-align: center;
+}
+div[epub|type="pagebreak"]:before {
+	content: "Page "attr(title)" ";
+}
+span[epub|type="pagebreak"] {
+	border: solid;
+}
+span[epub|type="pagebreak"]:before {
+	content: "Page "attr(title)" ";
 }

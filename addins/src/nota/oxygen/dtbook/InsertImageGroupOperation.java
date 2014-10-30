@@ -3,19 +3,13 @@ package nota.oxygen.dtbook;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.FilenameFilter;
-import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.Iterator;
 
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.FileImageInputStream;
-import javax.imageio.stream.ImageInputStream;
 import javax.swing.text.BadLocationException;
 
 import nota.oxygen.common.BaseAuthorOperation;
+import nota.oxygen.common.Utils;
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
@@ -64,7 +58,7 @@ public class InsertImageGroupOperation extends BaseAuthorOperation {
 		}
 		String height = "";
 		String width = "";
-		Dimension imageDim = getImageDimension(imageURL);
+		Dimension imageDim = Utils.getImageDimension(imageURL);
 		if (imageDim!=null) {
 			height = String.format("%1$d", imageDim.height);
 			width = String.format("%1$d", imageDim.width);
@@ -181,41 +175,6 @@ public class InsertImageGroupOperation extends BaseAuthorOperation {
 	
 	
 	
-	private String getExtension(String path) {
-		int index = path.lastIndexOf('.');
-		if (index>-1 && index+1<path.length()) {
-			return path.substring(index+1);
-		}
-		return "";
-	}
-	
-	private Dimension getImageDimension(URL imageURL) {
-		Iterator<ImageReader> imageReaders = ImageIO.getImageReadersBySuffix(getExtension(imageURL.getPath()));
-		if (imageReaders.hasNext()) {
-			 ImageReader reader = imageReaders.next();
-			 try {
-				 File imageFile = new File(imageURL.toURI());
-				 ImageInputStream imageStream = new FileImageInputStream(imageFile);
-				 try  {
-					 reader.setInput(imageStream);
-					 return new Dimension(
-							 reader.getWidth(reader.getMinIndex()),
-							 reader.getHeight(reader.getMinIndex()));
-				 }
-				 finally {
-					 imageStream.close();
-				 }
-			 }
-			 catch (IOException e) {
-				 return null;
-			 }
-			 catch (URISyntaxException e) {
-				 return null;
-			 }
-		}
-		return null;
-	}
-
 	@Override
 	protected void parseArguments(ArgumentsMap args)
 			throws IllegalArgumentException {
