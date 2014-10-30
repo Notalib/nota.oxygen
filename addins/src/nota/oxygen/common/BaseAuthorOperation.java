@@ -230,7 +230,7 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 	 * @throws BadLocationException 
 	 */
 	public AuthorElement getCurrentElement() throws BadLocationException {
-		return getElementAtOffset(getAuthorAccess().getEditorAccess().getBalancedSelectionStart()+1);
+		return getElementAtOffset(getAuthorAccess().getEditorAccess().getBalancedSelectionStart());
 	}
 	
 	

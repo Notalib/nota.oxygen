@@ -2,23 +2,17 @@ package nota.oxygen.epub;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpressionException;
 
-import org.apache.commons.lang3.StringEscapeUtils;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.ls.DOMImplementationLS;
-
 import nota.oxygen.common.Utils;
+
+import org.w3c.dom.Element;
+
 import ro.sync.ecss.extensions.api.AuthorAccess;
-import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.access.AuthorWorkspaceAccess;
 import ro.sync.ecss.extensions.api.node.AttrValue;
@@ -30,17 +24,12 @@ import ro.sync.exml.workspace.api.editor.page.author.WSAuthorEditorPage;
 
 public class EpubUtils {
 	
-	private static Pattern EPUB_URL_REGEX = Pattern.compile("^(zip:file:[^!]+!/).+$");
-	
 	public static URL getEpubUrl(URL baseEpubUrl, String url)
 	{
-		Matcher m = EPUB_URL_REGEX.matcher(baseEpubUrl.toString());
-		if (!m.matches()) return null;
-		URL result;
+		URL epubUrl = Utils.getZipUrl(baseEpubUrl);
+		if (epubUrl == null) return null;
 		try {
-			result = new URL(m.group(1));
-			result = new URL(result, url);
-			return result;
+			return new URL(epubUrl, url);
 		} catch (MalformedURLException e) {
 			return null;
 		}
@@ -53,7 +42,7 @@ public class EpubUtils {
 		WSEditor editor = wa.getEditorAccess(docUrl);
 		if (editor == null)
 		{
-			if (!wa.open(docUrl)) return null;
+			if (!wa.open(docUrl, WSEditor.PAGE_AUTHOR)) return null;
 			editor = wa.getEditorAccess(docUrl);
 			if (editor == null) return null;
 		}
@@ -87,8 +76,8 @@ public class EpubUtils {
 			return null;
 		}
 	}
-
-	public static AuthorAccess getPackageItemDocumentBySPath(AuthorAccess opfAccess, String xpath) {
+	
+	public static URL getPackageItemURLByXPath(AuthorAccess opfAccess, String xpath) {
 		try {
 			AuthorNode[] res = opfAccess.getDocumentController().findNodesByXPath(xpath, true, true, true);
 			if (res.length > 0)
@@ -96,9 +85,7 @@ public class EpubUtils {
 				AttrValue itemHref = ((AuthorElement)res[0]).getAttribute("href");
 				if (itemHref != null)
 				{
-					return getAuthorDocument(
-							opfAccess, 
-							new URL(opfAccess.getEditorAccess().getEditorLocation(), itemHref.getValue()));
+					return new URL(opfAccess.getEditorAccess().getEditorLocation(), itemHref.getValue());
 				}
 			}
 		}
@@ -108,93 +95,49 @@ public class EpubUtils {
 		return null;
 	}
 
+	public static AuthorAccess getPackageItemDocumentByXPath(AuthorAccess opfAccess, String xpath) {
+		URL itemUrl = getPackageItemURLByXPath(opfAccess, xpath);
+		if (itemUrl != null) {
+			return getAuthorDocument(opfAccess, itemUrl);
+		}
+		return null;
+	}
+
 	public static AuthorAccess getXHTMLNavDocument(AuthorAccess opfAccess) {
-		return getPackageItemDocumentBySPath(opfAccess, "//item[@media-type='application/xhtml+xml' and @properties='nav']");
+		return getPackageItemDocumentByXPath(opfAccess, "//item[@media-type='application/xhtml+xml' and @properties='nav']");
 	}
 
 	public static  AuthorAccess getNCXDocument(AuthorAccess opfAccess) {
-		return getPackageItemDocumentBySPath(opfAccess, "//item[@media-type='application/x-dtbncx+xml']");
+		return getPackageItemDocumentByXPath(opfAccess, "//item[@media-type='application/x-dtbncx+xml']");
 	}
 	
-	public static String getTOCName(String lang) {
-		switch (lang.toLowerCase()) {
-		case "da":
-		case "da-dk":
-			return "Indhold";
-		default:
-			return "Table of Contents";
-		}
-	}
-	
-	public static String getLOPName(String lang) {
-		switch (lang.toLowerCase()) {
-		case "da":
-		case "da-dk":
-			return "Sider";
-		default:
-			return "List of Pages";
-		}
-	}
-	
-	private static Element createNavLabel(String text, Document ncx) {
-		Element navLabelElement = ncx.createElementNS(NCX_NS, "navLabel");
-		Element textElement = ncx.createElementNS(NCX_NS, "text");
-		textElement.setTextContent(text);
-		navLabelElement.appendChild(textElement);
-		return navLabelElement;
-	}
-	
-	public static Document generateNcx(AuthorAccess opfAccess) throws AuthorOperationException {
-		try {
-			AuthorDocumentController opfCtrl = opfAccess.getDocumentController();
-			Document ncx = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-			Element root = ncx.createElementNS(NCX_NS, "ncx");
-			AuthorElement opfRoot = opfCtrl.getAuthorDocumentNode().getRootElement();
-			if (opfRoot == null) {
-				throw new AuthorOperationException("Package file has no root element");
+	public static URL[] getSpineUrls(AuthorAccess opfAccess, boolean includeNonLinear) throws AuthorOperationException {
+		String xpath = "/package/spine/itemref" + (includeNonLinear ? "" : "[not(@linear='no')]");
+		AuthorNode[] itemrefs = opfAccess.getDocumentController().findNodesByXPath(xpath, true, true, true);
+		List<URL> res = new ArrayList<URL>();
+		for (int i = 0; i < itemrefs.length; i++) {
+			AuthorElement itemref = (AuthorElement)itemrefs[i];
+			AttrValue idref = itemref.getAttribute("idref");
+			if (idref != null) {
+				URL spineUrl = getPackageItemURLByXPath(
+						opfAccess, 
+						String.format("/package/manifest/item[@id='%s']", idref.getValue()));
+				if (spineUrl != null) res.add(spineUrl);
 			}
-			AttrValue val = opfRoot.getAttribute("xml:lang");
-			String lang = (val == null ? "" : val.getValue().trim());
-			root.setAttribute("version", "2005-1");
-			if (lang.length() > 0) root.setAttribute("xml:lang", lang);
-			Element navMap = ncx.createElementNS(NCX_NS, "navMap");
-			navMap.appendChild(createNavLabel(getTOCName(lang), ncx));
-			Element pageList = ncx.createElementNS(NCX_NS, "pageList");
-			pageList.appendChild(createNavLabel(getLOPName(lang), ncx));
-			int playOrder = 0;
-			int pageCount = 0;
-			int maxPageNumber = 0;
-			Element lastFileNavPoint = null;
-			for (AuthorNode node : opfCtrl.findNodesByXPath("/package/spine/itemref[not(@linear='no']", true, true, true)) {
-				val = ((AuthorElement)node).getAttribute("idref");
-				String idref = (val == null) ? "" : val.getValue();
-				String xpath = String.format(
-						"/package/manifest/item[@media-type='application/xhtml+xml' and @id='%s']", 
-						StringEscapeUtils.escapeXml10(idref));
-				AuthorAccess textAccess = getPackageItemDocumentBySPath(opfAccess, xpath);
-				AuthorDocumentController textCtrl = textAccess.getDocumentController();
-				if (textAccess == null) continue;
-				String fileTitle = null;
-				for (AuthorNode h : textCtrl.findNodesByXPath("/html/body/(h1|h2|h3|h4|h5|h6)", true, true, true)) {
-					fileTitle = h.getTextContent();
-				}
-				if (fileTitle != null) {
-					
-				}
-				for (AuthorNode navTargetNode : textAccess.getDocumentController().findNodesByXPath("//section)|//*[@epub:type='pagebreak']", true, true, true)) {
-					playOrder++;
-				}
-			}
-			ncx.appendChild(root);
-			return ncx; 
-		} catch (Exception e) {
-			throw new AuthorOperationException(
-					String.format("Could not generate ncx Document due to an unexpected %s: %s", e.getClass().getName(), e.getMessage()), 
-					e);
 		}
-		
+		return res.toArray(new URL[res.size()]);
+	}
+	
+	public static AuthorAccess[] getSpine(AuthorAccess opfAccess, boolean includeNonLinear) throws AuthorOperationException {
+		List<AuthorAccess> res = new ArrayList<AuthorAccess>();
+		for (URL spineUrl : getSpineUrls(opfAccess, includeNonLinear)) {
+			AuthorAccess spineAccess = getAuthorDocument(opfAccess, spineUrl);
+			if (spineAccess != null) res.add(spineAccess);
+		}
+		return res.toArray(new AuthorAccess[0]);
 	}
 
 	public static String XHTML_NS = "http://www.w3.org/1999/xhtml";
 	public static String NCX_NS = "http://www.daisy.org/z3986/2005/ncx/";
+	public static String EPUB_NS = "http://www.idpf.org/2007/ops";
 }

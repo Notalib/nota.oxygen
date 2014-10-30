@@ -1,9 +1,24 @@
 package nota.oxygen.common;
 
 import java.awt.Component;
+import java.awt.Dimension;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.FileImageInputStream;
+import javax.imageio.stream.ImageInputStream;
 import javax.swing.JTabbedPane;
 import javax.swing.text.BadLocationException;
 import javax.xml.xpath.XPath;
@@ -22,11 +37,13 @@ import org.w3c.dom.ls.LSSerializer;
 import ro.sync.ecss.extensions.api.AuthorAccess;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
+import ro.sync.ecss.extensions.api.UniqueAttributesProcessor;
 import ro.sync.ecss.extensions.api.node.AttrValue;
 import ro.sync.ecss.extensions.api.node.AuthorDocument;
 import ro.sync.ecss.extensions.api.node.AuthorDocumentFragment;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
+import ro.sync.ecss.extensions.commons.id.DefaultUniqueAttributesRecognizer;
 import ro.sync.exml.workspace.api.editor.page.author.WSAuthorEditorPageBase;
 
 public class Utils {
@@ -346,7 +363,6 @@ public class Utils {
 			ctrl.replaceRoot(ctrl.createNewDocumentFragmentInContext(xml, 0));
 			AuthorDocument authorDoc = ctrl.getAuthorDocumentNode();
 			ctrl.getUniqueAttributesProcessor().assignUniqueIDs(authorDoc.getStartOffset(), authorDoc.getEndOffset(), false);
-			
 		}
 		catch (Exception e) {
 			ctrl.cancelCompoundEdit();
@@ -370,6 +386,97 @@ public class Utils {
 			}
 		}
 		return null;
+	}
+
+	public static Document getDOMDocument(AuthorAccess authorAccess) throws AuthorOperationException {
+		if (authorAccess == null) return null;
+		return deserializeDocument(
+				serialize(authorAccess, authorAccess.getDocumentController().getAuthorDocumentNode()),
+				authorAccess.getEditorAccess().getEditorLocation().toString());
+	}
+	
+	public static Element[] getChildElementsByNameNS(Element parent, String namespaceURI, String localName) {
+		List<Element> res = new ArrayList<Element>(); 
+		NodeList nodes = parent.getChildNodes();
+		for (int i = 0; i < nodes.getLength(); i++) {
+			Node node = nodes.item(i);
+			if (node instanceof Element && node.getLocalName().equals(localName) && node.getNamespaceURI().equals(namespaceURI)) {
+				res.add((Element)node);
+			}
+		}
+		return res.toArray(new Element[0]);
+	}
+
+	public static Element getChildElementByNameNS(Element parent, String namespaceURI, String localName) {
+		Element[] childElements = getChildElementsByNameNS(parent, namespaceURI, localName);
+		if (childElements.length > 0) return childElements[0];
+		return null;
+	}
+	
+	private static Pattern ZIP_URL_REGEX = Pattern.compile("^(zip:file:[^!]+!/)(.+)$");
+	
+	public static String getUrlRelToZip(String url) {
+		Matcher m = ZIP_URL_REGEX.matcher(url);
+		return m.matches() ? ("/" + m.group(2)) : null; 
+	}
+	
+	public static URL getUrlRelToZip(URL url) {
+		if (url == null) return null;
+		try {
+			return new URL(getUrlRelToZip(url.toString()));
+		} catch (MalformedURLException e) {
+			return null;
+		}
+	}
+	
+	public static String getZipUrl(String url) {
+		Matcher m = ZIP_URL_REGEX.matcher(url);
+		return m.matches() ? m.group(1) : null; 
+	}
+	
+	public static URL getZipUrl(URL url)
+	{
+		if (url == null) return null;
+		try {
+			return new URL(getZipUrl(url.toString()));
+		} catch (MalformedURLException e) {
+			return null;
+		}
+	}
+
+	public static Dimension getImageDimension(URL imageURL) {
+		Iterator<ImageReader> imageReaders = ImageIO.getImageReadersBySuffix(Utils.getExtension(imageURL.getPath()));
+		if (imageReaders.hasNext()) {
+			 ImageReader reader = imageReaders.next();
+			 try {
+				 File imageFile = new File(imageURL.toURI());
+				 ImageInputStream imageStream = new FileImageInputStream(imageFile);
+				 try  {
+					 reader.setInput(imageStream);
+					 return new Dimension(
+							 reader.getWidth(reader.getMinIndex()),
+							 reader.getHeight(reader.getMinIndex()));
+				 }
+				 finally {
+					 imageStream.close();
+				 }
+			 }
+			 catch (IOException e) {
+				 return null;
+			 }
+			 catch (URISyntaxException e) {
+				 return null;
+			 }
+		}
+		return null;
+	}
+
+	public static String getExtension(String path) {
+		int index = path.lastIndexOf('.');
+		if (index>-1 && index+1<path.length()) {
+			return path.substring(index+1);
+		}
+		return "";
 	}
 
 }

@@ -2663,6 +2663,91 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											</actionMode-array>
 										</field>
 									</action>
+									<action>
+										<field name="id">
+											<String>navigation.update</String>
+										</field>
+										<field name="name">
+											<String>${i18n(navigation.update)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(navigation.update.description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/Refresh16.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/Refresh16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<String>ctrl shift 7</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap/>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.epub.headings.UpdateNavigationDocumentsOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>header.remove</String>
+										</field>
+										<field name="name">
+											<String>${i18n(header.remove)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(header.remove.description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>${framework}\images\RemoveHeading20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>${framework}\images\RemoveHeading16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<String>M1 M2 N</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>(self::*:h1|self::*:h2|self::*:h3|self::*:h4|self::*:h5|self::*:h6)[parent::*:section[preceding-sibling::*:section or parent::*:section]]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>header replacement fragment</String>
+																<String>&lt;p xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+															<entry>
+																<String>parent section localname</String>
+																<String>section</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.epub.headings.RemoveHeadingOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
 								</action-array>
 							</field>
 							<field name="menubarDescriptor">
@@ -2734,6 +2819,16 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 														<menuItem>
 															<field name="actionID">
 																<String>heading.h6</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>header.remove</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>navigation.update</String>
 															</field>
 														</menuItem>
 													</menuEntry-array>
@@ -3102,6 +3197,16 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 																<String>heading.h6</String>
 															</field>
 														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>header.remove</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>navigation.update</String>
+															</field>
+														</menuItem>
 													</menuEntry-array>
 												</field>
 											</menu>
@@ -3227,6 +3332,16 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 														<toolbarItem>
 															<field name="actionID">
 																<String>heading.h6</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>header.remove</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>navigation.update</String>
 															</field>
 														</toolbarItem>
 													</toolbarEntry-array>
