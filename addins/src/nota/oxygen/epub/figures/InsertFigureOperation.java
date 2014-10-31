@@ -7,6 +7,7 @@ import java.net.URL;
 import de.schlichtherle.truezip.file.TArchiveDetector;
 import de.schlichtherle.truezip.file.TFile;
 import de.schlichtherle.truezip.file.TVFS;
+import de.schlichtherle.truezip.fs.FsSyncException;
 import de.schlichtherle.truezip.fs.archive.zip.JarDriver;
 import de.schlichtherle.truezip.socket.sl.IOPoolLocator;
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
@@ -43,32 +44,68 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 	@Override
 	protected void doOperation() throws AuthorOperationException {		
 		
-		/*File imageFile = getAuthorAccess().getWorkspaceAccess().chooseFile("Select image file", new String[] {"jpg"}, "JPEG");
 		
-		TFile source = new TFile(imageFile);
+		//File imageFile = getAuthorAccess().getWorkspaceAccess().chooseFile("Select image file", new String[] {"jpg"}, "JPEG");
+		File[] imageFiles = getAuthorAccess().getWorkspaceAccess().chooseFiles(new File("C:\\Users\\Public\\Pictures\\Sample Pictures"), "Select image file", new String[] {"jpg"}, "JPEG");
 		
-		TArchiveDetector myDetector = new TArchiveDetector("epub", new JarDriver(IOPoolLocator.SINGLETON));
-		//File destination = new File(location + "/EPUB/images");
-		TFile destination = new TFile(location);
+		if (imageFiles.length == 0) {
+			return;
+		}
 		
-		try {
-			if (destination.isArchive() || destination.isDirectory())
-			{
-				destination = new TFile(destination, source.getName());
+		if (imageFiles.length > 1) {
+			for(int i=0; i<imageFiles.length; i++) {
+				// group
+			}
+		}
+		else {
+			TArchiveDetector myDetector = new TArchiveDetector("epub", new JarDriver(IOPoolLocator.SINGLETON));
+			TFile source = new TFile(imageFiles[0]);
+			TFile destination = new TFile(location + "/EPUB/images", myDetector);
+
+			try {
+	            TFile.umount();
+	        } catch (FsSyncException e1) {
+	            e1.printStackTrace();
+	        }
+			
+			try {
+				if (destination.isArchive() || destination.isDirectory()) {
+					destination = new TFile(destination, source.getName());
+				}
+				source.cp_rp(destination);				
+			} catch (IOException ex) {
+				// TODO Auto-generated catch block
+				ex.printStackTrace();
 			}
 			
-			//destination.rm_r();
-			//if (!destination.exists()) {
-				//TVFS.umount(destination);
-				TFile.cp_rp(imageFile, destination, myDetector);
-			//}
+			try {
+	            TFile.umount();
+	        } catch (FsSyncException e) {
+	            e.printStackTrace();
+	        }
 			
-		} catch (IOException ex) {
-			// TODO Auto-generated catch block
-			ex.printStackTrace();
-		}*/
+			
+			String fileName = imageFiles[i].getName();
+			
+			if (imageFragment==null) throw new AuthorOperationException(ARG_IMAGE_FRAGMENT+" argument is null");
+			
+			// Inserts this fragment at the caret position.
+			String imggroupXml = imageFragment.replace("$image", "images/" + fileName);
+			int caretPosition  = getAuthorAccess().getEditorAccess().getCaretOffset();
+			getAuthorAccess().getDocumentController().insertXMLFragment(imggroupXml, caretPosition);
+		}
 		
-		URL imageURL = getAuthorAccess().getWorkspaceAccess().chooseURL("Select image file", new String[] {"jpg"}, "JPEG");
+		
+		
+		
+		
+		//URL docUrl = getAuthorAccess().getDocumentController().getAuthorDocumentNode().getXMLBaseURL();
+		//URL epubImagesUrl = EpubUtils.getEpubUrl(docUrl, "EPUB/images/");
+		//getAuthorAccess().getWorkspaceAccess().refreshInProject(docUrl);
+		
+		
+		
+		/*URL imageURL = getAuthorAccess().getWorkspaceAccess().chooseURL("Select image file", new String[] {"jpg"}, "JPEG");
 		if (imageURL==null) {
 			showMessage("No image file selected");
 			return;
@@ -103,7 +140,7 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 		// Inserts this fragment at the caret position.
 		String imggroupXml = imageFragment.replace("$image", relImageURL);
 		int caretPosition  = getAuthorAccess().getEditorAccess().getCaretOffset();
-		getAuthorAccess().getDocumentController().insertXMLFragment(imggroupXml, caretPosition);
+		getAuthorAccess().getDocumentController().insertXMLFragment(imggroupXml, caretPosition);*/
 		
 
 	}
