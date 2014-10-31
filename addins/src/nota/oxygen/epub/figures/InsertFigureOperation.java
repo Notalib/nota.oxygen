@@ -49,13 +49,13 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 		
 		TArchiveDetector myDetector = new TArchiveDetector("epub", new JarDriver(IOPoolLocator.SINGLETON));
 		//File destination = new File(location + "/EPUB/images");
-		File destination = new File(location);
+		TFile destination = new TFile(location);
 		
 		try {
-			//if (destination.isArchive() || destination.isDirectory())
-			//{
-				destination = new TFile(destination, source.getName(), myDetector);
-			//}
+			if (destination.isArchive() || destination.isDirectory())
+			{
+				destination = new TFile(destination, source.getName());
+			}
 			
 			//destination.rm_r();
 			//if (!destination.exists()) {
