@@ -85,7 +85,7 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 	        }
 			
 			
-			String fileName = imageFiles[i].getName();
+			String fileName = imageFiles[0].getName();
 			
 			if (imageFragment==null) throw new AuthorOperationException(ARG_IMAGE_FRAGMENT+" argument is null");
 			
