@@ -43,7 +43,7 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 	@Override
 	protected void doOperation() throws AuthorOperationException {		
 		
-		File imageFile = getAuthorAccess().getWorkspaceAccess().chooseFile("Select image file", new String[] {"jpg"}, "JPEG");
+		/*File imageFile = getAuthorAccess().getWorkspaceAccess().chooseFile("Select image file", new String[] {"jpg"}, "JPEG");
 		
 		TFile source = new TFile(imageFile);
 		
@@ -66,7 +66,7 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 		} catch (IOException ex) {
 			// TODO Auto-generated catch block
 			ex.printStackTrace();
-		}
+		}*/
 		
 		URL imageURL = getAuthorAccess().getWorkspaceAccess().chooseURL("Select image file", new String[] {"jpg"}, "JPEG");
 		if (imageURL==null) {
