@@ -2800,6 +2800,52 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											</actionMode-array>
 										</field>
 									</action>
+									<action>
+										<field name="id">
+											<String>insert.figures</String>
+										</field>
+										<field name="name">
+											<String>Insert Figures</String>
+										</field>
+										<field name="description">
+											<String>Insert Figures</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:section|self::*:div</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>image fragment</String>
+																<String>&lt;figure class="image" xmlns="http://www.w3.org/1999/xhtml">
+	&lt;figcaption>GROUPCAPTIONPLACEHOLDER&lt;/figcaption>
+  
+&lt;/figure></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.epub.figures.InsertFiguresOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
 								</action-array>
 							</field>
 							<field name="menubarDescriptor">
@@ -2899,6 +2945,11 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											<menuItem>
 												<field name="actionID">
 													<String>insert.figure</String>
+												</field>
+											</menuItem>
+											<menuItem>
+												<field name="actionID">
+													<String>insert.figures</String>
 												</field>
 											</menuItem>
 											<menuItem>
@@ -3284,6 +3335,11 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											</menuItem>
 											<menuItem>
 												<field name="actionID">
+													<String>insert.figures</String>
+												</field>
+											</menuItem>
+											<menuItem>
+												<field name="actionID">
 													<String>insert.table</String>
 												</field>
 											</menuItem>
@@ -3422,6 +3478,11 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											<toolbarItem>
 												<field name="actionID">
 													<String>insert.figure</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>insert.figures</String>
 												</field>
 											</toolbarItem>
 											<toolbarItem>
