@@ -14,10 +14,10 @@
 					<field name="schemaDescriptor">
 						<docTypeSchema>
 							<field name="type">
-								<Integer>9</Integer>
+								<Integer>6</Integer>
 							</field>
 							<field name="uri">
-								<String>${framework}/xhtml5%20(epub3)/epub-xhtml-30.nvdl</String>
+								<String>${framework}/schema/nordic-html5.rng</String>
 							</field>
 						</docTypeSchema>
 					</field>
@@ -3682,13 +3682,7 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 						</String-array>
 					</field>
 					<field name="xmlCatalogs">
-						<String-array>
-							<String>${framework}/dtd/xhtmlcatalog.xml</String>
-							<String>${framework}/relaxng/catalog.xml</String>
-							<String>${framework}/nvdl/catalog.xml</String>
-							<String>${frameworks}/xhtml11/dtd/xhtmlcatalog.xml</String>
-							<String>${frameworks}/xhtml11/schema/xhtmlcatalog.xml</String>
-						</String-array>
+						<String-array/>
 					</field>
 					<field name="description">
 						<String>An extension of HTML as an XML language. </String>
@@ -4266,10 +4260,125 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 						</scenario-array>
 					</field>
 					<field name="validationScenarios">
-						<validationScenario-array/>
+						<validationScenario-array>
+							<validationScenario>
+								<field name="pairs">
+									<list>
+										<validationUnit>
+											<field name="validationType">
+												<validationUnitType>
+													<field name="validationInputType">
+														<String>text/xml</String>
+													</field>
+												</validationUnitType>
+											</field>
+											<field name="url">
+												<String>${currentFileURL}</String>
+											</field>
+											<field name="validationEngine">
+												<validationEngine>
+													<field name="engineType">
+														<String>&lt;Default engine></String>
+													</field>
+													<field name="allowsAutomaticValidation">
+														<Boolean>true</Boolean>
+													</field>
+												</validationEngine>
+											</field>
+											<field name="allowAutomaticValidation">
+												<Boolean>true</Boolean>
+											</field>
+											<field name="extensions">
+												<null/>
+											</field>
+											<field name="validationSchema">
+												<validationUnitSchema>
+													<field name="dtdSchemaPublicID">
+														<null/>
+													</field>
+													<field name="schematronPhase">
+														<null/>
+													</field>
+													<field name="type">
+														<Integer>7</Integer>
+													</field>
+													<field name="uri">
+														<String>${framework}/schema/nordic2015-1.strict.sch</String>
+													</field>
+												</validationUnitSchema>
+											</field>
+										</validationUnit>
+									</list>
+								</field>
+								<field name="type">
+									<String>Validation_scenario</String>
+								</field>
+								<field name="name">
+									<String>XHTML ePub Nordic 2015 strict</String>
+								</field>
+							</validationScenario>
+							<validationScenario>
+								<field name="pairs">
+									<list>
+										<validationUnit>
+											<field name="validationType">
+												<validationUnitType>
+													<field name="validationInputType">
+														<String>text/xml</String>
+													</field>
+												</validationUnitType>
+											</field>
+											<field name="url">
+												<String>${currentFileURL}</String>
+											</field>
+											<field name="validationEngine">
+												<validationEngine>
+													<field name="engineType">
+														<String>&lt;Default engine></String>
+													</field>
+													<field name="allowsAutomaticValidation">
+														<Boolean>true</Boolean>
+													</field>
+												</validationEngine>
+											</field>
+											<field name="allowAutomaticValidation">
+												<Boolean>true</Boolean>
+											</field>
+											<field name="extensions">
+												<null/>
+											</field>
+											<field name="validationSchema">
+												<validationUnitSchema>
+													<field name="dtdSchemaPublicID">
+														<null/>
+													</field>
+													<field name="schematronPhase">
+														<null/>
+													</field>
+													<field name="type">
+														<Integer>7</Integer>
+													</field>
+													<field name="uri">
+														<String>${framework}/schema/nordic2015-1.sch</String>
+													</field>
+												</validationUnitSchema>
+											</field>
+										</validationUnit>
+									</list>
+								</field>
+								<field name="type">
+									<String>Validation_scenario</String>
+								</field>
+								<field name="name">
+									<String>XHTML ePub Nordic 2015</String>
+								</field>
+							</validationScenario>
+						</validationScenario-array>
 					</field>
 					<field name="defaultValidationScenarios">
-						<null/>
+						<list>
+							<String>XHTML ePub Nordic 2015 strict</String>
+						</list>
 					</field>
 					<field name="defaultTransformationScenarios">
 						<null/>
