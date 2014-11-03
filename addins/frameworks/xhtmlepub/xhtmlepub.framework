@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <serialized version="16.0" xml:space="preserve">
 	<serializableOrderedMap>
 		<entry>
@@ -26,6 +27,7 @@
 							<String>${framework}/i18n/</String>
 							<String>${framework}/xhtml.jar</String>
 							<String>${framework}/nota.oxygen.jar</String>
+							<String>${framework}/truezip-samples-7.7.6-jar-with-dependencies.jar</String>
 						</String-array>
 					</field>
 					<field name="parentClassLoaderID">
@@ -2752,10 +2754,10 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											<String>insert.figure</String>
 										</field>
 										<field name="name">
-											<String>Insert Figure(s)</String>
+											<String>Insert Figure(s) from file</String>
 										</field>
 										<field name="description">
-											<String>Insert figure(s), with the side-effect of updating the ePub navigation documents</String>
+											<String>Insert Figure(s) from file</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -2778,6 +2780,10 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
+																<String>from archive</String>
+																<String>no</String>
+															</entry>
+															<entry>
 																<String>image fragment</String>
 																<String>&lt;figure class="image" xmlns="http://www.w3.org/1999/xhtml">$content&lt;/figure></String>
 															</entry>
@@ -2796,13 +2802,13 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 									</action>
 									<action>
 										<field name="id">
-											<String>package.update</String>
+											<String>insert.figure.epub</String>
 										</field>
 										<field name="name">
-											<String>Update package</String>
+											<String>Insert Figure(s) from epub archive</String>
 										</field>
 										<field name="description">
-											<String>Update package</String>
+											<String>Insert figure(s) from epub archive</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -2820,46 +2826,17 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String></String>
+														<String>self::*:section|self::*:div|self::*:figure</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
+																<String>from archive</String>
+																<String>yes</String>
+															</entry>
+															<entry>
 																<String>image fragment</String>
-																<String>&lt;figure class="image" xmlns="http://www.w3.org/1999/xhtml">
-	&lt;figcaption>GROUPCAPTIONPLACEHOLDER&lt;/figcaption>
-  
-&lt;/figure></String>
-															</entry>
-															<entry>
-																<String>imageFragment</String>
-																<String>&lt;figure class="image" xmlns="http://www.w3.org/1999/xhtml">
-	&lt;img src="$image" alt="ALTTEXT" />
-	&lt;figcaption>
-		&lt;p>CAPTIONPLACEHOLDER&lt;/p>
-	&lt;/figcaption>
-&lt;/figure></String>
-															</entry>
-															<entry>
-																<String>imageGroupFragment</String>
-																<String>&lt;figure class="image" xmlns="http://www.w3.org/1999/xhtml">
-	&lt;figcaption>
-		&lt;p>GROUPCAPTIONPLACEHOLDER&lt;/p>
-	&lt;/figcaption>
-     &lt;figure class="image">
-      	&lt;img src="$image" alt="ALTTEXT" />
-      	&lt;figcaption>
-      		&lt;p>CAPTIONPLACEHOLDER&lt;/p>
-      	&lt;/figcaption>
-   &lt;/figure>
-&lt;/figure></String>
-															</entry>
-															<entry>
-																<String>imageGroupFragmentFirst</String>
-																<String>&lt;figure class="image" xmlns="http://www.w3.org/1999/xhtml">
-	&lt;figcaption>
-		&lt;p>GROUPCAPTIONPLACEHOLDER&lt;/p>
-	&lt;/figcaption></String>
+																<String>&lt;figure class="image" xmlns="http://www.w3.org/1999/xhtml">$content&lt;/figure></String>
 															</entry>
 															<entry>
 																<String>location</String>
@@ -2868,7 +2845,7 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
-														<String>nota.oxygen.epub.figures.UpdatePackageDocumentOperation</String>
+														<String>nota.oxygen.epub.figures.InsertFigureOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -2977,7 +2954,7 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											</menuItem>
 											<menuItem>
 												<field name="actionID">
-													<String>package.update</String>
+													<String>insert.figure.epub</String>
 												</field>
 											</menuItem>
 											<menuItem>
@@ -3363,6 +3340,11 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											</menuItem>
 											<menuItem>
 												<field name="actionID">
+													<String>insert.figure.epub</String>
+												</field>
+											</menuItem>
+											<menuItem>
+												<field name="actionID">
 													<String>insert.table</String>
 												</field>
 											</menuItem>
@@ -3501,6 +3483,11 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											<toolbarItem>
 												<field name="actionID">
 													<String>insert.figure</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>insert.figure.epub</String>
 												</field>
 											</toolbarItem>
 											<toolbarItem>

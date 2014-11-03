@@ -2,6 +2,7 @@ package nota.oxygen.epub.figures;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import de.schlichtherle.truezip.file.TArchiveDetector;
 import de.schlichtherle.truezip.file.TFile;
@@ -20,11 +21,16 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 	private static String ARG_LOCATION = "location";
 	private String location;
 	
+	private static String ARG_FROM_ARCHIVE = "from archive";
+	private static String[] YES_NO = new String[]{"yes", "no"};
+	private boolean fromArchive;
+	
 	@Override
 	public ArgumentDescriptor[] getArguments() {
 		return new ArgumentDescriptor[] { 
 				new ArgumentDescriptor(ARG_IMAGE_FRAGMENT, ArgumentDescriptor.TYPE_FRAGMENT, "Image fragment"),
-				new ArgumentDescriptor(ARG_LOCATION, ArgumentDescriptor.TYPE_STRING, "Location")
+				new ArgumentDescriptor(ARG_LOCATION, ArgumentDescriptor.TYPE_STRING, "Location"),
+				new ArgumentDescriptor(ARG_FROM_ARCHIVE, ArgumentDescriptor.TYPE_CONSTANT_LIST, "From archive", YES_NO, YES_NO[1])
 		};
 	}
 
@@ -32,6 +38,8 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 	protected void parseArguments(ArgumentsMap args) throws IllegalArgumentException {
 		imageFragment = (String)args.getArgumentValue(ARG_IMAGE_FRAGMENT);
 		location = (String)args.getArgumentValue(ARG_LOCATION);
+		String temp = (String)args.getArgumentValue(ARG_FROM_ARCHIVE);
+		fromArchive = YES_NO[0].equals(temp);
 	}
 	
 	@Override
@@ -41,10 +49,30 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 
 	@Override
 	protected void doOperation() throws AuthorOperationException {		
-		File[] imageFiles = getAuthorAccess().getWorkspaceAccess().chooseFiles(new File(""), "Select image file", new String[] {"jpg"}, "JPEG");
-		if (imageFiles == null) {
-			return;
+		File[] imageFiles = null;
+		if (fromArchive) {
+			URL imageURL = getAuthorAccess().getWorkspaceAccess().chooseURL(
+					"Select image file", new String[] { "jpg" }, "JPEG");
+			if (imageURL == null) {
+				showMessage("No image file selected");
+				return;
+			}
+			
+			String relImageURL = getAuthorAccess().getUtilAccess().makeRelative(getAuthorAccess().getDocumentController().getAuthorDocumentNode().getXMLBaseURL(), imageURL);
+			if (relImageURL==null) {
+				showMessage("No image file selected");
+				return;
+			}
+			
+			imageFiles = new File[] { new File(relImageURL) };
+		} else {
+			imageFiles = getAuthorAccess().getWorkspaceAccess().chooseFiles(new File(""), "Select image file", new String[] {"jpg"}, "JPEG");
+			if (imageFiles == null) {
+				return;
+			}
 		}
+			
+		
 			
 		if (imageFragment == null) {
 			throw new AuthorOperationException(ARG_IMAGE_FRAGMENT + " argument is null");
@@ -58,18 +86,21 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 			return;
 		} else if (imageFiles.length == 1) {
 			// single image file selected
-			insertImageToArchive(imageFiles[0]);
+			if (!fromArchive) {
+				insertImageToArchive(imageFiles[0]); 
+			}
+
 			String fileName = imageFiles[0].getName();
 			if (fileName == null) {
 				showMessage("No image file selected");
 				return;
 			}
 
-			figureXml += "<img src=\"images/" + fileName + "\" alt=\"ALTTEXT\" />";
-			figureXml += "<figcaption><p>CAPTIONPLACEHOLDER</p></figcaption>";
+			figureXml += "<img src=\"images/" + fileName + "\" alt=\"ALTTEXT\" />\n";
+			figureXml += "<figcaption>\n<p>CAPTIONPLACEHOLDER</p>\n</figcaption>\n";
 		} else {
 			// multi image files selected
-			figureXml = "<figcaption><p>GROUPCAPTIONPLACEHOLDER</p></figcaption>";
+			figureXml = "<figcaption>\n<p>GROUPCAPTIONPLACEHOLDER</p>\n</figcaption>\n";
 			for (int i = 0; i < imageFiles.length; i++) {
 				insertImageToArchive(imageFiles[i]);
 				String fileName = imageFiles[i].getName();
@@ -78,10 +109,10 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 					return;
 				}
 				
-				figureXml += "<figure class=\"image\">";
-				figureXml += "<img src=\"images/" + fileName + "\" alt=\"ALTTEXT\" />";
-				figureXml += "<figcaption><p>CAPTIONPLACEHOLDER</p></figcaption>";
-				figureXml += "</figure>";
+				figureXml += "<figure class=\"image\">\n";
+				figureXml += "<img src=\"images/" + fileName + "\" alt=\"ALTTEXT\" />\n";
+				figureXml += "<figcaption>\n<p>CAPTIONPLACEHOLDER</p>\n</figcaption>\n";
+				figureXml += "</figure>\n";
 			}
 		}
 
