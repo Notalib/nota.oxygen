@@ -50,10 +50,8 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 			throw new AuthorOperationException(ARG_IMAGE_FRAGMENT + " argument is null");
 		}
 		
-
 		String figureXml = "";
 		String fragmentXml = null;
-
 		
 		if (imageFiles.length == 0) {
 			// no image file selected
