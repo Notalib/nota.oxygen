@@ -16,7 +16,7 @@ import ro.sync.ecss.extensions.api.AuthorOperationException;
 import nota.oxygen.common.BaseAuthorOperation;
 
 public class InsertFigureOperation extends BaseAuthorOperation {
-	private static String ARG_IMAGE_FRAGMENT = "image fragment";
+	private static String ARG_IMAGE_FRAGMENT_SINGLE = "image fragment";
 	private String imageFragment;
 	
 	private static String ARG_LOCATION = "location";
@@ -25,14 +25,14 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 	@Override
 	public ArgumentDescriptor[] getArguments() {
 		return new ArgumentDescriptor[] { 
-				new ArgumentDescriptor(ARG_IMAGE_FRAGMENT, ArgumentDescriptor.TYPE_FRAGMENT, "Image fragment"),
+				new ArgumentDescriptor(ARG_IMAGE_FRAGMENT_SINGLE, ArgumentDescriptor.TYPE_FRAGMENT, "Image fragment"),
 				new ArgumentDescriptor(ARG_LOCATION, ArgumentDescriptor.TYPE_STRING, "Location")
 		};
 	}
 
 	@Override
 	protected void parseArguments(ArgumentsMap args) throws IllegalArgumentException {
-		imageFragment = (String)args.getArgumentValue(ARG_IMAGE_FRAGMENT);
+		imageFragment = (String)args.getArgumentValue(ARG_IMAGE_FRAGMENT_SINGLE);
 		location = (String)args.getArgumentValue(ARG_LOCATION);
 	}
 	
@@ -46,7 +46,7 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 		
 		
 		//File imageFile = getAuthorAccess().getWorkspaceAccess().chooseFile("Select image file", new String[] {"jpg"}, "JPEG");
-		File[] imageFiles = getAuthorAccess().getWorkspaceAccess().chooseFiles(new File("C:\\Users\\Public\\Pictures\\Sample Pictures"), "Select image file", new String[] {"jpg"}, "JPEG");
+		File[] imageFiles = getAuthorAccess().getWorkspaceAccess().chooseFiles(new File("C:\\"), "Select image file", new String[] {"jpg"}, "JPEG");
 		
 		if (imageFiles.length == 0) {
 			return;
@@ -84,10 +84,9 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 	            e.printStackTrace();
 	        }
 			
-			
 			String fileName = imageFiles[0].getName();
 			
-			if (imageFragment==null) throw new AuthorOperationException(ARG_IMAGE_FRAGMENT+" argument is null");
+			if (imageFragment==null) throw new AuthorOperationException(ARG_IMAGE_FRAGMENT_SINGLE +" argument is null");
 			
 			// Inserts this fragment at the caret position.
 			String imggroupXml = imageFragment.replace("$image", "images/" + fileName);

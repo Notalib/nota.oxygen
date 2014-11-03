@@ -2837,6 +2837,40 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
   
 &lt;/figure></String>
 															</entry>
+															<entry>
+																<String>imageFragment</String>
+																<String>&lt;figure class="image" xmlns="http://www.w3.org/1999/xhtml">
+	&lt;img src="$image" alt="ALTTEXT" />
+	&lt;figcaption>
+		&lt;p>CAPTIONPLACEHOLDER&lt;/p>
+	&lt;/figcaption>
+&lt;/figure></String>
+															</entry>
+															<entry>
+																<String>imageGroupFragment</String>
+																<String>&lt;figure class="image" xmlns="http://www.w3.org/1999/xhtml">
+	&lt;figcaption>
+		&lt;p>GROUPCAPTIONPLACEHOLDER&lt;/p>
+	&lt;/figcaption>
+     &lt;figure class="image">
+      	&lt;img src="$image" alt="ALTTEXT" />
+      	&lt;figcaption>
+      		&lt;p>CAPTIONPLACEHOLDER&lt;/p>
+      	&lt;/figcaption>
+   &lt;/figure>
+&lt;/figure></String>
+															</entry>
+															<entry>
+																<String>imageGroupFragmentFirst</String>
+																<String>&lt;figure class="image" xmlns="http://www.w3.org/1999/xhtml">
+	&lt;figcaption>
+		&lt;p>GROUPCAPTIONPLACEHOLDER&lt;/p>
+	&lt;/figcaption></String>
+															</entry>
+															<entry>
+																<String>location</String>
+																<String>${af}</String>
+															</entry>
 														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
