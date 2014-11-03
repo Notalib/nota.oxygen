@@ -1,0 +1,89 @@
+package {
+    display : block;
+}
+
+
+metadata {
+    display : block;
+    color   : green;
+}
+
+metadata *[id] {
+    content : attr(id) ' = ';
+}
+
+metadata * {
+    display : block;
+    content : oxy_name() ' = ';
+    color   : green;
+}
+
+
+title {
+    content : '';
+    display : block;
+    font-weight:bold;
+    color:#002244;
+    background-color:inherit;
+    font-size: 2.2em;
+    margin: 1em 1em;
+    border-bottom: 2px solid #004477; 
+}
+
+
+manifest:before {
+    content: "Manifest:";
+    color : blue;
+}
+manifest {
+    display : block;
+    margin:1em 1em;
+}
+
+item:before {
+    link: attr(href);
+    content: ' ' url(../img/link.png) ' ' attr(href);
+    color:navy;
+    background-color:inherit;
+}
+
+item[media-type="application/x-dtbncx+xml"]:before{
+    color : orange;
+}
+
+item {
+    display:block;
+}
+
+item:after {
+    color : #CCCCCC;
+    content : ' [' attr(id) '] [' attr(media-type) ']';
+    
+}
+
+spine:before {
+    color : blue;
+    link: oxy_concat('#', attr(toc));
+    content: "Spine → " url(../img/link.png) ' #'  attr(toc);
+}
+spine {
+    display : block;
+    margin:1em 1em;
+}
+
+itemref:before {
+    link: oxy_concat('#', attr(idref));
+    content: url(../img/link.png) ' #'  attr(idref);
+    color:navy;
+    background-color:inherit;
+}
+itemref {
+    display : block;
+}
+
+reference:before {
+    link: attr(href);
+    content: url(../img/link.png) attr(href);
+    color:navy;
+    background-color:inherit;
+}
