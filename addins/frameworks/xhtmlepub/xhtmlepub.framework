@@ -2753,10 +2753,10 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											<String>insert.figure</String>
 										</field>
 										<field name="name">
-											<String>Insert Figure</String>
+											<String>Insert Figure(s)</String>
 										</field>
 										<field name="description">
-											<String>Insert Figure</String>
+											<String>Insert figure(s), with the side-effect of updating the ePub navigation documents</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -2780,12 +2780,7 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 														<serializableOrderedMap>
 															<entry>
 																<String>image fragment</String>
-																<String>&lt;figure class="image" xmlns="http://www.w3.org/1999/xhtml">
-	&lt;img src="$image" alt="ALTTEXT" />
-	&lt;figcaption>
-		&lt;p>CAPTIONPLACEHOLDER&lt;/p>
-	&lt;/figcaption>
-&lt;/figure></String>
+																<String>&lt;figure class="image" xmlns="http://www.w3.org/1999/xhtml">$content&lt;/figure></String>
 															</entry>
 															<entry>
 																<String>location</String>
@@ -2802,13 +2797,13 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 									</action>
 									<action>
 										<field name="id">
-											<String>insert.figures</String>
+											<String>package.update</String>
 										</field>
 										<field name="name">
-											<String>Insert Figures</String>
+											<String>Update package</String>
 										</field>
 										<field name="description">
-											<String>Insert Figures</String>
+											<String>Update package</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -2826,21 +2821,13 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>self::*:section|self::*:div</String>
+														<String></String>
 													</field>
 													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>image fragment</String>
-																<String>&lt;figure class="image" xmlns="http://www.w3.org/1999/xhtml">
-	&lt;figcaption>GROUPCAPTIONPLACEHOLDER&lt;/figcaption>
-  
-&lt;/figure></String>
-															</entry>
-														</serializableOrderedMap>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
-														<String>nota.oxygen.epub.figures.InsertFiguresOperation</String>
+														<String>nota.oxygen.epub.figures.UpdatePackageDocumentOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -2949,7 +2936,7 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											</menuItem>
 											<menuItem>
 												<field name="actionID">
-													<String>insert.figures</String>
+													<String>package.update</String>
 												</field>
 											</menuItem>
 											<menuItem>
@@ -3335,11 +3322,6 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											</menuItem>
 											<menuItem>
 												<field name="actionID">
-													<String>insert.figures</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
 													<String>insert.table</String>
 												</field>
 											</menuItem>
@@ -3478,11 +3460,6 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											<toolbarItem>
 												<field name="actionID">
 													<String>insert.figure</String>
-												</field>
-											</toolbarItem>
-											<toolbarItem>
-												<field name="actionID">
-													<String>insert.figures</String>
 												</field>
 											</toolbarItem>
 											<toolbarItem>

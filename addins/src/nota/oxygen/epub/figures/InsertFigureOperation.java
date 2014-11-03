@@ -2,11 +2,9 @@ package nota.oxygen.epub.figures;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 import de.schlichtherle.truezip.file.TArchiveDetector;
 import de.schlichtherle.truezip.file.TFile;
-import de.schlichtherle.truezip.file.TVFS;
 import de.schlichtherle.truezip.fs.FsSyncException;
 import de.schlichtherle.truezip.fs.archive.zip.JarDriver;
 import de.schlichtherle.truezip.socket.sl.IOPoolLocator;
@@ -38,110 +36,86 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 	
 	@Override
 	public String getDescription() {
-		return "Inserts a image, with the side-effect of updating the ePub navigation documents";
+		return "Inserts figure(s), with the side-effect of updating the ePub navigation documents";
 	}
 
 	@Override
 	protected void doOperation() throws AuthorOperationException {		
+		File[] imageFiles = getAuthorAccess().getWorkspaceAccess().chooseFiles(new File(""), "Select image file", new String[] {"jpg"}, "JPEG");
+		if (imageFiles == null) {
+			return;
+		}
+			
+		if (imageFragment == null) {
+			throw new AuthorOperationException(ARG_IMAGE_FRAGMENT + " argument is null");
+		}
 		
-		
-		//File imageFile = getAuthorAccess().getWorkspaceAccess().chooseFile("Select image file", new String[] {"jpg"}, "JPEG");
-		File[] imageFiles = getAuthorAccess().getWorkspaceAccess().chooseFiles(new File("C:\\Users\\Public\\Pictures\\Sample Pictures"), "Select image file", new String[] {"jpg"}, "JPEG");
+		String figureXml = "";
+		String fragmentXml = null;
 		
 		if (imageFiles.length == 0) {
+			// no image file selected
 			return;
-		}
-		
-		if (imageFiles.length > 1) {
-			for(int i=0; i<imageFiles.length; i++) {
-				// group
+		} else if (imageFiles.length == 1) {
+			// single image file selected
+			insertImageToArchive(imageFiles[0]);
+			String fileName = imageFiles[0].getName();
+			if (fileName == null) {
+				showMessage("No image file selected");
+				return;
 			}
-		}
-		else {
-			TArchiveDetector myDetector = new TArchiveDetector("epub", new JarDriver(IOPoolLocator.SINGLETON));
-			TFile source = new TFile(imageFiles[0]);
-			TFile destination = new TFile(location + "/EPUB/images", myDetector);
 
-			try {
-	            TFile.umount();
-	        } catch (FsSyncException e1) {
-	            e1.printStackTrace();
-	        }
-			
-			try {
-				if (destination.isArchive() || destination.isDirectory()) {
-					destination = new TFile(destination, source.getName());
+			figureXml += "<img src=\"images/" + fileName + "\" alt=\"ALTTEXT\" />";
+			figureXml += "<figcaption><p>CAPTIONPLACEHOLDER</p></figcaption>";
+		} else {
+			// multi image files selected
+			figureXml = "<figcaption><p>GROUPCAPTIONPLACEHOLDER</p></figcaption>";
+			for (int i = 0; i < imageFiles.length; i++) {
+				insertImageToArchive(imageFiles[i]);
+				String fileName = imageFiles[i].getName();
+				if (fileName == null) {
+					showMessage("No image files selected");
+					return;
 				}
-				source.cp_rp(destination);				
-			} catch (IOException ex) {
-				// TODO Auto-generated catch block
-				ex.printStackTrace();
+				
+				figureXml += "<figure class=\"image\">";
+				figureXml += "<img src=\"images/" + fileName + "\" alt=\"ALTTEXT\" />";
+				figureXml += "<figcaption><p>CAPTIONPLACEHOLDER</p></figcaption>";
+				figureXml += "</figure>";
 			}
-			
-			try {
-	            TFile.umount();
-	        } catch (FsSyncException e) {
-	            e.printStackTrace();
-	        }
-			
-			
-			String fileName = imageFiles[i].getName();
-			
-			if (imageFragment==null) throw new AuthorOperationException(ARG_IMAGE_FRAGMENT+" argument is null");
-			
-			// Inserts this fragment at the caret position.
-			String imggroupXml = imageFragment.replace("$image", "images/" + fileName);
-			int caretPosition  = getAuthorAccess().getEditorAccess().getCaretOffset();
-			getAuthorAccess().getDocumentController().insertXMLFragment(imggroupXml, caretPosition);
 		}
-		
-		
-		
-		
-		
-		//URL docUrl = getAuthorAccess().getDocumentController().getAuthorDocumentNode().getXMLBaseURL();
-		//URL epubImagesUrl = EpubUtils.getEpubUrl(docUrl, "EPUB/images/");
-		//getAuthorAccess().getWorkspaceAccess().refreshInProject(docUrl);
-		
-		
-		
-		/*URL imageURL = getAuthorAccess().getWorkspaceAccess().chooseURL("Select image file", new String[] {"jpg"}, "JPEG");
-		if (imageURL==null) {
-			showMessage("No image file selected");
-			return;
-		}
-		
-		if (!imageURL.toString().contains("zip:file:"))
-		{
-			showMessage("filen kan ikke vælges herfra");
-			return;
-		}
-		
-		if (!imageURL.toString().contains(location.replace("\\", "/")))
-		{
-			showMessage("billeder kan kun vælges fra samme epub");
-			return;
-		}
-		
-		String relImageURL = getAuthorAccess().getUtilAccess().makeRelative(getAuthorAccess().getDocumentController().getAuthorDocumentNode().getXMLBaseURL(), imageURL);
-		if (relImageURL==null) {
-			showMessage("No image file selected");
-			return;
-		}
-		
-		String imageName = getAuthorAccess().getUtilAccess().getFileName(relImageURL);
-		if (imageName==null) {
-			showMessage("Image filename could not be set");
-			return;
-		}
-		
-		if (imageFragment==null) throw new AuthorOperationException(ARG_IMAGE_FRAGMENT+" argument is null");
-		
-		// Inserts this fragment at the caret position.
-		String imggroupXml = imageFragment.replace("$image", relImageURL);
-		int caretPosition  = getAuthorAccess().getEditorAccess().getCaretOffset();
-		getAuthorAccess().getDocumentController().insertXMLFragment(imggroupXml, caretPosition);*/
-		
 
+		// Inserts this fragment at the caret position.
+		fragmentXml = imageFragment.replace("$content", figureXml);
+		int caretPosition = getAuthorAccess().getEditorAccess().getCaretOffset();
+		getAuthorAccess().getDocumentController().insertXMLFragment(fragmentXml, caretPosition);
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void insertImageToArchive(File imageFile) {
+		TArchiveDetector myDetector = new TArchiveDetector("epub", new JarDriver(IOPoolLocator.SINGLETON));
+		TFile source = new TFile(imageFile);
+		TFile destination = new TFile(location + "/EPUB/images", myDetector);
+
+		try {
+            TFile.umount();
+        } catch (FsSyncException e) {
+            e.printStackTrace();
+        }
+		
+		try {
+			if (destination.isArchive() || destination.isDirectory()) {
+				destination = new TFile(destination, source.getName());
+			}
+			source.cp_rp(destination);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+            TFile.umount();
+        } catch (FsSyncException e) {
+            e.printStackTrace();
+        }
 	}
 }
