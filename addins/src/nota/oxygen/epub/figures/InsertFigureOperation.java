@@ -11,8 +11,14 @@ import de.schlichtherle.truezip.fs.archive.zip.JarDriver;
 import de.schlichtherle.truezip.socket.sl.IOPoolLocator;
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
+import ro.sync.ecss.extensions.api.AuthorAccess;
+import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
+import ro.sync.ecss.extensions.api.node.AuthorElement;
+import ro.sync.ecss.extensions.api.node.AuthorNode;
 import nota.oxygen.common.BaseAuthorOperation;
+import nota.oxygen.common.Utils;
+import nota.oxygen.epub.EpubUtils;
 
 public class InsertFigureOperation extends BaseAuthorOperation {
 	private static String ARG_IMAGE_FRAGMENT = "image fragment";
@@ -120,6 +126,10 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 		fragmentXml = imageFragment.replace("$content", figureXml);
 		int caretPosition = getAuthorAccess().getEditorAccess().getCaretOffset();
 		getAuthorAccess().getDocumentController().insertXMLFragment(fragmentXml, caretPosition);
+		
+		addToOpf(imageFiles);
+		
+		Utils.bringFocusToDocumentTab(getAuthorAccess());
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -148,5 +158,46 @@ public class InsertFigureOperation extends BaseAuthorOperation {
         } catch (FsSyncException e) {
             e.printStackTrace();
         }
+	}
+
+	public void addToOpf(File[] imageFiles) throws AuthorOperationException {
+		URL opfUrl = EpubUtils.getPackageUrl(getAuthorAccess());
+		if (opfUrl == null) {
+			showMessage("Could not find pagkage file for document");
+			return;
+		}
+		
+		AuthorAccess opfAccess = EpubUtils.getAuthorDocument(getAuthorAccess(), opfUrl);
+		if (opfAccess == null) {
+			throw new AuthorOperationException("Could not access pagkage file for document");
+		}
+		AuthorDocumentController opfCtrl = opfAccess.getDocumentController();
+		opfCtrl.beginCompoundEdit();
+		try {
+			AuthorElement manifest = getFirstElement(opfCtrl.findNodesByXPath("/package/manifest", true, true, true));
+			if (manifest == null) {
+				throw new AuthorOperationException("Found no manifest in package file");
+			}
+		
+		
+		
+			for (int i = 0; i < imageFiles.length; i++) {
+				String fileName = imageFiles[i].getName();
+				
+				AuthorElement item = getFirstElement(opfCtrl.findNodesByXPath(String.format("/package/manifest/item[@href='images/%s']", fileName), true, true, true));
+				if (item == null) {
+					String itemXml = "<item xmlns='" + EpubUtils.EPUB_NS + "' media-type='image/jpeg' href='images/" + fileName + "'/>";
+					opfCtrl.insertXMLFragment(itemXml, manifest.getEndOffset());
+					
+				}
+			}
+			opfCtrl.getUniqueAttributesProcessor().assignUniqueIDs(manifest.getStartOffset(), manifest.getEndOffset(), true);
+		}
+		catch (Exception e) {
+			opfCtrl.cancelCompoundEdit();
+			throw e;
+		}
+		opfCtrl.endCompoundEdit();
+		
 	}
 }

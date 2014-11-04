@@ -2937,24 +2937,34 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 													</menuEntry-array>
 												</field>
 											</menu>
+											<menu>
+												<field name="label">
+													<String>Figures</String>
+												</field>
+												<field name="accessKey">
+													<String></String>
+												</field>
+												<field name="iconPath">
+													<String>/images/Image16.gif</String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.figure</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.figure.epub</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+											</menu>
 											<menuItem>
 												<field name="actionID">
 													<String>paragraph</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
-													<String>insert.image</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
-													<String>insert.figure</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
-													<String>insert.figure.epub</String>
 												</field>
 											</menuItem>
 											<menuItem>
@@ -3323,24 +3333,34 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 													</menuEntry-array>
 												</field>
 											</menu>
+											<menu>
+												<field name="label">
+													<String>Figures</String>
+												</field>
+												<field name="accessKey">
+													<String></String>
+												</field>
+												<field name="iconPath">
+													<String>/images/Image16.gif</String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.figure</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.figure.epub</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+											</menu>
 											<menuItem>
 												<field name="actionID">
 													<String>paragraph</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
-													<String>insert.image</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
-													<String>insert.figure</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
-													<String>insert.figure.epub</String>
 												</field>
 											</menuItem>
 											<menuItem>
@@ -3470,24 +3490,37 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 													</toolbarEntry-array>
 												</field>
 											</toolbar>
+											<toolbar>
+												<field name="id">
+													<String>Figure</String>
+												</field>
+												<field name="type">
+													<Integer>3</Integer>
+												</field>
+												<field name="largeIconPath">
+													<String>/images/Image20.png</String>
+												</field>
+												<field name="smallIconPath">
+													<String>/images/Image16.gif</String>
+												</field>
+												<field name="toolbarEntriesDescriptorList">
+													<toolbarEntry-array>
+														<toolbarItem>
+															<field name="actionID">
+																<String>insert.figure</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>insert.figure.epub</String>
+															</field>
+														</toolbarItem>
+													</toolbarEntry-array>
+												</field>
+											</toolbar>
 											<toolbarItem>
 												<field name="actionID">
 													<String>paragraph</String>
-												</field>
-											</toolbarItem>
-											<toolbarItem>
-												<field name="actionID">
-													<String>insert.image</String>
-												</field>
-											</toolbarItem>
-											<toolbarItem>
-												<field name="actionID">
-													<String>insert.figure</String>
-												</field>
-											</toolbarItem>
-											<toolbarItem>
-												<field name="actionID">
-													<String>insert.figure.epub</String>
 												</field>
 											</toolbarItem>
 											<toolbarItem>
