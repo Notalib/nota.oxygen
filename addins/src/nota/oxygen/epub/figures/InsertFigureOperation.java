@@ -64,6 +64,18 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 				return;
 			}
 			
+			if (!imageURL.toString().contains("zip:file:"))
+			{
+				showMessage("filen kan ikke vælges herfra");
+				return;
+			}
+			
+			if (!imageURL.toString().contains(location.replace("\\", "/")))
+			{
+				showMessage("billeder kan kun vælges fra samme epub");
+				return;
+			}
+			
 			String relImageURL = getAuthorAccess().getUtilAccess().makeRelative(getAuthorAccess().getDocumentController().getAuthorDocumentNode().getXMLBaseURL(), imageURL);
 			if (relImageURL==null) {
 				showMessage("No image file selected");
