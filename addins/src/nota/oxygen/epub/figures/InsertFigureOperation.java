@@ -2,7 +2,10 @@ package nota.oxygen.epub.figures;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import de.schlichtherle.truezip.file.TArchiveDetector;
 import de.schlichtherle.truezip.file.TFile;
@@ -24,18 +27,20 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 	private static String ARG_IMAGE_FRAGMENT = "image fragment";
 	private String imageFragment;
 	
-	private static String ARG_LOCATION = "location";
-	private String location;
+	private static String ARG_IMAGE_COMTAINER_FRAGMENT = "image container fragment";
+	private String imageContainerFragment;
 	
 	private static String ARG_FROM_ARCHIVE = "from archive";
 	private static String[] YES_NO = new String[]{"yes", "no"};
 	private boolean fromArchive;
 	
+	private String epubFilePath;
+	
 	@Override
 	public ArgumentDescriptor[] getArguments() {
 		return new ArgumentDescriptor[] { 
-				new ArgumentDescriptor(ARG_IMAGE_FRAGMENT, ArgumentDescriptor.TYPE_FRAGMENT, "Image fragment"),
-				new ArgumentDescriptor(ARG_LOCATION, ArgumentDescriptor.TYPE_STRING, "Location"),
+				new ArgumentDescriptor(ARG_IMAGE_FRAGMENT, ArgumentDescriptor.TYPE_FRAGMENT, "Image fragment - use $image as placeholder for image url"),
+				new ArgumentDescriptor(ARG_IMAGE_COMTAINER_FRAGMENT, ArgumentDescriptor.TYPE_FRAGMENT, "Image container fragment - use $images as placeholder for images"),
 				new ArgumentDescriptor(ARG_FROM_ARCHIVE, ArgumentDescriptor.TYPE_CONSTANT_LIST, "From archive", YES_NO, YES_NO[1])
 		};
 	}
@@ -43,7 +48,7 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 	@Override
 	protected void parseArguments(ArgumentsMap args) throws IllegalArgumentException {
 		imageFragment = (String)args.getArgumentValue(ARG_IMAGE_FRAGMENT);
-		location = (String)args.getArgumentValue(ARG_LOCATION);
+		imageContainerFragment = (String)args.getArgumentValue(ARG_IMAGE_COMTAINER_FRAGMENT);
 		String temp = (String)args.getArgumentValue(ARG_FROM_ARCHIVE);
 		fromArchive = YES_NO[0].equals(temp);
 	}
@@ -54,23 +59,51 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 	}
 
 	@Override
-	protected void doOperation() throws AuthorOperationException {		
+	protected void doOperation() throws AuthorOperationException {
+		epubFilePath = Utils.getZipPath(getAuthorAccess().getEditorAccess().getEditorLocation().toString());
+		if (epubFilePath == null) epubFilePath = "";
 		File[] imageFiles = null;
 		if (fromArchive) {
-			URL imageURL = getAuthorAccess().getWorkspaceAccess().chooseURL(
-					"Select image file", new String[] { "jpg" }, "JPEG");
-			if (imageURL == null) {
-				showMessage("No image file selected");
+			List<File> files = new ArrayList<File>();
+			while (true) {
+				URL imageURL = getAuthorAccess()
+						.getWorkspaceAccess()
+						.chooseURL(
+								"Select image file",
+								new String[] { "jpg" },
+								"JPEG",
+								EpubUtils
+										.getEpubUrl(
+												EpubUtils
+														.getPackageUrl(getAuthorAccess()),
+												"images/").toString());
+				if (imageURL == null) {
+					break;
+				}
+				if (!imageURL.toString().contains("zip:file:")) {
+					showMessage("The choosen file is not contained in an archive");
+					continue;
+				}
+
+				if (!epubFilePath.equals(Utils.getZipPath(imageURL.toString()))) {
+					showMessage("The choosen file is from another archive");
+					continue;
+				}
+
+				String relImageURL = getAuthorAccess().getUtilAccess()
+						.makeRelative(
+								getAuthorAccess().getDocumentController()
+										.getAuthorDocumentNode()
+										.getXMLBaseURL(), imageURL);
+				if (relImageURL == null) {
+					break;
+				}
+				files.add(new File(relImageURL));
+			}
+			if (files.size() == 0) {
 				return;
 			}
-			
-			String relImageURL = getAuthorAccess().getUtilAccess().makeRelative(getAuthorAccess().getDocumentController().getAuthorDocumentNode().getXMLBaseURL(), imageURL);
-			if (relImageURL==null) {
-				showMessage("No image file selected");
-				return;
-			}
-			
-			imageFiles = new File[] { new File(relImageURL) };
+			imageFiles = files.toArray(new File[0]);
 		} else {
 			imageFiles = getAuthorAccess().getWorkspaceAccess().chooseFiles(new File(""), "Select image file", new String[] {"jpg"}, "JPEG");
 			if (imageFiles == null) {
@@ -84,46 +117,17 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 			throw new AuthorOperationException(ARG_IMAGE_FRAGMENT + " argument is null");
 		}
 		
-		String figureXml = "";
-		String fragmentXml = null;
-		
-		if (imageFiles.length == 0) {
-			// no image file selected
-			return;
-		} else if (imageFiles.length == 1) {
-			// single image file selected
+		String fragmentXml = "";
+		for (File imageFile : imageFiles) {
 			if (!fromArchive) {
-				insertImageToArchive(imageFiles[0]); 
+				insertImageToArchive(imageFile); 
 			}
-
-			String fileName = imageFiles[0].getName();
-			if (fileName == null) {
-				showMessage("No image file selected");
-				return;
-			}
-
-			figureXml += "<img src=\"images/" + fileName + "\" alt=\"ALTTEXT\" />\n";
-			figureXml += "<figcaption>\n<p>CAPTIONPLACEHOLDER</p>\n</figcaption>\n";
-		} else {
-			// multi image files selected
-			figureXml = "<figcaption>\n<p>GROUPCAPTIONPLACEHOLDER</p>\n</figcaption>\n";
-			for (int i = 0; i < imageFiles.length; i++) {
-				insertImageToArchive(imageFiles[i]);
-				String fileName = imageFiles[i].getName();
-				if (fileName == null) {
-					showMessage("No image files selected");
-					return;
-				}
-				
-				figureXml += "<figure class=\"image\">\n";
-				figureXml += "<img src=\"images/" + fileName + "\" alt=\"ALTTEXT\" />\n";
-				figureXml += "<figcaption>\n<p>CAPTIONPLACEHOLDER</p>\n</figcaption>\n";
-				figureXml += "</figure>\n";
-			}
+			fragmentXml += imageFragment.replace("$imageUrl", "images/"+imageFile.getName());			
 		}
-
-		// Inserts this fragment at the caret position.
-		fragmentXml = imageFragment.replace("$content", figureXml);
+		if (imageContainerFragment == null) imageContainerFragment = "";
+		if (imageContainerFragment.length()>0 && imageFiles.length>1) {
+			fragmentXml = imageContainerFragment.replace("$images", fragmentXml);
+		}
 		int caretPosition = getAuthorAccess().getEditorAccess().getCaretOffset();
 		getAuthorAccess().getDocumentController().insertXMLFragment(fragmentXml, caretPosition);
 		
@@ -136,7 +140,7 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 	public void insertImageToArchive(File imageFile) {
 		TArchiveDetector myDetector = new TArchiveDetector("epub", new JarDriver(IOPoolLocator.SINGLETON));
 		TFile source = new TFile(imageFile);
-		TFile destination = new TFile(location + "/EPUB/images", myDetector);
+		TFile destination = new TFile(epubFilePath + "/EPUB/images", myDetector);
 
 		try {
             TFile.umount();
