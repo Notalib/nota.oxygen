@@ -416,6 +416,8 @@ fieldset {
    Specifies a group of media content, and their caption.
  */
 figure, figcaption {
+    border: 1px solid black;
+    margin: 0.5em;
     display: block;
 }
 
