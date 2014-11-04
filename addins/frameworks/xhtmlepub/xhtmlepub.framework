@@ -27,6 +27,7 @@
 							<String>${framework}/i18n/</String>
 							<String>${framework}/xhtml.jar</String>
 							<String>${framework}/nota.oxygen.jar</String>
+							<String>${framework}/truezip-samples-7.7.6-jar-with-dependencies.jar</String>
 						</String-array>
 					</field>
 					<field name="parentClassLoaderID">
@@ -2750,6 +2751,7 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 									</action>
 									<action>
 										<field name="id">
+<<<<<<< HEAD
 											<String>division.epubtype.chapter</String>
 										</field>
 										<field name="name">
@@ -2757,6 +2759,15 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 										</field>
 										<field name="description">
 											<String></String>
+										</field>
+=======
+											<String>insert.figure.epub</String>
+										</field>
+										<field name="name">
+											<String>Insert Figure(s) from epub archive</String>
+										</field>
+										<field name="description">
+											<String>Insert figure(s) from epub archive</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -2774,6 +2785,106 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
+														<String>self::*:body|self::*:section|self::*:div|self::*:article|self::*:header|self::*:footer</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>from archive</String>
+																<String>yes</String>
+															</entry>
+															<entry>
+																<String>image container fragment</String>
+																<String>&lt;figure class="image-series" xmlns="http://www.w3.org/1999/xhtml">
+  &lt;figcaption>
+    &lt;p>FIGURE_GROUP_CAPTION&lt;/p>
+  &lt;/figcaption>
+  $images
+&lt;/figure></String>
+															</entry>
+															<entry>
+																<String>image fragment</String>
+																<String>&lt;figure class="image" xmlns="http://www.w3.org/1999/xhtml">
+  &lt;img src="$imageUrl" alt="ALTTEXT" />
+  &lt;figcaption>
+    &lt;p>FIGURE_CAPTION&lt;/p>
+  &lt;/figcaption>
+&lt;/figure></String>
+															</entry>
+															<entry>
+																<String>location</String>
+																<String>${af}</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.epub.figures.InsertFigureOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:figure[contains(concat(' ', normalize-space(@class), ' '), ' image-series ')]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>from archive</String>
+																<String>yes</String>
+															</entry>
+															<entry>
+																<String>image container fragment</String>
+																<String></String>
+															</entry>
+															<entry>
+																<String>image fragment</String>
+																<String>&lt;figure class="image" xmlns="http://www.w3.org/1999/xhtml">
+  &lt;img src="$imageUrl" alt="ALTTEXT" />
+  &lt;figcaption>
+    &lt;p>FIGURE_CAPTION&lt;/p>
+  &lt;/figcaption>
+&lt;/figure></String>
+															</entry>
+															<entry>
+																<String>location</String>
+																<String>${af}</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.epub.figures.InsertFigureOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>insert.figure.file</String>
+										</field>
+										<field name="name">
+											<String>Insert Figure(s) from files</String>
+										</field>
+										<field name="description">
+											<String>Insert figure(s) from files</String>
+										</field>
+>>>>>>> 857f1b9d49926c4f2001b193ba7205dfab7db27b
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+<<<<<<< HEAD
 														<String></String>
 													</field>
 													<field name="argValues">
@@ -2781,6 +2892,75 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 													</field>
 													<field name="operationID">
 														<String></String>
+=======
+														<String>self::*:body|self::*:section|self::*:div|self::*:article|self::*:header|self::*:footer</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>from archive</String>
+																<String>yes</String>
+															</entry>
+															<entry>
+																<String>image container fragment</String>
+																<String>&lt;figure class="image-series" xmlns="http://www.w3.org/1999/xhtml">
+  &lt;figcaption>
+    &lt;p>FIGURE_GROUP_CAPTION&lt;/p>
+  &lt;/figcaption>
+  $images
+&lt;/figure></String>
+															</entry>
+															<entry>
+																<String>image fragment</String>
+																<String>&lt;figure class="image" xmlns="http://www.w3.org/1999/xhtml">
+  &lt;img src="$imageUrl" alt="ALTTEXT" />
+  &lt;figcaption>
+    &lt;p>FIGURE_CAPTION&lt;/p>
+  &lt;/figcaption>
+&lt;/figure></String>
+															</entry>
+															<entry>
+																<String>location</String>
+																<String>${af}</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.epub.figures.InsertFigureOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:figure[contains(concat(' ', normalize-space(@class), ' '), ' image-series ')]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>from archive</String>
+																<String>yes</String>
+															</entry>
+															<entry>
+																<String>image container fragment</String>
+																<String></String>
+															</entry>
+															<entry>
+																<String>image fragment</String>
+																<String>&lt;figure class="image" xmlns="http://www.w3.org/1999/xhtml">
+  &lt;img src="$imageUrl" alt="ALTTEXT" />
+  &lt;figcaption>
+    &lt;p>FIGURE_CAPTION&lt;/p>
+  &lt;/figcaption>
+&lt;/figure></String>
+															</entry>
+															<entry>
+																<String>location</String>
+																<String>${af}</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.epub.figures.InsertFigureOperation</String>
+>>>>>>> 857f1b9d49926c4f2001b193ba7205dfab7db27b
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -2872,14 +3052,34 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 													</menuEntry-array>
 												</field>
 											</menu>
+											<menu>
+												<field name="label">
+													<String>Figures</String>
+												</field>
+												<field name="accessKey">
+													<String></String>
+												</field>
+												<field name="iconPath">
+													<String>/images/Image16.gif</String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.figure.file</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.figure.epub</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+											</menu>
 											<menuItem>
 												<field name="actionID">
 													<String>paragraph</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
-													<String>insert.image</String>
 												</field>
 											</menuItem>
 											<menuItem>
@@ -3248,14 +3448,34 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 													</menuEntry-array>
 												</field>
 											</menu>
+											<menu>
+												<field name="label">
+													<String>Figures</String>
+												</field>
+												<field name="accessKey">
+													<String></String>
+												</field>
+												<field name="iconPath">
+													<String>/images/Image16.gif</String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.figure.file</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.figure.epub</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+											</menu>
 											<menuItem>
 												<field name="actionID">
 													<String>paragraph</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
-													<String>insert.image</String>
 												</field>
 											</menuItem>
 											<menuItem>
@@ -3385,14 +3605,37 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 													</toolbarEntry-array>
 												</field>
 											</toolbar>
+											<toolbar>
+												<field name="id">
+													<String>Figure</String>
+												</field>
+												<field name="type">
+													<Integer>3</Integer>
+												</field>
+												<field name="largeIconPath">
+													<String>/images/Image20.png</String>
+												</field>
+												<field name="smallIconPath">
+													<String>/images/Image16.gif</String>
+												</field>
+												<field name="toolbarEntriesDescriptorList">
+													<toolbarEntry-array>
+														<toolbarItem>
+															<field name="actionID">
+																<String>insert.figure.file</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>insert.figure.epub</String>
+															</field>
+														</toolbarItem>
+													</toolbarEntry-array>
+												</field>
+											</toolbar>
 											<toolbarItem>
 												<field name="actionID">
 													<String>paragraph</String>
-												</field>
-											</toolbarItem>
-											<toolbarItem>
-												<field name="actionID">
-													<String>insert.image</String>
 												</field>
 											</toolbarItem>
 											<toolbarItem>

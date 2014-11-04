@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/oxygen jre"/>
-	<classpathentry kind="var" path="OXYGEN_HOME/lib/oxygen.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="http://www.oxygenxml.com/InstData/Editor/SDK/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="lib/commons-validator-1.4.0.jar">
+	<classpathentry exported="true" kind="lib" path="lib/commons-validator-1.4.0.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:platform:/resource/nota.oxygen/lib/commons-validator-1.4.0-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="var" path="ECLIPSE_HOME"/>
-	<classpathentry kind="lib" path="frameworks/xhtmlepub/xhtml.jar" sourcepath="/oxygen-sdk-samples-archetype/oxygen-sample-framework/samples/Oxygen Default Frameworks/src">
+	<classpathentry kind="lib" path="lib/truezip-samples-7.7.6-jar-with-dependencies.jar"/>
+	<classpathentry exported="true" kind="var" path="ECLIPSE_HOME"/>
+	<classpathentry exported="true" kind="lib" path="frameworks/xhtmlepub/xhtml.jar" sourcepath="/oxygen-sdk-samples-archetype/oxygen-sample-framework/samples/Oxygen Default Frameworks/src">
 		<attributes>
 			<attribute name="javadoc_location" value="https://www.oxygenxml.com/InstData/Editor/SDK/javadoc"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/commons-lang3-3.3.2.jar">
+	<classpathentry exported="true" kind="lib" path="lib/commons-lang3-3.3.2.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:platform:/resource/nota.oxygen/lib/commons-lang3-3.3.2-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="var" path="OXYGEN_HOME/lib/oxygen.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="https://www.oxygenxml.com/InstData/Editor/SDK/javadoc/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

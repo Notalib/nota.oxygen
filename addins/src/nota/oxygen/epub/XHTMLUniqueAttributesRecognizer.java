@@ -29,6 +29,7 @@ public class XHTMLUniqueAttributesRecognizer extends
 					"h5", 
 					"h6", 
 					"hd", 
+					"img",
 					"section",
 					"span",
 					"td", 
