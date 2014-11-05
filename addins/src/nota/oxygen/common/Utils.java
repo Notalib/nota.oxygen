@@ -430,15 +430,27 @@ public class Utils {
 	}
 	
 	public static String getZipUrl(String url) {
+		String zipRoot = getZipRootUrl(url);
+		if (zipRoot == null) return null;
+		return zipRoot.substring(4, zipRoot.length()-2);
+	}
+	
+	public static String getZipPath(String url) {
+		String zipUrl = Utils.getZipUrl(url);
+		if (zipUrl == null) return null;
+		return new File(URI.create(zipUrl)).getAbsolutePath();
+	}
+	
+	public static String getZipRootUrl(String url) {
 		Matcher m = ZIP_URL_REGEX.matcher(url);
 		return m.matches() ? m.group(1) : null; 
 	}
 	
-	public static URL getZipUrl(URL url)
+	public static URL getZipRootUrl(URL url)
 	{
 		if (url == null) return null;
 		try {
-			return new URL(getZipUrl(url.toString()));
+			return new URL(getZipRootUrl(url.toString()));
 		} catch (MalformedURLException e) {
 			return null;
 		}

@@ -26,7 +26,7 @@ public class EpubUtils {
 	
 	public static URL getEpubUrl(URL baseEpubUrl, String url)
 	{
-		URL epubUrl = Utils.getZipUrl(baseEpubUrl);
+		URL epubUrl = Utils.getZipRootUrl(baseEpubUrl);
 		if (epubUrl == null) return null;
 		try {
 			return new URL(epubUrl, url);
