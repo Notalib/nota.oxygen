@@ -26,7 +26,7 @@ public class EpubUtils {
 	
 	public static URL getEpubUrl(URL baseEpubUrl, String url)
 	{
-		URL epubUrl = Utils.getZipUrl(baseEpubUrl);
+		URL epubUrl = Utils.getZipRootUrl(baseEpubUrl);
 		if (epubUrl == null) return null;
 		try {
 			return new URL(epubUrl, url);
@@ -139,5 +139,5 @@ public class EpubUtils {
 
 	public static String XHTML_NS = "http://www.w3.org/1999/xhtml";
 	public static String NCX_NS = "http://www.daisy.org/z3986/2005/ncx/";
-	public static String EPUB_NS = "http://www.idpf.org/2007/ops";
+	public static String EPUB_NS = "http://www.idpf.org/2007/opf";
 }

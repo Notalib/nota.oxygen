@@ -46,7 +46,7 @@ public abstract class BaseAuthorOperation implements AuthorOperation {
 		return getFirstElement(getAuthorAccess().getDocumentController().findNodesByXPath(xpath,  true, true, true));
 	}
 	
-	private AuthorElement getFirstElement(AuthorNode[] nodes) {
+	public AuthorElement getFirstElement(AuthorNode[] nodes) {
 		for (int i=0; i<nodes.length; i++) {
 			if (nodes[i] instanceof AuthorElement) return (AuthorElement)nodes[i];
 		}
