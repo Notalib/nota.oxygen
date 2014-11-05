@@ -1,6 +1,8 @@
 @import "html_cals_table.css";
 @import "links.css";
 @namespace epub "http://www.idpf.org/2007/ops";
+@namespace fc "http://www.oxygenxml.com/ns/samples/form-controls";
+@namespace xml "http://www.w3.org/XML/1998/namespace";
 
 /*Defines an anchor*/
 a {
@@ -1063,4 +1065,27 @@ span[epub|type="pagebreak"] {
 }
 span[epub|type="pagebreak"]:before {
 	content: "Page "attr(title)" ";
+}
+
+*[lang]:before {
+    content: "@lang:"
+        oxy_editor(
+            type, combo,
+            edit, "@lang",
+            values, oxy_xpath("string-join(distinct-values(tokenize(concat('da sv no en de fr ', string-join(//*/@lang, ' ')), ' ')), ',')"),
+            selectionMode, "single",
+            fontInherit, true);
+    
+}
+
+section:before,body:before {
+    content: oxy_xpath("local-name()") "@epub:type="
+        oxy_editor(
+            type, popupSelection,
+            edit, "@epub:type",
+            /*values, "frontmatter, bodymatter, rearmatter, part, chapter, cover",*/
+            values, oxy_xpath("string-join(distinct-values(tokenize(concat('frontmatter bodymatter rearmatter part chapter section index toc cover ', string-join(//(*:section|*:body|*:article|*:header|*:footer)/@epub:type, ' ')), ' ')), ',')"),
+            resultSeparator, " ",
+            selectionMode, "multiple",
+            fontInherit, true);
 }
