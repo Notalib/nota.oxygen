@@ -190,7 +190,7 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 				
 				AuthorElement item = getFirstElement(opfCtrl.findNodesByXPath(String.format("/package/manifest/item[@href='images/%s']", fileName), true, true, true));
 				if (item == null) {
-					String itemXml = "<item xmlns='" + EpubUtils.EPUB_NS + "' media-type='image/jpeg' href='images/" + fileName + "'/>";
+					String itemXml = "<item xmlns='" + EpubUtils.OPF_NS + "' media-type='image/jpeg' href='images/" + fileName + "'/>";
 					opfCtrl.insertXMLFragment(itemXml, manifest.getEndOffset());
 					
 				}
