@@ -3657,13 +3657,13 @@ attribute.xmllang.copylang</String>
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::section[parent::body]</String>
+														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
 																<String>elementLocation</String>
-																<String>ancestor-or-self::section[parent::body]</String>
+																<String>ancestor-or-self::body</String>
 															</entry>
 															<entry>
 																<String>name</String>
@@ -3685,13 +3685,13 @@ attribute.xmllang.copylang</String>
 												</actionMode>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
+														<String>ancestor-or-self::section[parent::body]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
 																<String>elementLocation</String>
-																<String>ancestor-or-self::body</String>
+																<String>ancestor-or-self::section[parent::body]</String>
 															</entry>
 															<entry>
 																<String>name</String>
@@ -3740,13 +3740,13 @@ attribute.xmllang.copylang</String>
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::section[parent::body]</String>
+														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
 																<String>elementLocation</String>
-																<String>ancestor-or-self::section[parent::body]</String>
+																<String>ancestor-or-self::body</String>
 															</entry>
 															<entry>
 																<String>name</String>
@@ -3768,13 +3768,13 @@ attribute.xmllang.copylang</String>
 												</actionMode>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
+														<String>ancestor-or-self::section[parent::body]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
 																<String>elementLocation</String>
-																<String>ancestor-or-self::body</String>
+																<String>ancestor-or-self::section[parent::body]</String>
 															</entry>
 															<entry>
 																<String>name</String>
@@ -3823,13 +3823,13 @@ attribute.xmllang.copylang</String>
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::section[parent::body]</String>
+														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
 																<String>elementLocation</String>
-																<String>ancestor-or-self::section[parent::body]</String>
+																<String>ancestor-or-self::body</String>
 															</entry>
 															<entry>
 																<String>name</String>
@@ -3851,13 +3851,13 @@ attribute.xmllang.copylang</String>
 												</actionMode>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
+														<String>ancestor-or-self::section[parent::body]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
 																<String>elementLocation</String>
-																<String>ancestor-or-self::body</String>
+																<String>ancestor-or-self::section[parent::body]</String>
 															</entry>
 															<entry>
 																<String>name</String>
@@ -3906,38 +3906,6 @@ attribute.xmllang.copylang</String>
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::section[parent::body]</String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>elementLocation</String>
-																<String>ancestor-or-self::section[parent::body]</String>
-															</entry>
-															<entry>
-																<String>name</String>
-																<String>type</String>
-															</entry>
-															<entry>
-																<String>namespace</String>
-																<String>http://www.idpf.org/2007/ops</String>
-															</entry>
-															<entry>
-																<String>value</String>
-																<String>${xpath_eval(
-if (matches(ancestor-or-self::section[parent::body]/@epub:type, 'frontmatter')) then 'colophon frontmatter'
-else if (matches(ancestor-or-self::section[parent::body]/@epub:type, 'backmatter')) then 'colophon backmatter'
-else 'colophon frontmatter'
-)}</String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
-													</field>
-												</actionMode>
-												<actionMode>
-													<field name="xpathCondition">
 														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
 													</field>
 													<field name="argValues">
@@ -3959,6 +3927,38 @@ else 'colophon frontmatter'
 																<String>${xpath_eval(
 if (matches(ancestor-or-self::body/@epub:type, 'frontmatter')) then 'colophon frontmatter'
 else if (matches(ancestor-or-self::body/@epub:type, 'backmatter')) then 'colophon backmatter'
+else 'colophon frontmatter'
+)}</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::section[parent::body]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::section[parent::body]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>${xpath_eval(
+if (matches(ancestor-or-self::section[parent::body]/@epub:type, 'frontmatter')) then 'colophon frontmatter'
+else if (matches(ancestor-or-self::section[parent::body]/@epub:type, 'backmatter')) then 'colophon backmatter'
 else 'colophon frontmatter'
 )}</String>
 															</entry>
@@ -3997,38 +3997,6 @@ else 'colophon frontmatter'
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::section[parent::body]</String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>elementLocation</String>
-																<String>ancestor-or-self::section[parent::body]</String>
-															</entry>
-															<entry>
-																<String>name</String>
-																<String>type</String>
-															</entry>
-															<entry>
-																<String>namespace</String>
-																<String>http://www.idpf.org/2007/ops</String>
-															</entry>
-															<entry>
-																<String>value</String>
-																<String>${xpath_eval(
-if (matches(ancestor-or-self::section[parent::body]/@epub:type, 'frontmatter')) then 'toc frontmatter'
-else if (matches(ancestor-or-self::section[parent::body]/@epub:type, 'backmatter')) then 'toc backmatter'
-else 'toc frontmatter'
-)}</String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
-													</field>
-												</actionMode>
-												<actionMode>
-													<field name="xpathCondition">
 														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
 													</field>
 													<field name="argValues">
@@ -4050,6 +4018,38 @@ else 'toc frontmatter'
 																<String>${xpath_eval(
 if (matches(ancestor-or-self::body/@epub:type, 'frontmatter')) then 'toc frontmatter'
 else if (matches(ancestor-or-self::body/@epub:type, 'backmatter')) then 'toc backmatter'
+else 'toc frontmatter'
+)}</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::section[parent::body]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::section[parent::body]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>${xpath_eval(
+if (matches(ancestor-or-self::section[parent::body]/@epub:type, 'frontmatter')) then 'toc frontmatter'
+else if (matches(ancestor-or-self::section[parent::body]/@epub:type, 'backmatter')) then 'toc backmatter'
 else 'toc frontmatter'
 )}</String>
 															</entry>
@@ -4088,13 +4088,13 @@ else 'toc frontmatter'
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::section[parent::body]</String>
+														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
 																<String>elementLocation</String>
-																<String>ancestor-or-self::section[parent::body]</String>
+																<String>ancestor-or-self::body</String>
 															</entry>
 															<entry>
 																<String>name</String>
@@ -4116,13 +4116,13 @@ else 'toc frontmatter'
 												</actionMode>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
+														<String>ancestor-or-self::section[parent::body]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
 																<String>elementLocation</String>
-																<String>ancestor-or-self::body</String>
+																<String>ancestor-or-self::section[parent::body]</String>
 															</entry>
 															<entry>
 																<String>name</String>
@@ -4171,13 +4171,13 @@ else 'toc frontmatter'
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::section[parent::body]</String>
+														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
 																<String>elementLocation</String>
-																<String>ancestor-or-self::section[parent::body]</String>
+																<String>ancestor-or-self::body</String>
 															</entry>
 															<entry>
 																<String>name</String>
@@ -4199,13 +4199,13 @@ else 'toc frontmatter'
 												</actionMode>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
+														<String>ancestor-or-self::section[parent::body]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
 																<String>elementLocation</String>
-																<String>ancestor-or-self::body</String>
+																<String>ancestor-or-self::section[parent::body]</String>
 															</entry>
 															<entry>
 																<String>name</String>
@@ -4254,13 +4254,13 @@ else 'toc frontmatter'
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::section[parent::body]</String>
+														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
 																<String>elementLocation</String>
-																<String>ancestor-or-self::section[parent::body]</String>
+																<String>ancestor-or-self::body</String>
 															</entry>
 															<entry>
 																<String>name</String>
@@ -4282,13 +4282,13 @@ else 'toc frontmatter'
 												</actionMode>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
+														<String>ancestor-or-self::section[parent::body]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
 																<String>elementLocation</String>
-																<String>ancestor-or-self::body</String>
+																<String>ancestor-or-self::section[parent::body]</String>
 															</entry>
 															<entry>
 																<String>name</String>
@@ -4337,13 +4337,13 @@ else 'toc frontmatter'
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::section[parent::body]</String>
+														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
 																<String>elementLocation</String>
-																<String>ancestor-or-self::section[parent::body]</String>
+																<String>ancestor-or-self::body</String>
 															</entry>
 															<entry>
 																<String>name</String>
@@ -4365,13 +4365,13 @@ else 'toc frontmatter'
 												</actionMode>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
+														<String>ancestor-or-self::section[parent::body]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
 																<String>elementLocation</String>
-																<String>ancestor-or-self::body</String>
+																<String>ancestor-or-self::section[parent::body]</String>
 															</entry>
 															<entry>
 																<String>name</String>
@@ -4420,38 +4420,6 @@ else 'toc frontmatter'
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::section[parent::body]</String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>elementLocation</String>
-																<String>ancestor-or-self::section[parent::body]</String>
-															</entry>
-															<entry>
-																<String>name</String>
-																<String>type</String>
-															</entry>
-															<entry>
-																<String>namespace</String>
-																<String>http://www.idpf.org/2007/ops</String>
-															</entry>
-															<entry>
-																<String>value</String>
-																<String>${xpath_eval(
-if (matches(ancestor-or-self::section[parent::body]/@epub:type, 'frontmatter')) then 'rearnotes frontmatter'
-if (matches(ancestor-or-self::section[parent::body]/@epub:type, 'bodymatter')) then 'rearnotes bodymatter'
-else 'rearnotes backmatter'
-)}</String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
-													</field>
-												</actionMode>
-												<actionMode>
-													<field name="xpathCondition">
 														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
 													</field>
 													<field name="argValues">
@@ -4473,6 +4441,38 @@ else 'rearnotes backmatter'
 																<String>${xpath_eval(
 if (matches(ancestor-or-self::body/@epub:type, 'frontmatter')) then 'rearnotes frontmatter'
 else if (matches(ancestor-or-self::body/@epub:type, 'bodymatter')) then 'rearnotes bodymatter'
+else 'rearnotes backmatter'
+)}</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::section[parent::body]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::section[parent::body]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>${xpath_eval(
+if (matches(ancestor-or-self::section[parent::body]/@epub:type, 'frontmatter')) then 'rearnotes frontmatter'
+if (matches(ancestor-or-self::section[parent::body]/@epub:type, 'bodymatter')) then 'rearnotes bodymatter'
 else 'rearnotes backmatter'
 )}</String>
 															</entry>
@@ -4511,13 +4511,13 @@ else 'rearnotes backmatter'
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::section[parent::body]</String>
+														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
 																<String>elementLocation</String>
-																<String>ancestor-or-self::section[parent::body]</String>
+																<String>ancestor-or-self::body</String>
 															</entry>
 															<entry>
 																<String>name</String>
@@ -4539,13 +4539,13 @@ else 'rearnotes backmatter'
 												</actionMode>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
+														<String>ancestor-or-self::section[parent::body]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
 																<String>elementLocation</String>
-																<String>ancestor-or-self::body</String>
+																<String>ancestor-or-self::section[parent::body]</String>
 															</entry>
 															<entry>
 																<String>name</String>
