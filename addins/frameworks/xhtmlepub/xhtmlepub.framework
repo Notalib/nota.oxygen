@@ -27,7 +27,6 @@
 							<String>${framework}/i18n/</String>
 							<String>${framework}/xhtml.jar</String>
 							<String>${framework}/nota.oxygen.jar</String>
-							<String>${framework}/truezip-samples-7.7.6-jar-with-dependencies.jar</String>
 						</String-array>
 					</field>
 					<field name="parentClassLoaderID">
@@ -2729,13 +2728,13 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 									</action>
 									<action>
 										<field name="id">
-											<String>insert.figure.epub</String>
+											<String>language.text.danish</String>
 										</field>
 										<field name="name">
-											<String>Insert Figure(s) from epub archive</String>
+											<String>Selected text: Danish</String>
 										</field>
 										<field name="description">
-											<String>Insert figure(s) from epub archive</String>
+											<String>Surrounds selected text with span element indicating Danish language</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -2753,73 +2752,18 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>self::*:body|self::*:section|self::*:div|self::*:article|self::*:header|self::*:footer</String>
+														<String></String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
-																<String>from archive</String>
-																<String>yes</String>
-															</entry>
-															<entry>
-																<String>image container fragment</String>
-																<String>&lt;figure class="image-series" xmlns="http://www.w3.org/1999/xhtml">
-  &lt;figcaption>
-    &lt;p>FIGURE_GROUP_CAPTION&lt;/p>
-  &lt;/figcaption>
-  $images
-&lt;/figure></String>
-															</entry>
-															<entry>
-																<String>image fragment</String>
-																<String>&lt;figure class="image" xmlns="http://www.w3.org/1999/xhtml">
-  &lt;img src="$imageUrl" alt="ALTTEXT" />
-  &lt;figcaption>
-    &lt;p>FIGURE_CAPTION&lt;/p>
-  &lt;/figcaption>
-&lt;/figure></String>
-															</entry>
-															<entry>
-																<String>location</String>
-																<String>${af}</String>
+																<String>fragment</String>
+																<String>&lt;span lang="da" xml:lang="da" xmlns="http://www.w3.org/1999/xhtml">&lt;/span></String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
-														<String>nota.oxygen.epub.figures.InsertFigureOperation</String>
-													</field>
-												</actionMode>
-												<actionMode>
-													<field name="xpathCondition">
-														<String>self::*:figure[contains(concat(' ', normalize-space(@class), ' '), ' image-series ')]</String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>from archive</String>
-																<String>yes</String>
-															</entry>
-															<entry>
-																<String>image container fragment</String>
-																<String></String>
-															</entry>
-															<entry>
-																<String>image fragment</String>
-																<String>&lt;figure class="image" xmlns="http://www.w3.org/1999/xhtml">
-  &lt;img src="$imageUrl" alt="ALTTEXT" />
-  &lt;figcaption>
-    &lt;p>FIGURE_CAPTION&lt;/p>
-  &lt;/figcaption>
-&lt;/figure></String>
-															</entry>
-															<entry>
-																<String>location</String>
-																<String>${af}</String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>nota.oxygen.epub.figures.InsertFigureOperation</String>
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -2827,13 +2771,13 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 									</action>
 									<action>
 										<field name="id">
-											<String>insert.figure.file</String>
+											<String>language.text.english</String>
 										</field>
 										<field name="name">
-											<String>Insert Figure(s) from files</String>
+											<String>Selected text: English</String>
 										</field>
 										<field name="description">
-											<String>Insert figure(s) from files</String>
+											<String>Surrounds selected text with span element indicating English language</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -2851,73 +2795,1956 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>self::*:body|self::*:section|self::*:div|self::*:article|self::*:header|self::*:footer</String>
+														<String></String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
-																<String>from archive</String>
-																<String>yes</String>
-															</entry>
-															<entry>
-																<String>image container fragment</String>
-																<String>&lt;figure class="image-series" xmlns="http://www.w3.org/1999/xhtml">
-  &lt;figcaption>
-    &lt;p>FIGURE_GROUP_CAPTION&lt;/p>
-  &lt;/figcaption>
-  $images
-&lt;/figure></String>
-															</entry>
-															<entry>
-																<String>image fragment</String>
-																<String>&lt;figure class="image" xmlns="http://www.w3.org/1999/xhtml">
-  &lt;img src="$imageUrl" alt="ALTTEXT" />
-  &lt;figcaption>
-    &lt;p>FIGURE_CAPTION&lt;/p>
-  &lt;/figcaption>
-&lt;/figure></String>
-															</entry>
-															<entry>
-																<String>location</String>
-																<String>${af}</String>
+																<String>fragment</String>
+																<String>&lt;span lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">&lt;/span></String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
-														<String>nota.oxygen.epub.figures.InsertFigureOperation</String>
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>language.text.french</String>
+										</field>
+										<field name="name">
+											<String>Selected text: French</String>
+										</field>
+										<field name="description">
+											<String>Surrounds selected text with span element indicating French language</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;span lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">&lt;/span></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>language.text.norwegian</String>
+										</field>
+										<field name="name">
+											<String>Selected text: Norwegian</String>
+										</field>
+										<field name="description">
+											<String>Surrounds selected text with span element indicating Norwegian language</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;span lang="no" xml:lang="no" xmlns="http://www.w3.org/1999/xhtml">&lt;/span></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>language.text.swedish</String>
+										</field>
+										<field name="name">
+											<String>Selected text: Swedish</String>
+										</field>
+										<field name="description">
+											<String>Surrounds selected text with span element indicating Swedish language</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;span lang="se" xml:lang="se" xmlns="http://www.w3.org/1999/xhtml">&lt;/span></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>language.text.german</String>
+										</field>
+										<field name="name">
+											<String>Selected text: German</String>
+										</field>
+										<field name="description">
+											<String>Surrounds selected text with span element indicating German language</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;span lang="de" xml:lang="de" xmlns="http://www.w3.org/1999/xhtml">&lt;/span></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>attribute.lang.danish</String>
+										</field>
+										<field name="name">
+											<String>lang: Danish</String>
+										</field>
+										<field name="description">
+											<String>Sets the lang attribute on the current element to "da"</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::*[1]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>lang</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>da</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>attribute.lang.english</String>
+										</field>
+										<field name="name">
+											<String>lang: English</String>
+										</field>
+										<field name="description">
+											<String>Sets the lang attribute on the current element to "en"</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::*[1]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>lang</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>en</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>attribute.lang.french</String>
+										</field>
+										<field name="name">
+											<String>lang: French</String>
+										</field>
+										<field name="description">
+											<String>Sets the lang attribute on the current element to "fr"</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::*[1]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>lang</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>fr</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>attribute.lang.german</String>
+										</field>
+										<field name="name">
+											<String>lang: German</String>
+										</field>
+										<field name="description">
+											<String>Sets the lang attribute on the current element to "de"</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::*[1]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>lang</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>de</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>attribute.lang.norwegian</String>
+										</field>
+										<field name="name">
+											<String>lang: Norwegian</String>
+										</field>
+										<field name="description">
+											<String>Sets the lang attribute on the current element to "no"</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::*[1]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>lang</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>no</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>attribute.lang.swedish</String>
+										</field>
+										<field name="name">
+											<String>lang: Swedish</String>
+										</field>
+										<field name="description">
+											<String>Sets the lang attribute on the current element to "se"</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::*[1]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>lang</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>se</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>language.element.danish</String>
+										</field>
+										<field name="name">
+											<String>Current element: Danish</String>
+										</field>
+										<field name="description">
+											<String>Sets the language of the current element to Danish</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>actionIDs</String>
+																<String>attribute.lang.danish
+attribute.xmllang.copylang</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ExecuteMultipleActionsOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>language.element.english</String>
+										</field>
+										<field name="name">
+											<String>Current element: English</String>
+										</field>
+										<field name="description">
+											<String>Sets the language of the current element to English</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>actionIDs</String>
+																<String>attribute.lang.english
+attribute.xmllang.copylang</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ExecuteMultipleActionsOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>language.element.french</String>
+										</field>
+										<field name="name">
+											<String>Current element: French</String>
+										</field>
+										<field name="description">
+											<String>Sets the language of the current element to French</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>actionIDs</String>
+																<String>attribute.lang.french
+attribute.xmllang.copylang</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ExecuteMultipleActionsOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>language.element.german</String>
+										</field>
+										<field name="name">
+											<String>Current element: German</String>
+										</field>
+										<field name="description">
+											<String>Sets the language of the current element to German</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>actionIDs</String>
+																<String>attribute.lang.german
+attribute.xmllang.copylang</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ExecuteMultipleActionsOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>language.element.norwegian</String>
+										</field>
+										<field name="name">
+											<String>Current element: Norwegian</String>
+										</field>
+										<field name="description">
+											<String>Sets the language of the current element to Norwegian</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>actionIDs</String>
+																<String>attribute.lang.norwegian
+attribute.xmllang.copylang</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ExecuteMultipleActionsOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>language.element.swedish</String>
+										</field>
+										<field name="name">
+											<String>Current element: Swedish</String>
+										</field>
+										<field name="description">
+											<String>Sets the language of the current element to Swedish</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>actionIDs</String>
+																<String>attribute.lang.swedish
+attribute.xmllang.copylang</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ExecuteMultipleActionsOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>attribute.xmllang.copylang</String>
+										</field>
+										<field name="name">
+											<String>xml:lang: copy lang</String>
+										</field>
+										<field name="description">
+											<String>Sets the xml:lang attribute on the current element to whatever the lang attribute is</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::*[1]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>lang</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.w3.org/XML/1998/namespace</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>${xpath_eval(ancestor-or-self::*[1]/@lang)}</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>epubtype.division.chapter</String>
+										</field>
+										<field name="name">
+											<String>chapter</String>
+										</field>
+										<field name="description">
+											<String>Sets epub:type to "chapter" for the current division</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::body</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>chapter bodymatter</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
 													</field>
 												</actionMode>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>self::*:figure[contains(concat(' ', normalize-space(@class), ' '), ' image-series ')]</String>
+														<String>ancestor-or-self::section[parent::body]</String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
 															<entry>
-																<String>from archive</String>
-																<String>yes</String>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::section[parent::body]</String>
 															</entry>
 															<entry>
-																<String>image container fragment</String>
-																<String></String>
+																<String>name</String>
+																<String>type</String>
 															</entry>
 															<entry>
-																<String>image fragment</String>
-																<String>&lt;figure class="image" xmlns="http://www.w3.org/1999/xhtml">
-  &lt;img src="$imageUrl" alt="ALTTEXT" />
-  &lt;figcaption>
-    &lt;p>FIGURE_CAPTION&lt;/p>
-  &lt;/figcaption>
-&lt;/figure></String>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
 															</entry>
 															<entry>
-																<String>location</String>
-																<String>${af}</String>
+																<String>value</String>
+																<String>chapter bodymatter</String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
 													<field name="operationID">
-														<String>nota.oxygen.epub.figures.InsertFigureOperation</String>
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>epubtype.division.part</String>
+										</field>
+										<field name="name">
+											<String>part</String>
+										</field>
+										<field name="description">
+											<String>Sets epub:type to "part" for the current division</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::body</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>part bodymatter</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::section[parent::body]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::section[parent::body]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>part bodymatter</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>epubtype.division.preface</String>
+										</field>
+										<field name="name">
+											<String>preface</String>
+										</field>
+										<field name="description">
+											<String>Sets epub:type to "preface" for the current division</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::body</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>preface frontmatter</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::section[parent::body]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::section[parent::body]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>preface frontmatter</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>epubtype.division.colophon</String>
+										</field>
+										<field name="name">
+											<String>colophon</String>
+										</field>
+										<field name="description">
+											<String>Sets epub:type to "colophon" for the current division</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::body</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>${xpath_eval(
+if (matches(ancestor-or-self::body/@epub:type, 'frontmatter')) then 'colophon frontmatter'
+else if (matches(ancestor-or-self::body/@epub:type, 'backmatter')) then 'colophon backmatter'
+else 'colophon frontmatter'
+)}</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::section[parent::body]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::section[parent::body]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>${xpath_eval(
+if (matches(ancestor-or-self::section[parent::body]/@epub:type, 'frontmatter')) then 'colophon frontmatter'
+else if (matches(ancestor-or-self::section[parent::body]/@epub:type, 'backmatter')) then 'colophon backmatter'
+else 'colophon frontmatter'
+)}</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>epubtype.division.toc</String>
+										</field>
+										<field name="name">
+											<String>toc</String>
+										</field>
+										<field name="description">
+											<String>Sets epub:type to "toc" for the current division</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::body</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>${xpath_eval(
+if (matches(ancestor-or-self::body/@epub:type, 'frontmatter')) then 'toc frontmatter'
+else if (matches(ancestor-or-self::body/@epub:type, 'backmatter')) then 'toc backmatter'
+else 'toc frontmatter'
+)}</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::section[parent::body]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::section[parent::body]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>${xpath_eval(
+if (matches(ancestor-or-self::section[parent::body]/@epub:type, 'frontmatter')) then 'toc frontmatter'
+else if (matches(ancestor-or-self::section[parent::body]/@epub:type, 'backmatter')) then 'toc backmatter'
+else 'toc frontmatter'
+)}</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>epubtype.division.cover</String>
+										</field>
+										<field name="name">
+											<String>cover</String>
+										</field>
+										<field name="description">
+											<String>Sets epub:type to "cover" for the current division</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::body</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>cover</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::section[parent::body]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::section[parent::body]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>cover</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>epubtype.division.titlepage</String>
+										</field>
+										<field name="name">
+											<String>titlepage</String>
+										</field>
+										<field name="description">
+											<String>Sets epub:type to "titlepage" for the current division</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::body</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>titlepage frontmatter</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::section[parent::body]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::section[parent::body]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>titlepage frontmatter</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>epubtype.division.index</String>
+										</field>
+										<field name="name">
+											<String>index</String>
+										</field>
+										<field name="description">
+											<String>Sets epub:type to "index" for the current division</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::body</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>index backmatter</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::section[parent::body]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::section[parent::body]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>index backmatter</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>epubtype.division.appendix</String>
+										</field>
+										<field name="name">
+											<String>appendix</String>
+										</field>
+										<field name="description">
+											<String>Sets epub:type to "appendix" for the current division</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::body</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>appendix backmatter</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::section[parent::body]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::section[parent::body]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>appendix backmatter</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>epubtype.division.rearnotes</String>
+										</field>
+										<field name="name">
+											<String>rearnotes</String>
+										</field>
+										<field name="description">
+											<String>Sets epub:type to "rearnotes" for the current division</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::body</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>${xpath_eval(
+if (matches(ancestor-or-self::body/@epub:type, 'frontmatter')) then 'rearnotes frontmatter'
+else if (matches(ancestor-or-self::body/@epub:type, 'bodymatter')) then 'rearnotes bodymatter'
+else 'rearnotes backmatter'
+)}</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::section[parent::body]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::section[parent::body]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>${xpath_eval(
+if (matches(ancestor-or-self::section[parent::body]/@epub:type, 'frontmatter')) then 'rearnotes frontmatter'
+if (matches(ancestor-or-self::section[parent::body]/@epub:type, 'bodymatter')) then 'rearnotes bodymatter'
+else 'rearnotes backmatter'
+)}</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>epubtype.division.footnotes</String>
+										</field>
+										<field name="name">
+											<String>footnotes</String>
+										</field>
+										<field name="description">
+											<String>Sets epub:type to "footnotes" for the current division</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::body[not(child::*[1][self::section])]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::body</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>footnotes backmatter</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::section[parent::body]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::section[parent::body]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>type</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.idpf.org/2007/ops</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>footnotes backmatter</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>class.division.frontcover</String>
+										</field>
+										<field name="name">
+											<String>frontcover</String>
+										</field>
+										<field name="description">
+											<String>Sets class to "frontcover" for the current division</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::section</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::section[1]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>class</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>frontcover</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>class.division.rearcover</String>
+										</field>
+										<field name="name">
+											<String>rearcover</String>
+										</field>
+										<field name="description">
+											<String>Sets class to "rearcover" for the current division</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::section</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::section[1]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>class</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>rearcover</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>class.division.leftflap</String>
+										</field>
+										<field name="name">
+											<String>leftflap</String>
+										</field>
+										<field name="description">
+											<String>Sets class to "leftflap" for the current division</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::section</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::section[1]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>class</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>leftflap</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>class.division.rightflap</String>
+										</field>
+										<field name="name">
+											<String>rightflap</String>
+										</field>
+										<field name="description">
+											<String>Sets class to "rightflap" for the current division</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::section</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>ancestor-or-self::section[1]</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>class</String>
+															</entry>
+															<entry>
+																<String>value</String>
+																<String>rightflap</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -3009,34 +4836,14 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 													</menuEntry-array>
 												</field>
 											</menu>
-											<menu>
-												<field name="label">
-													<String>Figures</String>
-												</field>
-												<field name="accessKey">
-													<String></String>
-												</field>
-												<field name="iconPath">
-													<String>/images/Image16.gif</String>
-												</field>
-												<field name="menuEntriesDescriptorList">
-													<menuEntry-array>
-														<menuItem>
-															<field name="actionID">
-																<String>insert.figure.file</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>insert.figure.epub</String>
-															</field>
-														</menuItem>
-													</menuEntry-array>
-												</field>
-											</menu>
 											<menuItem>
 												<field name="actionID">
 													<String>paragraph</String>
+												</field>
+											</menuItem>
+											<menuItem>
+												<field name="actionID">
+													<String>insert.image</String>
 												</field>
 											</menuItem>
 											<menuItem>
@@ -3244,6 +5051,177 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 									</field>
 									<field name="menuEntriesDescriptorList">
 										<menuEntry-array>
+											<menu>
+												<field name="label">
+													<String>Division type</String>
+												</field>
+												<field name="accessKey">
+													<String></String>
+												</field>
+												<field name="iconPath">
+													<String></String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>epubtype.division.cover</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>class.division.frontcover</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>class.division.rearcover</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>class.division.leftflap</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>class.division.rightflap</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>epubtype.division.titlepage</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>epubtype.division.colophon</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>epubtype.division.toc</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>epubtype.division.preface</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>epubtype.division.part</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>epubtype.division.chapter</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>epubtype.division.appendix</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>epubtype.division.index</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>epubtype.division.rearnotes</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>epubtype.division.footnotes</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+											</menu>
+											<menu>
+												<field name="label">
+													<String>Language</String>
+												</field>
+												<field name="accessKey">
+													<String></String>
+												</field>
+												<field name="iconPath">
+													<String></String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>language.element.english</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>language.element.french</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>language.element.german</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>language.element.danish</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>language.element.norwegian</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>language.element.swedish</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>language.text.english</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>language.text.french</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>language.text.german</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>language.text.danish</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>language.text.norwegian</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>language.text.swedish</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+											</menu>
+											<menuSeparator/>
 											<menuItem>
 												<field name="actionID">
 													<String>insert.table.row.below</String>
@@ -3405,34 +5383,14 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 													</menuEntry-array>
 												</field>
 											</menu>
-											<menu>
-												<field name="label">
-													<String>Figures</String>
-												</field>
-												<field name="accessKey">
-													<String></String>
-												</field>
-												<field name="iconPath">
-													<String>/images/Image16.gif</String>
-												</field>
-												<field name="menuEntriesDescriptorList">
-													<menuEntry-array>
-														<menuItem>
-															<field name="actionID">
-																<String>insert.figure.file</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>insert.figure.epub</String>
-															</field>
-														</menuItem>
-													</menuEntry-array>
-												</field>
-											</menu>
 											<menuItem>
 												<field name="actionID">
 													<String>paragraph</String>
+												</field>
+											</menuItem>
+											<menuItem>
+												<field name="actionID">
+													<String>insert.image</String>
 												</field>
 											</menuItem>
 											<menuItem>
@@ -3562,37 +5520,14 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 													</toolbarEntry-array>
 												</field>
 											</toolbar>
-											<toolbar>
-												<field name="id">
-													<String>Figure</String>
-												</field>
-												<field name="type">
-													<Integer>3</Integer>
-												</field>
-												<field name="largeIconPath">
-													<String>/images/Image20.png</String>
-												</field>
-												<field name="smallIconPath">
-													<String>/images/Image16.gif</String>
-												</field>
-												<field name="toolbarEntriesDescriptorList">
-													<toolbarEntry-array>
-														<toolbarItem>
-															<field name="actionID">
-																<String>insert.figure.file</String>
-															</field>
-														</toolbarItem>
-														<toolbarItem>
-															<field name="actionID">
-																<String>insert.figure.epub</String>
-															</field>
-														</toolbarItem>
-													</toolbarEntry-array>
-												</field>
-											</toolbar>
 											<toolbarItem>
 												<field name="actionID">
 													<String>paragraph</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>insert.image</String>
 												</field>
 											</toolbarItem>
 											<toolbarItem>
