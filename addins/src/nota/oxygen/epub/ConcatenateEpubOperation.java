@@ -95,8 +95,13 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 			//URL[] xhtmlUrls = EpubUtils.getSpineUrls(opfAccess, false);
 			
 			// traverse each xhtml document in epub
-			for (AuthorAccess xhtmlAccess : EpubUtils.getSpine(opfAccess, false)) {
-
+			AuthorAccess[] spine = EpubUtils.getSpine(opfAccess, false);
+			if (spine.length < 2) {
+				showMessage("Cannot concatenate when there is only one linear text file in the spine");
+				return;
+			}
+			for (AuthorAccess xhtmlAccess : spine) {
+				
 				AuthorElement htmlElem = xhtmlAccess.getDocumentController().getAuthorDocumentNode().getRootElement();
 				if (htmlElem != null) {
 					// get html node from author document
