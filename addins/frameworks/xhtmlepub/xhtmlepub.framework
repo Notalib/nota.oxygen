@@ -3602,7 +3602,7 @@ attribute.xmllang.copylang</String>
 											<actionMode-array>
 												<actionMode>
 													<field name="xpathCondition">
-														<String>ancestor-or-self::*[1][@lang]</String>
+														<String></String>
 													</field>
 													<field name="argValues">
 														<serializableOrderedMap>
