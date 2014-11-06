@@ -5075,7 +5075,7 @@ else 'rearnotes backmatter'
 										<menuEntry-array>
 											<menu>
 												<field name="label">
-													<String>Set division type</String>
+													<String>Division type</String>
 												</field>
 												<field name="accessKey">
 													<String></String>
