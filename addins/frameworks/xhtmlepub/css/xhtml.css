@@ -1059,35 +1059,40 @@ div[epub|type="pagebreak"] {
 	border: solid;
 	text-align: center;
 }
-div[epub|type="pagebreak"]:before {
-	content: "Page "attr(title)" ";
-}
 span[epub|type="pagebreak"] {
 	border: solid;
 }
-span[epub|type="pagebreak"]:before {
-	content: "Page "attr(title)" ";
+div[epub|type="pagebreak"]:before, span[epub|type="pagebreak"]:before {
+	content: "Page "
+	         oxy_editor(
+	           type, text, 
+	           edit, "@title",
+	           contentType, "text/plain")
+	         " "
+	         oxy_editor(
+	           type, popupSelection,
+	           edit, "@class",
+	           values, "page-normal, page-front",
+	           selectionMode, "single");
 }
 
-*[lang]:before {
-    content: "@lang:"
-        oxy_editor(
-            type, combo,
-            edit, "@lang",
-            values, oxy_xpath("string-join(distinct-values(tokenize(concat('da sv no en de fr ', string-join(//*/@lang, ' ')), ' ')), ',')"),
-            selectionMode, "single",
-            fontInherit, true);
-    
-}
 
-section:before,body:before {
+section:before,
+body:before {
+    display: block;
     content: oxy_xpath("local-name()") "@epub:type="
         oxy_editor(
             type, popupSelection,
             edit, "@epub:type",
             /*values, "frontmatter, bodymatter, rearmatter, part, chapter, cover",*/
-            values, oxy_xpath("string-join(distinct-values(tokenize(concat('frontmatter bodymatter rearmatter part chapter section index toc cover ', string-join(//(*:section|*:body|*:article|*:header|*:footer)/@epub:type, ' ')), ' ')), ',')"),
+            values, oxy_xpath("string-join(distinct-values(tokenize(concat('frontmatter bodymatter rearmatter part chapter section index toc cover ', string-join(//(*:section|*:body|*:article|*:header|*:footer|*:nav)/@epub:type, ' ')), ' ')), ',')"),
             resultSeparator, " ",
             selectionMode, "multiple",
+            editorSort, "ascending"
             fontInherit, true);
+    color: red;
+    font-size: oxy_xpath("if (self::*:body) then '2em' else if (parent::*:body) then '1.5em' else '1.25em'");
+    border: 1px solid red;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
 }
