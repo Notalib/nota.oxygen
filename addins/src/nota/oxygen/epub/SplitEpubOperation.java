@@ -129,21 +129,21 @@ public class SplitEpubOperation extends BaseAuthorOperation {
 				// Find Document Title
 				_SourceTitle=GetDocTitle(DocEl);
 				
-				XPath xpath=XPathFactory.newInstance().newXPath();
-				
-				try 
-				{
-					Node TitNode = (Node) xpath.evaluate("/head/title", DocEl, XPathConstants.NODE);
-
-					if (TitNode != null) {
-						_SourceTitle = TitNode.getTextContent();
-					}
-				}
-
-				catch (XPathExpressionException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				XPath xpath=XPathFactory.newInstance().newXPath();
+//				
+//				try 
+//				{
+//					Node TitNode = (Node) xpath.evaluate("/head/title", DocEl, XPathConstants.NODE);
+//
+//					if (TitNode != null) {
+//						_SourceTitle = TitNode.getTextContent();
+//					}
+//				}
+//
+//				catch (XPathExpressionException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 
 				// GoThroughTopSections(Body);//Fejler på mystisk måde...
 				GoThroughNodes(DocEl);
