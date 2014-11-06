@@ -1,10 +1,8 @@
 package nota.oxygen.epub;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -41,7 +39,8 @@ import nota.oxygen.common.Utils;
 public class SplitEpubOperation extends BaseAuthorOperation {
 
 	private String xhtmlFileName = "concatenated.xhtml";
-
+	private String epubFilePath = "";
+	
 	private String _ID_Prefix;
 	private NodeList _MetaNodes;
 
@@ -49,8 +48,6 @@ public class SplitEpubOperation extends BaseAuthorOperation {
 	private AuthorAccess xhtmlAccess;
 
 	private int _DocNumber;
-	
-	private boolean _StopExecuting;
 	
 	@Override
 	public ArgumentDescriptor[] getArguments() {
@@ -62,17 +59,28 @@ public class SplitEpubOperation extends BaseAuthorOperation {
 		return "Splits epub file";
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void doOperation() throws AuthorOperationException {
 		
 		_DocNumber = 0;
 		
-		String epubFilePath = Utils.getZipRootUrl(getAuthorAccess().getEditorAccess().getEditorLocation().toString());
-
-		
 		try {
-			//xhtmlAccess = EpubUtils.getAuthorDocument(getAuthorAccess(), new URL(epubFilePath + "/EPUB/" + xhtmlFileName));
+
 			xhtmlAccess = getAuthorAccess();
+			
+			URL docUrl = getAuthorAccess().getDocumentController().getAuthorDocumentNode().getXMLBaseURL(); 
+			String inputFile = getAuthorAccess().getUtilAccess().getFileName(docUrl.toString());
+			if (!inputFile.equals(xhtmlFileName)) {
+				showMessage("Splitting can not start from this file");
+				return;
+			}
+			
+			epubFilePath = EpubUtils.getEpubFolder(getAuthorAccess());
+			if (epubFilePath.equals("")) {
+				showMessage("Could not access epub folder");
+				return;
+			}
 			
 			AuthorElement htmlElem = xhtmlAccess.getDocumentController().getAuthorDocumentNode().getRootElement();
 			if (htmlElem != null) {
@@ -125,7 +133,11 @@ public class SplitEpubOperation extends BaseAuthorOperation {
 				// GoThroughTopSections(Body);
 				GoThroughNodes(El);
 				
+				// close xhtml document
 				xhtmlAccess.getEditorAccess().close(true);
+				
+				// delete xhtml document
+				xhtmlAccess.getWorkspaceAccess().delete(xhtmlAccess.getEditorLocation());
 			}
 			
 			
@@ -415,11 +427,9 @@ public class SplitEpubOperation extends BaseAuthorOperation {
 			AuthorWorkspaceAccess wa = getAuthorAccess().getWorkspaceAccess();
 			URL newEditorUrl = wa.createNewEditor("xhtml", "text/xml", xmlContent);
 			WSEditor editor = wa.getEditorAccess(newEditorUrl);
-
-			String epubFilePath = Utils.getZipRootUrl(getAuthorAccess().getEditorAccess().getEditorLocation().toString());
-			editor.saveAs(new URL(epubFilePath + "/EPUB/" + splitFileName));
+			editor.saveAs(new URL(epubFilePath + "/" + splitFileName));
 			
-			wa.close(new URL(epubFilePath + "/EPUB/" + splitFileName));
+			wa.close(new URL(epubFilePath + "/" + splitFileName));
 
 		} catch (TransformerConfigurationException e) {
 			// TODO Auto-generated catch block

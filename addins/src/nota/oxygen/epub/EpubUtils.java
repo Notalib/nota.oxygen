@@ -77,6 +77,31 @@ public class EpubUtils {
 		}
 	}
 	
+	public static String getEpubFolder(AuthorAccess authorAccess) {
+		try {
+			if (authorAccess == null) return null;
+			URL docUrl = authorAccess.getDocumentController().getAuthorDocumentNode().getXMLBaseURL(); 
+			AuthorAccess containerDocAccess = getAuthorDocument(authorAccess, getEpubUrl(docUrl, "META-INF/container.xml"));
+			if (containerDocAccess == null) return null;
+			Element rootElem = Utils.deserializeElement(Utils.serialize(
+					containerDocAccess, 
+					containerDocAccess.getDocumentController().getAuthorDocumentNode()));
+			containerDocAccess.getEditorAccess().close(true);
+			XPath xp = Utils.getXPath("ns", "urn:oasis:names:tc:opendocument:xmlns:container");
+			try {
+				URL rootUrl = Utils.getZipRootUrl(docUrl);
+				String epubUrl = xp.evaluate("//ns:rootfile[@media-type='application/oebps-package+xml']/@full-path", rootElem); 
+				return rootUrl.toString() + epubUrl.substring(0, epubUrl.indexOf("/"));
+			} catch (XPathExpressionException e) {
+				return "";
+			}
+		}
+		catch (Exception e)
+		{
+			return null;
+		}
+	}
+	
 	public static URL getPackageItemURLByXPath(AuthorAccess opfAccess, String xpath) {
 		try {
 			AuthorNode[] res = opfAccess.getDocumentController().findNodesByXPath(xpath, true, true, true);

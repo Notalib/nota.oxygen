@@ -1,5 +1,6 @@
 package nota.oxygen.epub;
 
+import java.io.File;
 import java.io.StringWriter;
 import java.net.URL;
 
@@ -36,7 +37,8 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 
 	private AuthorAccess opfAccess;
 	private String xhtmlFileName = "concatenated.xhtml";
-	private DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	private String epubFilePath = "";
+	private DocumentBuilderFactory factory;
 	private DocumentBuilder builder = null;
 	private Document xhtmlDocument;
 	private Element htmlElement;
@@ -54,6 +56,7 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 		return "Concatenates epub files";
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void doOperation() throws AuthorOperationException {
 		URL opfUrl = EpubUtils.getPackageUrl(getAuthorAccess());
@@ -65,27 +68,29 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 		opfAccess = EpubUtils.getAuthorDocument(getAuthorAccess(), opfUrl);
 		if (opfAccess == null) {
 			showMessage("Could not access pagkage file for document");
+			return;
 		}
-
 		
-		
+		epubFilePath = EpubUtils.getEpubFolder(getAuthorAccess());
+		if (epubFilePath.equals("")) {
+			showMessage("Could not access epub folder");
+			return;
+		}
 		
 		try {
-			
-			
 			// create dom document
+			factory = DocumentBuilderFactory.newInstance();
 			factory.setExpandEntityReferences(false);
 			builder = factory.newDocumentBuilder();
-
 			xhtmlDocument = builder.newDocument();
+			
+			// add html, head and body do document
 			htmlElement = (Element)xhtmlDocument.createElement("html");
 			headElement = (Element)xhtmlDocument.createElement("head");
 			bodyElement = (Element)xhtmlDocument.createElement("body");
 			htmlElement.appendChild(headElement);
 			htmlElement.appendChild(bodyElement);
 			xhtmlDocument.appendChild(htmlElement);
-			
-			
 			
 			//URL[] xhtmlUrls = EpubUtils.getSpineUrls(opfAccess, false);
 			
@@ -94,15 +99,17 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 
 				AuthorElement htmlElem = xhtmlAccess.getDocumentController().getAuthorDocumentNode().getRootElement();
 				if (htmlElem != null) {
-					// add attributes to the html element of new xhtml file
+					// get html node from author document
 					AuthorNode htmlNode = getFirstElement(xhtmlAccess.getDocumentController().findNodesByXPath("/html", htmlElem, true, true, true, true));
 					if (htmlNode == null) {
 						throw new AuthorOperationException("Found no html in xhtml file");
 					}
 					
+					// serialize and deserialize html
 					String htmlContent = Utils.serialize(xhtmlAccess, htmlNode);
 					Element htmlElementSource = Utils.deserializeElement(htmlContent);
 					
+					// add attributes in html to the html of xhtml file
 					NamedNodeMap htmlAttributes = htmlElementSource.getAttributes();
 					for (int j=0; j<htmlAttributes.getLength(); j++) {
 						Attr node = (Attr) htmlAttributes.item(j);
@@ -117,42 +124,43 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 					
 					if (headElem != null) {
 						try {
-							// append elements to the head of new xhtml file
+							// get head node from author document
 							AuthorElement head = getFirstElement(xhtmlAccess.getDocumentController().findNodesByXPath("/html/head", true, true, true));
 							if (head == null) {
 								throw new AuthorOperationException("Found no head in xhtml file");
 							}
 							
+							// serialize and deserialize head
 							String headContent = Utils.serialize(xhtmlAccess, head);
 							Element headElementSource = Utils.deserializeElement(headContent);
 							
+							// get head elements
 							NodeList listOfSrcHeadElements = headElementSource.getChildNodes();
 							NodeList listOfDesHeadElements = headElement.getChildNodes();
 							
+							// append head elements to the head of new xhtml file
 							for (int i=0; i<listOfSrcHeadElements.getLength(); i++) {
 								Node node = xhtmlDocument.importNode(listOfSrcHeadElements.item(i), true);
 								String metaSourceValue = "";
 								if (node.getNodeName().equalsIgnoreCase("meta")) {
-									Node test = node.getAttributes().getNamedItem("name");
-									if (test != null) {
+									Node metaName = node.getAttributes().getNamedItem("name");
+									if (metaName != null) {
 										metaSourceValue = String.valueOf(node.getAttributes().getNamedItem("name").getNodeValue());
 									}
-									
 								}
 								
 								boolean exists = false;
 								for (int j=0; j<listOfDesHeadElements.getLength(); j++) {
 									String metaNewValue = "";
 									if (listOfDesHeadElements.item(j).getNodeName().equalsIgnoreCase("meta")) {
-										Node test = listOfDesHeadElements.item(j).getAttributes().getNamedItem("name");
-										if (test != null) {
+										Node metaName = listOfDesHeadElements.item(j).getAttributes().getNamedItem("name");
+										if (metaName != null) {
 											metaNewValue = String.valueOf(listOfDesHeadElements.item(j).getAttributes().getNamedItem("name").getNodeValue());
 										}
-										
 									}
 									
 									if (listOfDesHeadElements.item(j).isEqualNode(node)) exists = true;
-									else if (metaSourceValue.equals(metaNewValue)) exists = true;
+									else if (!metaSourceValue.equals("") && !metaNewValue.equals("") && metaSourceValue.equals(metaNewValue)) exists = true;
 								}
 								
 								if (!exists) {
@@ -171,22 +179,25 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 					}
 					if (bodyElem != null) {
 						try {
-							// append elements to the body of new xhtml file
+							// get body node from author document
 							AuthorNode bodyNode = getFirstElement(xhtmlAccess.getDocumentController().findNodesByXPath("/html/body", bodyElem, true, true, true, true));
 							if (bodyNode == null) {
 								throw new AuthorOperationException("Found no body in xhtml file");
 							}
 							
+							// serialize and deserialize body
 							String bodyContent = Utils.serialize(xhtmlAccess, bodyNode);
 							Element bodyElementSource = Utils.deserializeElement(bodyContent);
 							Element sectionElement = (Element)xhtmlDocument.createElement("section");
 							
+							// append body attributes to section of new xhtml file
 							NamedNodeMap bodyAttributes = bodyElementSource.getAttributes();
 							for (int j=0; j<bodyAttributes.getLength(); j++) {
 								Attr node = (Attr) bodyAttributes.item(j);
 								sectionElement.setAttributeNS(node.getNamespaceURI(), node.getName(), node.getValue());
 							}
 							
+							// append body elements to the section of new xhtml file
 							NodeList listOfBodyElements = bodyElementSource.getChildNodes();
 							for (int i=0; i<listOfBodyElements.getLength(); i++) {
 								sectionElement.appendChild(xhtmlDocument.importNode(listOfBodyElements.item(i), true));
@@ -209,10 +220,7 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 										if (!fileName.equals("") && !noteRef.equals("")) {
 											node.setNodeValue(xhtmlFileName + "#" + fileName + "_n_o_t_a_" + noteRef);
 										}
-										
-
 									}
-									
 								}
 							}*/
 							
@@ -226,64 +234,52 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 				
 				// close xhtml document
 				xhtmlAccess.getEditorAccess().close(true);
+				
+				// delete xhtml document
+				xhtmlAccess.getWorkspaceAccess().delete(xhtmlAccess.getEditorLocation());
 			}
 			
 			// close opf docuement
 			opfAccess.getEditorAccess().close(true);
 			
-			// transform new document to xml content
+			// transform concatenated document to xml content string
 			TransformerFactory transFactory = TransformerFactory.newInstance();
 			Transformer transformer = transFactory.newTransformer();
 			StringWriter buffer = new StringWriter();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
 			transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-			
+			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");	
 			//DOMImplementation domImpl = xhtmlDocument.getImplementation();
 			//DocumentType doctype = domImpl.createDocumentType("html", "-//W3C//DTD XHTML 1.0 Transitional//EN", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd");
-			//DocumentType doctype = domImpl.createDocumentType("html", "-//W3C//DTD XHTML 1.0 Transitional//EN", "");
-			
 			//transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, doctype.getPublicId());
 			//transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, doctype.getSystemId());
-			//transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, null);
-			//transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "about:legacy-compat");
-
 			DOMSource source = new DOMSource(xhtmlDocument);
 			StreamResult result = new StreamResult(buffer);
 			transformer.transform(source, result);
 			String xmlContent = buffer.toString();
 			
-			//Node n = xhtmlDocument.createProcessingInstruction("DOCTYPE", "html");
-			//xhtmlDocument.appendChild(n);
-			
-			
-			// save string into new xhtml concatenated document
+			// open new editor with concatenated xml content
 			AuthorWorkspaceAccess wa = getAuthorAccess().getWorkspaceAccess();
 			URL newEditorUrl = wa.createNewEditor("xhtml", "text/xml", xmlContent);
+			
+			// save content in editor into new concatenated xhtml file
 			WSEditor editor = wa.getEditorAccess(newEditorUrl);
+			editor.saveAs(new URL(epubFilePath + "/" + xhtmlFileName));
 			
-			String epubFilePath = Utils.getZipRootUrl(getAuthorAccess().getEditorAccess().getEditorLocation().toString());
-			editor.saveAs(new URL(epubFilePath + "/EPUB/" + xhtmlFileName));
-			
-		} catch (ParserConfigurationException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
 		} catch (TransformerConfigurationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (TransformerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-						e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 
 	@Override
-	protected void parseArguments(ArgumentsMap args)
-			throws IllegalArgumentException {
+	protected void parseArguments(ArgumentsMap args) throws IllegalArgumentException {
 		// Nothing to parse!!!
 	}
 }
