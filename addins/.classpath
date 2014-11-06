@@ -20,10 +20,6 @@
 	</classpathentry>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="var" path="OXYGEN_HOME/lib/oxygen.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="https://www.oxygenxml.com/InstData/Editor/SDK/javadoc/"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="var" path="OXYGEN_HOME"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

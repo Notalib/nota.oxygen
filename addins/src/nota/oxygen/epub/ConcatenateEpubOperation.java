@@ -1,8 +1,8 @@
 package nota.oxygen.epub;
 
 import java.io.StringWriter;
-import java.net.MalformedURLException;
 import java.net.URL;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -20,6 +20,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
 import ro.sync.ecss.extensions.api.AuthorAccess;
@@ -34,12 +35,14 @@ import nota.oxygen.common.Utils;
 public class ConcatenateEpubOperation extends BaseAuthorOperation {
 
 	private AuthorAccess opfAccess;
+	private String xhtmlFileName = "concatenated.xhtml";
 	private DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	private DocumentBuilder builder = null;
 	private Document xhtmlDocument;
 	private Element htmlElement;
 	private Element headElement;
 	private Element bodyElement;
+	
 	
 	@Override
 	public ArgumentDescriptor[] getArguments() {
@@ -71,7 +74,9 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 			
 			
 			// create dom document
+			factory.setExpandEntityReferences(false);
 			builder = factory.newDocumentBuilder();
+
 			xhtmlDocument = builder.newDocument();
 			htmlElement = (Element)xhtmlDocument.createElement("html");
 			headElement = (Element)xhtmlDocument.createElement("head");
@@ -81,8 +86,8 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 			xhtmlDocument.appendChild(htmlElement);
 			
 			
-			URL[] xhtmlUrls = EpubUtils.getSpineUrls(opfAccess, false);
 			
+			//URL[] xhtmlUrls = EpubUtils.getSpineUrls(opfAccess, false);
 			
 			// traverse each xhtml document in epub
 			for (AuthorAccess xhtmlAccess : EpubUtils.getSpine(opfAccess, false)) {
@@ -126,12 +131,28 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 							
 							for (int i=0; i<listOfSrcHeadElements.getLength(); i++) {
 								Node node = xhtmlDocument.importNode(listOfSrcHeadElements.item(i), true);
+								String metaSourceValue = "";
+								if (node.getNodeName().equalsIgnoreCase("meta")) {
+									Node test = node.getAttributes().getNamedItem("name");
+									if (test != null) {
+										metaSourceValue = String.valueOf(node.getAttributes().getNamedItem("name").getNodeValue());
+									}
+									
+								}
 								
 								boolean exists = false;
 								for (int j=0; j<listOfDesHeadElements.getLength(); j++) {
-									if (listOfDesHeadElements.item(j).isEqualNode(node)) {
-										exists = true;
+									String metaNewValue = "";
+									if (listOfDesHeadElements.item(j).getNodeName().equalsIgnoreCase("meta")) {
+										Node test = listOfDesHeadElements.item(j).getAttributes().getNamedItem("name");
+										if (test != null) {
+											metaNewValue = String.valueOf(listOfDesHeadElements.item(j).getAttributes().getNamedItem("name").getNodeValue());
+										}
+										
 									}
+									
+									if (listOfDesHeadElements.item(j).isEqualNode(node)) exists = true;
+									else if (metaSourceValue.equals(metaNewValue)) exists = true;
 								}
 								
 								if (!exists) {
@@ -171,6 +192,30 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 								sectionElement.appendChild(xhtmlDocument.importNode(listOfBodyElements.item(i), true));
 							}
 							
+							/*NodeList nList = sectionElement.getElementsByTagName("a");
+							for (int i=0; i<nList.getLength(); i++) {
+								NamedNodeMap attr = nList.item(i).getAttributes();
+								String fileName = "";
+								String noteRef = "";
+								for (int j=0; j<attr.getLength(); j++) {
+									Attr node = (Attr) attr.item(j);
+									if (node.getNodeName().equalsIgnoreCase("href")) {
+										String[] href = node.getValue().split("#");
+										if (href.length == 2) {
+											fileName = href[0];
+											noteRef = href[1];
+										}
+
+										if (!fileName.equals("") && !noteRef.equals("")) {
+											node.setNodeValue(xhtmlFileName + "#" + fileName + "_n_o_t_a_" + noteRef);
+										}
+										
+
+									}
+									
+								}
+							}*/
+							
 							bodyElement.appendChild(sectionElement);
 
 						} catch (Exception e) {
@@ -178,27 +223,48 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 						}
 					}
 				}
+				
+				// close xhtml document
+				xhtmlAccess.getEditorAccess().close(true);
 			}
 			
+			// close opf docuement
+			opfAccess.getEditorAccess().close(true);
 			
-			
-			// transform dom document to string
+			// transform new document to xml content
 			TransformerFactory transFactory = TransformerFactory.newInstance();
-			Transformer transformer;
-			transformer = transFactory.newTransformer();
+			Transformer transformer = transFactory.newTransformer();
 			StringWriter buffer = new StringWriter();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			transformer.transform(new DOMSource(xhtmlDocument), new StreamResult(buffer));
-			String str = buffer.toString();
+			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+			transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 			
+			//DOMImplementation domImpl = xhtmlDocument.getImplementation();
+			//DocumentType doctype = domImpl.createDocumentType("html", "-//W3C//DTD XHTML 1.0 Transitional//EN", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd");
+			//DocumentType doctype = domImpl.createDocumentType("html", "-//W3C//DTD XHTML 1.0 Transitional//EN", "");
 			
+			//transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, doctype.getPublicId());
+			//transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, doctype.getSystemId());
+			//transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, null);
+			//transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "about:legacy-compat");
+
+			DOMSource source = new DOMSource(xhtmlDocument);
+			StreamResult result = new StreamResult(buffer);
+			transformer.transform(source, result);
+			String xmlContent = buffer.toString();
+			
+			//Node n = xhtmlDocument.createProcessingInstruction("DOCTYPE", "html");
+			//xhtmlDocument.appendChild(n);
 			
 			
 			// save string into new xhtml concatenated document
 			AuthorWorkspaceAccess wa = getAuthorAccess().getWorkspaceAccess();
-			URL newEditorUrl = wa.createNewEditor("xhtml", "text/xml", str);
+			URL newEditorUrl = wa.createNewEditor("xhtml", "text/xml", xmlContent);
 			WSEditor editor = wa.getEditorAccess(newEditorUrl);
-			editor.saveAs(new URL("zip:file:/C:/Users/ybk/nota.oxygen/samples/heading_sample_single_textfile.epub!/EPUB/concatenated.xhtml"));
+			
+			String epubFilePath = Utils.getZipRootUrl(getAuthorAccess().getEditorAccess().getEditorLocation().toString());
+			editor.saveAs(new URL(epubFilePath + "/EPUB/" + xhtmlFileName));
 			
 		} catch (ParserConfigurationException e2) {
 			// TODO Auto-generated catch block
@@ -206,8 +272,6 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 		} catch (TransformerConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (MalformedURLException e1) {
-			e1.printStackTrace();
 		} catch (TransformerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
