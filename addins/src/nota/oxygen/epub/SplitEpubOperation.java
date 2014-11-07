@@ -69,12 +69,12 @@ public class SplitEpubOperation extends BaseAuthorOperation {
 
 			xhtmlAccess = getAuthorAccess();
 			
-			URL docUrl = getAuthorAccess().getDocumentController().getAuthorDocumentNode().getXMLBaseURL(); 
+			/*URL docUrl = getAuthorAccess().getDocumentController().getAuthorDocumentNode().getXMLBaseURL(); 
 			String inputFile = getAuthorAccess().getUtilAccess().getFileName(docUrl.toString());
 			if (!inputFile.equals(xhtmlFileName)) {
 				showMessage("Splitting can not start from this file");
 				return;
-			}
+			}*/
 			
 			epubFilePath = EpubUtils.getEpubFolder(getAuthorAccess());
 			if (epubFilePath.equals("")) {
