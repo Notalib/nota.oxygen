@@ -2959,7 +2959,7 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 														<serializableOrderedMap>
 															<entry>
 																<String>from archive</String>
-																<String>yes</String>
+																<String>no</String>
 															</entry>
 															<entry>
 																<String>image container fragment</String>
