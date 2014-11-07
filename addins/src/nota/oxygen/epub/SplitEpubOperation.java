@@ -131,6 +131,8 @@ public class SplitEpubOperation extends BaseAuthorOperation {
 				// Find Document Title
 				_SourceTitle=GetDocTitle(DocEl);
 				
+				GoThroughNodes(DocEl);
+				
 				// close xhtml document
 				xhtmlAccess.getEditorAccess().close(true);
 				
