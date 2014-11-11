@@ -15,6 +15,10 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -121,12 +125,6 @@ public class SplitEpubOperation extends BaseAuthorOperation {
 
 				//String IXml = GetOuterXml(DocEl);
 
-//				NodeList BNodes = _SourceDoc.getElementsByTagName("body");
-//
-//				Node Body = BNodes.item(0);
-
-				// IXml = GetOuterXml(Body);
-
 				// Get meta nodes
 				_MetaNodes = _SourceDoc.getElementsByTagName("meta");
 
@@ -147,7 +145,25 @@ public class SplitEpubOperation extends BaseAuthorOperation {
 				// Find Document Title
 				_SourceTitle=GetDocTitle(DocEl);
 				
-				GoThroughNodes(DocEl);
+				//Find Source body
+				XPathFactory factory = XPathFactory.newInstance();
+				XPath xpath = factory.newXPath();
+				
+				Node SourceBody = null;
+				
+				try
+				{
+					SourceBody = (Node) xpath.evaluate("//*[local-name() = 'body']",	_SourceDoc.getDocumentElement(), XPathConstants.NODE);
+
+				}
+
+				catch (XPathExpressionException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				GoThroughTopSections(SourceBody);
 				
 				// close xhtml document
 				xhtmlAccess.getEditorAccess().close(true);
@@ -165,6 +181,28 @@ public class SplitEpubOperation extends BaseAuthorOperation {
 			e.printStackTrace();
 		}
 
+	}
+	
+	private void GoThroughTopSections(Node Body)
+	{
+
+		String IXml = GetOuterXml(Body);
+
+		NodeList BodyNodes = Body.getChildNodes();
+
+		for (int i = 0; i < BodyNodes.getLength(); i++)
+		{
+
+			Node SectionNodeAtLevel1 = BodyNodes.item(i);
+
+			IXml = GetOuterXml(SectionNodeAtLevel1);
+
+			if (SectionNodeAtLevel1.getNodeType() == Node.ELEMENT_NODE)
+			{
+				CreateNewEpubDoc(SectionNodeAtLevel1);
+			}
+
+		}
 	}
 	
 	private String GetDocTitle(Node DocElement)
