@@ -15,6 +15,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -27,6 +28,7 @@ import org.xml.sax.SAXException;
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
 import ro.sync.ecss.extensions.api.AuthorAccess;
+import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.access.AuthorWorkspaceAccess;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
@@ -37,6 +39,7 @@ import nota.oxygen.common.Utils;
 
 public class SplitEpubOperation extends BaseAuthorOperation {
 
+	private AuthorAccess opfAccess;
 	private String xhtmlFileName = "concatenated.xhtml";
 	private String epubFilePath = "";
 	
@@ -62,12 +65,23 @@ public class SplitEpubOperation extends BaseAuthorOperation {
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void doOperation() throws AuthorOperationException {
-
+		URL opfUrl = EpubUtils.getPackageUrl(getAuthorAccess());
+		if (opfUrl == null) {
+			showMessage("Could not find pagkage file for document");
+			return;
+		}
+		
+		opfAccess = EpubUtils.getAuthorDocument(getAuthorAccess(), opfUrl);
+		if (opfAccess == null) {
+			showMessage("Could not access pagkage file for document");
+			return;
+		}
+		
 		_DocNumber = 0;
 		
 		try {
 
-			xhtmlAccess = getAuthorAccess();
+			
 			
 			/*URL docUrl = getAuthorAccess().getDocumentController().getAuthorDocumentNode().getXMLBaseURL(); 
 			String inputFile = getAuthorAccess().getUtilAccess().getFileName(docUrl.toString());
@@ -81,6 +95,8 @@ public class SplitEpubOperation extends BaseAuthorOperation {
 				showMessage("Could not access epub folder");
 				return;
 			}
+			
+			xhtmlAccess = EpubUtils.getAuthorDocument(getAuthorAccess(), new URL(epubFilePath + "/" + xhtmlFileName));
 			
 			AuthorElement htmlElem = xhtmlAccess.getDocumentController().getAuthorDocumentNode().getRootElement();
 
@@ -135,6 +151,10 @@ public class SplitEpubOperation extends BaseAuthorOperation {
 				
 				// close xhtml document
 				xhtmlAccess.getEditorAccess().close(true);
+				
+				// remove xhtml document from opf document
+				String fileName = xhtmlAccess.getUtilAccess().getFileName(xhtmlAccess.getEditorAccess().getEditorLocation().toString());
+				EpubUtils.removeOpfItem(getAuthorAccess(), fileName);
 				
 				// delete xhtml document
 				xhtmlAccess.getWorkspaceAccess().delete(xhtmlAccess.getEditorLocation());
@@ -405,6 +425,9 @@ public class SplitEpubOperation extends BaseAuthorOperation {
 			editor.saveAs(new URL(epubFilePath + "/" + splitFileName));
 			
 			wa.close(new URL(epubFilePath + "/" + splitFileName));
+			
+			// add xhtml document to opf document
+			EpubUtils.addOpfItem(getAuthorAccess(), splitFileName);
 
 		} catch (TransformerConfigurationException e) {
 			// TODO Auto-generated catch block
@@ -457,5 +480,4 @@ public class SplitEpubOperation extends BaseAuthorOperation {
 		}
 
 	}
-
 }
