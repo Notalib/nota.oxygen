@@ -150,6 +150,20 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 							sectionElement.appendChild(xhtmlDocument.importNode(bodyNodes.item(j),	true));
 						}
 
+						// get all references
+						NodeList refNodes = sectionElement.getElementsByTagName("a");
+						for (int j = 0; j < refNodes.getLength(); j++) {
+							Node refNode = refNodes.item(j);
+							NamedNodeMap attributes = refNode.getAttributes();
+							for (int k=0; k<attributes.getLength(); k++) {
+								Attr attribute = (Attr) attributes.item(k);
+								if (attribute.getNodeName().equalsIgnoreCase("href")) {
+									// remove file reference
+									attribute.setNodeValue(attribute.getNodeValue().substring(attribute.getNodeValue().indexOf("#")));
+								}
+							}
+						}
+
 						// append section to body element
 						bodyElementAdded.appendChild(sectionElement);
 					}
