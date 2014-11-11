@@ -25,8 +25,10 @@ import org.w3c.dom.NodeList;
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
 import ro.sync.ecss.extensions.api.AuthorAccess;
+import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.access.AuthorWorkspaceAccess;
+import ro.sync.ecss.extensions.api.node.AttrValue;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
 import ro.sync.exml.workspace.api.editor.WSEditor;
@@ -92,7 +94,14 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 			htmlElement.appendChild(bodyElement);
 			xhtmlDocument.appendChild(htmlElement);
 			
-			//URL[] xhtmlUrls = EpubUtils.getSpineUrls(opfAccess, false);
+			
+			
+			
+			
+			
+			
+			
+			URL[] xhtmlUrls = EpubUtils.getSpineUrls(opfAccess, false);
 			
 			// traverse each xhtml document in epub
 			for (AuthorAccess xhtmlAccess : EpubUtils.getSpine(opfAccess, false)) {
@@ -232,6 +241,10 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 					}
 				}
 				
+				// remove xhtml document from opf document
+				String fileName = xhtmlAccess.getUtilAccess().getFileName(xhtmlAccess.getEditorAccess().getEditorLocation().toString());
+				EpubUtils.removeOpfItem(getAuthorAccess(), fileName);
+				
 				// close xhtml document
 				xhtmlAccess.getEditorAccess().close(true);
 				
@@ -239,8 +252,10 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 				xhtmlAccess.getWorkspaceAccess().delete(xhtmlAccess.getEditorLocation());
 			}
 			
+			
+			
 			// close opf docuement
-			opfAccess.getEditorAccess().close(true);
+			//opfAccess.getEditorAccess().close(true);
 			
 			// transform concatenated document to xml content string
 			TransformerFactory transFactory = TransformerFactory.newInstance();
@@ -249,7 +264,7 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
 			transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");	
+			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 			//DOMImplementation domImpl = xhtmlDocument.getImplementation();
 			//DocumentType doctype = domImpl.createDocumentType("html", "-//W3C//DTD XHTML 1.0 Transitional//EN", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd");
 			//transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, doctype.getPublicId());
@@ -267,6 +282,11 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 			WSEditor editor = wa.getEditorAccess(newEditorUrl);
 			editor.saveAs(new URL(epubFilePath + "/" + xhtmlFileName));
 			
+			wa.close(new URL(epubFilePath + "/" + xhtmlFileName));
+			
+			// add xhtml document to opf document
+			EpubUtils.addOpfItem(getAuthorAccess(), xhtmlFileName);
+			
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (TransformerConfigurationException e) {
@@ -277,7 +297,7 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	protected void parseArguments(ArgumentsMap args) throws IllegalArgumentException {
 		// Nothing to parse!!!
