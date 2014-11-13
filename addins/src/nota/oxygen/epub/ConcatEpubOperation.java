@@ -19,9 +19,8 @@ import ro.sync.exml.workspace.api.editor.page.text.WSTextEditorPage;
 import nota.oxygen.common.BaseAuthorOperation;
 import nota.oxygen.common.Utils;
 
-public class ConcatenateEpubOperation extends BaseAuthorOperation {
+public class ConcatEpubOperation extends BaseAuthorOperation {
 	private String epubFilePath = "";
-	private String newXhtmlFileName = "concatenated.xhtml";
 
 	@Override
 	public ArgumentDescriptor[] getArguments() {
@@ -168,14 +167,14 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 			doc.appendChild(htmlElementAdded);
 			
 			// save new concatenated xhtml document
-			AuthorAccess xhtmlAccess = EpubUtils.saveDocument(getAuthorAccess(), doc, new URL(epubFilePath + "/" + newXhtmlFileName));
+			AuthorAccess xhtmlAccess = EpubUtils.saveDocument(getAuthorAccess(), doc, new URL(epubFilePath + "/" + EpubUtils.CONCAT_FILENAME));
 			if (xhtmlAccess == null) {
 				showMessage(EpubUtils.ERROR_MESSAGE);
 				return;
 			}
 			
 			// add xhtml document to opf document
-			if (!EpubUtils.addOpfItem(getAuthorAccess(), newXhtmlFileName)) {
+			if (!EpubUtils.addOpfItem(getAuthorAccess(), EpubUtils.CONCAT_FILENAME)) {
 				showMessage(EpubUtils.ERROR_MESSAGE);
 				return;
 			}
@@ -195,6 +194,9 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 				return;
 			}
 			
+			EpubUtils.getNCXDocument(getAuthorAccess()).getEditorAccess().save();;
+			EpubUtils.getXHTMLNavDocument(getAuthorAccess()).getEditorAccess().save();
+			getAuthorAccess().getWorkspaceAccess().closeAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 			showMessage("Could not finalize operation - an error occurred: " + e.getMessage());

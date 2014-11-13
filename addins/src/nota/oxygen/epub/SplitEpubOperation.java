@@ -46,7 +46,6 @@ public class SplitEpubOperation extends BaseAuthorOperation
 {
 
 	private AuthorAccess opfAccess;
-	private String xhtmlFileName = "concatenated.xhtml";
 	private String epubFilePath = "";
 
 	private String _ID_Prefix;
@@ -117,7 +116,7 @@ public class SplitEpubOperation extends BaseAuthorOperation
 				return;
 			}
 
-			xhtmlAccess = EpubUtils.getAuthorDocument(getAuthorAccess(), new URL(epubFilePath + "/" + xhtmlFileName));
+			xhtmlAccess = EpubUtils.getAuthorDocument(getAuthorAccess(), new URL(epubFilePath + "/" + EpubUtils.CONCAT_FILENAME));
 
 			AuthorElement htmlElem = xhtmlAccess.getDocumentController().getAuthorDocumentNode().getRootElement();
 

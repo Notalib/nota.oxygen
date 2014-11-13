@@ -57,13 +57,13 @@
 								<action-array>
 									<action>
 										<field name="id">
-											<String>concatenate.epub</String>
+											<String>concat.epub</String>
 										</field>
 										<field name="name">
-											<String>Concatenate Epub</String>
+											<String>Concat Epub</String>
 										</field>
 										<field name="description">
-											<String>Concatenate Epub</String>
+											<String>Concat Epub</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -87,7 +87,7 @@
 														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
-														<String>nota.oxygen.epub.ConcatenateEpubOperation</String>
+														<String>nota.oxygen.epub.ConcatEpubOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -148,7 +148,7 @@
 										<menuEntry-array>
 											<menuItem>
 												<field name="actionID">
-													<String>concatenate.epub</String>
+													<String>concat.epub</String>
 												</field>
 											</menuItem>
 											<menuItem>
@@ -175,7 +175,7 @@
 										<menuEntry-array>
 											<menuItem>
 												<field name="actionID">
-													<String>concatenate.epub</String>
+													<String>concat.epub</String>
 												</field>
 											</menuItem>
 											<menuItem>
@@ -205,7 +205,7 @@
 										<toolbarEntry-array>
 											<toolbarItem>
 												<field name="actionID">
-													<String>concatenate.epub</String>
+													<String>concat.epub</String>
 												</field>
 											</toolbarItem>
 											<toolbarItem>
