@@ -45,7 +45,7 @@ public class UpdateNavigationDocumentsOperation extends BaseAuthorOperation {
 
 	@Override
 	public void doOperation() throws AuthorOperationException {
-		/*if (authorAccess == null) {
+		if (getAuthorAccess() == null) {
 			opfAccess = authorAccess;
 		}
 		else {
@@ -60,8 +60,7 @@ public class UpdateNavigationDocumentsOperation extends BaseAuthorOperation {
 			if (opfAccess == null) {
 				showMessage("Could not access pagkage file for document");
 			}
-		}*/
-		opfAccess = authorAccess;
+		}
 		
 		AuthorAccess ncxAccess = EpubUtils.getNCXDocument(opfAccess);
 		ncx = Utils.getDOMDocument(ncxAccess);
