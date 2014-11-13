@@ -1400,6 +1400,22 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 														<String>nota.oxygen.epub.headings.InsertHeadingOperation</String>
 													</field>
 												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:p[(parent::*:section|parent::*:body)[not(*:h1|*:h2|*:h3|*:h4|*:h5|*:h6)]]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>new name</String>
+																<String>h1</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.RenameParentElementOperation</String>
+													</field>
+												</actionMode>
 											</actionMode-array>
 										</field>
 									</action>
@@ -1481,6 +1497,22 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.epub.headings.InsertHeadingOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:p[(parent::*:section|parent::*:body)[not(*:h1|*:h2|*:h3|*:h4|*:h5|*:h6)]]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>new name</String>
+																<String>h1</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.RenameParentElementOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -1566,6 +1598,22 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 														<String>nota.oxygen.epub.headings.InsertHeadingOperation</String>
 													</field>
 												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:p[(parent::*:section|parent::*:body)[not(*:h1|*:h2|*:h3|*:h4|*:h5|*:h6)]]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>new name</String>
+																<String>h3</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.RenameParentElementOperation</String>
+													</field>
+												</actionMode>
 											</actionMode-array>
 										</field>
 									</action>
@@ -1647,6 +1695,22 @@ ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</Str
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.epub.headings.InsertHeadingOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:p[(parent::*:section|parent::*:body)[not(*:h1|*:h2|*:h3|*:h4|*:h5|*:h6)]]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>new name</String>
+																<String>h4</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.RenameParentElementOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -2746,6 +2810,22 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 														<String>nota.oxygen.epub.headings.RemoveHeadingOperation</String>
 													</field>
 												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>(self::*:h1|self::*:h2|self::*:h3|self::*:h4|self::*:h5|self::*:h6)[parent::*:body]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>new name</String>
+																<String>p</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>nota.oxygen.common.RenameParentElementOperation</String>
+													</field>
+												</actionMode>
 											</actionMode-array>
 										</field>
 									</action>
@@ -2879,7 +2959,7 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 														<serializableOrderedMap>
 															<entry>
 																<String>from archive</String>
-																<String>yes</String>
+																<String>no</String>
 															</entry>
 															<entry>
 																<String>image container fragment</String>

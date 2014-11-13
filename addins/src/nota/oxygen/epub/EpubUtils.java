@@ -13,6 +13,7 @@ import nota.oxygen.common.Utils;
 import org.w3c.dom.Element;
 
 import ro.sync.ecss.extensions.api.AuthorAccess;
+import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.access.AuthorWorkspaceAccess;
 import ro.sync.ecss.extensions.api.node.AttrValue;
@@ -69,6 +70,31 @@ public class EpubUtils {
 				return getEpubUrl(docUrl, relUrl);
 			} catch (XPathExpressionException e) {
 				return null;
+			}
+		}
+		catch (Exception e)
+		{
+			return null;
+		}
+	}
+	
+	public static String getEpubFolder(AuthorAccess authorAccess) {
+		try {
+			if (authorAccess == null) return null;
+			URL docUrl = authorAccess.getDocumentController().getAuthorDocumentNode().getXMLBaseURL(); 
+			AuthorAccess containerDocAccess = getAuthorDocument(authorAccess, getEpubUrl(docUrl, "META-INF/container.xml"));
+			if (containerDocAccess == null) return null;
+			Element rootElem = Utils.deserializeElement(Utils.serialize(
+					containerDocAccess, 
+					containerDocAccess.getDocumentController().getAuthorDocumentNode()));
+			containerDocAccess.getEditorAccess().close(true);
+			XPath xp = Utils.getXPath("ns", "urn:oasis:names:tc:opendocument:xmlns:container");
+			try {
+				URL rootUrl = Utils.getZipRootUrl(docUrl);
+				String epubUrl = xp.evaluate("//ns:rootfile[@media-type='application/oebps-package+xml']/@full-path", rootElem); 
+				return rootUrl.toString() + epubUrl.substring(0, epubUrl.indexOf("/"));
+			} catch (XPathExpressionException e) {
+				return "";
 			}
 		}
 		catch (Exception e)
@@ -137,7 +163,105 @@ public class EpubUtils {
 		return res.toArray(new AuthorAccess[0]);
 	}
 
+	private static AuthorElement getFirstElement(AuthorNode[] nodes) {
+		for (int i=0; i<nodes.length; i++) {
+			if (nodes[i] instanceof AuthorElement) return (AuthorElement)nodes[i];
+		}
+		return null;
+	}
+	
+	public static void removeOpfItem(AuthorAccess authorAccess, String fileName) throws Exception {
+		URL opfUrl = EpubUtils.getPackageUrl(authorAccess);
+		if (opfUrl == null) {
+			//showMessage("Could not find pagkage file for document");
+			return;
+		}
+		
+		AuthorAccess opfAccess = EpubUtils.getAuthorDocument(authorAccess, opfUrl);
+		if (opfAccess == null) {
+			//showMessage("Could not access pagkage file for document");
+			return;
+		}
+		
+		AuthorDocumentController opfCtrl = opfAccess.getDocumentController();
+		opfCtrl.beginCompoundEdit();
+		
+		try {
+			AuthorElement manifest = getFirstElement(opfCtrl.findNodesByXPath("/package/manifest", true, true, true));
+			if (manifest == null) {
+				throw new AuthorOperationException("Found no manifest in package file");
+			}
+			
+			AuthorElement item = getFirstElement(opfCtrl.findNodesByXPath(String.format("/package/manifest/item[@href='%s']", fileName), true, true, true));
+			if (item != null) {
+				String idValue = item.getAttribute("id").getValue();
+				opfCtrl.deleteNode(item);
+				
+				AuthorElement itemRef = getFirstElement(opfCtrl.findNodesByXPath(String.format("/package/spine/itemref[@idref='%s']", idValue), true, true, true));
+				if (itemRef != null) {
+					opfCtrl.deleteNode(itemRef);
+				}
+			}
+		}
+		catch (Exception e) {
+			opfCtrl.cancelCompoundEdit();
+			throw e;
+		}
+		
+		opfCtrl.endCompoundEdit();
+	}
+	
+	public static void addOpfItem(AuthorAccess authorAccess, String fileName) throws Exception {
+		URL opfUrl = EpubUtils.getPackageUrl(authorAccess);
+		if (opfUrl == null) {
+			//showMessage("Could not find pagkage file for document");
+			return;
+		}
+		
+		AuthorAccess opfAccess = EpubUtils.getAuthorDocument(authorAccess, opfUrl);
+		if (opfAccess == null) {
+			//showMessage("Could not access pagkage file for document");
+			return;
+		}
+		
+		AuthorDocumentController opfCtrl = opfAccess.getDocumentController();
+		opfCtrl.beginCompoundEdit();
+		
+		try {
+			AuthorElement manifest = getFirstElement(opfCtrl.findNodesByXPath("/package/manifest", true, true, true));
+			AuthorElement spine = getFirstElement(opfCtrl.findNodesByXPath("/package/spine", true, true, true));
+			if (manifest == null) {
+				throw new AuthorOperationException("Found no manifest in package file");
+			}
+		
+			AuthorElement item = getFirstElement(opfCtrl.findNodesByXPath(String.format("/package/manifest/item[@href='%s']", fileName), true, true, true));
+			if (item == null) {
+				String itemXml = "<item xmlns='" + EpubUtils.OPF_NS + "' media-type='application/xhtml+xml' href='" + fileName + "'/>";
+				opfCtrl.insertXMLFragment(itemXml, manifest.getEndOffset());
+				opfCtrl.getUniqueAttributesProcessor().assignUniqueIDs(manifest.getStartOffset(), manifest.getEndOffset(), true);
+				
+				item = getFirstElement(opfCtrl.findNodesByXPath(String.format("/package/manifest/item[@href='%s']", fileName), true, true, true));
+				if (item != null) {
+					String idValue = item.getAttribute("id").getValue();
+
+					AuthorElement itemRef = getFirstElement(opfCtrl.findNodesByXPath(String.format("/package/spine/itemref[@idref='%s']", idValue), true, true, true));
+					if (itemRef == null) {
+						String itemRefXml = "<itemref xmlns='" + EpubUtils.OPF_NS + "' idref='" + idValue + "'/>";
+						opfCtrl.insertXMLFragment(itemRefXml, spine.getEndOffset());
+					}
+				}
+			}
+		}
+		catch (Exception e) {
+			opfCtrl.cancelCompoundEdit();
+			throw e;
+		}
+		
+		opfCtrl.endCompoundEdit();
+	}
+	
 	public static String XHTML_NS = "http://www.w3.org/1999/xhtml";
 	public static String NCX_NS = "http://www.daisy.org/z3986/2005/ncx/";
-	public static String EPUB_NS = "http://www.idpf.org/2007/opf";
+	public static String EPUB_NS = "http://www.idpf.org/2007/ops";
+	public static String OPF_NS = "http://www.idpf.org/2007/opf";
 }
