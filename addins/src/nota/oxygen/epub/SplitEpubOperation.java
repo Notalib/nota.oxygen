@@ -218,8 +218,16 @@ public class SplitEpubOperation extends BaseAuthorOperation
 				showMessage(EpubUtils.ERROR_MESSAGE);
 				return;
 			}
+			
+			getAuthorAccess().getEditorAccess().save();
+			
+			EpubUtils.getNCXDocument(getAuthorAccess()).getEditorAccess().save();;
+			EpubUtils.getXHTMLNavDocument(getAuthorAccess()).getEditorAccess().save();
+			getAuthorAccess().getWorkspaceAccess().closeAll();
 
-		} catch (Exception e)
+
+		} 
+		catch (Exception e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
