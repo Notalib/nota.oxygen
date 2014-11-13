@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -132,7 +133,7 @@ public class SplitEpubOperation extends BaseAuthorOperation
 
 				String htmlContent = Utils.serialize(xhtmlAccess, htmlNode);
 
-				_DocList=new HashMap<String, Document>();
+				_DocList=new TreeMap<String, Document>();
 				
 				_Ids=new HashMap<String, String>();
 				
