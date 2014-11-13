@@ -3,6 +3,7 @@ package nota.oxygen.epub;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,7 +47,6 @@ public class SplitEpubOperation extends BaseAuthorOperation
 {
 
 	private AuthorAccess opfAccess;
-	private String xhtmlFileName = "concatenated.xhtml";
 	private String epubFilePath = "";
 
 	private String _ID_Prefix;
@@ -54,7 +54,7 @@ public class SplitEpubOperation extends BaseAuthorOperation
 	private String _SourceTitle;
 
 	private Document _SourceDoc;
-	private AuthorAccess xhtmlAccess;
+	//private AuthorAccess xhtmlAccess;
 
 	private int _DocNumber;
 	
@@ -117,7 +117,7 @@ public class SplitEpubOperation extends BaseAuthorOperation
 				return;
 			}
 
-			xhtmlAccess = EpubUtils.getAuthorDocument(getAuthorAccess(), new URL(epubFilePath + "/" + xhtmlFileName));
+			AuthorAccess xhtmlAccess = EpubUtils.getAuthorDocument(getAuthorAccess(), new URL(epubFilePath + "/" + EpubUtils.CONCAT_FILENAME));
 
 			AuthorElement htmlElem = xhtmlAccess.getDocumentController().getAuthorDocumentNode().getRootElement();
 
@@ -211,6 +211,12 @@ public class SplitEpubOperation extends BaseAuthorOperation
 				// delete xhtml document
 				xhtmlAccess.getWorkspaceAccess().delete(xhtmlAccess.getEditorLocation());
 			}
+			
+			// update navigation documents
+			if (!EpubUtils.updateNavigationDocuments(getAuthorAccess())) {
+				showMessage(EpubUtils.ERROR_MESSAGE);
+				return;
+			}
 
 		} catch (Exception e)
 		{
@@ -229,6 +235,8 @@ public class SplitEpubOperation extends BaseAuthorOperation
 			SaveXml(D, F);
 			
 		}
+		
+
 	}
 	
 	private void MapRefs()
@@ -392,7 +400,7 @@ public class SplitEpubOperation extends BaseAuthorOperation
 	{
 		_DocNumber = _DocNumber + 1;
 
-		String XmlTemplate = "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:epub=\"http://www.idpf.org/2007/ops\" xmlns:nordic=\"http://www.mtm.se/epub/\">\n" + "<head>\n" + "<title>"
+		String XmlTemplate = "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:epub=\"http://www.idpf.org/2007/ops\" xmlns:nordic=\"http://www.mtm.se/epub/\" epub:prefix=\"z3998: http://www.daisy.org/z3998/2012/vocab/structure/#\">\n" + "<head>\n" + "<title>"
 				+ _SourceTitle + "</title>\n" + "</head>\n" + " <body/>\n" + "</html>";
 
 		Document Template = OpenXmlDocument(XmlTemplate);
@@ -555,49 +563,80 @@ public class SplitEpubOperation extends BaseAuthorOperation
 	private void SaveXml(Document xhtmlDocument, String splitFileName)
 	{
 
-		try
-		{
+		// save new concatenated xhtml document
+					AuthorAccess xhtmlAccess2;
+					try
+					{
+						xhtmlAccess2 = EpubUtils.saveDocument(getAuthorAccess(), xhtmlDocument, new URL(epubFilePath + "/" + splitFileName));
+						
+						if (xhtmlAccess2 == null) {
+							showMessage(EpubUtils.ERROR_MESSAGE);
+							return;
+						}
+						
+						xhtmlAccess2.getEditorAccess().close(true);
+						
+						// add xhtml document to opf document
+						if (!EpubUtils.addOpfItem(getAuthorAccess(), splitFileName)) {
+							showMessage(EpubUtils.ERROR_MESSAGE);
+							return;
+						}
 
-			// transform new document to xml content
-			TransformerFactory transFactory = TransformerFactory.newInstance();
-			Transformer transformer = transFactory.newTransformer();
-			StringWriter buffer = new StringWriter();
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
-			transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-			DOMSource source = new DOMSource(xhtmlDocument);
-			StreamResult result = new StreamResult(buffer);
-			transformer.transform(source, result);
-			String xmlContent = buffer.toString();
-
-			// save string into new xhtml concatenated document
-			AuthorWorkspaceAccess wa = getAuthorAccess().getWorkspaceAccess();
-			URL newEditorUrl = wa.createNewEditor("xhtml", "text/xml", xmlContent);
-			WSEditor editor = wa.getEditorAccess(newEditorUrl);
-			editor.saveAs(new URL(epubFilePath + "/" + splitFileName));
-
-			wa.close(new URL(epubFilePath + "/" + splitFileName));
-
-			// add xhtml document to opf document
-			EpubUtils.addOpfItem(getAuthorAccess(), splitFileName);
-
-		} 
-		catch (TransformerConfigurationException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		catch (TransformerException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		catch (Exception e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+						// save opf
+						getAuthorAccess().getEditorAccess().save();
+						
+						
+						
+						
+					} catch (MalformedURLException e)
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				
+//		try
+//		{
+//
+//			// transform new document to xml content
+//			TransformerFactory transFactory = TransformerFactory.newInstance();
+//			Transformer transformer = transFactory.newTransformer();
+//			StringWriter buffer = new StringWriter();
+//			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+//			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+//			transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+//			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+//			DOMSource source = new DOMSource(xhtmlDocument);
+//			StreamResult result = new StreamResult(buffer);
+//			transformer.transform(source, result);
+//			String xmlContent = buffer.toString();
+//
+//			// save string into new xhtml concatenated document
+//			AuthorWorkspaceAccess wa = getAuthorAccess().getWorkspaceAccess();
+//			URL newEditorUrl = wa.createNewEditor("xhtml", "text/xml", xmlContent);
+//			WSEditor editor = wa.getEditorAccess(newEditorUrl);
+//			editor.saveAs(new URL(epubFilePath + "/" + splitFileName));
+//
+//			wa.close(new URL(epubFilePath + "/" + splitFileName));
+//
+//			// add xhtml document to opf document
+//			EpubUtils.addOpfItem(getAuthorAccess(), splitFileName);
+//
+//		} 
+//		catch (TransformerConfigurationException e)
+//		{
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} 
+//		catch (TransformerException e)
+//		{
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} 
+//		catch (Exception e)
+//		{
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 	}
 

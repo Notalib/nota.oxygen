@@ -21,7 +21,6 @@ import nota.oxygen.common.Utils;
 
 public class ConcatenateEpubOperation extends BaseAuthorOperation {
 	private String epubFilePath = "";
-	private String newXhtmlFileName = "concatenated.xhtml";
 
 	@Override
 	public ArgumentDescriptor[] getArguments() {
@@ -168,14 +167,14 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 			doc.appendChild(htmlElementAdded);
 			
 			// save new concatenated xhtml document
-			AuthorAccess xhtmlAccess = EpubUtils.saveDocument(getAuthorAccess(), doc, new URL(epubFilePath + "/" + newXhtmlFileName));
+			AuthorAccess xhtmlAccess = EpubUtils.saveDocument(getAuthorAccess(), doc, new URL(epubFilePath + "/" + EpubUtils.CONCAT_FILENAME));
 			if (xhtmlAccess == null) {
 				showMessage(EpubUtils.ERROR_MESSAGE);
 				return;
 			}
 			
 			// add xhtml document to opf document
-			if (!EpubUtils.addOpfItem(getAuthorAccess(), newXhtmlFileName)) {
+			if (!EpubUtils.addOpfItem(getAuthorAccess(), EpubUtils.CONCAT_FILENAME)) {
 				showMessage(EpubUtils.ERROR_MESSAGE);
 				return;
 			}

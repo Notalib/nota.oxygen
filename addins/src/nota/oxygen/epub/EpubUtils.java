@@ -426,4 +426,6 @@ public class EpubUtils {
 	public static String OPF_NS = "http://www.idpf.org/2007/opf";
 	
 	public static String ERROR_MESSAGE;
+	
+	public static String CONCAT_FILENAME = "concat.xhtml";
 }
