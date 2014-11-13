@@ -3,6 +3,7 @@ package nota.oxygen.epub;
 import java.net.URL;
 
 import javax.swing.JTextArea;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -12,6 +13,7 @@ import org.w3c.dom.NodeList;
 
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
+import ro.sync.ecss.extensions.api.AuthorAccess;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.exml.workspace.api.editor.page.text.WSTextEditorPage;
 import nota.oxygen.common.BaseAuthorOperation;
@@ -166,7 +168,8 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 			doc.appendChild(htmlElementAdded);
 			
 			// save new concatenated xhtml document
-			if (!EpubUtils.saveDocument(getAuthorAccess(), doc, new URL(epubFilePath + "/" + newXhtmlFileName))) {
+			AuthorAccess xhtmlAccess = EpubUtils.saveDocument(getAuthorAccess(), doc, new URL(epubFilePath + "/" + newXhtmlFileName));
+			if (xhtmlAccess == null) {
 				showMessage(EpubUtils.ERROR_MESSAGE);
 				return;
 			}
@@ -181,7 +184,7 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 			getAuthorAccess().getEditorAccess().save();
 			
 			// add unique ids to missing elements
-			if (!EpubUtils.addUniqueIds(getAuthorAccess(), new URL(epubFilePath + "/" + newXhtmlFileName))) {
+			if (!EpubUtils.addUniqueIds(xhtmlAccess)) {
 				showMessage(EpubUtils.ERROR_MESSAGE);
 				return;
 			}

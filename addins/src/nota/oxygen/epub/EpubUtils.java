@@ -167,7 +167,7 @@ public class EpubUtils {
 		return getPackageItemDocumentByXPath(opfAccess, "//item[@media-type='application/xhtml+xml' and @properties='nav']");
 	}
 
-	public static  AuthorAccess getNCXDocument(AuthorAccess opfAccess) {
+	public static AuthorAccess getNCXDocument(AuthorAccess opfAccess) {
 		return getPackageItemDocumentByXPath(opfAccess, "//item[@media-type='application/x-dtbncx+xml']");
 	}
 	
@@ -204,18 +204,11 @@ public class EpubUtils {
 		return null;
 	}
 	
-	public static boolean removeOpfItem(AuthorAccess authorAccess, String fileName) {
+	public static boolean removeOpfItem(AuthorAccess opfAccess, String fileName) {
 		ERROR_MESSAGE = "";
 		
-		URL opfUrl = EpubUtils.getPackageUrl(authorAccess);
-		if (opfUrl == null) {
-			ERROR_MESSAGE = "Could not find pagkage file for document";
-			return false;
-		}
-		
-		AuthorAccess opfAccess = EpubUtils.getAuthorDocument(authorAccess, opfUrl);
 		if (opfAccess == null) {
-			ERROR_MESSAGE = "Could not access pagkage file for document";
+			ERROR_MESSAGE = "Could not access opf document";
 			return false;
 		}
 		
@@ -251,18 +244,11 @@ public class EpubUtils {
 		return true;
 	}
 	
-	public static boolean addOpfItem(AuthorAccess authorAccess, String fileName) {
+	public static boolean addOpfItem(AuthorAccess opfAccess, String fileName) {
 		ERROR_MESSAGE = "";
 		
-		URL opfUrl = EpubUtils.getPackageUrl(authorAccess);
-		if (opfUrl == null) {
-			ERROR_MESSAGE = "Could not find pagkage file for document";
-			return false;
-		}
-		
-		AuthorAccess opfAccess = EpubUtils.getAuthorDocument(authorAccess, opfUrl);
 		if (opfAccess == null) {
-			ERROR_MESSAGE = "Could not access pagkage file for document";
+			ERROR_MESSAGE = "Could not access opf document";
 			return false;
 		}
 		
@@ -318,7 +304,7 @@ public class EpubUtils {
 		return null;
 	}
 	
-	public static boolean saveDocument(AuthorAccess authorAccess, Document doc, URL file) {
+	public static AuthorAccess saveDocument(AuthorAccess authorAccess, Document doc, URL file) {
 		ERROR_MESSAGE = "";
 		
 		try {
@@ -347,18 +333,23 @@ public class EpubUtils {
 			// save content in editor into new concatenated xhtml file
 			WSEditor editor = awa.getEditorAccess(newEditorUrl);
 			editor.saveAs(file);
-			editor.close(true);
+			if (editor.getCurrentPageID() != WSEditor.PAGE_AUTHOR) editor.changePage(WSEditor.PAGE_AUTHOR);
+			WSEditorPage wep = editor.getCurrentPage();
+			WSAuthorEditorPage aea = (wep instanceof WSAuthorEditorPage ? (WSAuthorEditorPage)wep : null);
+			if (aea == null) {
+				ERROR_MESSAGE = "Could not get document";
+				return null;
+			}
+			return aea.getAuthorAccess();
 		} catch (TransformerException e) {
 			e.printStackTrace();
 			ERROR_MESSAGE = "Could not save document - an error occurred: " + e.getMessage();
-			return false;
+			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
 			ERROR_MESSAGE = "Could not save document - an error occurred: " + e.getMessage();
-			return false;
+			return null;
 		}
-		
-		return true;
 	}
 	
 	private static void removeEmptyLines(Document doc) {
@@ -374,12 +365,10 @@ public class EpubUtils {
 		}
 	}
 	
-	public static boolean addUniqueIds(AuthorAccess authorAccess, URL file) {
+	public static boolean addUniqueIds(AuthorAccess xhtmlAccess) {
 		ERROR_MESSAGE = "";
 		
 		try {
-			AuthorAccess xhtmlAccess;
-			xhtmlAccess = EpubUtils.getAuthorDocument(authorAccess, file);
 			AuthorElement rootElement = xhtmlAccess.getDocumentController().getAuthorDocumentNode().getRootElement();
 			if (rootElement == null) {
 				ERROR_MESSAGE = "Found no root in xhtml file";
