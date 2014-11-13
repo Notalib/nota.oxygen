@@ -1,16 +1,32 @@
 package nota.oxygen.epub;
 
+import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
 import nota.oxygen.common.Utils;
+import nota.oxygen.epub.headings.UpdateNavigationDocumentsOperation;
 
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import ro.sync.ecss.extensions.api.AuthorAccess;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
@@ -22,9 +38,9 @@ import ro.sync.ecss.extensions.api.node.AuthorNode;
 import ro.sync.exml.workspace.api.editor.WSEditor;
 import ro.sync.exml.workspace.api.editor.page.WSEditorPage;
 import ro.sync.exml.workspace.api.editor.page.author.WSAuthorEditorPage;
+import ro.sync.exml.workspace.api.editor.page.text.WSTextEditorPage;
 
-public class EpubUtils {
-	
+public class EpubUtils {	
 	public static URL getEpubUrl(URL baseEpubUrl, String url)
 	{
 		URL epubUrl = Utils.getZipRootUrl(baseEpubUrl);
@@ -52,6 +68,24 @@ public class EpubUtils {
 		WSAuthorEditorPage aea = (wep instanceof WSAuthorEditorPage ? (WSAuthorEditorPage)wep : null);
 		if (aea == null) return null;
 		return aea.getAuthorAccess();
+	}
+	
+	public static WSTextEditorPage getTextDocument(AuthorAccess authorAccess, URL docUrl)
+	{
+		AuthorWorkspaceAccess wa = authorAccess.getWorkspaceAccess();
+		WSEditor editor = wa.getEditorAccess(docUrl);
+		if (editor == null)
+		{
+			if (!wa.open(docUrl, WSEditor.PAGE_TEXT)) return null;
+			editor = wa.getEditorAccess(docUrl);
+			if (editor == null) return null;
+		}
+		editor.close(true);
+		if (editor.getCurrentPageID() != WSEditor.PAGE_TEXT) editor.changePage(WSEditor.PAGE_TEXT);
+		WSEditorPage wep = editor.getCurrentPage();
+		WSTextEditorPage editorPage = (wep instanceof WSTextEditorPage ? (WSTextEditorPage)wep : null);
+		if (editorPage == null) return null;
+		return editorPage;
 	}
 	
 	public static URL getPackageUrl(AuthorAccess authorAccess) {
@@ -170,17 +204,19 @@ public class EpubUtils {
 		return null;
 	}
 	
-	public static void removeOpfItem(AuthorAccess authorAccess, String fileName) throws Exception {
+	public static boolean removeOpfItem(AuthorAccess authorAccess, String fileName) {
+		ERROR_MESSAGE = "";
+		
 		URL opfUrl = EpubUtils.getPackageUrl(authorAccess);
 		if (opfUrl == null) {
-			//showMessage("Could not find pagkage file for document");
-			return;
+			ERROR_MESSAGE = "Could not find pagkage file for document";
+			return false;
 		}
 		
 		AuthorAccess opfAccess = EpubUtils.getAuthorDocument(authorAccess, opfUrl);
 		if (opfAccess == null) {
-			//showMessage("Could not access pagkage file for document");
-			return;
+			ERROR_MESSAGE = "Could not access pagkage file for document";
+			return false;
 		}
 		
 		AuthorDocumentController opfCtrl = opfAccess.getDocumentController();
@@ -189,7 +225,8 @@ public class EpubUtils {
 		try {
 			AuthorElement manifest = getFirstElement(opfCtrl.findNodesByXPath("/package/manifest", true, true, true));
 			if (manifest == null) {
-				throw new AuthorOperationException("Found no manifest in package file");
+				ERROR_MESSAGE = "Found no manifest in package file";
+				return false;
 			}
 			
 			AuthorElement item = getFirstElement(opfCtrl.findNodesByXPath(String.format("/package/manifest/item[@href='%s']", fileName), true, true, true));
@@ -205,23 +242,28 @@ public class EpubUtils {
 		}
 		catch (Exception e) {
 			opfCtrl.cancelCompoundEdit();
-			throw e;
+			ERROR_MESSAGE = "Could not add item to opf document - an error occurred: " + e.getMessage();
+			return false;
 		}
 		
 		opfCtrl.endCompoundEdit();
+		
+		return true;
 	}
 	
-	public static void addOpfItem(AuthorAccess authorAccess, String fileName) throws Exception {
+	public static boolean addOpfItem(AuthorAccess authorAccess, String fileName) {
+		ERROR_MESSAGE = "";
+		
 		URL opfUrl = EpubUtils.getPackageUrl(authorAccess);
 		if (opfUrl == null) {
-			//showMessage("Could not find pagkage file for document");
-			return;
+			ERROR_MESSAGE = "Could not find pagkage file for document";
+			return false;
 		}
 		
 		AuthorAccess opfAccess = EpubUtils.getAuthorDocument(authorAccess, opfUrl);
 		if (opfAccess == null) {
-			//showMessage("Could not access pagkage file for document");
-			return;
+			ERROR_MESSAGE = "Could not access pagkage file for document";
+			return false;
 		}
 		
 		AuthorDocumentController opfCtrl = opfAccess.getDocumentController();
@@ -231,7 +273,8 @@ public class EpubUtils {
 			AuthorElement manifest = getFirstElement(opfCtrl.findNodesByXPath("/package/manifest", true, true, true));
 			AuthorElement spine = getFirstElement(opfCtrl.findNodesByXPath("/package/spine", true, true, true));
 			if (manifest == null) {
-				throw new AuthorOperationException("Found no manifest in package file");
+				ERROR_MESSAGE = "Found no manifest in package file";
+				return false;
 			}
 		
 			AuthorElement item = getFirstElement(opfCtrl.findNodesByXPath(String.format("/package/manifest/item[@href='%s']", fileName), true, true, true));
@@ -251,17 +294,147 @@ public class EpubUtils {
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			opfCtrl.cancelCompoundEdit();
-			throw e;
+			ERROR_MESSAGE = "Could not add item to opf document - an error occurred: " + e.getMessage();
+			return false;
 		}
 		
 		opfCtrl.endCompoundEdit();
+		
+		return true;
+	}
+	
+	public static Document createDocument() {
+		try {
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder;
+			builder = factory.newDocumentBuilder();
+			Document doc = builder.newDocument();
+			return doc;
+		} catch (ParserConfigurationException e) {
+		}
+		
+		return null;
+	}
+	
+	public static boolean saveDocument(AuthorAccess authorAccess, Document doc, URL file) {
+		ERROR_MESSAGE = "";
+		
+		try {
+			// remove all empty lines in document
+			removeEmptyLines(doc);
+			
+			// create transformer
+			Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+			transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			
+			StringWriter writer = new StringWriter();
+			writer.write("<?xml version='1.0' encoding='UTF-8'?>\n");
+			writer.write("<!DOCTYPE html>\n");
+			StreamResult result = new StreamResult(writer);
+			
+			// transform concatenated document to xml content string
+			transformer.transform(new DOMSource(doc), result);
+			
+			// open new editor with concatenated xml content
+			AuthorWorkspaceAccess awa = authorAccess.getWorkspaceAccess();
+			URL newEditorUrl = awa.createNewEditor("xhtml", "text/xml", writer.toString());
+
+			// save content in editor into new concatenated xhtml file
+			WSEditor editor = awa.getEditorAccess(newEditorUrl);
+			editor.saveAs(file);
+			editor.close(true);
+		} catch (TransformerException e) {
+			e.printStackTrace();
+			ERROR_MESSAGE = "Could not save document - an error occurred: " + e.getMessage();
+			return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			ERROR_MESSAGE = "Could not save document - an error occurred: " + e.getMessage();
+			return false;
+		}
+		
+		return true;
+	}
+	
+	private static void removeEmptyLines(Document doc) {
+		try {
+			XPath xp = XPathFactory.newInstance().newXPath();
+			NodeList nl = (NodeList) xp.evaluate("//text()[normalize-space(.)='']", doc, XPathConstants.NODESET);
+			for (int i=0; i < nl.getLength(); ++i) {
+			    Node node = nl.item(i);
+			    node.getParentNode().removeChild(node);
+			}
+		} catch (XPathExpressionException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static boolean addUniqueIds(AuthorAccess authorAccess, URL file) {
+		ERROR_MESSAGE = "";
+		
+		try {
+			AuthorAccess xhtmlAccess;
+			xhtmlAccess = EpubUtils.getAuthorDocument(authorAccess, file);
+			AuthorElement rootElement = xhtmlAccess.getDocumentController().getAuthorDocumentNode().getRootElement();
+			if (rootElement == null) {
+				ERROR_MESSAGE = "Found no root in xhtml file";
+				return false;
+			}
+
+			// insert unique ids for elements
+			XHTMLUniqueAttributesRecognizer uniqueAttributesRecognizer = new XHTMLUniqueAttributesRecognizer();
+			uniqueAttributesRecognizer.activated(xhtmlAccess);
+			uniqueAttributesRecognizer.assignUniqueIDs(rootElement.getStartOffset(), rootElement.getEndOffset(), false);
+			uniqueAttributesRecognizer.deactivated(xhtmlAccess);
+
+			// save and close
+			xhtmlAccess.getEditorAccess().save();
+			xhtmlAccess.getEditorAccess().close(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			ERROR_MESSAGE = "Could not add ids to document - an error occurred: " + e.getMessage();
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public static boolean updateNavigationDocuments(AuthorAccess authorAccess) {
+		ERROR_MESSAGE = "";
+		
+		try {
+			UpdateNavigationDocumentsOperation navigationOperation = new UpdateNavigationDocumentsOperation();
+			navigationOperation.setAuthorAccess(authorAccess);
+			navigationOperation.doOperation();
+		} catch (AuthorOperationException e) {
+			e.printStackTrace();
+			ERROR_MESSAGE = "Could not update navigation documents - an error occurred: " + e.getMessage();
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public static String getMetaNodeValue(Node meta) {
+		String value = "";
+		if (meta.getNodeName().equalsIgnoreCase("meta")) {
+			Node metaName = meta.getAttributes().getNamedItem("name");
+			if (metaName != null) {
+				value = String.valueOf(meta.getAttributes().getNamedItem("name").getNodeValue());
+			}
+		}
+		return value;
 	}
 	
 	public static String XHTML_NS = "http://www.w3.org/1999/xhtml";
 	public static String NCX_NS = "http://www.daisy.org/z3986/2005/ncx/";
 	public static String EPUB_NS = "http://www.idpf.org/2007/ops";
 	public static String OPF_NS = "http://www.idpf.org/2007/opf";
+	
+	public static String ERROR_MESSAGE;
 }
