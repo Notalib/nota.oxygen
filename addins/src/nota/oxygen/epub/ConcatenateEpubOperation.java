@@ -1,18 +1,8 @@
 package nota.oxygen.epub;
 
-import java.io.StringWriter;
 import java.net.URL;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
+import javax.swing.JTextArea;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -22,23 +12,15 @@ import org.w3c.dom.NodeList;
 
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
-import ro.sync.ecss.extensions.api.AuthorAccess;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
-import ro.sync.ecss.extensions.api.access.AuthorWorkspaceAccess;
-import ro.sync.ecss.extensions.api.node.AuthorElement;
-import ro.sync.ecss.extensions.api.node.AuthorNode;
-import ro.sync.exml.workspace.api.editor.WSEditor;
+import ro.sync.exml.workspace.api.editor.page.text.WSTextEditorPage;
 import nota.oxygen.common.BaseAuthorOperation;
 import nota.oxygen.common.Utils;
 
 public class ConcatenateEpubOperation extends BaseAuthorOperation {
 	private String epubFilePath = "";
 	private String newXhtmlFileName = "concatenated.xhtml";
-	private Document xhtmlDocument = null;
-	private Element htmlElementAdded;
-	private Element headElementAdded;
-	private Element bodyElementAdded;
-	
+
 	@Override
 	public ArgumentDescriptor[] getArguments() {
 		return new ArgumentDescriptor[]{};
@@ -50,53 +32,52 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 	}
 
 	@Override
-	protected void doOperation() throws AuthorOperationException {
-		// get epub folder path
-		epubFilePath = EpubUtils.getEpubFolder(getAuthorAccess());
-		if (epubFilePath.equals("")) {
-			showMessage("Could not access epub folder");
-			return;
-		}
-		
-		// create new document for concatenating
-		createDocument();
-		if (xhtmlDocument == null) {
-			showMessage("Could not create new document for concatenating");
-			return;
-		}
-		
+	protected void parseArguments(ArgumentsMap args) throws IllegalArgumentException {
+		// Nothing to parse!!!
+	}
+	
+	@Override
+	protected void doOperation() throws AuthorOperationException {		
 		try {
-			
-			URL[] xhtmlUrls = EpubUtils.getSpineUrls(getAuthorAccess(), false);
-			if (xhtmlUrls.length < 2) {
-				showMessage("Epub cannot be concatenated - only one xhtml file");
+			// get epub folder path
+			epubFilePath = EpubUtils.getEpubFolder(getAuthorAccess());
+			if (epubFilePath.equals("")) {
+				showMessage("Could not access epub folder");
 				return;
 			}
 			
+			// construct a new document
+			Document doc = EpubUtils.createDocument();
+			if (doc == null) {
+				showMessage("Could not construct new document");
+				return;
+			}
+			
+			// get all xhtml files in epub (besides nav.html)
+			URL[] xhtmlUrls = EpubUtils.getSpineUrls(getAuthorAccess(), false);
+			if (xhtmlUrls.length < 2) {
+				showMessage("This epub cannot be concatenated (only one xhtml file)");
+				return;
+			}
+			
+			Element htmlElementAdded = (Element) doc.createElement("html");
+			Element headElementAdded = (Element) doc.createElement("head");
+			Element bodyElementAdded = (Element) doc.createElement("body");
+			
 			// traverse each xhtml document in epub
 			for (URL xhtmlUrl : xhtmlUrls) {
-				// get a authoraccess object to the xhtml document
-				AuthorAccess xhtmlAccess = EpubUtils.getAuthorDocument(getAuthorAccess(), xhtmlUrl);
-				
-				// close xhtml document
-				xhtmlAccess.getEditorAccess().close(true);
-				
-				AuthorElement rootElement = xhtmlAccess.getDocumentController().getAuthorDocumentNode().getRootElement();
-				if (rootElement == null) {
-					showMessage("Found no root in xhtml file");
+				// get xml from each xhtml document
+				WSTextEditorPage editorPage = EpubUtils.getTextDocument(getAuthorAccess(), xhtmlUrl);
+				JTextArea textArea = (JTextArea) ((WSTextEditorPage) editorPage).getTextComponent();
+				String docText = textArea.getText();
+				if (docText == null) {
+					showMessage("Could not get xml from xhtml document");
 					return;
 				}
 				
-				// get html node from author document
-				AuthorNode authorNode = getFirstElement(xhtmlAccess.getDocumentController().findNodesByXPath("/html", rootElement, true, true, true, true));
-				if (authorNode == null) {
-					throw new AuthorOperationException("Found no html in xhtml file");
-				}
-
-				// serialize and deserialize html
-				String nodeContent = Utils.serialize(xhtmlAccess, authorNode);
-				Node html = Utils.deserializeElement(nodeContent);
-					
+				// deserialize xml
+				Node html = Utils.deserializeElement(docText);
+				
 				// add html attributes
 				NamedNodeMap htmlAttributes = html.getAttributes();
 				for (int j = 0; j < htmlAttributes.getLength(); j++) {
@@ -115,14 +96,14 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 
 						// append head elements
 						for (int j = 0; j < headNodes.getLength(); j++) {
-							Node headNode = xhtmlDocument.importNode(headNodes.item(j), true);
-							String metaValue = getMetaNodeValue(headNode);
+							Node headNode = doc.importNode(headNodes.item(j), true);
+							String metaValue = EpubUtils.getMetaNodeValue(headNode);
 
 							// check if head element not already exists
 							boolean exists = false;
 							for (int k = 0; k < headNodesAdded.getLength(); k++) {
 								Node headNodeAdded = headNodesAdded.item(k);
-								String metaValueAdded = getMetaNodeValue(headNodeAdded);
+								String metaValueAdded = EpubUtils.getMetaNodeValue(headNodeAdded);
 
 								if (headNodeAdded.isEqualNode(headNode))	exists = true;
 								else if (!metaValue.equals("")	&& !metaValueAdded.equals("") && metaValue.equals(metaValueAdded)) exists = true;
@@ -135,7 +116,7 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 
 					if (htmlNode.getNodeName().equals("body")) {
 						// create new section
-						Element sectionElement = (Element) xhtmlDocument.createElement("section");
+						Element sectionElement = (Element) doc.createElement("section");
 
 						// append body attributes to new section
 						NamedNodeMap bodyAttributes = htmlNode.getAttributes();
@@ -147,7 +128,7 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 						// append body elements
 						NodeList bodyNodes = htmlNode.getChildNodes();
 						for (int j = 0; j < bodyNodes.getLength(); j++) {
-							sectionElement.appendChild(xhtmlDocument.importNode(bodyNodes.item(j),	true));
+							sectionElement.appendChild(doc.importNode(bodyNodes.item(j),	true));
 						}
 
 						// get all references
@@ -168,111 +149,53 @@ public class ConcatenateEpubOperation extends BaseAuthorOperation {
 						bodyElementAdded.appendChild(sectionElement);
 					}
 				}
-
+				
 				// remove xhtml document from opf document
-				String fileName = xhtmlAccess.getUtilAccess().getFileName(xhtmlAccess.getEditorAccess().getEditorLocation().toString());
-				EpubUtils.removeOpfItem(getAuthorAccess(), fileName);
+				String fileName = getAuthorAccess().getUtilAccess().getFileName(xhtmlUrl.toString());
+				if (!EpubUtils.removeOpfItem(getAuthorAccess(), fileName)) {
+					showMessage(EpubUtils.ERROR_MESSAGE);
+					return;
+				}
 
 				// delete xhtml document
-				xhtmlAccess.getWorkspaceAccess().delete(xhtmlAccess.getEditorAccess().getEditorLocation());
+				getAuthorAccess().getWorkspaceAccess().delete(xhtmlUrl);
 			}
 			
-			saveDocument();
-			
-			// add xhtml document to opf document
-			EpubUtils.addOpfItem(getAuthorAccess(), newXhtmlFileName);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	private void createDocument() {
-		DocumentBuilderFactory factory;
-		DocumentBuilder builder;
-		
-		try {
-			// create dom document
-			factory = DocumentBuilderFactory.newInstance();
-			factory.setExpandEntityReferences(false);
-			builder = factory.newDocumentBuilder();
-			xhtmlDocument = builder.newDocument();
-
-			// add html, head and body to document
-			htmlElementAdded = (Element) xhtmlDocument.createElement("html");
-			headElementAdded = (Element) xhtmlDocument.createElement("head");
-			bodyElementAdded = (Element) xhtmlDocument.createElement("body");
 			htmlElementAdded.appendChild(headElementAdded);
 			htmlElementAdded.appendChild(bodyElementAdded);
-			xhtmlDocument.appendChild(htmlElementAdded);
+			doc.appendChild(htmlElementAdded);
 			
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	private void saveDocument() {
-		TransformerFactory transFactory = TransformerFactory.newInstance();
-		Transformer transformer;
-		
-		try {
-			// new transformer
-			transformer = transFactory.newTransformer();
-			StringWriter buffer = new StringWriter();
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
-			transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+			// save new concatenated xhtml document
+			if (!EpubUtils.saveDocument(getAuthorAccess(), doc, new URL(epubFilePath + "/" + newXhtmlFileName))) {
+				showMessage(EpubUtils.ERROR_MESSAGE);
+				return;
+			}
 			
-			// DOMImplementation domImpl = xhtmlDocument.getImplementation();
-			// DocumentType doctype = domImpl.createDocumentType("html",
-			// "-//W3C//DTD XHTML 1.0 Transitional//EN",
-			// "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd");
-			// transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC,
-			// doctype.getPublicId());
-			// transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM,
-			// doctype.getSystemId());
-			
-			// transform concatenated document to xml content string
-			DOMSource source = new DOMSource(xhtmlDocument);
-			StreamResult result = new StreamResult(buffer);
-			transformer.transform(source, result);
-			String xmlContent = buffer.toString();
+			// add xhtml document to opf document
+			if (!EpubUtils.addOpfItem(getAuthorAccess(), newXhtmlFileName)) {
+				showMessage(EpubUtils.ERROR_MESSAGE);
+				return;
+			}
 
-			// open new editor with concatenated xml content
-			AuthorWorkspaceAccess wa = getAuthorAccess().getWorkspaceAccess();
-			URL newEditorUrl = wa.createNewEditor("xhtml", "text/xml", xmlContent);
-
-			// save content in editor into new concatenated xhtml file
-			WSEditor editor = wa.getEditorAccess(newEditorUrl);
-			editor.saveAs(new URL(epubFilePath + "/" + newXhtmlFileName));
-
-			// close xhtml file
-			wa.close(new URL(epubFilePath + "/" + newXhtmlFileName));
+			// save opf
+			getAuthorAccess().getEditorAccess().save();
 			
-		} catch (TransformerException e) {
-			e.printStackTrace();
+			// add unique ids to missing elements
+			if (!EpubUtils.addUniqueIds(getAuthorAccess(), new URL(epubFilePath + "/" + newXhtmlFileName))) {
+				showMessage(EpubUtils.ERROR_MESSAGE);
+				return;
+			}
+			
+			// update navigation documents
+			if (!EpubUtils.updateNavigationDocuments(getAuthorAccess())) {
+				showMessage(EpubUtils.ERROR_MESSAGE);
+				return;
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+			showMessage("Could not finalize operation - an error occurred: " + e.getMessage());
+			return;
 		}
-	}
-	
-	private String getMetaNodeValue(Node meta) {
-		String value = "";
-		
-		if (meta.getNodeName().equalsIgnoreCase("meta")) {
-			Node metaName = meta.getAttributes().getNamedItem("name");
-			if (metaName != null) {
-				value = String.valueOf(meta.getAttributes().getNamedItem("name").getNodeValue());
-			}
-		}
-		
-		return value;
-	}
-	
-	@Override
-	protected void parseArguments(ArgumentsMap args) throws IllegalArgumentException {
-		// Nothing to parse!!!
 	}
 }
