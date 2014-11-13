@@ -172,7 +172,18 @@
 										<null/>
 									</field>
 									<field name="menuEntriesDescriptorList">
-										<menuEntry-array/>
+										<menuEntry-array>
+											<menuItem>
+												<field name="actionID">
+													<String>concatenate.epub</String>
+												</field>
+											</menuItem>
+											<menuItem>
+												<field name="actionID">
+													<String>split.epub</String>
+												</field>
+											</menuItem>
+										</menuEntry-array>
 									</field>
 								</menu>
 							</field>
@@ -191,7 +202,18 @@
 										<null/>
 									</field>
 									<field name="toolbarEntriesDescriptorList">
-										<toolbarEntry-array/>
+										<toolbarEntry-array>
+											<toolbarItem>
+												<field name="actionID">
+													<String>concatenate.epub</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>split.epub</String>
+												</field>
+											</toolbarItem>
+										</toolbarEntry-array>
 									</field>
 								</toolbar>
 							</field>
