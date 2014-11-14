@@ -25,7 +25,7 @@ import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
 
 public class UpdateNavigationDocumentsOperation extends BaseAuthorOperation {
-
+	private AuthorAccess authorAccess;
 	private AuthorAccess opfAccess;
 	private Document ncx;
 	private Document xhtmlNav;
@@ -44,16 +44,24 @@ public class UpdateNavigationDocumentsOperation extends BaseAuthorOperation {
 	}
 
 	@Override
-	protected void doOperation() throws AuthorOperationException {
-		URL opfUrl = EpubUtils.getPackageUrl(getAuthorAccess());
-		if (opfUrl == null) {
-			showMessage("Could not find pagkage file for document");
-			return;
+	public void doOperation() throws AuthorOperationException {
+		if (getAuthorAccess() == null) {
+			opfAccess = authorAccess;
 		}
-		opfAccess = EpubUtils.getAuthorDocument(getAuthorAccess(), opfUrl);
-		if (opfAccess == null) {
-			showMessage("Could not access pagkage file for document");
+		else {
+			authorAccess = getAuthorAccess();
+			
+			URL opfUrl = EpubUtils.getPackageUrl(authorAccess);
+			if (opfUrl == null) {
+				showMessage("Could not find pagkage file for document");
+				return;
+			}
+			opfAccess = EpubUtils.getAuthorDocument(getAuthorAccess(), opfUrl);
+			if (opfAccess == null) {
+				showMessage("Could not access pagkage file for document");
+			}
 		}
+		
 		AuthorAccess ncxAccess = EpubUtils.getNCXDocument(opfAccess);
 		ncx = Utils.getDOMDocument(ncxAccess);
 		AuthorAccess xhtmlNavAccess = EpubUtils.getXHTMLNavDocument(opfAccess);
@@ -85,7 +93,8 @@ public class UpdateNavigationDocumentsOperation extends BaseAuthorOperation {
 		}
 		ncxAccess.getDocumentController().endCompoundEdit();
 		xhtmlNavAccess.getDocumentController().endCompoundEdit();
-		Utils.bringFocusToDocumentTab(getAuthorAccess());
+		
+		Utils.bringFocusToDocumentTab(authorAccess);
 	}
 	
 	private Element createSkeletonNcxRootElement() throws AuthorOperationException {
@@ -282,7 +291,7 @@ public class UpdateNavigationDocumentsOperation extends BaseAuthorOperation {
 			throws AuthorOperationException {
 		try {
 			URI textDocUri = URI.create(
-					getAuthorAccess().getUtilAccess().makeRelative(
+					authorAccess.getUtilAccess().makeRelative(
 							opfAccess.getEditorAccess().getEditorLocation(), 
 							textDocAccess.getEditorAccess().getEditorLocation()));
 //			URI textDocUri = URI.create(Utils.relativizeURI(
@@ -402,7 +411,11 @@ public class UpdateNavigationDocumentsOperation extends BaseAuthorOperation {
 		return navLabelElement;
 	}
 
-	private class NavItem {
+	public void setAuthorAccess(AuthorAccess authorAccess) {
+		this.authorAccess = authorAccess;
+	}
+	
+	public class NavItem {
 		public URI targetUri;
 		public String text;
 		public int order;
@@ -446,6 +459,7 @@ public class UpdateNavigationDocumentsOperation extends BaseAuthorOperation {
 		
 		public Element getAsNcxPageTarget() {
 			Element pageTarget = ncx.createElementNS(EpubUtils.NCX_NS, "pageTarget");
+			pageTarget.setAttribute("id", String.format("pageTarget-%d", order));
 			pageTarget.setAttribute("playOrder", String.format("%d", order));
 			pageTarget.setAttribute("type", isOfClass("page-normal") ? "normal" : "special"); 
 			pageTarget.appendChild(createNavLabel(text));
@@ -463,7 +477,7 @@ public class UpdateNavigationDocumentsOperation extends BaseAuthorOperation {
 		}
 	}
 	
-	private class TocItem extends NavItem {
+	public class TocItem extends NavItem {
 		public List<TocItem> childItems = new ArrayList<TocItem>();
 		
 		public int getDepth() {
@@ -478,6 +492,7 @@ public class UpdateNavigationDocumentsOperation extends BaseAuthorOperation {
 		
 		public Element getAsNcxNavPoint() {
 			Element navPoint = ncx.createElementNS(EpubUtils.NCX_NS, "navPoint");
+			navPoint.setAttribute("id", String.format("navPoint-%d", order));
 			navPoint.setAttribute("playOrder", String.format("%d", order));
 			navPoint.appendChild(createNavLabel(text));
 			navPoint.appendChild(getContent());
@@ -491,7 +506,7 @@ public class UpdateNavigationDocumentsOperation extends BaseAuthorOperation {
 		public Element getAsXhtmlListItem() {
 			Element li = super.getAsXhtmlListItem();
 			if (childItems.size() > 0) {
-				Element ol = xhtmlNav.createElementNS(EpubUtils.XHTML_NS, "ul");
+				Element ol = xhtmlNav.createElementNS(EpubUtils.XHTML_NS, "ol");
 				for (int i = 0; i < childItems.size(); i++) {
 					ol.appendChild(childItems.get(i).getAsXhtmlListItem());
 				}
