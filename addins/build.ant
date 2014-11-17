@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="dtbook.frameworks" default="dist">
 	<!-- Set property oxygen_installation_folder in Window->Preferences->Ant->Runtime->Properties -->
-	<property name="version-number" value="2.9.0" />
+	<property name="version-number" value="3.0.0" />
 	<target name="dist">
 		<jar destfile="./frameworks/dtbook2005/nota.oxygen.jar" basedir="./bin">
 			<manifest>
