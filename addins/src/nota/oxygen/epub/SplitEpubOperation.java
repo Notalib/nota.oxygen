@@ -61,6 +61,8 @@ public class SplitEpubOperation extends BaseAuthorOperation
 	
 	private boolean _stop;
 	
+	private String _XmlLang;
+	
 	private Map<String, Document> _DocList;
 	
 	private Map<String, String> _Ids;
@@ -134,6 +136,13 @@ public class SplitEpubOperation extends BaseAuthorOperation
 				}
 
 				Node DocEl = _SourceDoc.getDocumentElement();
+				
+				_XmlLang=GetAttributeFromNode(DocEl, "xml:lang");	
+				
+				if(_XmlLang=="")
+				{
+					_XmlLang="da";
+				}
 
 				// String IXml = GetOuterXml(DocEl);
 
@@ -384,8 +393,12 @@ public class SplitEpubOperation extends BaseAuthorOperation
 		EPType = EPType.replace("frontmatter", "");
 		EPType = EPType.replace("bodymatter", "");
 		EPType = EPType.replace("backmatter", "");
+		
+		EPType= EPType.trim();
+		
+		EPType=EPType.replaceAll(" ", "-");
 
-		return EPType.trim();
+		return EPType;
 	}
 
 	private String GetAttributeFromNode(Node n, String AttName)
@@ -404,7 +417,20 @@ public class SplitEpubOperation extends BaseAuthorOperation
 				+ _SourceTitle + "</title>\n" + "</head>\n" + " <body/>\n" + "</html>";
 
 		Document Template = OpenXmlDocument(XmlTemplate);
+		
+		//Sæt xml:lang og lang attributter på
+			Node Root=Template.getDocumentElement();
+			
+			Attr attXmlLang = Template.createAttribute("xml:lang");
+			attXmlLang.setValue(_XmlLang);
+			NamedNodeMap HtmAtts = Root.getAttributes();
+			HtmAtts.setNamedItem(attXmlLang);
 
+			Attr attLang = Template.createAttribute("lang");
+			attLang.setValue(_XmlLang);
+			NamedNodeMap HtmlAtts = Root.getAttributes();
+			HtmlAtts.setNamedItem(attLang);
+			
 		NodeList temp = Template.getElementsByTagName("body");
 
 		Node TemplateBody = temp.item(0);
@@ -524,12 +550,12 @@ public class SplitEpubOperation extends BaseAuthorOperation
 					return;
 					
 				}
-				else
-				{
-					_stop=true;
-					showMessage(id + " findes flere gange i dokumentet.");
-					return;
-				}
+//				else
+//				{
+//					_stop=true;
+//					showMessage(id + " findes flere gange i dokumentet.");
+//					return;
+//				}
 				
 			}
 		}
