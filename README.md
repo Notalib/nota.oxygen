@@ -8,4 +8,4 @@ The directory [dicts](./dicts) contains additional spelling dictionaries for oXy
 
 ## License and copyright
 
-LYT is copyright [Nota](http://nota.nu/) and distritributed under [LGPL version 3](LICENSE).
+nota.oxygen is copyright [Nota](http://nota.nu/) and distritributed under [LGPL version 3](LICENSE).
