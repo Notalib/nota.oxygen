@@ -55,7 +55,7 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 			}
 			
 			// get all xhtml files in epub (besides nav.html)
-			URL[] xhtmlUrls = EpubUtils.getSpineUrls(getAuthorAccess(), false);
+			URL[] xhtmlUrls = EpubUtils.getSpineUrls(getAuthorAccess(), true);
 			if (xhtmlUrls.length < 2) {
 				showMessage("This epub cannot be concatenated (only one xhtml file)");
 				return;

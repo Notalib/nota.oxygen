@@ -1089,9 +1089,10 @@ body:before {
             resultSeparator, " ",
             selectionMode, "multiple",
             editorSort, "ascending"
-            fontInherit, true);
+            fontInherit, true)
+        "[" oxy_xpath("count(ancestor-or-self::*:section)+1") "]";
     color: red;
-    font-size: oxy_xpath("if (self::*:body) then '2em' else if (parent::*:body) then '1.5em' else '1.25em'");
+    /*font-size: oxy_xpath("if (self::*:body) then '2em' else if (parent::*:body) then '1.5em' else '1.25em'");*/
     border: 1px solid red;
     padding-left: 0.25em;
     padding-right: 0.25em;
