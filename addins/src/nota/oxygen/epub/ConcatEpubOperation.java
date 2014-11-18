@@ -29,7 +29,7 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 
 	@Override
 	public String getDescription() {
-		return "Concatenates epub files";
+		return "Concats epub files";
 	}
 
 	@Override
