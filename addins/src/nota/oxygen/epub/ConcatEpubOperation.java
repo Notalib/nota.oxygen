@@ -167,8 +167,7 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 			doc.appendChild(htmlElementAdded);
 			
 			// save new concatenated xhtml document
-			AuthorAccess xhtmlAccess = EpubUtils.saveDocument(getAuthorAccess(), doc, new URL(epubFilePath + "/" + EpubUtils.CONCAT_FILENAME));
-			if (xhtmlAccess == null) {
+			if (!EpubUtils.saveDocument(getAuthorAccess(), doc, new URL(epubFilePath + "/" + EpubUtils.CONCAT_FILENAME))) {
 				showMessage(EpubUtils.ERROR_MESSAGE);
 				return;
 			}
@@ -182,6 +181,7 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 			// save opf
 			getAuthorAccess().getEditorAccess().save();
 			
+			AuthorAccess xhtmlAccess = EpubUtils.getAuthorDocument(getAuthorAccess(), new URL(epubFilePath + "/" + EpubUtils.CONCAT_FILENAME));
 			// add unique ids to missing elements
 			if (!EpubUtils.addUniqueIds(xhtmlAccess)) {
 				showMessage(EpubUtils.ERROR_MESSAGE);

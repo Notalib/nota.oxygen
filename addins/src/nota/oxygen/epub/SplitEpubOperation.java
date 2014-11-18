@@ -221,6 +221,7 @@ public class SplitEpubOperation extends BaseAuthorOperation
 				return;
 			}
 			
+			// save opf
 			getAuthorAccess().getEditorAccess().save();
 			
 			EpubUtils.getNCXDocument(getAuthorAccess()).getEditorAccess().save();;
@@ -592,32 +593,22 @@ public class SplitEpubOperation extends BaseAuthorOperation
 	{
 
 		// save new xhtml document
-					AuthorAccess xhtmlAccess2;
-					try
-					{
-						xhtmlAccess2 = EpubUtils.saveDocument(getAuthorAccess(), xhtmlDocument, new URL(epubFilePath + "/" + splitFileName));
-						
-						if (xhtmlAccess2 == null) {
-							showMessage(EpubUtils.ERROR_MESSAGE);
-							return;
-						}
-						
-						xhtmlAccess2.getEditorAccess().close(true);
-						
-						// add xhtml document to opf document
-						if (!EpubUtils.addOpfItem(getAuthorAccess(), splitFileName)) {
-							showMessage(EpubUtils.ERROR_MESSAGE);
-							return;
-						}
+		AuthorAccess xhtmlAccess2;
+		try {
+			if (!EpubUtils.saveDocument(getAuthorAccess(), xhtmlDocument, new URL(epubFilePath + "/" + splitFileName))) {
+				showMessage(EpubUtils.ERROR_MESSAGE);
+				return;
+			}
 
-						// save opf
-						getAuthorAccess().getEditorAccess().save();
-						
-						
-					} catch (Exception e)
-					{
-						showMessage("Could not save this document: " + splitFileName + ". Error: " + e.getMessage()  );
-					}
+			// add xhtml document to opf document
+			if (!EpubUtils.addOpfItem(getAuthorAccess(), splitFileName)) {
+				showMessage(EpubUtils.ERROR_MESSAGE);
+				return;
+			}
+		} catch (Exception e) {
+			showMessage("Could not save this document: " + splitFileName
+					+ ". Error: " + e.getMessage());
+		}
 
 	}
 

@@ -304,7 +304,7 @@ public class EpubUtils {
 		return null;
 	}
 	
-	public static AuthorAccess saveDocument(AuthorAccess authorAccess, Document doc, URL file) {
+	public static boolean saveDocument(AuthorAccess authorAccess, Document doc, URL file) {
 		ERROR_MESSAGE = "";
 		
 		try {
@@ -333,22 +333,16 @@ public class EpubUtils {
 			// save content in editor into new concatenated xhtml file
 			WSEditor editor = awa.getEditorAccess(newEditorUrl);
 			editor.saveAs(file);
-			if (editor.getCurrentPageID() != WSEditor.PAGE_AUTHOR) editor.changePage(WSEditor.PAGE_AUTHOR);
-			WSEditorPage wep = editor.getCurrentPage();
-			WSAuthorEditorPage aea = (wep instanceof WSAuthorEditorPage ? (WSAuthorEditorPage)wep : null);
-			if (aea == null) {
-				ERROR_MESSAGE = "Could not get document";
-				return null;
-			}
-			return aea.getAuthorAccess();
+			editor.close(true);
+			return true;
 		} catch (TransformerException e) {
 			e.printStackTrace();
 			ERROR_MESSAGE = "Could not save document - an error occurred: " + e.getMessage();
-			return null;
+			return false;
 		} catch (Exception e) {
 			e.printStackTrace();
 			ERROR_MESSAGE = "Could not save document - an error occurred: " + e.getMessage();
-			return null;
+			return false;
 		}
 	}
 	
