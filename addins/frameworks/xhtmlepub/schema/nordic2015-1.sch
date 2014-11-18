@@ -67,7 +67,7 @@
         </sch:rule>
     </sch:pattern>
 
-    <!-- Rule 13: All documents must have frontmatter and bodymatter -->
+   <!-- Rule 13: All documents must have frontmatter and bodymatter -->
     <sch:pattern id="dtbook_TPB_13">
         <sch:rule context="html:body[html:header]">
             <sch:assert test="((html:section|html:article)/tokenize(@epub:type,'\s+')=('cover','frontmatter')) = true()">[tpb13] A Single-HTML document must have at least one frontmatter or cover
@@ -97,7 +97,7 @@
             <sch:assert test="html:h1 | html:h2 | html:h3 | html:h4 | html:h5 | html:h6">[tpb14] sectioning element with no headline (h1-h6) when sub-section is present (is only allowed for sectioning
                 element with epub:type="cover")</sch:assert>
         </sch:rule>
-    </sch:pattern>
+    </sch:pattern> 
 
     <!-- Rule 20: No imggroup in inline context -->
     <sch:pattern id="dtbook_TPB_20">

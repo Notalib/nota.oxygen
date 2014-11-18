@@ -61,11 +61,11 @@ public class SplitEpubOperation extends BaseAuthorOperation
 	
 	private boolean _stop;
 	
+	private String _XmlLang;
+	
 	private Map<String, Document> _DocList;
 	
 	private Map<String, String> _Ids;
-	
-	private String _ErrMsg;
 
 	@Override
 	public ArgumentDescriptor[] getArguments()
@@ -102,15 +102,6 @@ public class SplitEpubOperation extends BaseAuthorOperation
 		try
 		{
 
-			/*
-			 * URL docUrl =
-			 * getAuthorAccess().getDocumentController().getAuthorDocumentNode
-			 * ().getXMLBaseURL(); String inputFile =
-			 * getAuthorAccess().getUtilAccess().getFileName(docUrl.toString());
-			 * if (!inputFile.equals(xhtmlFileName)) {
-			 * showMessage("Splitting can not start from this file"); return; }
-			 */
-
 			epubFilePath = EpubUtils.getEpubFolder(getAuthorAccess());
 			if (epubFilePath.equals(""))
 			{
@@ -138,8 +129,20 @@ public class SplitEpubOperation extends BaseAuthorOperation
 				_Ids=new HashMap<String, String>();
 				
 				_SourceDoc = OpenXmlDocument(htmlContent);
+				
+				if(_SourceDoc == null)
+				{
+					return;
+				}
 
 				Node DocEl = _SourceDoc.getDocumentElement();
+				
+				_XmlLang=GetAttributeFromNode(DocEl, "xml:lang");	
+				
+				if(_XmlLang=="")
+				{
+					_XmlLang="da";
+				}
 
 				// String IXml = GetOuterXml(DocEl);
 
@@ -174,16 +177,15 @@ public class SplitEpubOperation extends BaseAuthorOperation
 
 				}
 
-				catch (XPathExpressionException e)
+				catch (Exception e)
 				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					showMessage("Error in Xml document: " + e.getMessage());
+					return;
 				}
 				
 				// Find Document Title
 				_SourceTitle = GetDocTitle(DocEl);
 			
-
 				NodeList BodyNodes = SourceBody.getChildNodes();
 
 				for (int i = 0; i < BodyNodes.getLength(); i++)
@@ -229,8 +231,8 @@ public class SplitEpubOperation extends BaseAuthorOperation
 		} 
 		catch (Exception e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			showMessage(EpubUtils.ERROR_MESSAGE);
+			return;
 		}
 
 	}
@@ -241,10 +243,8 @@ public class SplitEpubOperation extends BaseAuthorOperation
 		{
 			Document D=entry.getValue();
 			String F=entry.getKey();
-			SaveXml(D, F);
-			
+			SaveXml(D, F);		
 		}
-		
 
 	}
 	
@@ -265,10 +265,10 @@ public class SplitEpubOperation extends BaseAuthorOperation
 
 			}
 
-			catch (XPathExpressionException e)
+			catch (Exception e)
 			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				showMessage("Error in Xml document: " + e.getMessage());
+				return;
 			}
 			
 			//Check referencer mod samlingen af Id'er
@@ -334,8 +334,8 @@ public class SplitEpubOperation extends BaseAuthorOperation
 			builder = factory.newDocumentBuilder();
 		} catch (ParserConfigurationException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			showMessage("Error: " + e.getMessage());
+			return null;
 		}
 
 		Document document = null;
@@ -347,13 +347,13 @@ public class SplitEpubOperation extends BaseAuthorOperation
 		
 		catch (SAXException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			showMessage("Could not parse document: " + e.getMessage());
+			return null;
 		} 
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			showMessage("Could not open document: " + e.getMessage());
+			return null;
 		}
 
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -366,8 +366,8 @@ public class SplitEpubOperation extends BaseAuthorOperation
 		} 
 		catch (TransformerConfigurationException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			showMessage("Could not open document: " + e.getMessage());
+			return null;
 		}
 
 		DOMSource source = new DOMSource(document);
@@ -379,8 +379,8 @@ public class SplitEpubOperation extends BaseAuthorOperation
 		}
 		catch (TransformerException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			showMessage("Could not open document: " + e.getMessage());
+			return null;
 		}
 
 		return document;
@@ -393,8 +393,12 @@ public class SplitEpubOperation extends BaseAuthorOperation
 		EPType = EPType.replace("frontmatter", "");
 		EPType = EPType.replace("bodymatter", "");
 		EPType = EPType.replace("backmatter", "");
+		
+		EPType= EPType.trim();
+		
+		EPType=EPType.replaceAll(" ", "-");
 
-		return EPType.trim();
+		return EPType;
 	}
 
 	private String GetAttributeFromNode(Node n, String AttName)
@@ -413,7 +417,20 @@ public class SplitEpubOperation extends BaseAuthorOperation
 				+ _SourceTitle + "</title>\n" + "</head>\n" + " <body/>\n" + "</html>";
 
 		Document Template = OpenXmlDocument(XmlTemplate);
+		
+		//Sæt xml:lang og lang attributter på
+			Node Root=Template.getDocumentElement();
+			
+			Attr attXmlLang = Template.createAttribute("xml:lang");
+			attXmlLang.setValue(_XmlLang);
+			NamedNodeMap HtmAtts = Root.getAttributes();
+			HtmAtts.setNamedItem(attXmlLang);
 
+			Attr attLang = Template.createAttribute("lang");
+			attLang.setValue(_XmlLang);
+			NamedNodeMap HtmlAtts = Root.getAttributes();
+			HtmlAtts.setNamedItem(attLang);
+			
 		NodeList temp = Template.getElementsByTagName("body");
 
 		Node TemplateBody = temp.item(0);
@@ -533,10 +550,12 @@ public class SplitEpubOperation extends BaseAuthorOperation
 					return;
 					
 				}
-				else
-				{
-					_ErrMsg= id + " er findes flere gange i dokumentet.";
-				}
+//				else
+//				{
+//					_stop=true;
+//					showMessage(id + " findes flere gange i dokumentet.");
+//					return;
+//				}
 				
 			}
 		}
@@ -560,7 +579,7 @@ public class SplitEpubOperation extends BaseAuthorOperation
 	{
 		if(_Ids.containsKey(Id))
 		{
-			_ErrMsg= "Id'et " + Id + " findes flere gange i dokumentet";
+			showMessage("Id'et " + Id + " findes flere gange i dokumentet");
 			return false;
 		}
 		
@@ -572,7 +591,7 @@ public class SplitEpubOperation extends BaseAuthorOperation
 	private void SaveXml(Document xhtmlDocument, String splitFileName)
 	{
 
-		// save new concatenated xhtml document
+		// save new xhtml document
 					AuthorAccess xhtmlAccess2;
 					try
 					{
@@ -595,57 +614,10 @@ public class SplitEpubOperation extends BaseAuthorOperation
 						getAuthorAccess().getEditorAccess().save();
 						
 						
-						
-						
-					} catch (MalformedURLException e)
+					} catch (Exception e)
 					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						showMessage("Could not save this document: " + splitFileName + ". Error: " + e.getMessage()  );
 					}
-				
-//		try
-//		{
-//
-//			// transform new document to xml content
-//			TransformerFactory transFactory = TransformerFactory.newInstance();
-//			Transformer transformer = transFactory.newTransformer();
-//			StringWriter buffer = new StringWriter();
-//			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-//			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
-//			transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-//			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-//			DOMSource source = new DOMSource(xhtmlDocument);
-//			StreamResult result = new StreamResult(buffer);
-//			transformer.transform(source, result);
-//			String xmlContent = buffer.toString();
-//
-//			// save string into new xhtml concatenated document
-//			AuthorWorkspaceAccess wa = getAuthorAccess().getWorkspaceAccess();
-//			URL newEditorUrl = wa.createNewEditor("xhtml", "text/xml", xmlContent);
-//			WSEditor editor = wa.getEditorAccess(newEditorUrl);
-//			editor.saveAs(new URL(epubFilePath + "/" + splitFileName));
-//
-//			wa.close(new URL(epubFilePath + "/" + splitFileName));
-//
-//			// add xhtml document to opf document
-//			EpubUtils.addOpfItem(getAuthorAccess(), splitFileName);
-//
-//		} 
-//		catch (TransformerConfigurationException e)
-//		{
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} 
-//		catch (TransformerException e)
-//		{
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} 
-//		catch (Exception e)
-//		{
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 
 	}
 
@@ -656,40 +628,42 @@ public class SplitEpubOperation extends BaseAuthorOperation
 
 	}
 
-	private String GetOuterXml(Node n)
-	{
-		TransformerFactory transFactory = TransformerFactory.newInstance();
-		Transformer transformer = null;
-		try
-		{
-			transformer = transFactory.newTransformer();
-		} catch (TransformerConfigurationException e1)
-		{
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-			return "";
-		}
-		try
-		{
-			StringWriter buffer = new StringWriter();
-			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-			transformer.transform(new DOMSource(n), new StreamResult(buffer));
-			return buffer.toString();
-
-		} catch (TransformerConfigurationException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return "";
-		} catch (TransformerException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return "";
-		}
-
-	}
+//	private String GetOuterXml(Node n)
+//	{
+//		
+//		//For debug only...
+//		TransformerFactory transFactory = TransformerFactory.newInstance();
+//		Transformer transformer = null;
+//		try
+//		{
+//			transformer = transFactory.newTransformer();
+//		} catch (TransformerConfigurationException e1)
+//		{
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//			return "";
+//		}
+//		try
+//		{
+//			StringWriter buffer = new StringWriter();
+//			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+//			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+//			transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+//			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+//			transformer.transform(new DOMSource(n), new StreamResult(buffer));
+//			return buffer.toString();
+//
+//		} catch (TransformerConfigurationException e)
+//		{
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			return "";
+//		} catch (TransformerException e)
+//		{
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			return "";
+//		}
+//
+//	}
 }
