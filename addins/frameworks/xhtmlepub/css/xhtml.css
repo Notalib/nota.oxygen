@@ -1084,9 +1084,7 @@ body:before {
         oxy_editor(
             type, popupSelection,
             edit, "@epub:type",
-            /*values, "frontmatter, bodymatter, rearmatter, part, chapter, cover",*/
-            /*values, oxy_xpath("string-join(distinct-values(tokenize(concat('frontmatter bodymatter rearmatter part chapter section index toc cover ', string-join(//(*:section|*:body|*:article|*:header|*:footer|*:nav)/@epub:type, ' ')), ' ')), ',')"),*/
-            values, oxy_xpath("string-join(distinct-values(tokenize(concat('frontmatter bodymatter rearmatter part chapter section index toc cover ', ''), ' ')), ',')"),
+            values, 'frontmatter, bodymatter, rearmatter, cover, frontcover, leftflap, rightflap, titlepage, colophon, toc, preface, part, chapter, appendix, index, rearnotes, footnotes',
 			resultSeparator, " ",
             selectionMode, "multiple",
             editorSort, "ascending"
