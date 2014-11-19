@@ -17,6 +17,7 @@ import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 import de.schlichtherle.truezip.file.TArchiveDetector;
 import de.schlichtherle.truezip.file.TFile;
+import de.schlichtherle.truezip.file.TVFS;
 import de.schlichtherle.truezip.fs.FsSyncException;
 import de.schlichtherle.truezip.fs.archive.zip.JarDriver;
 import de.schlichtherle.truezip.socket.sl.IOPoolLocator;
@@ -134,14 +135,13 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 		Utils.bringFocusToDocumentTab(getAuthorAccess());
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void insertImageToArchive(File imageFile) {
 		TArchiveDetector myDetector = new TArchiveDetector("epub", new JarDriver(IOPoolLocator.SINGLETON));
 		TFile source = new TFile(imageFile);
 		TFile destination = new TFile(epubFilePath + "/EPUB/images", myDetector);
 
 		try {
-            TFile.umount();
+			TVFS.umount();
         } catch (FsSyncException e) {
             e.printStackTrace();
         }
@@ -156,7 +156,7 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 		}
 		
 		try {
-            TFile.umount();
+			TVFS.umount();
         } catch (FsSyncException e) {
             e.printStackTrace();
         }
