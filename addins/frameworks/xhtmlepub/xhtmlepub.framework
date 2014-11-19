@@ -2812,10 +2812,10 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											<String>insert.figure.epub</String>
 										</field>
 										<field name="name">
-											<String>Insert Figure(s) from epub archive</String>
+											<String>${i18n(insert.figure.epub)}</String>
 										</field>
 										<field name="description">
-											<String>Insert figure(s) from epub archive</String>
+											<String>${i18n(insert.figure.epub.description)}</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -2910,10 +2910,10 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											<String>insert.figure.file</String>
 										</field>
 										<field name="name">
-											<String>Insert Figure(s) from files</String>
+											<String>${i18n(insert.figure.file)}</String>
 										</field>
 										<field name="description">
-											<String>Insert figure(s) from files</String>
+											<String>${i18n(insert.figure.file.description)}</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
