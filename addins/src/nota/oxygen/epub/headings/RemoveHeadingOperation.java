@@ -3,14 +3,11 @@ package nota.oxygen.epub.headings;
 import javax.swing.text.BadLocationException;
 
 import nota.oxygen.common.BaseAuthorOperation;
-import nota.oxygen.common.Utils;
-import nota.oxygen.epub.EpubUtils;
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.node.AuthorDocumentFragment;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
-import ro.sync.ecss.extensions.api.node.AuthorNode;
 
 public class RemoveHeadingOperation extends BaseAuthorOperation {
 

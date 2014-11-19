@@ -37,13 +37,11 @@ import org.w3c.dom.ls.LSSerializer;
 import ro.sync.ecss.extensions.api.AuthorAccess;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
-import ro.sync.ecss.extensions.api.UniqueAttributesProcessor;
 import ro.sync.ecss.extensions.api.node.AttrValue;
 import ro.sync.ecss.extensions.api.node.AuthorDocument;
 import ro.sync.ecss.extensions.api.node.AuthorDocumentFragment;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
-import ro.sync.ecss.extensions.commons.id.DefaultUniqueAttributesRecognizer;
 import ro.sync.exml.workspace.api.editor.page.author.WSAuthorEditorPageBase;
 
 public class Utils {

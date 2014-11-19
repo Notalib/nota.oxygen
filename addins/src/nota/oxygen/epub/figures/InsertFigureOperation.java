@@ -2,26 +2,24 @@ package nota.oxygen.epub.figures;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.schlichtherle.truezip.file.TArchiveDetector;
-import de.schlichtherle.truezip.file.TFile;
-import de.schlichtherle.truezip.fs.FsSyncException;
-import de.schlichtherle.truezip.fs.archive.zip.JarDriver;
-import de.schlichtherle.truezip.socket.sl.IOPoolLocator;
+import nota.oxygen.common.BaseAuthorOperation;
+import nota.oxygen.common.Utils;
+import nota.oxygen.epub.EpubUtils;
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
 import ro.sync.ecss.extensions.api.AuthorAccess;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
-import ro.sync.ecss.extensions.api.node.AuthorNode;
-import nota.oxygen.common.BaseAuthorOperation;
-import nota.oxygen.common.Utils;
-import nota.oxygen.epub.EpubUtils;
+import de.schlichtherle.truezip.file.TArchiveDetector;
+import de.schlichtherle.truezip.file.TFile;
+import de.schlichtherle.truezip.fs.FsSyncException;
+import de.schlichtherle.truezip.fs.archive.zip.JarDriver;
+import de.schlichtherle.truezip.socket.sl.IOPoolLocator;
 
 public class InsertFigureOperation extends BaseAuthorOperation {
 	private static String ARG_IMAGE_FRAGMENT = "image fragment";

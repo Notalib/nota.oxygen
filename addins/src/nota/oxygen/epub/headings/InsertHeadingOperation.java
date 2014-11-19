@@ -12,7 +12,6 @@ import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.node.AuthorDocumentFragment;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
-import sun.font.SunLayoutEngine;
 
 public class InsertHeadingOperation extends BaseAuthorOperation {
 
