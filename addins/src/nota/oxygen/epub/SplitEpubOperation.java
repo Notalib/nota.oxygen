@@ -3,7 +3,6 @@ package nota.oxygen.epub;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +11,6 @@ import java.util.TreeMap;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -21,8 +19,10 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+
+import nota.oxygen.common.BaseAuthorOperation;
+import nota.oxygen.common.Utils;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -37,12 +37,8 @@ import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
 import ro.sync.ecss.extensions.api.AuthorAccess;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
-import ro.sync.ecss.extensions.api.access.AuthorWorkspaceAccess;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
-import ro.sync.exml.workspace.api.editor.WSEditor;
-import nota.oxygen.common.BaseAuthorOperation;
-import nota.oxygen.common.Utils;
 
 public class SplitEpubOperation extends BaseAuthorOperation
 {
@@ -593,7 +589,6 @@ public class SplitEpubOperation extends BaseAuthorOperation
 	{
 
 		// save new xhtml document
-		AuthorAccess xhtmlAccess2;
 		try {
 			if (!EpubUtils.saveDocument(getAuthorAccess(), xhtmlDocument, new URL(epubFilePath + "/" + splitFileName))) {
 				showMessage(EpubUtils.ERROR_MESSAGE);

@@ -2,7 +2,6 @@ package nota.oxygen.epub.figures;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,16 +12,15 @@ import de.schlichtherle.truezip.file.TVFS;
 import de.schlichtherle.truezip.fs.FsSyncException;
 import de.schlichtherle.truezip.fs.archive.zip.JarDriver;
 import de.schlichtherle.truezip.socket.sl.IOPoolLocator;
+import nota.oxygen.common.BaseAuthorOperation;
+import nota.oxygen.common.Utils;
+import nota.oxygen.epub.EpubUtils;
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
 import ro.sync.ecss.extensions.api.AuthorAccess;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.node.AuthorElement;
-import ro.sync.ecss.extensions.api.node.AuthorNode;
-import nota.oxygen.common.BaseAuthorOperation;
-import nota.oxygen.common.Utils;
-import nota.oxygen.epub.EpubUtils;
 
 public class InsertFigureOperation extends BaseAuthorOperation {
 	private static String ARG_IMAGE_FRAGMENT = "image fragment";
@@ -137,7 +135,6 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 		Utils.bringFocusToDocumentTab(getAuthorAccess());
 	}
 	
-	//@SuppressWarnings("deprecation")
 	public void insertImageToArchive(File imageFile) throws AuthorOperationException {
 		TArchiveDetector myDetector = new TArchiveDetector("epub", new JarDriver(IOPoolLocator.SINGLETON));
 		TFile source = new TFile(imageFile);
@@ -145,15 +142,11 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 
 		try {
 			TVFS.umount();
-            //TFile.umount();
         } catch (FsSyncException e) {
         	throw new AuthorOperationException(e.getMessage(), e);
         }
 		
 		try {
-			/*if (destination.isArchive() || destination.isDirectory()) {
-				destination = new TFile(destination, source.getName());
-			}*/
 			destination = new TFile(destination, source.getName());
 			source.cp_rp(destination);
 		} catch (IOException e) {
@@ -162,7 +155,6 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 		
 		try {
 			TVFS.umount();
-            //TFile.umount();
         } catch (FsSyncException e) {
         	throw new AuthorOperationException(e.getMessage(), e);
         }

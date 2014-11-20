@@ -1091,4 +1091,25 @@
 		<comment>Remove header action description</comment>
 		<val lang="en_US">Remove header and corresponding section, turning the header into a paragraph</val>
 	</key>
+	<key value="figures">
+		<comment>Figures menu name</comment>
+		<val lang="en_US">Figures</val>
+	</key>
+	<key type="action" value="insert.figure.epub">
+		<comment>Insert Figure(s) from epub archive</comment>
+		<val lang="en_US">Insert figure(s) from epub archive</val>
+	</key>
+	<key type="action" value="insert.figure.epub.description">
+		<comment>Insert Figure(s) from epub archive</comment>
+		<val lang="en_US">Insert figure(s) from epub archive</val>
+	</key>
+	<key type="action" value="insert.figure.file">
+		<comment>Insert figure(s) from file(s)</comment>
+		<val lang="en_US">Insert figure(s) from file(s)</val>
+	</key>
+	<key type="action" value="insert.figure.file.description">
+		<comment>Insert figure(s) from file(s)</comment>
+		<val lang="en_US">Insert figure(s) from system file(s), with the side-effect of adding them to the epub zip archive</val>
+	</key>
+	
 </translation>
