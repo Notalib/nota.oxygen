@@ -6838,7 +6838,8 @@ else 'rearnotes backmatter'
 					</field>
 					<field name="defaultValidationScenarios">
 						<list>
-							<String>Epub Single file</String>
+							<String>XHTML ePub Nordic 2015</String>
+							<String>XHTML ePub Nordic 2015 strict</String>
 						</list>
 					</field>
 					<field name="defaultTransformationScenarios">

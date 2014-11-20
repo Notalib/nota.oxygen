@@ -39,6 +39,9 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 	
 	@Override
 	protected void doOperation() throws AuthorOperationException {		
+		
+		String Urlname="x";
+		
 		try {
 			// get epub folder path
 			epubFilePath = EpubUtils.getEpubFolder(getAuthorAccess());
@@ -65,8 +68,18 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 			Element headElementAdded = (Element) doc.createElement("head");
 			Element bodyElementAdded = (Element) doc.createElement("body");
 			
+			
 			// traverse each xhtml document in epub
 			for (URL xhtmlUrl : xhtmlUrls) {
+				
+				Urlname=xhtmlUrl.toString();
+				
+				String t=Urlname.substring(Urlname.lastIndexOf("."));
+				
+				if(!Urlname.substring(Urlname.lastIndexOf(".")).equals(".xhtml"))
+				{
+					continue;
+				}
 				// get xml from each xhtml document
 				WSTextEditorPage editorPage = EpubUtils.getTextDocument(getAuthorAccess(), xhtmlUrl);
 				JTextArea textArea = (JTextArea) ((WSTextEditorPage) editorPage).getTextComponent();
@@ -199,7 +212,7 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 			getAuthorAccess().getWorkspaceAccess().closeAll();
 		} catch (Exception e) {
 			e.printStackTrace();
-			showMessage("Could not finalize operation - an error occurred: " + e.getMessage());
+			showMessage(Urlname + " Could not finalize operation - an error occurred: " + e.getMessage());
 			return;
 		}
 	}
