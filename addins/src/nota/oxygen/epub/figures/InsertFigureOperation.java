@@ -9,6 +9,7 @@ import java.util.List;
 
 import de.schlichtherle.truezip.file.TArchiveDetector;
 import de.schlichtherle.truezip.file.TFile;
+import de.schlichtherle.truezip.file.TVFS;
 import de.schlichtherle.truezip.fs.FsSyncException;
 import de.schlichtherle.truezip.fs.archive.zip.JarDriver;
 import de.schlichtherle.truezip.socket.sl.IOPoolLocator;
@@ -136,31 +137,34 @@ public class InsertFigureOperation extends BaseAuthorOperation {
 		Utils.bringFocusToDocumentTab(getAuthorAccess());
 	}
 	
-	@SuppressWarnings("deprecation")
-	public void insertImageToArchive(File imageFile) {
+	//@SuppressWarnings("deprecation")
+	public void insertImageToArchive(File imageFile) throws AuthorOperationException {
 		TArchiveDetector myDetector = new TArchiveDetector("epub", new JarDriver(IOPoolLocator.SINGLETON));
 		TFile source = new TFile(imageFile);
 		TFile destination = new TFile(epubFilePath + "/EPUB/images", myDetector);
 
 		try {
-            TFile.umount();
+			TVFS.umount();
+            //TFile.umount();
         } catch (FsSyncException e) {
-            e.printStackTrace();
+        	throw new AuthorOperationException(e.getMessage(), e);
         }
 		
 		try {
-			if (destination.isArchive() || destination.isDirectory()) {
+			/*if (destination.isArchive() || destination.isDirectory()) {
 				destination = new TFile(destination, source.getName());
-			}
+			}*/
+			destination = new TFile(destination, source.getName());
 			source.cp_rp(destination);
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new AuthorOperationException(e.getMessage(), e);
 		}
 		
 		try {
-            TFile.umount();
+			TVFS.umount();
+            //TFile.umount();
         } catch (FsSyncException e) {
-            e.printStackTrace();
+        	throw new AuthorOperationException(e.getMessage(), e);
         }
 	}
 
