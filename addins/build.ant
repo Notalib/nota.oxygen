@@ -10,6 +10,7 @@
 			<fileset dir="bin" />
 			<fileset dir="." includes="doc/**" />
 		</jar>
+		
 		<copy todir="./frameworks/dtbook110/" file="./frameworks/dtbook2005/nota.oxygen.jar" />
 		<copy todir="./frameworks/xhtmlepub/" file="./frameworks/dtbook2005/nota.oxygen.jar" />
 		<copy todir="./frameworks/ncx/" file="./frameworks/dtbook2005/nota.oxygen.jar" />
