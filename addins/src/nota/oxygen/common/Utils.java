@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -21,6 +22,13 @@ import javax.imageio.stream.FileImageInputStream;
 import javax.imageio.stream.ImageInputStream;
 import javax.swing.JTabbedPane;
 import javax.swing.text.BadLocationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 
@@ -487,6 +495,45 @@ public class Utils {
 			return path.substring(index+1);
 		}
 		return "";
+	}
+
+	public static String getOuterXml(Node n)
+	{
+		
+		//For debug only...
+		TransformerFactory transFactory = TransformerFactory.newInstance();
+		Transformer transformer = null;
+		try
+		{
+			transformer = transFactory.newTransformer();
+		} catch (TransformerConfigurationException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return "";
+		}
+		try
+		{
+			StringWriter buffer = new StringWriter();
+			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+			transformer.transform(new DOMSource(n), new StreamResult(buffer));
+			return buffer.toString();
+	
+		} catch (TransformerConfigurationException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "";
+		} catch (TransformerException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "";
+		}
+	
 	}
 
 }

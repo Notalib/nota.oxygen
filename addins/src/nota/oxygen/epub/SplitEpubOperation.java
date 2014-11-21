@@ -1,22 +1,10 @@
 package nota.oxygen.epub;
 
-import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
@@ -30,8 +18,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
@@ -75,7 +61,6 @@ public class SplitEpubOperation extends BaseAuthorOperation
 		return "Splits epub file";
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void doOperation() throws AuthorOperationException
 	{
@@ -124,7 +109,7 @@ public class SplitEpubOperation extends BaseAuthorOperation
 				
 				_Ids=new HashMap<String, String>();
 				
-				_SourceDoc = OpenXmlDocument(htmlContent);
+				_SourceDoc = Utils.deserializeDocument(htmlContent, null);
 				
 				if(_SourceDoc == null)
 				{
@@ -208,7 +193,7 @@ public class SplitEpubOperation extends BaseAuthorOperation
 				EpubUtils.removeOpfItem(getAuthorAccess(), fileName);
 
 				// delete xhtml document
-				xhtmlAccess.getWorkspaceAccess().delete(xhtmlAccess.getEditorLocation());
+				xhtmlAccess.getWorkspaceAccess().delete(xhtmlAccess.getEditorAccess().getEditorLocation());
 			}
 			
 			// update navigation documents
@@ -322,67 +307,6 @@ public class SplitEpubOperation extends BaseAuthorOperation
 
 	}
 
-	private Document OpenXmlDocument(String Xml)
-	{
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = null;
-		try
-		{
-			builder = factory.newDocumentBuilder();
-		} catch (ParserConfigurationException e)
-		{
-			showMessage("Error: " + e.getMessage());
-			return null;
-		}
-
-		Document document = null;
-		
-		try
-		{
-			document = builder.parse(new InputSource(new StringReader(Xml)));
-		} 
-		
-		catch (SAXException e)
-		{
-			showMessage("Could not parse document: " + e.getMessage());
-			return null;
-		} 
-		catch (IOException e)
-		{
-			showMessage("Could not open document: " + e.getMessage());
-			return null;
-		}
-
-		TransformerFactory transformerFactory = TransformerFactory.newInstance();
-
-		Transformer transformer = null;
-
-		try
-		{
-			transformer = transformerFactory.newTransformer();
-		} 
-		catch (TransformerConfigurationException e)
-		{
-			showMessage("Could not open document: " + e.getMessage());
-			return null;
-		}
-
-		DOMSource source = new DOMSource(document);
-		StreamResult result = new StreamResult(new StringWriter());
-
-		try
-		{
-			transformer.transform(source, result);
-		}
-		catch (TransformerException e)
-		{
-			showMessage("Could not open document: " + e.getMessage());
-			return null;
-		}
-
-		return document;
-	}
-
 	private String GetEpubMainType(String EPType)
 	{
 		EPType = EPType.replace("  ", " ");
@@ -406,14 +330,14 @@ public class SplitEpubOperation extends BaseAuthorOperation
 
 	}
 
-	private void CreateNewEpubDoc(Node Section)
+	private void CreateNewEpubDoc(Node Section) throws AuthorOperationException
 	{
 		_DocNumber = _DocNumber + 1;
 
 		String XmlTemplate = "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:epub=\"http://www.idpf.org/2007/ops\" xmlns:nordic=\"http://www.mtm.se/epub/\" epub:prefix=\"z3998: http://www.daisy.org/z3998/2012/vocab/structure/#\">\n" + "<head>\n" + "<title>"
 				+ _SourceTitle + "</title>\n" + "</head>\n" + " <body/>\n" + "</html>";
 
-		Document Template = OpenXmlDocument(XmlTemplate);
+		Document Template = Utils.deserializeDocument(XmlTemplate, null);
 		
 		//Sæt xml:lang og lang attributter på
 			Node Root=Template.getDocumentElement();
@@ -613,43 +537,4 @@ public class SplitEpubOperation extends BaseAuthorOperation
 		// Nothing to parse!!!
 
 	}
-
-//	private String GetOuterXml(Node n)
-//	{
-//		
-//		//For debug only...
-//		TransformerFactory transFactory = TransformerFactory.newInstance();
-//		Transformer transformer = null;
-//		try
-//		{
-//			transformer = transFactory.newTransformer();
-//		} catch (TransformerConfigurationException e1)
-//		{
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//			return "";
-//		}
-//		try
-//		{
-//			StringWriter buffer = new StringWriter();
-//			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-//			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-//			transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-//			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-//			transformer.transform(new DOMSource(n), new StreamResult(buffer));
-//			return buffer.toString();
-//
-//		} catch (TransformerConfigurationException e)
-//		{
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			return "";
-//		} catch (TransformerException e)
-//		{
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			return "";
-//		}
-//
-//	}
 }

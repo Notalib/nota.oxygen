@@ -74,8 +74,6 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 				
 				Urlname=xhtmlUrl.toString();
 				
-				String t=Urlname.substring(Urlname.lastIndexOf("."));
-				
 				if(!Urlname.substring(Urlname.lastIndexOf(".")).equals(".xhtml"))
 				{
 					continue;
