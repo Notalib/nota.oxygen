@@ -12,8 +12,9 @@ public class LangExtensionStateListener implements AuthorExtensionStateListener 
 
 	@Override
 	public void activated(AuthorAccess authorAccess) {
-		authorAccess.getDocumentController().addAuthorListener(new LangAuthorListener(authorAccess));
-
+		LangAuthorListener listener = new LangAuthorListener(authorAccess);
+		listener.updateAllLangsFromXmlLangs();
+		authorAccess.getDocumentController().addAuthorListener(listener);
 	}
 
 	@Override
