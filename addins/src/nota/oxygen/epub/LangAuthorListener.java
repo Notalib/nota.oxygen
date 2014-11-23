@@ -21,11 +21,12 @@ public class LangAuthorListener implements AuthorListener {
 	
 	private void updateLangFromXmlLang(AuthorElement elem, boolean recursive) {
 		AttrValue xmlLang = elem.getAttribute("xml:lang");
-		if (xmlLang == null) {
+		AttrValue lang = elem.getAttribute("lang");
+		if (xmlLang == null && lang != null) {
 			authorAccess.getDocumentController().removeAttribute("lang", elem);
 		}
-		else {
-			authorAccess.getDocumentController().setAttribute("lang", elem.getAttribute("xml:lang"), elem);
+		else if (!xmlLang.equals(lang)) {
+			authorAccess.getDocumentController().setAttribute("lang", xmlLang, elem);
 		}
 		if (recursive) {
 			for (AuthorNode node : elem.getContentNodes()) {
