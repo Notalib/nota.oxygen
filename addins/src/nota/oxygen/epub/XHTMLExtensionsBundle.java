@@ -1,7 +1,13 @@
 package nota.oxygen.epub;
 
+import nota.oxygen.common.Utils;
+
+import org.w3c.dom.Document;
+
 import ro.sync.ecss.extensions.api.AuthorExtensionStateListener;
 import ro.sync.ecss.extensions.api.AuthorExtensionStateListenerDelegator;
+import ro.sync.ecss.extensions.api.AuthorOperationException;
+import ro.sync.ecss.extensions.api.CustomAttributeValueEditor;
 import ro.sync.ecss.extensions.api.UniqueAttributesRecognizer;
 
 public class XHTMLExtensionsBundle extends ro.sync.ecss.extensions.xhtml.XHTMLExtensionsBundle {
@@ -32,5 +38,40 @@ public class XHTMLExtensionsBundle extends ro.sync.ecss.extensions.xhtml.XHTMLEx
 		if (langStateListener == null) langStateListener = new LangExtensionStateListener();
 		return langStateListener;
 	}
+	
+	private static Document attributeValueListsDocument;
+	
+	public static Document getAttributeValueListsDocument() {
+		if (attributeValueListsDocument == null) {
+			try {
+				attributeValueListsDocument = Utils.deserializeDocument(
+						"<attributeValueLists>"
+						+ "<attributeValueList parentElementNames='body section' attributeNames='class' allowMultipleValues='true' allowEdit='false'>"
+						+ "<value>render-optional</value>"
+						+ "<value>jacketcopy</value>"
+						+ "<value>frontcover</value>"
+						+ "<value>rearcover</value>"
+						+ "</attributeValueList>"
+						+ "</attributeValueLists>", null);
+			}
+			catch (AuthorOperationException e) {
+				attributeValueListsDocument = null;
+			}
+		}
+		return attributeValueListsDocument;
+	}
+	
+	XHTMLAttributeValueEditor attributesValueEditor;
+
+	@Override
+	public CustomAttributeValueEditor createCustomAttributeValueEditor(
+			boolean arg0) {
+		if (attributesValueEditor == null) {
+			attributesValueEditor = new XHTMLAttributeValueEditor(getAttributeValueListsDocument());
+		}
+		return attributesValueEditor;
+	}
+	
+	
 	
 }
