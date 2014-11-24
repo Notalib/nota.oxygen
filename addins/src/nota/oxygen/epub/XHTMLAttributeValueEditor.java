@@ -1,25 +1,10 @@
 package nota.oxygen.epub;
 
 import java.awt.Component;
-import java.awt.Dialog;
+import java.awt.Container;
 import java.awt.Window;
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Enumeration;
-import java.util.Hashtable;
 import java.util.List;
-
-import javax.swing.BoxLayout;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -39,65 +24,9 @@ public class XHTMLAttributeValueEditor extends CustomAttributeValueEditor {
 	public String getDescription() {
 		return "Configurable attribute editor, using an xml document to store list of attribute values";
 	}
-	
-	private String selectFromComboBox(List<String> values, String initialValue, boolean allowEdit, Component parentComponent) {
-		if (!values.contains(initialValue)) {
-			values.add(initialValue);
-		}
-		JComboBox<String> comboBox = new JComboBox<String>(values.toArray(new String[0]));
-		comboBox.setEditable(allowEdit);
-		comboBox.setSelectedItem(initialValue);
-		if (JOptionPane.showConfirmDialog(parentComponent, comboBox, "Enter value", JOptionPane.OK_CANCEL_OPTION)==0) {
-			return comboBox.getSelectedItem().toString();
-		}
-		return initialValue;
-	}
-	
-	private String selectFromListBox(List<String> values, String initialValue, Component parentComponent) {
-		String[] initialValues = initialValue.split("\\s");
-		for (String iv : initialValues) {
-			if (!values.contains(iv)) {
-				values.add(iv);
-			}
-		}
-		JPanel checkBoxPanel = new JPanel();
-		checkBoxPanel.setLayout(new BoxLayout(checkBoxPanel, BoxLayout.Y_AXIS));
-		Dictionary<String, JCheckBox> valueCheckBoxes = new Hashtable<String, JCheckBox>();
-		for (String v : values.toArray(new String[0])) {
-			JCheckBox box = new JCheckBox(v);
-			valueCheckBoxes.put(v, box);
-			checkBoxPanel.add(box);
-		}
-		for (String iv : initialValues) {
-			valueCheckBoxes.get(iv).setSelected(true);
-		}
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setViewportView(checkBoxPanel);
-//		JOptionPane pane = new JOptionPane(scrollPane, JOptionPane.PLAIN_MESSAGE, JOptionPane.OK_CANCEL_OPTION);
-//		JDialog dialog = pane.createDialog(parentComponent, "Select value");
-//		dialog.setVisible(true);
-//		if (pane.getValue()==0) {
-		if (JOptionPane.showConfirmDialog(parentComponent, scrollPane, "Select value", JOptionPane.OK_CANCEL_OPTION)==0) {
-			String result = "";
-			for (int i = 0; i < values.size(); i++) {
-				if (valueCheckBoxes.get(values.get(i)).isSelected()) {
-					result += values.get(i) + " ";
-				}
-			}
-//			for (int i : listBox.getSelectedIndices()) {
-//				result += values.get(i) + " ";
-//			}
-			return result.trim();
-		}
-		return initialValue;
-	}
 
 	@Override
 	public String getAttributeValue(EditedAttribute edtAttr, Object parent) {
-		Window parentWindow = null;
-		if (parent instanceof Window) {
-			parentWindow = (Window)parent;
-		}
 		String value = edtAttr.getValue();
 		Element attrList = getAttributeList(edtAttr);
 		if (attrList != null) {
@@ -110,7 +39,7 @@ public class XHTMLAttributeValueEditor extends CustomAttributeValueEditor {
 				if (!possibleValues.contains(v)) possibleValues.add(v);
 			}
 			String newValue = AttributeEditorDialog.showAttributeDialog(
-					parentWindow, 
+					parent, 
 					possibleValues.toArray(new String[0]), value, 
 					allowEdit, allowMultipleValues, 
 					"Edit Attribute "+edtAttr.getAttributeQName());

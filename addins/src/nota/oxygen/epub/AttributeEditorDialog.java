@@ -2,45 +2,37 @@ package nota.oxygen.epub;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.BoxLayout;
-
-import java.awt.GridLayout;
-import java.awt.Dimension;
-import java.awt.event.InputMethodListener;
-import java.awt.event.InputMethodEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeEvent;
-
-import javax.swing.event.CaretListener;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import javax.swing.JToggleButton;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class AttributeEditorDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private String[] possibleValues = new String[0];
+	private boolean allowMultipleValues;
 	
 	private String value;
 	
@@ -62,35 +54,51 @@ public class AttributeEditorDialog extends JDialog {
 		List<String> values = new ArrayList<String>(Arrays.asList(possibleValues));
 		List<String> selectedValues = new ArrayList<String>(); 
 		if (!("".equals(getValue().trim()))) {
-			selectedValues.addAll(Arrays.asList(getValue().split("\\s+")));
+			if (allowMultipleValues) {
+				selectedValues.addAll(Arrays.asList(getValue().split("\\s+")));
+			}
+			else {
+				selectedValues.add(getValue());
+			}
 		}
 		for (int i = 0; i < selectedValues.size(); i++) {
 			if (!values.contains(selectedValues.get(i))) {
 				values.add(selectedValues.get(i));
 			}
 		}
-		checkBoxPanel.invalidate();
-		checkBoxPanel.removeAll();
+		toggleButtonPanel.invalidate();
+		toggleButtonPanel.removeAll();
 		for (int i = 0; i < values.size(); i++) {
-			JCheckBox box = new JCheckBox(values.get(i));
-			box.setSelected(selectedValues.contains(values.get(i)));
-			box.addActionListener(new ActionListener() {
+			JToggleButton toggleButton = allowMultipleValues ? new JCheckBox(values.get(i)) : new JRadioButton(values.get(i));
+			toggleButton.setSelected(selectedValues.contains(values.get(i)));
+			toggleButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					if (e.getSource() instanceof JRadioButton) {
+						JRadioButton button = (JRadioButton)e.getSource();
+						for (Component c : button.getParent().getComponents()) {
+							if (c == button) {
+								continue;
+							}
+							else if (c instanceof JRadioButton) {
+								((JRadioButton)c).setSelected(false);
+							}
+						}
+					}
 					setValue(getValueFromCheckBoxes());
 				}
 			});
-			checkBoxPanel.add(box);
+			toggleButtonPanel.add(toggleButton);
 		}
-		checkBoxPanel.validate();
-		checkBoxPanel.repaint();
+		toggleButtonPanel.validate();
+		toggleButtonPanel.repaint();
 	}
 	
 	private String getValueFromCheckBoxes() {
 		String result = "";
-		for (Component c : checkBoxPanel.getComponents()) {
-			if (c instanceof JCheckBox) {
-				JCheckBox box = (JCheckBox)c;
+		for (Component c : toggleButtonPanel.getComponents()) {
+			if (c instanceof JToggleButton) {
+				JToggleButton box = (JToggleButton)c;
 				if (box.isSelected()) {
 					result += box.getText() + " ";
 				}
@@ -104,14 +112,16 @@ public class AttributeEditorDialog extends JDialog {
 	}
 
 	private JTextField valueTextField;
-	private JPanel checkBoxPanel;
+	private JPanel toggleButtonPanel;
 	
 	public static String showAttributeDialog(
-			Window owner, String[] valueList, String initialValue, 
+			Object owner, String[] valueList, String initialValue, 
 			boolean allowEdit, boolean allowMultipleValues, String title) {
 		AttributeEditorDialog dialog = new AttributeEditorDialog(owner);
 		dialog.setTitle(title);
 		dialog.possibleValues = valueList;
+		dialog.valueTextField.setEditable(allowEdit);
+		dialog.allowMultipleValues = allowMultipleValues;
 		dialog.setValue(initialValue);
 		dialog.setModal(true);
 		dialog.setVisible(true);
@@ -122,13 +132,46 @@ public class AttributeEditorDialog extends JDialog {
 	}
 	
 	private boolean okPressed = false;
+	
+	
+	private static Window getAncestralWindow(Object obj) {
+		if (obj instanceof Window) {
+			return (Window)obj;
+		}
+		else if (obj instanceof Component) {
+			return getAncestralWindow(((Component)obj).getParent());
+		}
+		return null;
+	}
+	
+	private Rectangle getOptimalBounds(Object parent) {
+		Rectangle result = new Rectangle(getPreferredSize()); 
+		Rectangle parentBounds = null;
+		if (parent instanceof Container) {
+			parentBounds = ((Container)parent).getBounds();
+			parentBounds.setLocation(((Container)parent).getLocationOnScreen());
+			if (parentBounds.width>=getPreferredSize().width && parentBounds.height>=getPreferredSize().height) {
+				result.x = parentBounds.x;
+				result.y = parentBounds.y;
+			}
+			else if (getOwner() != null) {
+				parentBounds = getOwner().getBounds();
+				if (parentBounds.width>=getPreferredSize().width && parentBounds.height>=getPreferredSize().height) {
+					result.x = parentBounds.x + (parentBounds.width-getPreferredSize().width)/2;
+					result.y = parentBounds.y + (parentBounds.height-getPreferredSize().height)/2;
+				}				
+			}
+		}
+		return result;
+	}
 
 	/**
 	 * Create the dialog.
 	 */
-	private AttributeEditorDialog(Window owner) {
-		super(owner);
-		setBounds(100, 100, 300, 400);
+	private AttributeEditorDialog(Object owner) {
+		super(getAncestralWindow(owner));
+		setPreferredSize(new Dimension(300, 400));
+		setBounds(getOptimalBounds(owner));
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -154,9 +197,9 @@ public class AttributeEditorDialog extends JDialog {
 			JScrollPane scrollPane = new JScrollPane();
 			contentPanel.add(scrollPane);
 			{
-				checkBoxPanel = new JPanel();
-				scrollPane.setViewportView(checkBoxPanel);
-				checkBoxPanel.setLayout(new BoxLayout(checkBoxPanel, BoxLayout.PAGE_AXIS));
+				toggleButtonPanel = new JPanel();
+				scrollPane.setViewportView(toggleButtonPanel);
+				toggleButtonPanel.setLayout(new BoxLayout(toggleButtonPanel, BoxLayout.PAGE_AXIS));
 			}
 		}
 		{

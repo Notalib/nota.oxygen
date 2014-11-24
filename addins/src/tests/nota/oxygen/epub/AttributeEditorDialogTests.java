@@ -12,5 +12,11 @@ public class AttributeEditorDialogTests {
 		assertNotNull(value);
 		value = AttributeEditorDialog.showAttributeDialog(null, new String[] {"a",  "b",  "c",  "d"}, "a b", true, true, "Enter attribute value and press Cancel");
 		assertNull(value);
+		value = AttributeEditorDialog.showAttributeDialog(null, new String[] {"a",  "b",  "c",  "d"}, "a b", true, false, "Enter attribute value and press OK");
+		assertNotNull(value);
+		value = AttributeEditorDialog.showAttributeDialog(null, new String[] {"a",  "b",  "c",  "d"}, "a b", false, true, "Enter attribute value and press OK");
+		assertNotNull(value);
+		value = AttributeEditorDialog.showAttributeDialog(null, new String[] {"a",  "b",  "c",  "d"}, "a b", false, false, "Enter attribute value and press OK");
+		assertNotNull(value);
 	}
 }

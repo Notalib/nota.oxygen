@@ -1,5 +1,7 @@
 package nota.oxygen.epub;
 
+import java.net.URL;
+
 import nota.oxygen.common.Utils;
 
 import org.w3c.dom.Document;
@@ -44,15 +46,12 @@ public class XHTMLExtensionsBundle extends ro.sync.ecss.extensions.xhtml.XHTMLEx
 	public static Document getAttributeValueListsDocument() {
 		if (attributeValueListsDocument == null) {
 			try {
-				attributeValueListsDocument = Utils.deserializeDocument(
-						"<attributeValueLists>"
-						+ "<attributeValueList parentElementNames='body section' attributeNames='class' allowMultipleValues='true' allowEdit='false'>"
-						+ "<value>render-optional</value>"
-						+ "<value>jacketcopy</value>"
-						+ "<value>frontcover</value>"
-						+ "<value>rearcover</value>"
-						+ "</attributeValueList>"
-						+ "</attributeValueLists>", null);
+				try {
+					attributeValueListsDocument = Utils.loadDocument(new URL("http://notalib.github.io/nota.oxygen/attributeValueLists.xml"));
+				}
+				catch (Exception e) {
+					attributeValueListsDocument = Utils.deserializeDocument("<attributeValueLists/>", null);
+				}
 			}
 			catch (AuthorOperationException e) {
 				attributeValueListsDocument = null;
