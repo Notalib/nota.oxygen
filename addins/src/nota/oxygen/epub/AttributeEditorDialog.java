@@ -1,9 +1,12 @@
 package nota.oxygen.epub;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.FlowLayout;
+import java.awt.Window;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -15,57 +18,130 @@ import java.awt.GridLayout;
 import java.awt.Dimension;
 import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
+
+import javax.swing.event.CaretListener;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 @SuppressWarnings("serial")
 public class AttributeEditorDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField valueTextField;
+	private String[] possibleValues = new String[0];
+	
+	private String value;
+	
+	public void setValue(String val) {
+		if (value == null) {
+			if (val == null) {
+				return;
+			}
+		}
+		else if (value.equals(val)) {
+			return;
+		}
+		value = val;
+		valueTextField.setText(value);
+		updateCheckBoxes();
+	}
+	
+	private void updateCheckBoxes() {
+		List<String> values = new ArrayList<String>(Arrays.asList(possibleValues));
+		List<String> selectedValues = Arrays.asList(getValue().split("\\s+"));
+		for (int i = 0; i < selectedValues.size(); i++) {
+			if (!values.contains(selectedValues.get(i))) {
+				values.add(selectedValues.get(i));
+			}
+		}
+		checkBoxPanel.invalidate();
+		checkBoxPanel.removeAll();
+		for (int i = 0; i < values.size(); i++) {
+			JCheckBox box = new JCheckBox(values.get(i));
+			box.setSelected(selectedValues.contains(values.get(i)));
+			box.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					setValue(getValueFromCheckBoxes());
+					
+				}
+			});
+			checkBoxPanel.add(box);
+		}
+		checkBoxPanel.validate();
+		checkBoxPanel.repaint();
+	}
+	
+	private String getValueFromCheckBoxes() {
+		String result = "";
+		for (Component c : checkBoxPanel.getComponents()) {
+			if (c instanceof JCheckBox) {
+				JCheckBox box = (JCheckBox)c;
+				if (box.isSelected()) {
+					result += box.getText() + " ";
+				}
+			}
+		}
+		return result.trim();
+	}
+	
+	public String getValue() {
+		return valueTextField.getText();
+	}
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			AttributeEditorDialog dialog = new AttributeEditorDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
+	private JTextField valueTextField;
+	private JPanel checkBoxPanel;
+	
+	public static String showAttributeDialog(
+			Window owner, String[] valueList, String initialValue, 
+			boolean allowEdit, boolean allowMultipleValues, String title) {
+		AttributeEditorDialog dialog = new AttributeEditorDialog(owner);
+		dialog.setTitle(title);
+		dialog.possibleValues = valueList;
+		dialog.setValue(initialValue);
+		dialog.setModal(true);
+		dialog.setVisible(true);
+		if (dialog.okPressed) {
+			return dialog.getValue();
 		}
+		return null;
 	}
 	
-	private String[] selectedValues = new String[0];
-	
-	public void setSelectedValues(String[] val) {
-		if (val == null && selectedValues != null) {
-			selectedValues = null;
-		}
-		else if (!selectedValues.equals(val)) {
-			
-		}
-	}
-	
-	public String[] getSelectedValues() {
-		return selectedValues;
-	}
+	private boolean okPressed = false;
 
 	/**
 	 * Create the dialog.
 	 */
-	public AttributeEditorDialog() {
-		setBounds(100, 100, 450, 300);
+	private AttributeEditorDialog(Window owner) {
+		super(owner);
+		setBounds(100, 100, 300, 400);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
 		{
 			valueTextField = new JTextField();
-			valueTextField.addInputMethodListener(new InputMethodListener() {
-				public void caretPositionChanged(InputMethodEvent arg0) {
+			valueTextField.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent event) {
+					setValue(valueTextField.getText());
 				}
-				public void inputMethodTextChanged(InputMethodEvent arg0) {
-					
+			});
+			valueTextField.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					setValue(valueTextField.getText());
 				}
 			});
 			valueTextField.setMaximumSize(new Dimension(2147483647, 20));
@@ -76,8 +152,9 @@ public class AttributeEditorDialog extends JDialog {
 			JScrollPane scrollPane = new JScrollPane();
 			contentPanel.add(scrollPane);
 			{
-				JPanel checkBoxPanel = new JPanel();
+				checkBoxPanel = new JPanel();
 				scrollPane.setViewportView(checkBoxPanel);
+				checkBoxPanel.setLayout(new BoxLayout(checkBoxPanel, BoxLayout.PAGE_AXIS));
 			}
 		}
 		{
@@ -86,12 +163,25 @@ public class AttributeEditorDialog extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						okPressed = true;
+						setVisible(false);
+						dispose();
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						setVisible(false);
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
