@@ -94,9 +94,9 @@ public class XHTMLAttributeValueEditor extends CustomAttributeValueEditor {
 
 	@Override
 	public String getAttributeValue(EditedAttribute edtAttr, Object parent) {
-		Component parentComponent = null;
-		if (parent instanceof Component) {
-			parentComponent = (Component)parent;
+		Window parentWindow = null;
+		if (parent instanceof Window) {
+			parentWindow = (Window)parent;
 		}
 		String value = edtAttr.getValue();
 		Element attrList = getAttributeList(edtAttr);
@@ -109,16 +109,13 @@ public class XHTMLAttributeValueEditor extends CustomAttributeValueEditor {
 				String v = valueNodes.item(i).getTextContent();
 				if (!possibleValues.contains(v)) possibleValues.add(v);
 			}
-			if (allowMultipleValues) {
-				if (allowEdit) {
-					
-				}
-				else {
-					value = selectFromListBox(possibleValues, value, parentComponent);
-				}				
-			}
-			else {
-				value = selectFromComboBox(possibleValues, value, allowEdit, parentComponent);
+			String newValue = AttributeEditorDialog.showAttributeDialog(
+					parentWindow, 
+					possibleValues.toArray(new String[0]), value, 
+					allowEdit, allowMultipleValues, 
+					"Edit Attribute "+edtAttr.getAttributeQName());
+			if (newValue != null) {
+				return newValue;
 			}
 		}
 		return value;

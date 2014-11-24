@@ -60,7 +60,10 @@ public class AttributeEditorDialog extends JDialog {
 	
 	private void updateCheckBoxes() {
 		List<String> values = new ArrayList<String>(Arrays.asList(possibleValues));
-		List<String> selectedValues = Arrays.asList(getValue().split("\\s+"));
+		List<String> selectedValues = new ArrayList<String>(); 
+		if (!("".equals(getValue().trim()))) {
+			selectedValues.addAll(Arrays.asList(getValue().split("\\s+")));
+		}
 		for (int i = 0; i < selectedValues.size(); i++) {
 			if (!values.contains(selectedValues.get(i))) {
 				values.add(selectedValues.get(i));
@@ -75,7 +78,6 @@ public class AttributeEditorDialog extends JDialog {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					setValue(getValueFromCheckBoxes());
-					
 				}
 			});
 			checkBoxPanel.add(box);
