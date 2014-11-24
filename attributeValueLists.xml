@@ -27,4 +27,13 @@
         <value>rearnotes</value>
         <value>footnotes</value>
     </attributeValueList>
+    <attributeValueList parentElementNames="*" attributeNames="xml:lang"
+        allowMultipleValues="false" allowEdit="true">
+        <value>da</value>
+        <value>de</value>
+        <value>en</value>
+        <value>fr</value>
+        <value>no</value>
+        <value>sv</value>
+    </attributeValueList>
 </attributeValueLists>
