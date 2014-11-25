@@ -29,11 +29,16 @@
     </attributeValueList>
     <attributeValueList parentElementNames="*" attributeNames="xml:lang"
         allowMultipleValues="false" allowEdit="true">
-        <value>da</value>
-        <value>de</value>
-        <value>en</value>
-        <value>fr</value>
-        <value>no</value>
-        <value>sv</value>
-    </attributeValueList>
+		<value>da</value>
+		<value>de</value>
+		<value>de-CH</value>
+		<value>en</value>
+		<value>fi</value>
+		<value>fr</value>
+		<value>nb-NO</value>
+		<value>nn-NO</value>
+		<value>no</value>
+		<value>sv</value>
+		<value>sv-FI</value>
+	</attributeValueList>
 </attributeValueLists>
