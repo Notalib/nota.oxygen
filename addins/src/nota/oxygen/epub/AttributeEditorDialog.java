@@ -23,6 +23,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.border.EmptyBorder;
@@ -143,13 +144,24 @@ public class AttributeEditorDialog extends JDialog {
 		}
 		return null;
 	}
+
+	private static JScrollPane getAncestralJScrollPane(Object obj) {
+		if (obj instanceof JScrollPane) {
+			return (JScrollPane)obj;
+		}
+		else if (obj instanceof Component) {
+			return getAncestralJScrollPane(((Component)obj).getParent());
+		}
+		return null;
+	}
 	
 	private Rectangle getOptimalBounds(Object parent) {
 		Rectangle result = new Rectangle(getPreferredSize()); 
 		Rectangle parentBounds = null;
-		if (parent instanceof Container) {
-			parentBounds = ((Container)parent).getBounds();
-			parentBounds.setLocation(((Container)parent).getLocationOnScreen());
+		JScrollPane parentScrollPane = getAncestralJScrollPane(parent);
+		if (parentScrollPane != null) {
+			parentBounds = parentScrollPane.getBounds();
+			parentBounds.setLocation(parentScrollPane.getLocationOnScreen());
 			if (parentBounds.width>=getPreferredSize().width && parentBounds.height>=getPreferredSize().height) {
 				result.x = parentBounds.x;
 				result.y = parentBounds.y;
