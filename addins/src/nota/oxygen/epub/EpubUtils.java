@@ -222,7 +222,7 @@ public class EpubUtils {
 				return false;
 			}
 			
-			AuthorElement item = getFirstElement(opfCtrl.findNodesByXPath(String.format("/package/manifest/item[@href='%s']", fileName), true, true, true));
+			AuthorElement item = getFirstElement(opfCtrl.findNodesByXPath(String.format("/package/manifest/item[contains(@href,'%s')]", fileName), true, true, true));
 			if (item != null) {
 				String idValue = item.getAttribute("id").getValue();
 				opfCtrl.removeAttribute("fallback", item);
