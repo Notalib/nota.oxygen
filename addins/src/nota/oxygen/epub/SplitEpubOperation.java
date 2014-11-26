@@ -334,7 +334,7 @@ public class SplitEpubOperation extends BaseAuthorOperation
 	{
 		_DocNumber = _DocNumber + 1;
 
-		String XmlTemplate = "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:epub=\"http://www.idpf.org/2007/ops\" xmlns:nordic=\"http://www.mtm.se/epub/\" epub:prefix=\"z3998: http://www.daisy.org/z3998/2012/vocab/structure/#\">\n" + "<head>\n" + "<title>"
+		String XmlTemplate = "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:epub=\"http://www.idpf.org/2007/ops\" xmlns:nordic=\"http://www.mtm.se/epub/\" epub:prefix=\"z3998: http://www.daisy.org/z3998/2012/vocab/structure/#\">\n" + "<head>\n" + "<meta charset=\"UTF-8\"/>\n"  +  "<title>"
 				+ _SourceTitle + "</title>\n" + "</head>\n" + " <body/>\n" + "</html>";
 
 		Document Template = Utils.deserializeDocument(XmlTemplate, null);
@@ -368,15 +368,23 @@ public class SplitEpubOperation extends BaseAuthorOperation
 		for (int i = 0; i < _MetaNodes.getLength(); i++)
 		{
 			Node n = _MetaNodes.item(i);
-			Node ImpNode = Template.importNode(n, true);
-			TemplateHead.appendChild(ImpNode);
+			
+			//We don't want the charset node
+			String AttVal=GetAttributeFromNode(n, "charset");
+			
+			if(AttVal.equals(""))
+			{
+				Node ImpNode = Template.importNode(n, true);
+				TemplateHead.appendChild(ImpNode);
+			}
+			
 		}
-
+		
 		// Read Section Node
 		// Section Classname
 		String Classname = GetAttributeFromNode(Section, "class");
 
-		if (Classname != "")
+		if (!Classname.equals(""))
 		{
 			// Add class to body
 			Attr attClass = Template.createAttribute("class");
@@ -390,7 +398,7 @@ public class SplitEpubOperation extends BaseAuthorOperation
 		// Section Id
 		String Id = GetAttributeFromNode(Section, "id");
 
-		if (Id != "")
+		if (!Id.equals(""))
 		{
 			// Add id to body
 			Attr attID = Template.createAttribute("id");
@@ -403,20 +411,20 @@ public class SplitEpubOperation extends BaseAuthorOperation
 
 		// Section epub:type
 		String EpubType = GetAttributeFromNode(Section, "epub:type");
+		
+		// Add id to body
+		Attr attEpubType = Template.createAttributeNS("http://www.idpf.org/2007/ops", "epub:type");
+		attEpubType.setValue(EpubType);
+		NamedNodeMap BodyAtts = TemplateBody.getAttributes();
+		BodyAtts.setNamedItemNS(attEpubType);
 
-		String EpubMainType = "unknown";
+		// epub:type might be divided by spaces - only 1 value will be used
 
-		if (EpubType != "")
+		String EpubMainType = GetEpubMainType(EpubType);
+
+		if(EpubMainType.equals(""))
 		{
-			// Add id to body
-			Attr attEpubType = Template.createAttributeNS("http://www.idpf.org/2007/ops", "epub:type");
-			attEpubType.setValue(EpubType);
-			NamedNodeMap BodyAtts = TemplateBody.getAttributes();
-			BodyAtts.setNamedItemNS(attEpubType);
-
-			// epub:type might be divided by spaces - only 1 value will be used
-
-			EpubMainType = GetEpubMainType(EpubType);
+		    EpubMainType = "unknown";
 		}
 
 		// IXml = GetOuterXml(TemplateBody);
