@@ -528,10 +528,22 @@ public class SplitEpubOperation extends BaseAuthorOperation
 			}
 
 			// add xhtml document to opf document
-			if (!EpubUtils.addOpfItem(getAuthorAccess(), splitFileName)) {
-				showMessage(EpubUtils.ERROR_MESSAGE);
-				return;
+			if(splitFileName.contains("-cover.xhtml"))
+			{
+				if (!EpubUtils.addOpfItem(getAuthorAccess(), splitFileName, false)) {
+					showMessage(EpubUtils.ERROR_MESSAGE);
+					return;
+				}
 			}
+			else
+			{
+				if (!EpubUtils.addOpfItem(getAuthorAccess(), splitFileName, true)) {
+					showMessage(EpubUtils.ERROR_MESSAGE);
+					return;
+				}
+			}
+			
+			
 		} catch (Exception e) {
 			showMessage("Could not save this document: " + splitFileName
 					+ ". Error: " + e.getMessage());

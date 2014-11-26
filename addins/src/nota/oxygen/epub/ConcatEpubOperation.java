@@ -184,7 +184,7 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 			}
 			
 			// add xhtml document to opf document
-			if (!EpubUtils.addOpfItem(getAuthorAccess(), EpubUtils.CONCAT_FILENAME)) {
+			if (!EpubUtils.addOpfItem(getAuthorAccess(), EpubUtils.CONCAT_FILENAME, true)) {
 				showMessage(EpubUtils.ERROR_MESSAGE);
 				return;
 			}

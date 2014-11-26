@@ -284,7 +284,7 @@ public class EpubUtils {
 		return true;
 	}
 	
-	public static boolean addOpfItem(AuthorAccess opfAccess, String fileName) {
+	public static boolean addOpfItem(AuthorAccess opfAccess, String fileName, boolean linear) {
 		ERROR_MESSAGE = "";
 		
 		if (opfAccess == null) {
@@ -305,7 +305,10 @@ public class EpubUtils {
 		
 			AuthorElement item = getFirstElement(opfCtrl.findNodesByXPath(String.format("/package/manifest/item[@href='%s']", fileName), true, true, true));
 			if (item == null) {
+				
 				String itemXml = "<item xmlns='" + EpubUtils.OPF_NS + "' media-type='application/xhtml+xml' href='" + fileName + "'/>";
+			
+				
 				opfCtrl.insertXMLFragment(itemXml, manifest.getEndOffset());
 				opfCtrl.getUniqueAttributesProcessor().assignUniqueIDs(manifest.getStartOffset(), manifest.getEndOffset(), true);
 				
@@ -315,7 +318,18 @@ public class EpubUtils {
 
 					AuthorElement itemRef = getFirstElement(opfCtrl.findNodesByXPath(String.format("/package/spine/itemref[@idref='%s']", idValue), true, true, true));
 					if (itemRef == null) {
-						String itemRefXml = "<itemref xmlns='" + EpubUtils.OPF_NS + "' idref='" + idValue + "'/>";
+						
+						String itemRefXml="";
+						
+						if(linear)
+						{
+							itemRefXml = "<itemref xmlns='" + EpubUtils.OPF_NS + "' idref='" + idValue + "'/>";
+						}
+						else
+						{
+							itemRefXml = "<itemref xmlns='" + EpubUtils.OPF_NS + "' idref='" + idValue + "' linear='no'/>";
+						}
+						
 						opfCtrl.insertXMLFragment(itemRefXml, spine.getEndOffset());
 					}
 				}
