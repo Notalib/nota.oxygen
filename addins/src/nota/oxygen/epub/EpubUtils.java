@@ -204,6 +204,46 @@ public class EpubUtils {
 		return null;
 	}
 	
+	public static boolean removeFallbackFromOpf(AuthorAccess opfAccess, String fileName) {
+		ERROR_MESSAGE = "";
+		
+		if (opfAccess == null) {
+			ERROR_MESSAGE = "Could not access opf document";
+			return false;
+		}
+		
+		AuthorDocumentController opfCtrl = opfAccess.getDocumentController();
+		opfCtrl.beginCompoundEdit();
+		
+		try {
+			AuthorElement manifest = getFirstElement(opfCtrl.findNodesByXPath("/package/manifest", true, true, true));
+			if (manifest == null) {
+				ERROR_MESSAGE = "Found no manifest in package file";
+				return false;
+			}
+			
+			AuthorElement item = getFirstElement(opfCtrl.findNodesByXPath(String.format("/package/manifest/item[@href='%s']", fileName), true, true, true));
+			if (item != null) {
+				String idValue = item.getAttribute("id").getValue();
+				opfCtrl.removeAttribute("fallback", item);
+				
+				AuthorElement itemRef = getFirstElement(opfCtrl.findNodesByXPath(String.format("/package/spine/itemref[@idref='%s']", idValue), true, true, true));
+				if (itemRef != null) {
+					opfCtrl.deleteNode(itemRef);
+				}
+			}
+		}
+		catch (Exception e) {
+			opfCtrl.cancelCompoundEdit();
+			ERROR_MESSAGE = "Could not add item to opf document - an error occurred: " + e.getMessage();
+			return false;
+		}
+		
+		opfCtrl.endCompoundEdit();
+		
+		return true;
+	}
+	
 	public static boolean removeOpfItem(AuthorAccess opfAccess, String fileName) {
 		ERROR_MESSAGE = "";
 		

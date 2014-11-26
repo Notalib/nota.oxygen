@@ -39,9 +39,6 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 	
 	@Override
 	protected void doOperation() throws AuthorOperationException {		
-		
-		String Urlname="x";
-		
 		try {
 			// get epub folder path
 			epubFilePath = EpubUtils.getEpubFolder(getAuthorAccess());
@@ -68,16 +65,19 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 			Element headElementAdded = (Element) doc.createElement("head");
 			Element bodyElementAdded = (Element) doc.createElement("body");
 			
-			
 			// traverse each xhtml document in epub
 			for (URL xhtmlUrl : xhtmlUrls) {
+				String fileName = getAuthorAccess().getUtilAccess().getFileName(xhtmlUrl.toString());
 				
-				Urlname=xhtmlUrl.toString();
-				
-				if(!Urlname.substring(Urlname.lastIndexOf(".")).equals(".xhtml"))
+				if(!xhtmlUrl.toString().substring(xhtmlUrl.toString().lastIndexOf(".")).equals(".xhtml"))
 				{
+					if (!EpubUtils.removeFallbackFromOpf(getAuthorAccess(), fileName)) {
+						showMessage(EpubUtils.ERROR_MESSAGE);
+						return;
+					}
 					continue;
 				}
+				
 				// get xml from each xhtml document
 				WSTextEditorPage editorPage = EpubUtils.getTextDocument(getAuthorAccess(), xhtmlUrl);
 				JTextArea textArea = (JTextArea) ((WSTextEditorPage) editorPage).getTextComponent();
@@ -163,7 +163,7 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 				}
 				
 				// remove xhtml document from opf document
-				String fileName = getAuthorAccess().getUtilAccess().getFileName(xhtmlUrl.toString());
+				
 				if (!EpubUtils.removeOpfItem(getAuthorAccess(), fileName)) {
 					showMessage(EpubUtils.ERROR_MESSAGE);
 					return;
@@ -210,7 +210,7 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 			getAuthorAccess().getWorkspaceAccess().closeAll();
 		} catch (Exception e) {
 			e.printStackTrace();
-			showMessage(Urlname + " Could not finalize operation - an error occurred: " + e.getMessage());
+			showMessage("Could not finalize operation - an error occurred: " + e.getMessage());
 			return;
 		}
 	}
