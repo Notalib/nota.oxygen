@@ -39,7 +39,7 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 	
 	@Override
 	protected void doOperation() throws AuthorOperationException {	
-		String fileName = "";
+		String fileName = "", fileEpubType = "";
 		try {
 			// get epub folder path
 			epubFilePath = EpubUtils.getEpubFolder(getAuthorAccess());
@@ -69,6 +69,7 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 			// traverse each xhtml document in epub
 			for (URL xhtmlUrl : xhtmlUrls) {
 				fileName = getAuthorAccess().getUtilAccess().getFileName(xhtmlUrl.toString());
+				fileEpubType = fileName.substring(fileName.lastIndexOf("-") + 1, fileName.lastIndexOf("."));
 				
 				if(!xhtmlUrl.toString().substring(xhtmlUrl.toString().lastIndexOf(".")).equals(".xhtml"))
 				{
@@ -133,11 +134,27 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 
 						// append body attributes to new section
 						NamedNodeMap bodyAttributes = htmlNode.getAttributes();
+						
 						for (int j = 0; j < bodyAttributes.getLength(); j++) {
-							Attr attribute = (Attr) bodyAttributes.item(j);
-							sectionElement.setAttributeNS(attribute.getNamespaceURI(), attribute.getName(), attribute.getValue());
+							Attr attr = (Attr) bodyAttributes.item(j);
+							String attrName = attr.getName();
+							String attrValue = attr.getValue();
+							if (attrName.equals("epub:type")) {
+								String[] epubTypes = attrValue.split("\\ ");
+								boolean epubTypeOk = false;
+								for (String epubType : epubTypes) {
+									if (!epubType.equals("frontmatter") && !epubType.equals("bodymatter")  && !epubType.equals("backmatter") && !epubType.equals("rearmatter")) {
+										epubTypeOk = true;
+									}
+								}
+								
+								if (!epubTypeOk && !fileEpubType.equals("") && !fileEpubType.equals("frontmatter") && !fileEpubType.equals("bodymatter")  && !fileEpubType.equals("backmatter") && !fileEpubType.equals("rearmatter")) {
+									attrValue = attrValue + " " + fileEpubType;
+								}
+							}
+							sectionElement.setAttributeNS(attr.getNamespaceURI(), attrName, attrValue);
 						}
-
+						
 						// append body elements
 						NodeList bodyNodes = htmlNode.getChildNodes();
 						for (int j = 0; j < bodyNodes.getLength(); j++) {
@@ -148,13 +165,18 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 						NodeList refNodes = sectionElement.getElementsByTagName("a");
 						for (int j = 0; j < refNodes.getLength(); j++) {
 							Node refNode = refNodes.item(j);
-							NamedNodeMap attributes = refNode.getAttributes();
-							for (int k=0; k<attributes.getLength(); k++) {
-								Attr attribute = (Attr) attributes.item(k);
-								if (attribute.getNodeName().equalsIgnoreCase("href")) {
-									if (attribute.getNodeValue().contains("#")) {
+							NamedNodeMap attrs = refNode.getAttributes();
+							for (int k=0; k<attrs.getLength(); k++) {
+								Attr attr = (Attr) attrs.item(k);
+								if (attr.getNodeName().equalsIgnoreCase("href")) {
+									if (!attr.getNodeValue().contains("www") && attr.getNodeValue().contains("#")) {
 										// remove file reference
-										attribute.setNodeValue(attribute.getNodeValue().substring(attribute.getNodeValue().indexOf("#")));
+										attr.setNodeValue(attr.getNodeValue().substring(attr.getNodeValue().indexOf("#")));
+									}
+									else if (!attr.getNodeValue().contains("www") && !attr.getNodeValue().contains("#")) {
+										// error file reference should reference a id
+										showMessage("File references (in " + fileName +") does not reference ids in files");
+										return;
 									}
 								}
 							}

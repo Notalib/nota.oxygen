@@ -6445,62 +6445,6 @@ else 'rearnotes backmatter'
 														<Integer>7</Integer>
 													</field>
 													<field name="uri">
-														<String>${framework}/schema/nordic2015-1.strict.sch</String>
-													</field>
-												</validationUnitSchema>
-											</field>
-										</validationUnit>
-									</list>
-								</field>
-								<field name="type">
-									<String>Validation_scenario</String>
-								</field>
-								<field name="name">
-									<String>XHTML ePub Nordic 2015 strict</String>
-								</field>
-							</validationScenario>
-							<validationScenario>
-								<field name="pairs">
-									<list>
-										<validationUnit>
-											<field name="validationType">
-												<validationUnitType>
-													<field name="validationInputType">
-														<String>text/xml</String>
-													</field>
-												</validationUnitType>
-											</field>
-											<field name="url">
-												<String>${currentFileURL}</String>
-											</field>
-											<field name="validationEngine">
-												<validationEngine>
-													<field name="engineType">
-														<String>&lt;Default engine></String>
-													</field>
-													<field name="allowsAutomaticValidation">
-														<Boolean>true</Boolean>
-													</field>
-												</validationEngine>
-											</field>
-											<field name="allowAutomaticValidation">
-												<Boolean>true</Boolean>
-											</field>
-											<field name="extensions">
-												<null/>
-											</field>
-											<field name="validationSchema">
-												<validationUnitSchema>
-													<field name="dtdSchemaPublicID">
-														<null/>
-													</field>
-													<field name="schematronPhase">
-														<null/>
-													</field>
-													<field name="type">
-														<Integer>7</Integer>
-													</field>
-													<field name="uri">
 														<String>${framework}/schema/nordic-single-file2015-1.sch</String>
 													</field>
 												</validationUnitSchema>
@@ -6520,7 +6464,6 @@ else 'rearnotes backmatter'
 					<field name="defaultValidationScenarios">
 						<list>
 							<String>XHTML ePub Nordic 2015</String>
-							<String>XHTML ePub Nordic 2015 strict</String>
 						</list>
 					</field>
 					<field name="defaultTransformationScenarios">
