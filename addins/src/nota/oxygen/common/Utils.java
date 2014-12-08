@@ -133,6 +133,20 @@ public class Utils {
 		
 	}
 	
+	public static Document loadDocument(URL docUrl) throws AuthorOperationException {
+		DOMImplementationLS impl = getDOMImplementationLS();
+		LSParser builder = impl.createLSParser(DOMImplementationLS.MODE_SYNCHRONOUS, null);
+		LSInput input = impl.createLSInput();
+		try {
+			input.setByteStream(docUrl.openStream());
+		} 
+		catch (IOException e) {
+			throw new AuthorOperationException(
+					"Could not load document from url"+docUrl.toString()+":\n"+e.getMessage(), e);
+		}
+		return builder.parse(input);
+	}
+	
 
 	/**
 	 * De-serializes a xml document {@link String} representation to a {@link Document} 

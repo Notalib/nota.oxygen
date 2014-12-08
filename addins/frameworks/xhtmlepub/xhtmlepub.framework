@@ -3035,7 +3035,7 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
-																<String>&lt;span lang="da" xml:lang="da" xmlns="http://www.w3.org/1999/xhtml">&lt;/span></String>
+																<String>&lt;span xml:lang="da" xmlns="http://www.w3.org/1999/xhtml">&lt;/span></String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
@@ -3078,7 +3078,7 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
-																<String>&lt;span lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">&lt;/span></String>
+																<String>&lt;span xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">&lt;/span></String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
@@ -3121,7 +3121,7 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
-																<String>&lt;span lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">&lt;/span></String>
+																<String>&lt;span xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">&lt;/span></String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
@@ -3164,7 +3164,7 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
-																<String>&lt;span lang="no" xml:lang="no" xmlns="http://www.w3.org/1999/xhtml">&lt;/span></String>
+																<String>&lt;span xml:lang="no" xmlns="http://www.w3.org/1999/xhtml">&lt;/span></String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
@@ -3207,7 +3207,7 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
-																<String>&lt;span lang="se" xml:lang="se" xmlns="http://www.w3.org/1999/xhtml">&lt;/span></String>
+																<String>&lt;span xml:lang="se" xmlns="http://www.w3.org/1999/xhtml">&lt;/span></String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
@@ -3250,7 +3250,7 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
-																<String>&lt;span lang="de" xml:lang="de" xmlns="http://www.w3.org/1999/xhtml">&lt;/span></String>
+																<String>&lt;span xml:lang="de" xmlns="http://www.w3.org/1999/xhtml">&lt;/span></String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
@@ -3266,10 +3266,10 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											<String>attribute.lang.danish</String>
 										</field>
 										<field name="name">
-											<String>lang: Danish</String>
+											<String>Current element: Danish</String>
 										</field>
 										<field name="description">
-											<String>Sets the lang attribute on the current element to "da"</String>
+											<String>Sets thexml lang attribute on the current element to "da"</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -3297,7 +3297,7 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 															</entry>
 															<entry>
 																<String>name</String>
-																<String>lang</String>
+																<String>xml:lang</String>
 															</entry>
 															<entry>
 																<String>value</String>
@@ -3317,10 +3317,10 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											<String>attribute.lang.english</String>
 										</field>
 										<field name="name">
-											<String>lang: English</String>
+											<String>Current element: English</String>
 										</field>
 										<field name="description">
-											<String>Sets the lang attribute on the current element to "en"</String>
+											<String>Sets the xml:lang attribute on the current element to "en"</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -3348,7 +3348,7 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 															</entry>
 															<entry>
 																<String>name</String>
-																<String>lang</String>
+																<String>xml:lang</String>
 															</entry>
 															<entry>
 																<String>value</String>
@@ -3368,10 +3368,10 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											<String>attribute.lang.french</String>
 										</field>
 										<field name="name">
-											<String>lang: French</String>
+											<String>Current element: French</String>
 										</field>
 										<field name="description">
-											<String>Sets the lang attribute on the current element to "fr"</String>
+											<String>Sets the xml:lang attribute on the current element to "fr"</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -3399,7 +3399,7 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 															</entry>
 															<entry>
 																<String>name</String>
-																<String>lang</String>
+																<String>xml:lang</String>
 															</entry>
 															<entry>
 																<String>value</String>
@@ -3419,10 +3419,10 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											<String>attribute.lang.german</String>
 										</field>
 										<field name="name">
-											<String>lang: German</String>
+											<String>Current element: German</String>
 										</field>
 										<field name="description">
-											<String>Sets the lang attribute on the current element to "de"</String>
+											<String>Sets the xml:lang attribute on the current element to "de"</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -3450,7 +3450,7 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 															</entry>
 															<entry>
 																<String>name</String>
-																<String>lang</String>
+																<String>xml:lang</String>
 															</entry>
 															<entry>
 																<String>value</String>
@@ -3470,10 +3470,10 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											<String>attribute.lang.norwegian</String>
 										</field>
 										<field name="name">
-											<String>lang: Norwegian</String>
+											<String>Current element: Norwegian</String>
 										</field>
 										<field name="description">
-											<String>Sets the lang attribute on the current element to "no"</String>
+											<String>Sets the xml:lang attribute on the current element to "no"</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -3501,7 +3501,7 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 															</entry>
 															<entry>
 																<String>name</String>
-																<String>lang</String>
+																<String>xml:lang</String>
 															</entry>
 															<entry>
 																<String>value</String>
@@ -3521,10 +3521,10 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 											<String>attribute.lang.swedish</String>
 										</field>
 										<field name="name">
-											<String>lang: Swedish</String>
+											<String>Current element: Swedish</String>
 										</field>
 										<field name="description">
-											<String>Sets the lang attribute on the current element to "se"</String>
+											<String>Sets the xml:lang attribute on the current element to "se"</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -3552,330 +3552,11 @@ ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*
 															</entry>
 															<entry>
 																<String>name</String>
-																<String>lang</String>
+																<String>xml:lang</String>
 															</entry>
 															<entry>
 																<String>value</String>
 																<String>se</String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.ChangeAttributeOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-									</action>
-									<action>
-										<field name="id">
-											<String>language.element.danish</String>
-										</field>
-										<field name="name">
-											<String>Current element: Danish</String>
-										</field>
-										<field name="description">
-											<String>Sets the language of the current element to Danish</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String></String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>actionIDs</String>
-																<String>attribute.lang.danish
-attribute.xmllang.copylang</String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.ExecuteMultipleActionsOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-									</action>
-									<action>
-										<field name="id">
-											<String>language.element.english</String>
-										</field>
-										<field name="name">
-											<String>Current element: English</String>
-										</field>
-										<field name="description">
-											<String>Sets the language of the current element to English</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String></String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>actionIDs</String>
-																<String>attribute.lang.english
-attribute.xmllang.copylang</String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.ExecuteMultipleActionsOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-									</action>
-									<action>
-										<field name="id">
-											<String>language.element.french</String>
-										</field>
-										<field name="name">
-											<String>Current element: French</String>
-										</field>
-										<field name="description">
-											<String>Sets the language of the current element to French</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String></String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>actionIDs</String>
-																<String>attribute.lang.french
-attribute.xmllang.copylang</String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.ExecuteMultipleActionsOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-									</action>
-									<action>
-										<field name="id">
-											<String>language.element.german</String>
-										</field>
-										<field name="name">
-											<String>Current element: German</String>
-										</field>
-										<field name="description">
-											<String>Sets the language of the current element to German</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String></String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>actionIDs</String>
-																<String>attribute.lang.german
-attribute.xmllang.copylang</String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.ExecuteMultipleActionsOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-									</action>
-									<action>
-										<field name="id">
-											<String>language.element.norwegian</String>
-										</field>
-										<field name="name">
-											<String>Current element: Norwegian</String>
-										</field>
-										<field name="description">
-											<String>Sets the language of the current element to Norwegian</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String></String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>actionIDs</String>
-																<String>attribute.lang.norwegian
-attribute.xmllang.copylang</String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.ExecuteMultipleActionsOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-									</action>
-									<action>
-										<field name="id">
-											<String>language.element.swedish</String>
-										</field>
-										<field name="name">
-											<String>Current element: Swedish</String>
-										</field>
-										<field name="description">
-											<String>Sets the language of the current element to Swedish</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String></String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>actionIDs</String>
-																<String>attribute.lang.swedish
-attribute.xmllang.copylang</String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.ExecuteMultipleActionsOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-									</action>
-									<action>
-										<field name="id">
-											<String>attribute.xmllang.copylang</String>
-										</field>
-										<field name="name">
-											<String>xml:lang: copy lang</String>
-										</field>
-										<field name="description">
-											<String>Sets the xml:lang attribute on the current element to whatever the lang attribute is</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String></String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>elementLocation</String>
-																<String>ancestor-or-self::*[1]</String>
-															</entry>
-															<entry>
-																<String>name</String>
-																<String>lang</String>
-															</entry>
-															<entry>
-																<String>namespace</String>
-																<String>http://www.w3.org/XML/1998/namespace</String>
-															</entry>
-															<entry>
-																<String>value</String>
-																<String>${xpath_eval(ancestor-or-self::*[1]/@lang)}</String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
@@ -5461,32 +5142,32 @@ else 'rearnotes backmatter'
 													<menuEntry-array>
 														<menuItem>
 															<field name="actionID">
-																<String>language.element.english</String>
+																<String>attribute.lang.english</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>language.element.french</String>
+																<String>attribute.lang.french</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>language.element.german</String>
+																<String>attribute.lang.german</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>language.element.danish</String>
+																<String>attribute.lang.danish</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>language.element.norwegian</String>
+																<String>attribute.lang.norwegian</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>language.element.swedish</String>
+																<String>attribute.lang.swedish</String>
 															</field>
 														</menuItem>
 														<menuSeparator/>
