@@ -38,7 +38,8 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 	}
 	
 	@Override
-	protected void doOperation() throws AuthorOperationException {		
+	protected void doOperation() throws AuthorOperationException {	
+		String fileName = "";
 		try {
 			// get epub folder path
 			epubFilePath = EpubUtils.getEpubFolder(getAuthorAccess());
@@ -67,7 +68,7 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 			
 			// traverse each xhtml document in epub
 			for (URL xhtmlUrl : xhtmlUrls) {
-				String fileName = getAuthorAccess().getUtilAccess().getFileName(xhtmlUrl.toString());
+				fileName = getAuthorAccess().getUtilAccess().getFileName(xhtmlUrl.toString());
 				
 				if(!xhtmlUrl.toString().substring(xhtmlUrl.toString().lastIndexOf(".")).equals(".xhtml"))
 				{
@@ -117,7 +118,7 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 								Node headNodeAdded = headNodesAdded.item(k);
 								String metaValueAdded = EpubUtils.getMetaNodeValue(headNodeAdded);
 
-								if (headNodeAdded.isEqualNode(headNode))	exists = true;
+								if (headNodeAdded.isEqualNode(headNode)) exists = true;
 								else if (!metaValue.equals("")	&& !metaValueAdded.equals("") && metaValue.equals(metaValueAdded)) exists = true;
 							}
 
@@ -151,8 +152,10 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 							for (int k=0; k<attributes.getLength(); k++) {
 								Attr attribute = (Attr) attributes.item(k);
 								if (attribute.getNodeName().equalsIgnoreCase("href")) {
-									// remove file reference
-									attribute.setNodeValue(attribute.getNodeValue().substring(attribute.getNodeValue().indexOf("#")));
+									if (attribute.getNodeValue().contains("#")) {
+										// remove file reference
+										attribute.setNodeValue(attribute.getNodeValue().substring(attribute.getNodeValue().indexOf("#")));
+									}
 								}
 							}
 						}
@@ -210,7 +213,7 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 			getAuthorAccess().getWorkspaceAccess().closeAll();
 		} catch (Exception e) {
 			e.printStackTrace();
-			showMessage("Could not finalize operation - an error occurred: " + e.getMessage());
+			showMessage("Could not finalize operation - an error occurred in file (" + fileName + "): " + e.getMessage());
 			return;
 		}
 	}

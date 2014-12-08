@@ -354,6 +354,16 @@
         </sch:rule>
     </sch:pattern>
 
+    <!-- Rule 124 (106): The publication must contain pagebreaks -->
+    <sch:pattern id="dtbook_TPB_124">
+        <sch:rule context="html:body[html:nav]">
+            <sch:assert test="count(html:nav[tokenize(@epub:type,'\s+')='page-list']) &gt; 0">[tpb124] The publication must contain pagebreaks, and they must be referenced from a &lt;nav
+                epub:type="page-list"&gt; in the navigation document. There is no such element in the navigation document.</sch:assert>
+            <sch:assert test="count(html:nav[tokenize(@epub:type,'\s+')='page-list']//html:a) &gt; 0">[tpb124] The publication must contain pagebreaks, and they must be referenced from the &lt;nav
+                epub:type="page-list"&gt; in the navigation document. No pagebreaks are referenced from within the page list.</sch:assert>
+        </sch:rule>
+    </sch:pattern>
+
     <!-- Rule 125 (109): Only allow images in JPG format -->
     <sch:pattern id="dtbook_TPB_125">
         <sch:rule context="html:img">
@@ -551,7 +561,7 @@
         <sch:rule context="html:body[tokenize(@epub:type,'\s+')='rearnotes'] | html:section[tokenize(@epub:type,'\s+')='rearnotes']">
             <sch:assert test="descendant::html:*[tokenize(@epub:type,'\s+')='rearnote']">[nordic203c] <sch:value-of select="if (self::html:body) then 'documents' else 'sections'"/> with the epub:type
                 'rearnotes' must have descendants with 'rearnote'.</sch:assert>
-            <sch:assert test="html:ol">[nordic204c] <sch:value-of select="if (self::html:body) then 'documents' else 'sections'"/> with the epub:type 'footnotes' must have &lt;ol&gt; child
+            <sch:assert test="html:ol">[nordic204c] <sch:value-of select="if (self::html:body) then 'documents' else 'sections'"/> with the epub:type 'rearnotes' must have &lt;ol&gt; child
                 elements.</sch:assert>
         </sch:rule>
     </sch:pattern>
@@ -818,7 +828,6 @@
     <sch:pattern id="epub_nordic_267_a">
         <sch:rule context="html:*[*[tokenize(@epub:type,'\s+')='rearnote']]">
             <sch:assert test="self::html:ol">[nordic267a] Rearnotes must be wrapped in a "ol" element.</sch:assert>
-            <sch:assert test="tokenize(@epub:type,'\s+')='rearnotes'">[nordic266a] The rearnotes "ol" element must use the epub:type "rearnotes".</sch:assert>
         </sch:rule>
     </sch:pattern>
 
