@@ -120,7 +120,7 @@ public class SplitEpubOperation extends BaseAuthorOperation
 				
 				_XmlLang=GetAttributeFromNode(DocEl, "xml:lang");	
 				
-				if(_XmlLang=="")
+				if(_XmlLang.equals(""))
 				{
 					_XmlLang="da";
 				}
@@ -309,11 +309,15 @@ public class SplitEpubOperation extends BaseAuthorOperation
 
 	private String GetEpubMainType(String EPType)
 	{
+		//Hvis der kun er en enkelt attributværdi returneres denne. Ellers returnes de værdier der IKKE er frontmatter, bodymatter eller rearmatter
 		EPType = EPType.replace("  ", " ");
 
-		EPType = EPType.replace("frontmatter", "");
-		EPType = EPType.replace("bodymatter", "");
-		EPType = EPType.replace("backmatter", "");
+		if(EPType.contains(" "))
+		{
+			EPType = EPType.replace("frontmatter", "");
+			EPType = EPType.replace("bodymatter", "");
+			EPType = EPType.replace("backmatter", "");
+		}
 		
 		EPType= EPType.trim();
 		
@@ -412,7 +416,7 @@ public class SplitEpubOperation extends BaseAuthorOperation
 		// Section epub:type
 		String EpubType = GetAttributeFromNode(Section, "epub:type");
 		
-		// Add id to body
+		// Add epub:type to body
 		Attr attEpubType = Template.createAttributeNS("http://www.idpf.org/2007/ops", "epub:type");
 		attEpubType.setValue(EpubType);
 		NamedNodeMap BodyAtts = TemplateBody.getAttributes();
