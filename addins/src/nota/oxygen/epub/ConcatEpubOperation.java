@@ -232,25 +232,12 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 				return;
 			}
 
-			// save opf
-			getAuthorAccess().getEditorAccess().save();
-			
-			AuthorAccess xhtmlAccess = EpubUtils.getAuthorDocument(getAuthorAccess(), new URL(epubFilePath + "/" + EpubUtils.CONCAT_FILENAME));
 			// add unique ids to missing elements
+			AuthorAccess xhtmlAccess = EpubUtils.getAuthorDocument(getAuthorAccess(), new URL(epubFilePath + "/" + EpubUtils.CONCAT_FILENAME));
 			if (!EpubUtils.addUniqueIds(xhtmlAccess)) {
 				showMessage(EpubUtils.ERROR_MESSAGE);
 				return;
 			}
-			
-			// update navigation documents
-			if (!EpubUtils.updateNavigationDocuments(getAuthorAccess())) {
-				showMessage(EpubUtils.ERROR_MESSAGE);
-				return;
-			}
-			
-			EpubUtils.getNCXDocument(getAuthorAccess()).getEditorAccess().save();;
-			EpubUtils.getXHTMLNavDocument(getAuthorAccess()).getEditorAccess().save();
-			getAuthorAccess().getWorkspaceAccess().closeAll();
 			
 			// clean up
 			for (URL xhtmlUrl : xhtmlUrls) {
@@ -272,6 +259,19 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 					return;
 				}
 			}
+			
+			// save opf
+			getAuthorAccess().getEditorAccess().save();
+			
+			// update navigation documents
+			if (!EpubUtils.updateNavigationDocuments(getAuthorAccess())) {
+				showMessage(EpubUtils.ERROR_MESSAGE);
+				return;
+			}
+			
+			EpubUtils.getNCXDocument(getAuthorAccess()).getEditorAccess().save();;
+			EpubUtils.getXHTMLNavDocument(getAuthorAccess()).getEditorAccess().save();
+			getAuthorAccess().getWorkspaceAccess().closeAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 			showMessage("Could not finalize operation - an error occurred in file (" + fileName + "): " + e.getMessage());
