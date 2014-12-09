@@ -14,7 +14,10 @@ import org.w3c.dom.NodeList;
 import ro.sync.ecss.extensions.api.ArgumentDescriptor;
 import ro.sync.ecss.extensions.api.ArgumentsMap;
 import ro.sync.ecss.extensions.api.AuthorAccess;
+import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
+import ro.sync.ecss.extensions.api.node.AttrValue;
+import ro.sync.ecss.extensions.api.node.AuthorElement;
 import ro.sync.exml.workspace.api.editor.page.text.WSTextEditorPage;
 import nota.oxygen.common.BaseAuthorOperation;
 import nota.oxygen.common.Utils;
@@ -71,12 +74,8 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 				fileName = getAuthorAccess().getUtilAccess().getFileName(xhtmlUrl.toString());
 				fileEpubType = fileName.substring(fileName.lastIndexOf("-") + 1, fileName.lastIndexOf("."));
 				
-				if(!xhtmlUrl.toString().substring(xhtmlUrl.toString().lastIndexOf(".")).equals(".xhtml"))
-				{
-					if (!EpubUtils.removeFallbackFromOpf(getAuthorAccess(), fileName)) {
-						showMessage(EpubUtils.ERROR_MESSAGE);
-						return;
-					}
+				// continue if spine elements is not xhtml
+				if(!xhtmlUrl.toString().substring(xhtmlUrl.toString().lastIndexOf(".")).equals(".xhtml")) {
 					continue;
 				}
 				
@@ -173,10 +172,30 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 										// remove file reference
 										attr.setNodeValue(attr.getNodeValue().substring(attr.getNodeValue().indexOf("#")));
 									}
-									else if (!attr.getNodeValue().contains("www") && !attr.getNodeValue().contains("#")) {
+									else if (!attr.getNodeValue().contains("www") && !attr.getNodeValue().contains("#") && attr.getNodeValue().contains(".xhtml")) {
+										String fileRef = attr.getNodeValue();
+										AuthorAccess fileRefAccess = EpubUtils.getAuthorDocument(getAuthorAccess(), new URL(epubFilePath + "/" + fileRef));
+										// add unique ids to missing elements
+										if (!EpubUtils.addUniqueIds(fileRefAccess)) {
+											showMessage(EpubUtils.ERROR_MESSAGE);
+											return;
+										}
+										
+										AuthorDocumentController opfCtrl = fileRefAccess.getDocumentController();
+										opfCtrl.beginCompoundEdit();
+										AuthorElement bodyId = getFirstElement(opfCtrl.findNodesByXPath("/html/body", true, true, true));
+										if (bodyId != null) {
+											AttrValue id = bodyId.getAttribute("id");
+											attr.setNodeValue("#" + id.getValue());
+										}
+										opfCtrl.cancelCompoundEdit();
+										//opfCtrl.endCompoundEdit();
+										fileRefAccess.getEditorAccess().close(true);
+										
 										// error file reference should reference a id
-										showMessage("File references (in " + fileName +") does not reference ids in files");
-										return;
+										//showMessage("File references (in " + fileName +") does not reference ids in files");
+										//return;
+										
 									}
 								}
 							}
@@ -188,14 +207,13 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 				}
 				
 				// remove xhtml document from opf document
-				
-				if (!EpubUtils.removeOpfItem(getAuthorAccess(), fileName)) {
+				/*if (!EpubUtils.removeOpfItem(getAuthorAccess(), fileName)) {
 					showMessage(EpubUtils.ERROR_MESSAGE);
 					return;
-				}
+				}*/
 
 				// delete xhtml document
-				getAuthorAccess().getWorkspaceAccess().delete(xhtmlUrl);
+				//getAuthorAccess().getWorkspaceAccess().delete(xhtmlUrl);
 			}
 			
 			htmlElementAdded.appendChild(headElementAdded);
@@ -233,6 +251,27 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 			EpubUtils.getNCXDocument(getAuthorAccess()).getEditorAccess().save();;
 			EpubUtils.getXHTMLNavDocument(getAuthorAccess()).getEditorAccess().save();
 			getAuthorAccess().getWorkspaceAccess().closeAll();
+			
+			// clean up
+			for (URL xhtmlUrl : xhtmlUrls) {
+				// remove fallback from spine elements that is not xhtml
+				if(!xhtmlUrl.toString().substring(xhtmlUrl.toString().lastIndexOf(".")).equals(".xhtml")) {
+					if (!EpubUtils.removeFallbackFromOpf(getAuthorAccess(), fileName)) {
+						showMessage(EpubUtils.ERROR_MESSAGE);
+						return;
+					}
+					continue;
+				}
+				
+				// delete xhtml document
+				getAuthorAccess().getWorkspaceAccess().delete(xhtmlUrl);
+				
+				// remove xhtml document from opf document
+				if (!EpubUtils.removeOpfItem(getAuthorAccess(), getAuthorAccess().getUtilAccess().getFileName(xhtmlUrl.toString()))) {
+					showMessage(EpubUtils.ERROR_MESSAGE);
+					return;
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			showMessage("Could not finalize operation - an error occurred in file (" + fileName + "): " + e.getMessage());
