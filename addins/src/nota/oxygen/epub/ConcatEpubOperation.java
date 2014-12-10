@@ -74,8 +74,9 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 				fileName = getAuthorAccess().getUtilAccess().getFileName(xhtmlUrl.toString());
 				fileEpubType = fileName.substring(fileName.lastIndexOf("-") + 1, fileName.lastIndexOf("."));
 				
-				// continue if spine elements is not xhtml
-				if(!xhtmlUrl.toString().substring(xhtmlUrl.toString().lastIndexOf(".")).equals(".xhtml")) {
+				// check for non spine elements
+				if(fileName.equals("nav.xhtml") || !fileName.substring(fileName.lastIndexOf(".")).equals(".xhtml")) {
+					// continue if non spine elements
 					continue;
 				}
 				
@@ -241,15 +242,21 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 			
 			// clean up
 			for (URL xhtmlUrl : xhtmlUrls) {
-				// remove fallback from spine elements that is not xhtml
-				if(!xhtmlUrl.toString().substring(xhtmlUrl.toString().lastIndexOf(".")).equals(".xhtml")) {
+				fileName = getAuthorAccess().getUtilAccess().getFileName(xhtmlUrl.toString());
+				
+				// check for non spine elements
+				if(fileName.equals("nav.xhtml") || !fileName.substring(fileName.lastIndexOf(".")).equals(".xhtml")) {
+					// remove fallback from non xhtml spine elements
+					// remove non spine elements from spine
 					if (!EpubUtils.removeFallbackFromOpf(getAuthorAccess(), fileName)) {
 						showMessage(EpubUtils.ERROR_MESSAGE);
 						return;
 					}
+					
+					// continue if spine elements is not xhtml
 					continue;
 				}
-				
+
 				// delete xhtml document
 				getAuthorAccess().getWorkspaceAccess().delete(xhtmlUrl);
 				
