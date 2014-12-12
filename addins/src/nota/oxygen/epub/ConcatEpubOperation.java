@@ -42,7 +42,7 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 	
 	@Override
 	protected void doOperation() throws AuthorOperationException {	
-		String fileName = "", fileEpubType = "";
+		String fileName = "", fileEpubType = "", dcIdentifier = "";
 		try {
 			// get epub folder path
 			epubFilePath = EpubUtils.getEpubFolder(getAuthorAccess());
@@ -50,6 +50,16 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 				showMessage("Could not access epub folder");
 				return;
 			}
+			
+			// get dc:identifier value from package file
+			AuthorDocumentController opfCtrl = getAuthorAccess().getDocumentController();
+			opfCtrl.beginCompoundEdit();
+			AuthorElement metaDcIdentifier = getFirstElement(opfCtrl.findNodesByXPath(String.format("/package/metadata/dc:identifier"), true, true, true));
+			if (metaDcIdentifier != null) {
+				dcIdentifier = metaDcIdentifier.getTextContent();
+				
+			}
+			opfCtrl.cancelCompoundEdit();
 			
 			// construct a new document
 			Document doc = EpubUtils.createDocument();
@@ -74,8 +84,9 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 				fileName = getAuthorAccess().getUtilAccess().getFileName(xhtmlUrl.toString());
 				fileEpubType = fileName.substring(fileName.lastIndexOf("-") + 1, fileName.lastIndexOf("."));
 				
-				// continue if spine elements is not xhtml
-				if(!xhtmlUrl.toString().substring(xhtmlUrl.toString().lastIndexOf(".")).equals(".xhtml")) {
+				// check for non spine elements
+				if(fileName.equals("nav.xhtml") || !fileName.substring(fileName.lastIndexOf(".")).equals(".xhtml")) {
+					// continue if non spine elements
 					continue;
 				}
 				
@@ -123,7 +134,20 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 							}
 
 							// append head element
-							if (!exists) headElementAdded.appendChild(headNode);
+							if (!exists) {
+								if (headNode.getNodeName().equalsIgnoreCase("meta")) {
+									if (headNode.getAttributes().getNamedItem("name") != null) {
+										String value = String.valueOf(headNode.getAttributes().getNamedItem("name").getNodeValue());
+										if (value.equals("dc:identifier") && !dcIdentifier.equals("")) {
+											if (headNode.getAttributes().getNamedItem("content") != null) {
+												headNode.getAttributes().getNamedItem("content").setNodeValue(dcIdentifier);
+											}
+										}
+									}
+								}
+								
+								headElementAdded.appendChild(headNode);
+							}
 						}
 					}
 
@@ -181,21 +205,16 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 											return;
 										}
 										
-										AuthorDocumentController opfCtrl = fileRefAccess.getDocumentController();
-										opfCtrl.beginCompoundEdit();
-										AuthorElement bodyId = getFirstElement(opfCtrl.findNodesByXPath("/html/body", true, true, true));
+										AuthorDocumentController fileRefCtrl = fileRefAccess.getDocumentController();
+										fileRefCtrl.beginCompoundEdit();
+										AuthorElement bodyId = getFirstElement(fileRefCtrl.findNodesByXPath("/html/body", true, true, true));
 										if (bodyId != null) {
 											AttrValue id = bodyId.getAttribute("id");
 											attr.setNodeValue("#" + id.getValue());
 										}
-										opfCtrl.cancelCompoundEdit();
-										//opfCtrl.endCompoundEdit();
+										fileRefCtrl.cancelCompoundEdit();
+
 										fileRefAccess.getEditorAccess().close(true);
-										
-										// error file reference should reference a id
-										//showMessage("File references (in " + fileName +") does not reference ids in files");
-										//return;
-										
 									}
 								}
 							}
@@ -205,15 +224,6 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 						bodyElementAdded.appendChild(sectionElement);
 					}
 				}
-				
-				// remove xhtml document from opf document
-				/*if (!EpubUtils.removeOpfItem(getAuthorAccess(), fileName)) {
-					showMessage(EpubUtils.ERROR_MESSAGE);
-					return;
-				}*/
-
-				// delete xhtml document
-				//getAuthorAccess().getWorkspaceAccess().delete(xhtmlUrl);
 			}
 			
 			htmlElementAdded.appendChild(headElementAdded);
@@ -241,15 +251,21 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 			
 			// clean up
 			for (URL xhtmlUrl : xhtmlUrls) {
-				// remove fallback from spine elements that is not xhtml
-				if(!xhtmlUrl.toString().substring(xhtmlUrl.toString().lastIndexOf(".")).equals(".xhtml")) {
+				fileName = getAuthorAccess().getUtilAccess().getFileName(xhtmlUrl.toString());
+				
+				// check for non spine elements
+				if(fileName.equals("nav.xhtml") || !fileName.substring(fileName.lastIndexOf(".")).equals(".xhtml")) {
+					// remove fallback from non xhtml spine elements
+					// remove non spine elements from spine
 					if (!EpubUtils.removeFallbackFromOpf(getAuthorAccess(), fileName)) {
 						showMessage(EpubUtils.ERROR_MESSAGE);
 						return;
 					}
+					
+					// continue if spine elements is not xhtml
 					continue;
 				}
-				
+
 				// delete xhtml document
 				getAuthorAccess().getWorkspaceAccess().delete(xhtmlUrl);
 				
