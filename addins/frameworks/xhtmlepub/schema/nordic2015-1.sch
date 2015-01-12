@@ -153,7 +153,7 @@
     <pattern id="epub_nordic_26">
         <rule context="html:*[tokenize(@epub:type,'\s+')='note'][ancestor::html:body[html:header]]">
             <!-- this is the single-HTML version of the rule; the multi-HTML version of this rule is in nordic2015-1.opf-and-html.sch -->
-            <assert test="count(//html:a[tokenize(@epub:type,'\s+')='noteref'][translate(@idref, '#', '')=current()/@id])&gt;=1">[nordic26] Each note must have at least one &lt;a epub:type="noteref"
+            <assert test="count(//html:a[tokenize(@epub:type,'\s+')='noteref'][substring-after(@href, '#')=current()/@id])&gt;=1">[nordic26] Each note must have at least one &lt;a epub:type="noteref"
                 ...&gt; referencing it: <value-of select="concat('&lt;',name(),string-join(for $a in (@*) return concat(' ',$a/name(),'=&quot;',$a,'&quot;'),''),'&gt;')"/></assert>
         </rule>
     </pattern>
@@ -162,7 +162,7 @@
     <pattern id="epub_nordic_27">
         <rule context="html:*[tokenize(@epub:type,' ')='annotation'][ancestor::html:body[html:header]]">
             <!-- this is the single-HTML version of the rule; the multi-HTML version of this rule is in nordic2015-1.opf-and-html.sch -->
-            <assert test="count(//html:a[tokenize(@epub:type,' ')='annoref'][translate(@idref, '#', '')=current()/@id])&gt;=1">[nordic27] Each annotation must have at least one &lt;a
+            <assert test="count(//html:a[tokenize(@epub:type,' ')='annoref'][substring-after(@href, '#')=current()/@id])&gt;=1">[nordic27] Each annotation must have at least one &lt;a
                 epub:type="annoref" ...&gt; referencing it: <value-of select="concat('&lt;',name(),string-join(for $a in (@*) return concat(' ',$a/name(),'=&quot;',$a,'&quot;'),''),'&gt;')"/></assert>
         </rule>
     </pattern>
@@ -432,7 +432,8 @@
         <rule context="html:section[tokenize(@epub:type,'\s+')='toc'] | html:body[tokenize(@epub:type,'\s+')='toc']">
             <assert test="html:ol">[nordic127a] The table of contents must contain a "ol" element as a direct child of the parent <value-of select="if (self::html:body) then 'body' else 'section'"/>
                 element.</assert>
-            <report test="tokenize(@epub:type,'\s+')='bodymatter'">[nordic127b] The table of contents must be in either frontmatter or backmatter; it is not allowed in bodymatter.</report>
+            <report test="ancestor-or-self::*/tokenize(@epub:type,'\s+')=('bodymatter','cover')">[nordic127b] The table of contents must be in either frontmatter or backmatter; it is not allowed in
+                bodymatter or cover.</report>
         </rule>
     </pattern>
 
@@ -544,10 +545,16 @@
     <pattern id="epub_nordic_202">
         <rule context="html:*[tokenize(@epub:type,' ')='frontmatter']">
             <!-- types can be titlepage, colophon, toc, foreword, introduction or blank -->
-            <assert test="count(tokenize(@epub:type,'\s+')) = 1 or tokenize(@epub:type,'\s+')=('titlepage','colophon','toc','foreword','preface','introduction')">[nordic202] '<value-of
-                    select="(tokenize(@epub:type,'\s+')[not(.='frontmatter')])[1]"/>' is not an allowed type in frontmatter. On elements with the epub:type "frontmatter", you can either leave the type
-                blank (and just use 'frontmatter' as the type in the filename), or you can use one of the following types: 'titlepage', 'colophon', 'toc', 'foreword', 'preface' or
-                'introduction'.</assert>
+            <assert
+                test="count(tokenize(@epub:type,'\s+')) = 1 or tokenize(@epub:type,'\s+')=('titlepage','chapter','abstract','foreword','preface','prologue','introduction','preamble','conclusion','epilogue',
+                'afterword','epigraph','toc','toc-brief','landmarks','loa','loi','lot','lov','appendix','colophon','credits','keywords','index','glossary','bibliography','titlepage','halftitlepage',
+                'copyright-page','seriespage','acknowledgments','imprint','imprimatur','contributors','other-credits','errata','dedication','revision-history','case-study','answers','assessments','qna',
+                'practices','footnotes','rearnotes')"
+                >[nordic202] '<value-of select="(tokenize(@epub:type,'\s+')[not(.='frontmatter')])[1]"/>' is not an allowed type in frontmatter. On elements with the epub:type "frontmatter", you can
+                either leave the type blank (and just use 'frontmatter' as the type in the filename), or you can use one of the following types: 'titlepage', 'chapter', 'abstract', 'foreword',
+                'preface', 'prologue', 'introduction', 'preamble', 'conclusion', 'epilogue', 'afterword', 'epigraph', 'toc', 'toc-brief', 'landmarks', 'loa', 'loi', 'lot', 'lov', 'appendix',
+                'colophon', 'credits', 'keywords', 'index', 'glossary', 'bibliography', 'titlepage', 'halftitlepage', 'copyright-page', 'seriespage', 'acknowledgments', 'imprint', 'imprimatur',
+                'contributors', 'other-credits', 'errata', 'dedication', 'revision-history', 'case-study', 'answers', 'assessments', 'qna', 'practices', 'footnotes' or 'rearnotes'.</assert>
         </rule>
     </pattern>
 
@@ -623,29 +630,48 @@
     <!-- Rule 208: bodymatter -->
     <pattern id="epub_nordic_208">
         <rule context="html:*[tokenize(@epub:type,' ')='bodymatter']">
-            <assert test="tokenize(@epub:type,'\s+')=('prologue','preface','introduction','chapter','rearnotes','conclusion','epilogue','part')">[nordic208] '<value-of
-                    select="(tokenize(@epub:type,'\s+')[not(.='bodymatter')])[1]"/>' is not an allowed type in bodymatter. Elements with the type "bodymatter" must also have one of the types
-                'prologue', 'preface', 'introduction', 'chapter', 'rearnotes', 'conclusion', 'epilogue' or 'part'.</assert>
+            <assert
+                test="tokenize(@epub:type,'\s+')=('part','chapter','abstract','foreword','preface','prologue','introduction','preamble','conclusion','epilogue','afterword','epigraph','toc',
+                'toc-brief','landmarks','loa','loi','lot','lov','appendix','colophon','credits','keywords','index','glossary','bibliography','titlepage','halftitlepage','copyright-page',
+                'seriespage','acknowledgments','imprint','imprimatur','contributors','other-credits','errata','dedication','revision-history','case-study','answers','assessments','qna',
+                'practices','footnotes','rearnotes')"
+                >[nordic208] '<value-of select="(tokenize(@epub:type,'\s+')[not(.='bodymatter')])[1]"/>' is not an allowed type in bodymatter. Elements with the type "bodymatter" must also have one of
+                the types 'part', 'chapter', 'abstract', 'foreword', 'preface', 'prologue', 'introduction', 'preamble', 'conclusion', 'epilogue', 'afterword', 'epigraph', 'toc', 'toc-brief',
+                'landmarks', 'loa', 'loi', 'lot', 'lov', 'appendix', 'colophon', 'credits', 'keywords', 'index', 'glossary', 'bibliography', 'titlepage', 'halftitlepage', 'copyright-page',
+                'seriespage', 'acknowledgments', 'imprint', 'imprimatur', 'contributors', 'other-credits', 'errata', 'dedication', 'revision-history', 'case-study', 'answers', 'assessments', 'qna',
+                'practices', 'footnotes' or 'rearnotes'.</assert>
         </rule>
     </pattern>
 
     <!-- Rule 211: bodymatter.part -->
     <pattern id="epub_nordic_211">
         <rule context="html:*[self::html:section or self::html:article][parent::html:section[tokenize(@epub:type,' ')=('part','volume')]]">
-            <!-- types can be prologue, preface, chapter, conclusion, epilogue -->
-            <assert test="tokenize(@epub:type,'\s+')=('prologue','preface','introduction','chapter','rearnotes','conclusion','epilogue')">[nordic211] '<value-of
-                    select="(tokenize(@epub:type,'\s+')[not(.=('part','volume'))])[1]"/>' is not an allowed type in a part. Sections inside a part must also have one of the types 'prologue',
-                'preface', 'introduction', 'chapter', 'rearnotes', 'conclusion' or 'epilogue'.</assert>
+            <assert
+                test="tokenize(@epub:type,'\s+')=('chapter','abstract','foreword','preface','prologue','introduction','preamble','conclusion','epilogue','afterword','epigraph','toc','toc-brief',
+                'landmarks','loa','loi','lot','lov','appendix','colophon','credits','keywords','index','glossary','bibliography','titlepage','halftitlepage','copyright-page','seriespage',
+                'acknowledgments','imprint','imprimatur','contributors','other-credits','errata','dedication','revision-history','case-study','answers','assessments','qna','practices',
+                'footnotes','rearnotes')"
+                >[nordic211] '<value-of select="(tokenize(@epub:type,'\s+')[not(.=('part','volume'))])[1]"/>' is not an allowed type in a part. Sections inside a part must also have one of the types
+                'chapter', 'abstract', 'foreword', 'preface', 'prologue', 'introduction', 'preamble', 'conclusion', 'epilogue', 'afterword', 'epigraph', 'toc', 'toc-brief', 'landmarks', 'loa', 'loi',
+                'lot', 'lov', 'appendix', 'colophon', 'credits', 'keywords', 'index', 'glossary', 'bibliography', 'titlepage', 'halftitlepage', 'copyright-page', 'seriespage', 'acknowledgments',
+                'imprint', 'imprimatur', 'contributors', 'other-credits', 'errata', 'dedication', 'revision-history', 'case-study', 'answers', 'assessments', 'qna', 'practices', 'footnotes' or
+                'rearnotes'.</assert>
         </rule>
     </pattern>
 
     <!-- Rule 215: rearmatter -->
     <pattern id="epub_nordic_215">
         <rule context="html:*[tokenize(@epub:type,'\s+')='backmatter']">
-            <assert test="count(tokenize(@epub:type,'\s+')) = 1 or tokenize(@epub:type,'\s+')=('afterword','toc','index','appendix','glossary','footnotes','rearnotes')">[nordic215] '<value-of
-                    select="(tokenize(@epub:type,'\s+')[not(.='backmatter')])[1]"/>' is not an allowed type in backmatter. On elements with the epub:type "backmatter", you can either leave the type
-                blank (and just use 'backmatter' as the type in the filename), or you can use one of the following types: 'afterword', 'toc', 'index', 'appendix', 'glossary', 'footnotes' or
-                'rearnotes'.</assert>
+            <assert
+                test="count(tokenize(@epub:type,'\s+')) = 1 or tokenize(@epub:type,'\s+')=('chapter','abstract','foreword','preface','prologue','introduction','preamble','conclusion','epilogue','afterword',
+                'epigraph','toc','toc-brief','landmarks','loa','loi','lot','lov','appendix','colophon','credits','keywords','index','glossary','bibliography','titlepage','halftitlepage','copyright-page',
+                'seriespage','acknowledgments','imprint','imprimatur','contributors','other-credits','errata','dedication','revision-history','case-study','answers','assessments','qna','practices',
+                'footnotes','rearnotes')"
+                >[nordic215] '<value-of select="(tokenize(@epub:type,'\s+')[not(.='backmatter')])[1]"/>' is not an allowed type in backmatter. On elements with the epub:type "backmatter", you can
+                either leave the type blank (and just use 'backmatter' as the type in the filename), or you can use one of the following types: 'chapter', 'abstract', 'foreword', 'preface',
+                'prologue', 'introduction', 'preamble', 'conclusion', 'epilogue', 'afterword', 'epigraph', 'toc', 'toc-brief', 'landmarks', 'loa', 'loi', 'lot', 'lov', 'appendix', 'colophon',
+                'credits', 'keywords', 'index', 'glossary', 'bibliography', 'titlepage', 'halftitlepage', 'copyright-page', 'seriespage', 'acknowledgments', 'imprint', 'imprimatur', 'contributors',
+                'other-credits', 'errata', 'dedication', 'revision-history', 'case-study', 'answers', 'assessments', 'qna', 'practices', 'footnotes' or 'rearnotes'.</assert>
         </rule>
     </pattern>
 
