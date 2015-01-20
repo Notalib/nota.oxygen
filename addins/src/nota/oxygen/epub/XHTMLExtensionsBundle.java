@@ -21,6 +21,7 @@ public class XHTMLExtensionsBundle extends ro.sync.ecss.extensions.xhtml.XHTMLEx
 			stateListener.addListener(getUniqueAttributesIdentifier());
 			stateListener.addListener(getLangStateListener());
 		}
+		
 		return stateListener;
 	}
 	
