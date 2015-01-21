@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- REMOVED RULE 50 -->
 <schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
 
     <title>DTBook 2005 Schematron tests for NORDIC 2010-1 rules - adapted for HTML5</title>
@@ -61,6 +62,46 @@
         <rule context="html:body/html:header">
             <assert test="html:*[1][self::html:h1[tokenize(@epub:type,' ')='fulltitle']]">[nordic12] Single-HTML document must begin with a fulltitle headline in its header element (xpath:
                 /html/body/header/h1).</assert>
+        </rule>
+    </pattern>
+
+    <!-- Rule 13: All books must have frontmatter and bodymatter -->
+    <pattern id="epub_nordic_13_a">
+        <rule context="html:body[html:header]">
+            <assert test="((html:section|html:article)/tokenize(@epub:type,'\s+')=('cover','frontmatter')) = true()">[nordic13a] A single-HTML document must have at least one frontmatter or cover
+                section</assert>
+            <assert test="((html:section|html:article)/tokenize(@epub:type,'\s+')='bodymatter') = true()">[nordic13a] A single-HTML document must have at least one bodymatter section</assert>
+            <assert test="not(tokenize(@epub:type,'\s+')=('cover','frontmatter','bodymatter','backmatter'))">[nordic13a] The single-HTML document must not have cover, frontmatter, bodymatter or
+                backmatter as epub:type on its body element</assert>
+        </rule>
+    </pattern>
+
+    <pattern id="epub_nordic_13_b">
+        <rule context="html:*[self::html:section or self::html:article][ancestor::html:body[html:header] and not(parent::html:body) and not(parent::html:section[tokenize(@epub:type,'\s+')='part'])]">
+            <assert test="not((tokenize(@epub:type,'\s+')=('cover','frontmatter','bodymatter','backmatter')) = true())">[nordic13b] The single-HTML document must not have cover, frontmatter,
+                bodymatter or backmatter on any of its sectioning elements other than the top-level elements that has body as its parent</assert>
+        </rule>
+    </pattern>
+
+    <pattern id="epub_nordic_13_c">
+        <rule context="html:body[not(html:header|html:nav)]">
+            <assert test="tokenize(@epub:type,'\s+')=('cover','frontmatter','bodymatter','backmatter')">[nordic13c] The document must have either cover, frontmatter, bodymatter or backmatter as
+                epub:type on its body element.</assert>
+        </rule>
+    </pattern>
+
+    <pattern id="epub_nordic_13_d">
+        <rule context="html:*[self::html:section or self::html:article][ancestor::html:body[not(html:header|html:nav)]]">
+            <assert test="not((tokenize(@epub:type,'\s+')=('cover','frontmatter','bodymatter','backmatter')) = true())">[nordic13d] The document must not have cover, frontmatter, bodymatter or
+                backmatter on any of its sectioning elements (they are only allowed on the body element).</assert>
+        </rule>
+    </pattern>
+
+    <!-- Rule 14:  Don't allow <h x+1> in section w/depth x+1 unless <h x> in section w/depth x is present -->
+    <pattern id="epub_nordic_14">
+        <rule context="html:*[self::html:body[not(html:header)] or self::html:section or self::html:article][not(tokenize(@epub:type,'\s+')='cover')][html:section|html:article]">
+            <assert test="html:h1 | html:h2 | html:h3 | html:h4 | html:h5 | html:h6">[nordic14] sectioning element with no headline (h1-h6) when sub-section is present (is only allowed for sectioning
+                element with epub:type="cover"): <value-of select="concat('&lt;',name(),string-join(for $a in (@*) return concat(' ',$a/name(),'=&quot;',$a,'&quot;'),''),'&gt;')"/></assert>
         </rule>
     </pattern>
 
@@ -195,7 +236,7 @@
     </pattern>
 
     <!-- Rule 50: image alt attribute -->
-    <pattern id="epub_nordic_50_a">
+    <!--<pattern id="epub_nordic_50_a">
         <rule context="html:img[parent::html:figure/tokenize(@class,'\s+')='image']">
             <report test="string(@alt)!='image'">[nordic50a] an image inside a figure with class='image' must have attribute alt="image": <value-of
                     select="concat('&lt;',name(),string-join(for $a in (@*) return concat(' ',$a/name(),'=&quot;',$a,'&quot;'),''),'&gt;')"/></report>
@@ -207,7 +248,7 @@
             <report test="string(@alt)!=''">[nordic50b] an image which is not inside a figure with class='image' is irrelevant or redundant with regards to the understanding of the book, so the alt
                 attribute must be present but empty: <value-of select="concat('&lt;',name(),string-join(for $a in (@*) return concat(' ',$a/name(),'=&quot;',$a,'&quot;'),''),'&gt;')"/></report>
         </rule>
-    </pattern>
+    </pattern>-->
 
     <!-- Rule 51 & 52: -->
     <pattern id="epub_nordic_5152">
