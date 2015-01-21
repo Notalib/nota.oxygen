@@ -3,8 +3,13 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.oxygenxml.com/ns/extension http://www.oxygenxml.com/ns/extension/extensions.xsd">
     <xt:extension id="dk.nota.oxygen.dtbook110">
+<<<<<<< HEAD
         <xt:location href="dtbook110_3.0.2.zip"/>
         <xt:version>3.0.2</xt:version>
+=======
+        <xt:location href="dtbook110_3.0.3.zip"/>
+        <xt:version>3.0.3</xt:version>
+>>>>>>> ybk/master
         <xt:oxy_version>16.0+</xt:oxy_version>
         <xt:type>framework</xt:type>
         <xt:author>Ole Holst Andersen</xt:author>
@@ -15,8 +20,13 @@
         <xt:license><![CDATA[nota.oxygen is copyright Nota and distritributed under LGPL version 3.]]></xt:license>
     </xt:extension>
     <xt:extension id="dk.nota.oxygen.dtbook2005">
+<<<<<<< HEAD
         <xt:location href="dtbook2005_3.0.2.zip"/>
         <xt:version>3.0.2</xt:version>
+=======
+        <xt:location href="dtbook2005_3.0.3.zip"/>
+        <xt:version>3.0.3</xt:version>
+>>>>>>> ybk/master
         <xt:oxy_version>16.0+</xt:oxy_version>
         <xt:type>framework</xt:type>
         <xt:author>Ole Holst Andersen</xt:author>
@@ -27,8 +37,13 @@
         <xt:license><![CDATA[nota.oxygen is copyright Nota and distritributed under LGPL version 3.]]></xt:license>
     </xt:extension>
     <xt:extension id="dk.nota.oxygen.xhtmlepub">
+<<<<<<< HEAD
         <xt:location href="xhtmlepub_3.0.2.zip"/>
         <xt:version>3.0.2</xt:version>
+=======
+        <xt:location href="xhtmlepub_3.0.3.zip"/>
+        <xt:version>3.0.3</xt:version>
+>>>>>>> ybk/master
         <xt:oxy_version>16.0+</xt:oxy_version>
         <xt:type>framework</xt:type>
         <xt:author>Ole Holst Andersen</xt:author>
@@ -39,8 +54,13 @@
         <xt:license><![CDATA[nota.oxygen is copyright Nota and distritributed under LGPL version 3.]]></xt:license>
     </xt:extension>
     <xt:extension id="dk.nota.oxygen.ncx">
+<<<<<<< HEAD
         <xt:location href="ncx_3.0.2.zip"/>
         <xt:version>3.0.2</xt:version>
+=======
+        <xt:location href="ncx_3.0.3.zip"/>
+        <xt:version>3.0.3</xt:version>
+>>>>>>> ybk/master
         <xt:oxy_version>16.0+</xt:oxy_version>
         <xt:type>framework</xt:type>
         <xt:author>Ole Holst Andersen</xt:author>
@@ -51,8 +71,13 @@
         <xt:license><![CDATA[nota.oxygen is copyright Nota and distritributed under LGPL version 3.]]></xt:license>
     </xt:extension>
     <xt:extension id="dk.nota.oxygen.opf">
+<<<<<<< HEAD
         <xt:location href="opf_3.0.2.zip"/>
         <xt:version>3.0.2</xt:version>
+=======
+        <xt:location href="opf_3.0.3.zip"/>
+        <xt:version>3.0.3</xt:version>
+>>>>>>> ybk/master
         <xt:oxy_version>16.0+</xt:oxy_version>
         <xt:type>framework</xt:type>
         <xt:author>Ole Holst Andersen</xt:author>

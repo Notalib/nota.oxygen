@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- REMOVED RULE 50 -->
 <schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
 
     <title>DTBook 2005 Schematron tests for NORDIC 2010-1 rules - adapted for HTML5</title>
@@ -235,7 +236,7 @@
     </pattern>
 
     <!-- Rule 50: image alt attribute -->
-    <pattern id="epub_nordic_50_a">
+    <!--<pattern id="epub_nordic_50_a">
         <rule context="html:img[parent::html:figure/tokenize(@class,'\s+')='image']">
             <report test="string(@alt)!='image'">[nordic50a] an image inside a figure with class='image' must have attribute alt="image": <value-of
                     select="concat('&lt;',name(),string-join(for $a in (@*) return concat(' ',$a/name(),'=&quot;',$a,'&quot;'),''),'&gt;')"/></report>
@@ -247,7 +248,7 @@
             <report test="string(@alt)!=''">[nordic50b] an image which is not inside a figure with class='image' is irrelevant or redundant with regards to the understanding of the book, so the alt
                 attribute must be present but empty: <value-of select="concat('&lt;',name(),string-join(for $a in (@*) return concat(' ',$a/name(),'=&quot;',$a,'&quot;'),''),'&gt;')"/></report>
         </rule>
-    </pattern>
+    </pattern>-->
 
     <!-- Rule 51 & 52: -->
     <pattern id="epub_nordic_5152">

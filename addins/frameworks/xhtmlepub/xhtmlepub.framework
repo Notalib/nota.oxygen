@@ -6389,7 +6389,7 @@ else 'rearnotes backmatter'
 														<Integer>7</Integer>
 													</field>
 													<field name="uri">
-														<String>${framework}/schema/nordic2015-1.sch</String>
+														<String>${framework}/schema/nordic2015-1.nota.sch</String>
 													</field>
 												</validationUnitSchema>
 											</field>
@@ -6445,7 +6445,7 @@ else 'rearnotes backmatter'
 														<Integer>7</Integer>
 													</field>
 													<field name="uri">
-														<String>${framework}/schema/nordic-single-file2015-1.sch</String>
+														<String>${framework}/schema/nordic2015-1.nota-single-file.sch</String>
 													</field>
 												</validationUnitSchema>
 											</field>
@@ -6456,7 +6456,7 @@ else 'rearnotes backmatter'
 									<String>Validation_scenario</String>
 								</field>
 								<field name="name">
-									<String>Epub Single file</String>
+									<String>XHTML ePub Nordic 2015 (single file)</String>
 								</field>
 							</validationScenario>
 						</validationScenario-array>
