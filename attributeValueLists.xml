@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<attributeValueLists>
+    <attributeValueList parentElementNames="body section" attributeNames="class"
+        allowMultipleValues="true" allowEdit="true">
+        <value>render-optional</value>
+        <value>jacketcopy</value>
+        <value>frontcover</value>
+        <value>rearcover</value>
+    </attributeValueList>
+    <attributeValueList parentElementNames="body section" attributeNames="epub:type"
+        allowMultipleValues="true" allowEdit="true">
+        <value>frontmatter</value>
+        <value>bodymatter</value>
+        <value>rearmatter</value>
+        <value>cover</value>
+        <value>frontcover</value>
+        <value>leftflap</value>
+        <value>rightflap</value>
+        <value>titlepage</value>
+        <value>colophon</value>
+        <value>toc</value>
+        <value>preface</value>
+        <value>part</value>
+        <value>chapter</value>
+        <value>appendix</value>
+        <value>index</value>
+        <value>rearnotes</value>
+        <value>footnotes</value>
+    </attributeValueList>
+    <attributeValueList parentElementNames="*" attributeNames="xml:lang"
+        allowMultipleValues="false" allowEdit="true">
+		<value>da</value>
+		<value>de</value>
+		<value>de-CH</value>
+		<value>en</value>
+		<value>fi</value>
+		<value>fr</value>
+		<value>nb-NO</value>
+		<value>nn-NO</value>
+		<value>no</value>
+		<value>sv</value>
+		<value>sv-FI</value>
+	</attributeValueList>
+</attributeValueLists>
