@@ -68,7 +68,7 @@
         <xt:oxy_version>16.0+</xt:oxy_version>
         <xt:type>framework</xt:type>
         <xt:author>Ole Holst Andersen</xt:author>
-        <xt:name>package file framework</xt:name>
+        <xt:name>xhtml cartoon file framework</xt:name>
         <xt:description xmlns="http://www.w3.org/1999/xhtml">
         	<p>Framework for xhtml in Audio Cartoons</p>
         </xt:description>
