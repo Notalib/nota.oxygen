@@ -62,4 +62,16 @@
         </xt:description>
         <xt:license><![CDATA[nota.oxygen is copyright Nota and distritributed under LGPL version 3.]]></xt:license>
     </xt:extension>
+    <xt:extension id="dk.nota.oxygen.xhtmlcartoons">
+        <xt:location href="xhtmlcartoons_3.0.4.zip"/>
+        <xt:version>3.0.4</xt:version>
+        <xt:oxy_version>16.0+</xt:oxy_version>
+        <xt:type>framework</xt:type>
+        <xt:author>Ole Holst Andersen</xt:author>
+        <xt:name>xhtml cartoon file framework</xt:name>
+        <xt:description xmlns="http://www.w3.org/1999/xhtml">
+        	<p>Framework for xhtml in Audio Cartoons</p>
+        </xt:description>
+        <xt:license><![CDATA[nota.oxygen is copyright Nota and distritributed under LGPL version 3.]]></xt:license>
+    </xt:extension>
 </xt:extensions>

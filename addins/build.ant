@@ -31,5 +31,6 @@
 		<zip destfile="./updatesite/xhtmlepub_${version-number}.zip" basedir="./frameworks" includes="xhtmlepub/**" />
 		<zip destfile="./updatesite/ncx_${version-number}.zip" basedir="./frameworks" includes="ncx/**" />
 		<zip destfile="./updatesite/opf_${version-number}.zip" basedir="./frameworks" includes="opf/**" />
+		<zip destfile="./updatesite/xhtmlcartoons_${version-number}.zip" basedir="./frameworks" includes="xhtmlcartoons/**" />
 	</target>
 </project>
