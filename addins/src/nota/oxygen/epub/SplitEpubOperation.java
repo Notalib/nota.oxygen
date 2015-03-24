@@ -34,6 +34,7 @@ public class SplitEpubOperation extends BaseAuthorOperation
 
 	private String _ID_Prefix;
 	private NodeList _MetaNodes;
+	private NodeList _LinkNodes;
 	private String _SourceTitle;
 
 	private Document _SourceDoc;
@@ -117,7 +118,6 @@ public class SplitEpubOperation extends BaseAuthorOperation
 				}
 
 				Node DocEl = _SourceDoc.getDocumentElement();
-				
 				_XmlLang=GetAttributeFromNode(DocEl, "xml:lang");	
 				
 				if(_XmlLang.equals(""))
@@ -129,14 +129,14 @@ public class SplitEpubOperation extends BaseAuthorOperation
 
 				// Get meta nodes
 				_MetaNodes = _SourceDoc.getElementsByTagName("meta");
-
+				_LinkNodes = _SourceDoc.getElementsByTagName("link");
+				
 				// Find identifier - use xpath. For now: for loop
 				String DCIdentifier = "dc:identifier";
 
 				for (int i = 0; i < _MetaNodes.getLength(); i++)
 				{
 					Node n = _MetaNodes.item(i);
-
 					String Att = GetAttributeFromNode(n, "name");
 
 					if (Att.equals(DCIdentifier))
@@ -145,7 +145,7 @@ public class SplitEpubOperation extends BaseAuthorOperation
 						break;
 					}
 				}
-
+				
 				// Find Source body
 				XPathFactory factory = XPathFactory.newInstance();
 				XPath xpath = factory.newXPath();
@@ -166,6 +166,7 @@ public class SplitEpubOperation extends BaseAuthorOperation
 				
 				// Find Document Title
 				_SourceTitle = GetDocTitle(DocEl);
+				_SourceTitle = _SourceTitle.replace("&", "&amp;");
 			
 				NodeList BodyNodes = SourceBody.getChildNodes();
 
@@ -291,7 +292,6 @@ public class SplitEpubOperation extends BaseAuthorOperation
 		return "";
 	}
 	
-
 	private String GetDocTitle(Node DocElement)
 	{
 		NodeList LTit = _SourceDoc.getElementsByTagName("title");
@@ -382,6 +382,14 @@ public class SplitEpubOperation extends BaseAuthorOperation
 				TemplateHead.appendChild(ImpNode);
 			}
 			
+		}
+		
+		// insert linknodes
+		for (int i = 0; i < _LinkNodes.getLength(); i++)
+		{
+			Node n = _LinkNodes.item(i);
+			Node ImpNode = Template.importNode(n, true);
+			TemplateHead.appendChild(ImpNode);
 		}
 		
 		// Read Section Node
