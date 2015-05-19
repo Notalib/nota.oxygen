@@ -475,5 +475,6 @@ public class EpubUtils {
 	
 	public static String ERROR_MESSAGE;
 	
+	public static String PACKAGE_FILENAME = "package.opf";
 	public static String CONCAT_FILENAME = "concat.xhtml";
 }
