@@ -17,6 +17,7 @@
 					<field name="classpath">
 						<String-array>
 							<String>${framework}/nota.oxygen.jar</String>
+							<String>${framework}/truezip-samples-7.7.8-jar-with-dependencies.jar</String>
 						</String-array>
 					</field>
 					<field name="parentClassLoaderID">

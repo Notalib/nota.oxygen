@@ -7,7 +7,6 @@ import javax.swing.*;
 
 import java.beans.*;
 import java.io.File;
-
 import org.w3c.dom.Document;
 
 import de.schlichtherle.truezip.file.TArchiveDetector;

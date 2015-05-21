@@ -6,7 +6,7 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/nota.oxygen/lib/commons-validator-1.4.0-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/truezip-samples-7.7.6-jar-with-dependencies.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/truezip-samples-7.7.8-jar-with-dependencies.jar"/>
 	<classpathentry exported="true" kind="var" path="ECLIPSE_HOME"/>
 	<classpathentry exported="true" kind="lib" path="frameworks/xhtmlepub/xhtml.jar" sourcepath="/oxygen-sdk-samples-archetype/oxygen-sample-framework/samples/Oxygen Default Frameworks/src">
 		<attributes>
