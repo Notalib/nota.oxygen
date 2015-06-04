@@ -7,7 +7,7 @@ import nota.oxygen.common.BaseAuthorOperation;
 import nota.oxygen.common.Utils;
 
 public class ConcatEpubOperation extends BaseAuthorOperation {
-	private String epubZipPath;
+	private String epub;
 	private String epubFolder;
 	
 	@Override
@@ -31,8 +31,8 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 			getAuthorAccess().getWorkspaceAccess().closeAll();
 			
 			// get epub zip path
-			epubZipPath = Utils.getZipPath(getAuthorAccess().getEditorAccess().getEditorLocation().toString());
-			if (epubZipPath.equals("")) {
+			epub = Utils.getZipPath(getAuthorAccess().getEditorAccess().getEditorLocation().toString());
+			if (epub.equals("")) {
 				showMessage("Could not access epub zip path");
 				return;
 			}
@@ -44,7 +44,7 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 				return;
 			}
 
-			Concater.main(new String[] {epubZipPath, epubFolder});
+			Concatter.main(new String[] {epub, epubFolder});
 		} catch (Exception e) {
 			e.printStackTrace();
 			showMessage("Could not finalize operation. An Exception occurred: " + e.getMessage());

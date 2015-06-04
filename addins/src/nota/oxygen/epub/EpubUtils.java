@@ -1,15 +1,11 @@
 package nota.oxygen.epub;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -39,13 +35,12 @@ import nota.oxygen.common.Utils;
 import nota.oxygen.epub.headings.UpdateNavigationDocumentsOperation;
 
 import org.apache.commons.io.FileUtils;
-import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
 import de.schlichtherle.truezip.file.TFile;
 import de.schlichtherle.truezip.file.TVFS;
@@ -72,7 +67,6 @@ public class EpubUtils {
 		} catch (MalformedURLException e) {
 			return null;
 		}
-		
 	}
 	
 	public static AuthorAccess getAuthorDocument(AuthorAccess authorAccess, URL docUrl)
@@ -90,24 +84,6 @@ public class EpubUtils {
 		WSAuthorEditorPage aea = (wep instanceof WSAuthorEditorPage ? (WSAuthorEditorPage)wep : null);
 		if (aea == null) return null;
 		return aea.getAuthorAccess();
-	}
-	
-	public static WSTextEditorPage getTextDocument(AuthorAccess authorAccess, URL docUrl)
-	{
-		AuthorWorkspaceAccess wa = authorAccess.getWorkspaceAccess();
-		WSEditor editor = wa.getEditorAccess(docUrl);
-		if (editor == null)
-		{
-			if (!wa.open(docUrl, WSEditor.PAGE_TEXT)) return null;
-			editor = wa.getEditorAccess(docUrl);
-			if (editor == null) return null;
-		}
-		editor.close(true);
-		if (editor.getCurrentPageID() != WSEditor.PAGE_TEXT) editor.changePage(WSEditor.PAGE_TEXT);
-		WSEditorPage wep = editor.getCurrentPage();
-		WSTextEditorPage editorPage = (wep instanceof WSTextEditorPage ? (WSTextEditorPage)wep : null);
-		if (editorPage == null) return null;
-		return editorPage;
 	}
 	
 	public static URL getPackageUrl(AuthorAccess authorAccess) {
@@ -219,6 +195,71 @@ public class EpubUtils {
 		return res.toArray(new AuthorAccess[0]);
 	}
 
+	public static boolean updateNavigationDocuments(AuthorAccess authorAccess) {
+		ERROR_MESSAGE = "";
+		
+		try {
+			UpdateNavigationDocumentsOperation navigationOperation = new UpdateNavigationDocumentsOperation();
+			navigationOperation.setAuthorAccess(authorAccess);
+			navigationOperation.doOperation();
+		} catch (AuthorOperationException e) {
+			e.printStackTrace();
+			ERROR_MESSAGE = "Could not update navigation documents - an error occurred: " + e.getMessage();
+			return false;
+		}
+		
+		return true;
+	}
+	
+	/*********************************************************************************************************************************************
+	 * OLD CONCAT & SPLIT METHODS (USING OXYGEN API)
+	 *********************************************************************************************************************************************/
+	public static WSTextEditorPage getTextDocument(AuthorAccess authorAccess, URL docUrl)
+	{
+		AuthorWorkspaceAccess wa = authorAccess.getWorkspaceAccess();
+		WSEditor editor = wa.getEditorAccess(docUrl);
+		if (editor == null)
+		{
+			if (!wa.open(docUrl, WSEditor.PAGE_TEXT)) return null;
+			editor = wa.getEditorAccess(docUrl);
+			if (editor == null) return null;
+		}
+		editor.close(true);
+		if (editor.getCurrentPageID() != WSEditor.PAGE_TEXT) editor.changePage(WSEditor.PAGE_TEXT);
+		WSEditorPage wep = editor.getCurrentPage();
+		WSTextEditorPage editorPage = (wep instanceof WSTextEditorPage ? (WSTextEditorPage)wep : null);
+		if (editorPage == null) return null;
+		return editorPage;
+	}
+	
+	public static boolean addUniqueIds(AuthorAccess xhtmlAccess) {
+		ERROR_MESSAGE = "";
+		
+		try {
+			AuthorElement rootElement = xhtmlAccess.getDocumentController().getAuthorDocumentNode().getRootElement();
+			if (rootElement == null) {
+				ERROR_MESSAGE = "Found no root in xhtml file";
+				return false;
+			}
+
+			// insert unique ids for elements
+			XHTMLUniqueAttributesRecognizer uniqueAttributesRecognizer = new XHTMLUniqueAttributesRecognizer();
+			uniqueAttributesRecognizer.activated(xhtmlAccess);
+			uniqueAttributesRecognizer.assignUniqueIDs(rootElement.getStartOffset(), rootElement.getEndOffset(), false);
+			uniqueAttributesRecognizer.deactivated(xhtmlAccess);
+
+			// save and close
+			xhtmlAccess.getEditorAccess().save();
+			xhtmlAccess.getEditorAccess().close(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			ERROR_MESSAGE = "Could not add ids to document - an error occurred: " + e.getMessage();
+			return false;
+		}
+		
+		return true;
+	}
+	
 	private static AuthorElement getFirstElement(AuthorNode[] nodes) {
 		for (int i=0; i<nodes.length; i++) {
 			if (nodes[i] instanceof AuthorElement) return (AuthorElement)nodes[i];
@@ -435,50 +476,6 @@ public class EpubUtils {
 		}
 	}
 	
-	public static boolean addUniqueIds(AuthorAccess xhtmlAccess) {
-		ERROR_MESSAGE = "";
-		
-		try {
-			AuthorElement rootElement = xhtmlAccess.getDocumentController().getAuthorDocumentNode().getRootElement();
-			if (rootElement == null) {
-				ERROR_MESSAGE = "Found no root in xhtml file";
-				return false;
-			}
-
-			// insert unique ids for elements
-			XHTMLUniqueAttributesRecognizer uniqueAttributesRecognizer = new XHTMLUniqueAttributesRecognizer();
-			uniqueAttributesRecognizer.activated(xhtmlAccess);
-			uniqueAttributesRecognizer.assignUniqueIDs(rootElement.getStartOffset(), rootElement.getEndOffset(), false);
-			uniqueAttributesRecognizer.deactivated(xhtmlAccess);
-
-			// save and close
-			xhtmlAccess.getEditorAccess().save();
-			xhtmlAccess.getEditorAccess().close(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-			ERROR_MESSAGE = "Could not add ids to document - an error occurred: " + e.getMessage();
-			return false;
-		}
-		
-		return true;
-	}
-	
-	public static boolean updateNavigationDocuments(AuthorAccess authorAccess) {
-		ERROR_MESSAGE = "";
-		
-		try {
-			UpdateNavigationDocumentsOperation navigationOperation = new UpdateNavigationDocumentsOperation();
-			navigationOperation.setAuthorAccess(authorAccess);
-			navigationOperation.doOperation();
-		} catch (AuthorOperationException e) {
-			e.printStackTrace();
-			ERROR_MESSAGE = "Could not update navigation documents - an error occurred: " + e.getMessage();
-			return false;
-		}
-		
-		return true;
-	}
-	
 	public static String getMetaNodeValue(Node meta) {
 		String value = "";
 		if (meta.getNodeName().equalsIgnoreCase("meta")) {
@@ -490,10 +487,15 @@ public class EpubUtils {
 		return value;
 	}
 	
-	
-	/***************************
-	 * CONCAT & SPLIT METHODS
-	 ***************************/
+	/*********************************************************************************************************************************************
+	 * NEW CONCAT & SPLIT METHODS
+	 *********************************************************************************************************************************************/
+	public static void outputProcess(String process, boolean newLine, JTextArea taskOutput) {
+		if (newLine) outputMessage(taskOutput, "");
+		outputMessage(taskOutput, "********************************************************");
+		outputMessage(taskOutput, process);
+		outputMessage(taskOutput, "********************************************************");
+	}
 	
 	public static void outputMessage(JTextArea taskOutput, String output) {
 		taskOutput.append(output + "\n");
@@ -514,10 +516,9 @@ public class EpubUtils {
 		return false;
 	}
 	
-	public static boolean backupEpub(String epubZipPath, JTextArea taskOutput) {
+	public static boolean backupEpub(File epub, String extension, JTextArea taskOutput) {
 		try {
-			File epub = new File(epubZipPath);
-			File epubBak = new File(epub.getParent() + File.separator + epub.getName() + ".concat.bak");
+			File epubBak = new File(epub.getParent() + File.separator + epub.getName() + extension);
 			outputMessage(taskOutput, "Backing up epub " + epub.getPath() + " to " + epubBak.getPath());
 
 			final FileInputStream fileInputStream  = new FileInputStream(epub);
@@ -537,19 +538,19 @@ public class EpubUtils {
 
 			return true;
 		} catch (IOException ioe) {
-			outputMessage(taskOutput, "Could not backup epub " + epubZipPath + ". An IOException occurred: " + ioe.getMessage());
+			outputMessage(taskOutput, "Could not backup epub " + epub.getParent() + ". An IOException occurred: " + ioe.getMessage());
 		} catch (Exception e) {
-			outputMessage(taskOutput, "Could not backup epub " + epubZipPath + ". An Exception occurred: " + e.getMessage());
+			outputMessage(taskOutput, "Could not backup epub " + epub.getParent() + ". An Exception occurred: " + e.getMessage());
 		}
 
 		return false;
 	}
 
-	public static boolean unzip(String zipFilePath, String destDir, JTextArea taskOutput) {
+	public static boolean unzip(File epub, String destDir, JTextArea taskOutput) {
 		byte[] byteBuffer = new byte[16 * 1024 * 1024];
 
 		try {
-			ZipInputStream inZip = new ZipInputStream(new FileInputStream(zipFilePath));
+			ZipInputStream inZip = new ZipInputStream(new FileInputStream(epub.getPath()));
 			ZipEntry inZipEntry = inZip.getNextEntry();
 			while (inZipEntry != null) {
 				String fileName = inZipEntry.getName();
@@ -585,21 +586,21 @@ public class EpubUtils {
 			outputMessage(taskOutput, "Finished unzipping");
 			return true;
 		} catch (IOException ioe) {
-			outputMessage(taskOutput, "Could not unzip epub " + zipFilePath + " to " + destDir + ". An IOException occurred: " + ioe.getMessage());
+			outputMessage(taskOutput, "Could not unzip epub " + epub.getParent() + " to " + destDir + ". An IOException occurred: " + ioe.getMessage());
 		} catch (Exception e) {
-			outputMessage(taskOutput, "Could not unzip epub " + zipFilePath + " to " + destDir + ". An Exception occurred: " + e.getMessage());
+			outputMessage(taskOutput, "Could not unzip epub " + epub.getParent() + " to " + destDir + ". An Exception occurred: " + e.getMessage());
 		}
 
 		return false;
 	}
 	
-	public static File[] getFiles(String epubFolder) {
+	public static File[] getFiles(String epubFolder, final boolean concat) {
 		FilenameFilter filter = new FilenameFilter() {
 			public boolean accept(File dir, String name) {
-				return name.endsWith(".xhtml") && !name.equals("nav.xhtml") && !name.equals("concat.xhtml");
+				if (concat) return name.endsWith(".xhtml") && !name.equals("nav.xhtml") && name.equals("concat.xhtml");
+				else return name.endsWith(".xhtml") && !name.equals("nav.xhtml") && !name.equals("concat.xhtml");
 			}
 		};
-
 		return new File(epubFolder).listFiles(filter);
 	}
 	
@@ -637,16 +638,20 @@ public class EpubUtils {
 		return false;
 	}
 	
-	public static boolean parseFile(File file, ConcatHandler concatHandler, JTextArea taskOutput) {
+	public static boolean parseFile(File file, DefaultHandler handler, JTextArea taskOutput) {
 		try {
 			// parse source file
 			EpubUtils.outputMessage(taskOutput, "Parsing " + file.getPath());
 			String fileName = file.getName();
-			concatHandler.setFileEpubType(fileName.substring(fileName.lastIndexOf("-") + 1, fileName.lastIndexOf(".")));
+			
+			if (handler.getClass().isAssignableFrom(ConcatHandler.class)) {
+				((ConcatHandler)handler).setFileEpubType(fileName.substring(fileName.lastIndexOf("-") + 1, fileName.lastIndexOf(".")));
+			}
+			
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			SAXParser saxParser;
 			saxParser = factory.newSAXParser();
-			saxParser.parse(file, concatHandler);
+			saxParser.parse(file, handler);
 			return true;
 		} catch (ParserConfigurationException pce) {
 			EpubUtils.outputMessage(taskOutput, "Could not parse " + file.getPath() + ". An ParserConfigurationException occurred: " + pce.getMessage());
@@ -696,45 +701,6 @@ public class EpubUtils {
 		}
 	}
 	
-	public static boolean buildConcatFile(String concatFile, ConcatHandler concatHandler, JTextArea taskOutput) {
-		try {
-			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(concatFile), "UTF-8"));
-			if (!EpubUtils.writeConcatLines(bw, concatHandler.getTopLines(), "TOP", taskOutput)) return false;
-			if (!EpubUtils.writeConcatLines(bw, concatHandler.getHeadLines(), "HEAD", taskOutput)) return false;
-			if (!EpubUtils.writeConcatLines(bw, concatHandler.getBodyLines(), "BODY", taskOutput)) return false;
-			if (!EpubUtils.writeConcatLines(bw, concatHandler.getBottomLines(), "BOTTOM", taskOutput)) return false;
-			bw.close();
-			return true;
-		} catch (UnsupportedEncodingException uee) {
-			outputMessage(taskOutput, "Could not build lines. An UnsupportedEncodingException occurred: " + uee.getMessage());
-		} catch (FileNotFoundException fnfe) {
-			outputMessage(taskOutput, "Could not build lines. An FileNotFoundException occurred: " + fnfe.getMessage());
-		} catch (IOException ioe) {
-			outputMessage(taskOutput, "Could not build lines. An IOException occurred: " + ioe.getMessage());
-		} catch (Exception e) {
-			outputMessage(taskOutput, "Could not build lines. An Exception occurred: " + e.getMessage());
-		}
-		
-		return false;
-	}
-	
-	private static boolean writeConcatLines(BufferedWriter bw, List<String> lines, String lineType, JTextArea taskOutput) {
-		try {
-			outputMessage(taskOutput, "Building " + lineType);
-			for (String line : lines) {
-				line = line.replace("&", "&amp;");
-				bw.write(line);
-			}
-			return true;
-		} catch (IOException ioe) {
-			outputMessage(taskOutput, "Could not build " + lineType + ". An IOException occurred: " + ioe.getMessage());
-		} catch (Exception e) {
-			outputMessage(taskOutput, "Could not build " + lineType + ". An Exception occurred: " + e.getMessage());
-		}
-		
-		return false;
-	}
-	
 	public static Document createDocument(File file, JTextArea taskOutput) {
 		try {
 			outputMessage(taskOutput, "Creating document");
@@ -752,49 +718,6 @@ public class EpubUtils {
 		}
 
 		return null;
-	}
-	
-	public static boolean cleanReferences(NodeList refNodes, String epubFolder, JTextArea taskOutput) {
-		try {
-			outputMessage(taskOutput, "Cleaning references");
-			for (int i = 0; i < refNodes.getLength(); i++) {
-				Node refNode = refNodes.item(i);
-				NamedNodeMap attrs = refNode.getAttributes();
-				for (int j = 0; j < attrs.getLength(); j++) {
-					Attr attr = (Attr) attrs.item(j);
-					if (attr.getNodeName().equalsIgnoreCase("href")) {
-						if (!attr.getNodeValue().contains("www") && attr.getNodeValue().contains("#")) {
-							// remove file reference
-							attr.setNodeValue(attr.getNodeValue().substring(attr.getNodeValue().indexOf("#")));
-						} else if (!attr.getNodeValue().contains("www") && !attr.getNodeValue().contains("#") && attr.getNodeValue().contains(".xhtml")) {
-							String fileRef = attr.getNodeValue();
-
-							// create default handler instance
-							FindIdHandler findIdHandler = new FindIdHandler();
-
-							SAXParserFactory factory = SAXParserFactory.newInstance();
-							SAXParser saxParser = factory.newSAXParser();
-							saxParser.parse(new File(epubFolder	+ File.separator + fileRef), findIdHandler);
-
-							String bodyId = findIdHandler.getId();
-							if (bodyId == null || bodyId.equals("")) {
-								outputMessage(taskOutput, "Reference " + attr.getNodeValue() + " could not be changed, no id found");
-								return false;
-							}
-							
-							String tempNodeValue = attr.getNodeValue();
-							attr.setNodeValue("#" + bodyId);
-							outputMessage(taskOutput, "Reference " + tempNodeValue + " changed to " + attr.getNodeValue());
-						}
-					}
-				}
-			}
-			return true;
-		} catch (Exception e) {
-			outputMessage(taskOutput, "Could not clean references. An Exception occurred: " + e.getMessage());
-		}
-
-		return false;
 	}
 	
     public static boolean saveDocument(Document doc, File file, JTextArea taskOutput) {
@@ -846,21 +769,22 @@ public class EpubUtils {
 		}
 	}
 	
-    public static boolean addOpfItem(Document opfDoc, String fileName, JTextArea taskOutput) {
+    public static boolean addOpfItem(Document opfDoc, String fileName, int number, JTextArea taskOutput) {
 		try {
 			outputMessage(taskOutput, "Adding " + fileName + " to package document");
 			
 			NodeList manifest = opfDoc.getElementsByTagName("manifest");
 			NodeList spine = opfDoc.getElementsByTagName("spine");
 
+			String id = "item_cs_" + number;
 			Element manifestItem = opfDoc.createElement("item");
 			manifestItem.setAttribute("href", fileName);
-			manifestItem.setAttribute("id", "item_concat");
+			manifestItem.setAttribute("id", id);
 			manifestItem.setAttribute("media-type", "application/xhtml+xml");
 			manifest.item(0).appendChild(manifestItem);
 
 			Element spineItem = opfDoc.createElement("itemref");
-			spineItem.setAttribute("idref", "item_concat");
+			spineItem.setAttribute("idref", id);
 			spine.item(0).appendChild(spineItem);
 
 			return true;
@@ -990,34 +914,15 @@ public class EpubUtils {
 		return false;
 	}
 	
-	public static boolean removeFilesFromEpub(TFile destination, JTextArea taskOutput) {
+	public static boolean removeFileFromEpub(TFile destination, JTextArea taskOutput) {
 		try {
-			outputMessage(taskOutput, "Removing files from epub:");
-			for (TFile source : destination.listFiles()) {
-				if (source.isFile()
-						&& source.getName().substring(source.getName().lastIndexOf(".")).equals(".xhtml")
-						&& !source.getName().equals("concat.xhtml")
-						&& !source.getName().equals("nav.xhtml")) {
-					removeFileFromEpub(source, taskOutput);
-				}
-			}
-			return true;
-		} catch (Exception e) {
-			outputMessage(taskOutput, "Could not remove files from epub. An Exception occurred: " + e.getMessage());
-		}
-		
-		return false;
-	}
-	
-	public static boolean removeFileFromEpub(TFile source, JTextArea taskOutput) {
-		try {
-			outputMessage(taskOutput, "Removing file " + source.getName() + " from epub");
-			source.rm();
+			outputMessage(taskOutput, "Removing file " + destination.getName() + " from epub");
+			destination.rm();
 			return true;
 		} catch (IOException ioe) {
-			outputMessage(taskOutput, "Could not remove file " + source.getName() + " from epub. An IOException occurred: " + ioe.getMessage());
+			outputMessage(taskOutput, "Could not remove file " + destination.getName() + " from epub. An IOException occurred: " + ioe.getMessage());
 		} catch (Exception e) {
-			outputMessage(taskOutput, "Could not remove file " + source.getName() + " from epub. An Exception occurred: " + e.getMessage());
+			outputMessage(taskOutput, "Could not remove file " + destination.getName() + " from epub. An Exception occurred: " + e.getMessage());
 		}
 		
 		return false;

@@ -8,26 +8,19 @@ import java.util.Map;
 import org.xml.sax.*;
 import org.xml.sax.helpers.DefaultHandler;
 
-public class ConcatHandler extends DefaultHandler {
+public class SplitHandler extends DefaultHandler {	
 	private Map<String, String> htmlAttributes;
 	private String sourceTitle;
 	private Map<String, String> metaNodes;
 	private List<String> cssLinks;
-	
-	private boolean isBody;
-	private List<String> bodyLines;
-	
 	private String characterData;
 	
-	private String fileEpubType;
-
-	public ConcatHandler() {
+	public SplitHandler() {
 		htmlAttributes = new HashMap<String, String>();
 		metaNodes = new HashMap<String, String>();
 		cssLinks = new ArrayList<String>();
-		bodyLines = new ArrayList<String>();
 	}
-
+	
 	public Map<String, String> getHtmlAttributes() {
 		return htmlAttributes;
 	}
@@ -44,16 +37,7 @@ public class ConcatHandler extends DefaultHandler {
 		return cssLinks;
 	}
 
-	public List<String> getBodyLines() {
-		return bodyLines;
-	}
-
-	public void setFileEpubType(String fileEpubType) {
-		this.fileEpubType = fileEpubType;
-	}
-
 	public void startDocument() {
-		isBody = false;
 	}
 
 	public void endDocument() {
@@ -100,15 +84,6 @@ public class ConcatHandler extends DefaultHandler {
 				}
 			}
 		}
-		
-		if (qualifiedName.equals("body")) {
-			isBody = true;
-			bodyLines.add(getLine("section", attributes, true));
-		} else if (isBody) {
-			if (isBody) {
-				bodyLines.add(getLine(qualifiedName, attributes, false));
-			}
-		}
 	}
 
 	public void endElement(String uri, String localName, String qualifiedName) {
@@ -117,59 +92,10 @@ public class ConcatHandler extends DefaultHandler {
 			sourceTitle = sourceTitle.replace("&", "&amp;");
 		}
 		
-		if (qualifiedName.equals("body")) {
-			isBody = false;
-			bodyLines.add("</section>");
-		} else if (isBody) {
-			bodyLines.add("</" + qualifiedName + ">");
-		}
-		
 		characterData = null;
 	}
 
 	public void characters(char characters[], int start, int length) {
 		characterData = (new String(characters, start, length)).trim();
-		
-		if (isBody) {
-			if (characterData.indexOf("\n") < 0 && characterData.length() > 0) {
-				bodyLines.add(characterData);
-			}
-		}
-	}
-
-	private String getLine(String qualifiedName, Attributes attributes, boolean topSection) {
-		String line = "<" + qualifiedName;
-
-		if (attributes != null) {
-			int numberAttributes = attributes.getLength();
-
-			for (int i=0; i<numberAttributes; i++) {
-				line += ' ';
-				line += attributes.getQName(i);
-				line += "=\"";
-				
-				String attrValue = attributes.getValue(i);
-				if (topSection && attributes.getQName(i).equals("epub:type")) {
-					String[] epubTypes = attributes.getValue(i).split("\\ ");
-					boolean epubTypeOk = false;
-					for (String epubType : epubTypes) {
-						if (!epubType.equals("frontmatter") && !epubType.equals("bodymatter") && !epubType.equals("backmatter") && !epubType.equals("rearmatter")) {
-							epubTypeOk = true;
-						}
-					}
-
-					if (!epubTypeOk && !fileEpubType.equals("") && !fileEpubType.equals("frontmatter") && !fileEpubType.equals("bodymatter") && !fileEpubType.equals("backmatter") && !fileEpubType.equals("rearmatter")) {
-						attrValue = attrValue + " " + fileEpubType;
-					}
-				}
-				
-				line += attrValue;
-				line += '"';
-			}
-		}
-
-		line += '>';
-
-		return line;
 	}
 }
