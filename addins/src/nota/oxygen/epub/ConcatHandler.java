@@ -129,9 +129,13 @@ public class ConcatHandler extends DefaultHandler {
 
 	public void characters(char characters[], int start, int length) {
 		characterData = (new String(characters, start, length)).trim();
+		characterData = characterData.replace("&", "&amp;");
 		
 		if (isBody) {
 			if (characterData.indexOf("\n") < 0 && characterData.length() > 0) {
+				characterData = characterData.replaceAll("&(?!amp;)", "&amp;");
+				characterData = characterData.replaceAll("<", "&lt;");
+				characterData = characterData.replaceAll(">", "&gt;");
 				bodyLines.add(characterData);
 			}
 		}
@@ -149,6 +153,8 @@ public class ConcatHandler extends DefaultHandler {
 				line += "=\"";
 				
 				String attrValue = attributes.getValue(i);
+				attrValue = attrValue.replaceAll("&(?!amp;)", "&amp;");
+				
 				if (topSection && attributes.getQName(i).equals("epub:type")) {
 					String[] epubTypes = attributes.getValue(i).split("\\ ");
 					boolean epubTypeOk = false;

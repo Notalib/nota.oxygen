@@ -89,7 +89,6 @@ public class SplitHandler extends DefaultHandler {
 	public void endElement(String uri, String localName, String qualifiedName) {
 		if (qualifiedName.equals("title")) {
 			sourceTitle = characterData;
-			sourceTitle = sourceTitle.replace("&", "&amp;");
 		}
 		
 		characterData = null;
@@ -97,5 +96,8 @@ public class SplitHandler extends DefaultHandler {
 
 	public void characters(char characters[], int start, int length) {
 		characterData = (new String(characters, start, length)).trim();
+		characterData = characterData.replaceAll("&(?!amp;)", "&amp;");
+		characterData = characterData.replaceAll("<", "&lt;");
+		characterData = characterData.replaceAll(">", "&gt;");
 	}
 }

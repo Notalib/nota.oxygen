@@ -32,11 +32,7 @@ public class Concatter extends JPanel implements ActionListener, PropertyChangeL
 	private static JTextArea taskOutput;
 	private Task task;
 
-	private static File epub;
-	private static String epubFolder = "";
-	private String workFolder = "";
 	private File[] listOfFiles;
-	private String concatFile = "";
 
 	private static ConcatHandler concatHandler;
 	
@@ -44,49 +40,25 @@ public class Concatter extends JPanel implements ActionListener, PropertyChangeL
 		// Main task. Executed in background thread.
 		@Override
 		public Void doInBackground() {
-			frame.setTitle("Concatenating " + epub.getName() + "...");
+			if (!EpubUtils.start(taskOutput)) return null;
+			if (!EpubUtils.unzip(taskOutput)) return null;
+			if (!EpubUtils.canConcat(taskOutput)) return null;
+			if (!EpubUtils.backup(taskOutput)) return null;
 			
-			EpubUtils.outputProcess("STARTING", false, taskOutput);
-			
-			// set working folder 
-			workFolder = epub.getParent() + File.separator + epub.getName() + ".concatter";
-
-			// set epubFolder
-			epubFolder = workFolder + File.separator + epubFolder.substring(epubFolder.lastIndexOf("/")).replace("/", "");
-
-			// set concat file
-			concatFile = epubFolder + File.separator + EpubUtils.CONCAT_FILENAME;
-
-			// create working folder
-			if (!new File(workFolder).exists())	new File(workFolder).mkdir();
-
-			// clean workfolder
-			if(!EpubUtils.cleanWorkfolder(workFolder, taskOutput)) return null;
-			
-			EpubUtils.outputProcess("BACKING UP EPUB", true, taskOutput);
-			
-			// backup epub
-			if (!EpubUtils.backupEpub(epub, ".concat.bak", taskOutput)) return null;
-			
-			EpubUtils.outputProcess("UNZIPPING", true, taskOutput);
-			
-			// unzip epub to workfolder
-			if (!EpubUtils.unzip(epub, workFolder, taskOutput)) return null;
-
 			EpubUtils.outputProcess("PREPARING AND PARSING", true, taskOutput);
 			
 			// get all xhtml files from extracted zip file
-			listOfFiles = EpubUtils.getFiles(epubFolder, false);
-
+			listOfFiles = EpubUtils.getFiles(false, true);
+			
 			// create concat handler instance
 			concatHandler = new ConcatHandler();
 
-			for (int i = 0; i < listOfFiles.length; i++) {
+			for (File file : listOfFiles) {
 				// prepare source file
-				if (!EpubUtils.prepareFile(listOfFiles[i], taskOutput)) return null;
+				if (!EpubUtils.prepareFile(file, taskOutput)) return null;
 				
 				// parse source file
-				if (!EpubUtils.parseFile(listOfFiles[i], concatHandler, taskOutput)) return null;
+				if (!EpubUtils.parseFile(file, concatHandler, taskOutput)) return null;
 			}
 			
 			EpubUtils.outputProcess("BUILDING CONCAT DOCUMENT", true, taskOutput);
@@ -101,14 +73,14 @@ public class Concatter extends JPanel implements ActionListener, PropertyChangeL
 			EpubUtils.addUniqueIds(concatDoc.getDocumentElement(), taskOutput);
 			
 			// clean references
-			if (!cleanReferences(concatDoc.getElementsByTagName("a"), epubFolder, taskOutput)) return null;
+			if (!cleanReferences(concatDoc.getElementsByTagName("a"), EpubUtils.EPUB_FOLDER, taskOutput)) return null;
 			
 			// save concat document
-			if (!EpubUtils.saveDocument(concatDoc, new File(concatFile), taskOutput)) return null;
+			if (!EpubUtils.saveDocument(concatDoc, new File(EpubUtils.EPUB_FOLDER + File.separator + EpubUtils.CONCAT_FILENAME), taskOutput)) return null;
 			
 			EpubUtils.outputProcess("MODIFYING PACKAGE DOCUMENT", true, taskOutput);
 			
-			Document packageDoc = EpubUtils.createDocument(new File(epubFolder + File.separator + EpubUtils.PACKAGE_FILENAME), taskOutput);		
+			Document packageDoc = EpubUtils.createDocument(new File(EpubUtils.EPUB_FOLDER + File.separator + EpubUtils.PACKAGE_FILENAME), taskOutput);		
 			if (packageDoc == null) {
 				return null;
 			}
@@ -122,21 +94,21 @@ public class Concatter extends JPanel implements ActionListener, PropertyChangeL
 			}
 
 			// remove fallback from non xhtml spine elements
-			if (!EpubUtils.removeFallbackFromOpf(packageDoc, epubFolder, taskOutput)) return null;
+			if (!EpubUtils.removeFallbackFromOpf(packageDoc, taskOutput)) return null;
 						
 			// save opf document
-			if (!EpubUtils.saveDocument(packageDoc, new File(epubFolder + File.separator + EpubUtils.PACKAGE_FILENAME), taskOutput)) return null;
+			if (!EpubUtils.saveDocument(packageDoc, new File(EpubUtils.EPUB_FOLDER + File.separator + EpubUtils.PACKAGE_FILENAME), taskOutput)) return null;
 
 			EpubUtils.outputProcess("MODIFYING EPUB", true, taskOutput);
 			
 			// modify epub file
 			TConfig.get().setArchiveDetector(new TArchiveDetector("epub", new JarDriver(IOPoolLocator.SINGLETON)));
 			
-			TFile destination = new TFile(epub.getPath() + File.separator + epubFolder.substring(epubFolder.lastIndexOf(File.separator)).replace(File.separator, ""));
+			TFile destination = new TFile(EpubUtils.EPUB.getPath() + File.separator + EpubUtils.EPUB_FOLDER.substring(EpubUtils.EPUB_FOLDER.lastIndexOf(File.separator)).replace(File.separator, ""));
 			
-			if (!EpubUtils.addFileToEpub(new TFile(epubFolder + File.separator + EpubUtils.CONCAT_FILENAME), destination, taskOutput)) return null;
+			if (!EpubUtils.addFileToEpub(new TFile(EpubUtils.EPUB_FOLDER + File.separator + EpubUtils.CONCAT_FILENAME), destination, taskOutput)) return null;
 			
-			if (!EpubUtils.addFileToEpub(new TFile(epubFolder + File.separator + EpubUtils.PACKAGE_FILENAME), destination, taskOutput)) return null;
+			if (!EpubUtils.addFileToEpub(new TFile(EpubUtils.EPUB_FOLDER + File.separator + EpubUtils.PACKAGE_FILENAME), destination, taskOutput)) return null;
 			
 			for (int i = 0; i < listOfFiles.length; i++) {
 				if (!EpubUtils.removeFileFromEpub(new TFile(destination, listOfFiles[i].getName()), taskOutput)) return null;
@@ -144,16 +116,7 @@ public class Concatter extends JPanel implements ActionListener, PropertyChangeL
 			
 			if (!EpubUtils.commitChanges(taskOutput)) return null;
 
-			EpubUtils.outputProcess("FINISHING", true, taskOutput);
-			
-			// clean working folder
-			if (!EpubUtils.cleanWorkfolder(workFolder, taskOutput)) return null;
-
-			// delete folder
-			if (new File(workFolder).exists()) new File(workFolder).delete();
-			
-			EpubUtils.outputMessage(taskOutput, "");
-			
+			if (!EpubUtils.finish(taskOutput)) return null;
 			return null;
 		}
 
@@ -189,9 +152,16 @@ public class Concatter extends JPanel implements ActionListener, PropertyChangeL
 
 		startButton.doClick();
 	}
-
-	// Invoked when the user presses the start button.
+	
+	@Override
+	public void propertyChange(PropertyChangeEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
 	public void actionPerformed(ActionEvent evt) {
+		// Invoked when the user presses the start button.
 		startButton.setEnabled(false);
 		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		
@@ -201,29 +171,20 @@ public class Concatter extends JPanel implements ActionListener, PropertyChangeL
 		task.execute();
 	}
 
-	// Invoked when task's progress property changes.
-	public void propertyChange(PropertyChangeEvent evt) {
-	}
-
-	// Create the GUI and show it. As with all GUI code, this must run on the event-dispatching thread.
 	private static void createAndShowGUI() {
-		// Create and set up the window.
-		frame = new JFrame("Concatenating ePub...");
-		// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		// Create and set up the content pane.
 		JComponent newContentPane = new Concatter();
-		newContentPane.setOpaque(true); // content panes must be opaque
+		newContentPane.setOpaque(true);
+		
+		frame = new JFrame("Concatenating " + EpubUtils.EPUB.getName());
 		frame.setContentPane(newContentPane);
-
-		// Display the window.
 		frame.pack();
 		frame.setVisible(true);
 	}
 
 	public static void main(String[] args) {
-		epub = new File(args[0]);
-		epubFolder = args[1];
+		EpubUtils.EPUB = new File(args[0]);
+		EpubUtils.EPUB_FOLDER = args[1];
+		EpubUtils.prepare("concatter", "concat");
 		
 		// Schedule a job for the event-dispatching thread: creating and showing this application's GUI.
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -268,6 +229,7 @@ public class Concatter extends JPanel implements ActionListener, PropertyChangeL
 			xmlTemplate.append("</body>");
 			xmlTemplate.append("</html>");
 
+			//System.out.println(xmlTemplate.toString());
 			return Utils.deserializeDocument(xmlTemplate.toString(), null);
 		} catch (Exception e) {
 			EpubUtils.outputMessage(taskOutput, "Could not build concat document. An Exception occurred: " + e.getMessage());

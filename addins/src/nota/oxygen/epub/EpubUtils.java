@@ -14,6 +14,7 @@ import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -490,6 +491,67 @@ public class EpubUtils {
 	/*********************************************************************************************************************************************
 	 * NEW CONCAT & SPLIT METHODS
 	 *********************************************************************************************************************************************/
+	public static void prepare(String workFolder, String backupExt) {
+		// set working folder
+		WORK_FOLDER = EPUB.getParent() + File.separator + EPUB.getName() + "." + workFolder;
+
+		// set epub folder name
+		EPUB_FOLDER = WORK_FOLDER + File.separator + EPUB_FOLDER.substring(EPUB_FOLDER.lastIndexOf("/")).replace("/", "");
+		
+		// set backup name
+		BACKUP_EXT = "." + backupExt + ".bak";
+	}
+	
+	public static boolean start(JTextArea taskOutput) {
+		outputProcess("STARTING", false, taskOutput);
+
+		// create working folder
+		if (!new File(WORK_FOLDER).exists())
+			new File(WORK_FOLDER).mkdir();
+
+		// clean workfolder
+		if (!cleanWorkfolder(WORK_FOLDER, taskOutput))
+			return false;
+
+		return true;
+	}
+	
+	public static boolean backup(JTextArea taskOutput) {
+		outputProcess("BACKING UP EPUB", true, taskOutput);
+
+		// backup epub
+		if (!backupEpub(EPUB, BACKUP_EXT, taskOutput))
+			return false;
+
+		return true;
+	}
+	
+	public static boolean unzip(JTextArea taskOutput) {
+		outputProcess("UNZIPPING", true, taskOutput);
+
+		// unzip epub to workfolder
+		if (!unzip(EPUB, WORK_FOLDER, taskOutput))
+			return false;
+
+		return true;
+	}
+	
+	public static boolean finish(JTextArea taskOutput) {
+		outputProcess("FINISHING", true, taskOutput);
+
+		// clean working folder
+		if (!cleanWorkfolder(WORK_FOLDER, taskOutput))
+			return false;
+
+		// delete folder
+		if (new File(WORK_FOLDER).exists())
+			new File(WORK_FOLDER).delete();
+
+		outputMessage(taskOutput, "");
+
+		return true;
+	}
+
 	public static void outputProcess(String process, boolean newLine, JTextArea taskOutput) {
 		if (newLine) outputMessage(taskOutput, "");
 		outputMessage(taskOutput, "********************************************************");
@@ -594,14 +656,79 @@ public class EpubUtils {
 		return false;
 	}
 	
-	public static File[] getFiles(String epubFolder, final boolean concat) {
+	public static boolean canConcat(JTextArea taskOutput) {
+		outputMessage(taskOutput, "");
+		
 		FilenameFilter filter = new FilenameFilter() {
 			public boolean accept(File dir, String name) {
-				if (concat) return name.endsWith(".xhtml") && !name.equals("nav.xhtml") && name.equals("concat.xhtml");
-				else return name.endsWith(".xhtml") && !name.equals("nav.xhtml") && !name.equals("concat.xhtml");
+				return name.endsWith(".xhtml") && !name.equals(NAVIGATION_FILENAME);
 			}
 		};
-		return new File(epubFolder).listFiles(filter);
+		
+		File[] files = new File(EPUB_FOLDER).listFiles(filter);
+		
+		boolean exists = false;
+		for (File file : files) {
+			if (file.getName().equals(CONCAT_FILENAME)) {
+				exists = true;
+			}
+		}
+		
+		if (files.length == 0) {
+			outputMessage(taskOutput, "Cannot concat ePub - no documents found");
+		} else if (exists) {
+			outputMessage(taskOutput, "Cannot concat ePub - concat document already exists");
+		} else if (files.length == 1) {
+			outputMessage(taskOutput, "Cannot concat ePub - only one document exists");
+		} else {
+			return true;
+		}
+		
+		outputMessage(taskOutput, "");
+		return false;
+	}
+	
+	public static boolean canSplit(JTextArea taskOutput) {
+		outputMessage(taskOutput, "");
+		
+		FilenameFilter filter = new FilenameFilter() {
+			public boolean accept(File dir, String name) {
+				return name.endsWith(".xhtml") && !name.equals(NAVIGATION_FILENAME);
+			}
+		};
+		
+		File[] files = new File(EPUB_FOLDER).listFiles(filter);
+		
+		boolean exists = true;
+		for (File file : files) {
+			if (file.getName().equals(CONCAT_FILENAME)) {
+				exists = true;
+			}
+		}
+		
+		if (files.length == 0) {
+			outputMessage(taskOutput, "Cannot split ePub - no documents found");
+		} else if (files.length > 1) {
+			outputMessage(taskOutput, "Cannot split ePub - too many documents exists");
+		} else if (!exists) {
+			outputMessage(taskOutput, "Cannot split ePub - no concat document exists");
+		} else {
+			return true;
+		}
+		
+		outputMessage(taskOutput, "");
+		return false;
+	}
+	
+	public static File[] getFiles(final boolean concat, final boolean split) {
+		FilenameFilter filter = new FilenameFilter() {
+			public boolean accept(File dir, String name) {
+				if (concat) return name.endsWith(".xhtml") && !name.equals(NAVIGATION_FILENAME) && name.equals(CONCAT_FILENAME);
+				else if (split) return name.endsWith(".xhtml") && !name.equals(NAVIGATION_FILENAME) && !name.equals(CONCAT_FILENAME);
+				else return name.endsWith(".xhtml") && !name.equals(NAVIGATION_FILENAME);
+			}
+		};
+		return new File(EPUB_FOLDER).listFiles(filter);
 	}
 	
 	public static boolean prepareFile(File file, JTextArea taskOutput) {
@@ -836,12 +963,12 @@ public class EpubUtils {
 		return false;
 	}
 	
-	public static boolean removeFallbackFromOpf(Document opfDoc, String epubFolder, JTextArea taskOutput) {
+	public static boolean removeFallbackFromOpf(Document opfDoc, JTextArea taskOutput) {
 		try {
 			outputMessage(taskOutput, "Removing fallback from package document");
 			
 			List<String> nonSpineElements = new ArrayList<String>();
-			getNonSpineElements(new File(epubFolder), "", nonSpineElements);
+			getNonSpineElements(new File(EPUB_FOLDER), "", nonSpineElements);
 
 			NodeList items = opfDoc.getElementsByTagName("item");
 			NodeList itemRefs = opfDoc.getElementsByTagName("itemref");
@@ -887,7 +1014,7 @@ public class EpubUtils {
         for (int i = 0; i < files.length; i++) {
             String fileName = files[i].getName();
 
-            if (fileName.endsWith("nav.xhtml") || (fileName.contains(".") && !fileName.substring(fileName.lastIndexOf(".")).equals(".xhtml"))) {
+            if (fileName.endsWith(NAVIGATION_FILENAME) || (fileName.contains(".") && !fileName.substring(fileName.lastIndexOf(".")).equals(".xhtml"))) {
                 if (files[i].isFile()) {
                 	if (!subFolder.equals("")) nonSpineElements.add(subFolder + "/" + files[i].getName());
                 	else nonSpineElements.add(files[i].getName());
@@ -951,4 +1078,10 @@ public class EpubUtils {
 	
 	public static String PACKAGE_FILENAME = "package.opf";
 	public static String CONCAT_FILENAME = "concat.xhtml";
+	public static String NAVIGATION_FILENAME = "nav.xhtml";
+	
+	public static File EPUB;
+	public static String EPUB_FOLDER = "";
+	public static String WORK_FOLDER = "";
+	public static String BACKUP_EXT = "";
 }
