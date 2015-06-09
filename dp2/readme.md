@@ -1,18 +1,20 @@
-# Project homepage
+# Nordic ePub3 DTBook Migrator
+
+## Project homepage
 http://nlbdev.github.io/nordic-epub3-dtbook-migrator/
 
-# Repository
+## Repository
 https://github.com/nlbdev/nordic-epub3-dtbook-migrator
 
-# New builds
+## New builds
 https://dl.dropboxusercontent.com/u/6370535/nordic-epub3-dtbook-migrator/index.html
 
-# Getting the code
+## Getting the code
 - clone https://github.com/nlbdev/nordic-epub3-dtbook-migrator.git
 - change to dtbook110-ybk branch (if we want to push some changes to https://github.com/nlbdev/nordic-epub3-dtbook-migrator, then do it from branch dtbook110).
 - pull origin master
 
-# Importing
+## Importing
 - should be imported as a Maven project in Eclipse
 - File->Import->Maven->Existing Maven Projects
 - press Next
@@ -20,19 +22,19 @@ https://dl.dropboxusercontent.com/u/6370535/nordic-epub3-dtbook-migrator/index.h
 - project pom.xml file should be shown
 - press Finish
 
-# Changes
+## Changes
 - add own changes if any
 - save own changes to file https://github.com/Notalib/nota.oxygen/tree/gh-pages/dp2/nota_changes.txt to keep track with our own changes
 
-# Building
+## Building
 - right click project->Run As->Maven install
 - if building is successful a jar file will be found beneath target folder
 
-# Debugging
+## Debugging
 - add jar file to Daisy Pipeline 2 modules folder ex. C:\Program Files (x86)\DAISY Pipeline 2\daisy-pipeline\modules
 - run/restart Daisy Pipeline 2
 
-# Deploying
+## Deploying
 - upload jar to https://github.com/Notalib/nota.oxygen/tree/gh-pages/dp2
 - edit Dockerfile (daisy-pipeline.test.dbb.dk|daisy-pipeline.live.dbb.dk) to reference new jar file
 - build with build.sh script
