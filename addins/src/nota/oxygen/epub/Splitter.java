@@ -40,7 +40,9 @@ public class Splitter extends JPanel implements ActionListener, PropertyChangeLi
 
 	private File[] listOfFiles;
 	
+	private PackageHandler packageHandler;
 	private SplitHandler splitHandler;
+	
 	private int docNumber;
 	private String idPrefix;
 	private Map<String, Document> docList;
@@ -57,6 +59,10 @@ public class Splitter extends JPanel implements ActionListener, PropertyChangeLi
 			if (!EpubUtils.backup(taskOutput)) return null;
 
 			EpubUtils.outputProcess("PREPARING AND PARSING", true, taskOutput);
+			
+			// create package handler instance
+			packageHandler = new PackageHandler();
+			if (!EpubUtils.parseFile(new File(EpubUtils.EPUB_FOLDER + File.separator + EpubUtils.PACKAGE_FILENAME), packageHandler, taskOutput)) return null;
 			
 			docNumber = 0;
 			docList = new TreeMap<String, Document>();
@@ -256,7 +262,12 @@ public class Splitter extends JPanel implements ActionListener, PropertyChangeLi
 		
 		xmlTemplate.append("<head>");
 		xmlTemplate.append("<meta charset='UTF-8'/>");
-		xmlTemplate.append("<title>" + splitHandler.getSourceTitle() + "</title>");
+		
+		if (packageHandler.getTitle() != null) {
+			xmlTemplate.append("<title>" + packageHandler.getTitle() + "</title>");
+		} else {
+			xmlTemplate.append("<title>" + splitHandler.getTitle() + "</title>");
+		}
 		
 		for (Map.Entry<String, String> entry : splitHandler.getMetaNodes().entrySet()) {
 			xmlTemplate.append("<meta content='" + entry.getValue() + "' name='" + entry.getKey() + "'/>");

@@ -10,7 +10,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class SplitHandler extends DefaultHandler {	
 	private Map<String, String> htmlAttributes;
-	private String sourceTitle;
+	private String title;
 	private Map<String, String> metaNodes;
 	private List<String> cssLinks;
 	private String characterData;
@@ -25,8 +25,8 @@ public class SplitHandler extends DefaultHandler {
 		return htmlAttributes;
 	}
 	
-	public String getSourceTitle() {
-		return sourceTitle;
+	public String getTitle() {
+		return title;
 	}
 	
 	public Map<String, String> getMetaNodes() {
@@ -87,15 +87,13 @@ public class SplitHandler extends DefaultHandler {
 	}
 
 	public void endElement(String uri, String localName, String qualifiedName) {
-		if (qualifiedName.equals("title")) {
-			sourceTitle = characterData;
+		if (qualifiedName.equals("title") && title == null) {
+			title = characterData;
 		}
-		
-		characterData = null;
 	}
 
 	public void characters(char characters[], int start, int length) {
-		characterData = (new String(characters, start, length)).trim();
+		characterData = new String(characters, start, length);
 		characterData = characterData.replaceAll("&(?!amp;)", "&amp;");
 		characterData = characterData.replaceAll("<", "&lt;");
 		characterData = characterData.replaceAll(">", "&gt;");

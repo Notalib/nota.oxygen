@@ -10,7 +10,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class ConcatHandler extends DefaultHandler {
 	private Map<String, String> htmlAttributes;
-	private String sourceTitle;
+	private String title;
 	private Map<String, String> metaNodes;
 	private List<String> cssLinks;
 	
@@ -32,8 +32,8 @@ public class ConcatHandler extends DefaultHandler {
 		return htmlAttributes;
 	}
 	
-	public String getSourceTitle() {
-		return sourceTitle;
+	public String getTitle() {
+		return title;
 	}
 	
 	public Map<String, String> getMetaNodes() {
@@ -112,9 +112,8 @@ public class ConcatHandler extends DefaultHandler {
 	}
 
 	public void endElement(String uri, String localName, String qualifiedName) {
-		if (qualifiedName.equals("title")) {
-			sourceTitle = characterData;
-			sourceTitle = sourceTitle.replace("&", "&amp;");
+		if (qualifiedName.equals("title") && title == null) {
+			title = characterData;
 		}
 		
 		if (qualifiedName.equals("body")) {
@@ -123,13 +122,10 @@ public class ConcatHandler extends DefaultHandler {
 		} else if (isBody) {
 			bodyLines.add("</" + qualifiedName + ">");
 		}
-		
-		characterData = null;
 	}
 
 	public void characters(char characters[], int start, int length) {
-		characterData = (new String(characters, start, length)).trim();
-		characterData = characterData.replace("&", "&amp;");
+		characterData = new String(characters, start, length);
 		
 		if (isBody) {
 			if (characterData.indexOf("\n") < 0 && characterData.length() > 0) {

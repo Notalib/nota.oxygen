@@ -34,6 +34,7 @@ public class Concatter extends JPanel implements ActionListener, PropertyChangeL
 
 	private File[] listOfFiles;
 
+	private static PackageHandler packageHandler;
 	private static ConcatHandler concatHandler;
 	
 	class Task extends SwingWorker<Void, Void> {
@@ -47,9 +48,13 @@ public class Concatter extends JPanel implements ActionListener, PropertyChangeL
 			
 			EpubUtils.outputProcess("PREPARING AND PARSING", true, taskOutput);
 			
+			// create package handler instance
+			packageHandler = new PackageHandler();
+			if (!EpubUtils.parseFile(new File(EpubUtils.EPUB_FOLDER + File.separator + EpubUtils.PACKAGE_FILENAME), packageHandler, taskOutput)) return null;
+			
 			// get all xhtml files from extracted zip file
 			listOfFiles = EpubUtils.getFiles(false, true);
-			
+						
 			// create concat handler instance
 			concatHandler = new ConcatHandler();
 
@@ -209,7 +214,12 @@ public class Concatter extends JPanel implements ActionListener, PropertyChangeL
 			
 			xmlTemplate.append("<head>");
 			xmlTemplate.append("<meta charset='UTF-8'/>");
-			xmlTemplate.append("<title>" + concatHandler.getSourceTitle() + "</title>");
+			
+			if (packageHandler.getTitle() != null) {
+				xmlTemplate.append("<title>" + packageHandler.getTitle() + "</title>");
+			} else {
+				xmlTemplate.append("<title>" + concatHandler.getTitle() + "</title>");
+			}
 			
 			for (Map.Entry<String, String> entry : concatHandler.getMetaNodes().entrySet()) {
 				xmlTemplate.append("<meta content='" + entry.getValue() + "' name='" + entry.getKey() + "'/>");

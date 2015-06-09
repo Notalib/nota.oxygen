@@ -90,7 +90,7 @@ public class InsertNoteRefOperation extends BaseAuthorOperation {
 				showMessage("Could not find document filename");
 				return;
 			}
-						
+			
 			NoteRefInserter.main(new String[] { epub, epubFolder, fileName });*/
 			
 			
