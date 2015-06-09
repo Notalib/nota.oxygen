@@ -85,7 +85,7 @@
             <ref name="img"/> <!-- img -->
             <ref name="figure.imggroup"/> <!-- figure -->
             <ref name="poem"/> <!-- section -->
-            <ref name="linegroup"/> <!-- section -->
+            <ref name="linegroup"/> <!-- section, div -->
             <ref name="byline"/> <!-- span -->
             <ref name="dateline"/> <!-- span -->
             <ref name="epigraph"/> <!-- p -->
@@ -105,7 +105,7 @@
             <ref name="div"/> <!-- div -->
             <ref name="blockquote"/> <!-- blockquote -->
             <ref name="poem"/> <!-- section -->
-            <ref name="linegroup"/> <!-- section -->
+            <ref name="linegroup"/> <!-- section, div -->
             <ref name="byline"/> <!-- span -->
             <ref name="dateline"/> <!-- span -->
             <ref name="epigraph"/> <!-- p -->
@@ -125,7 +125,7 @@
             <ref name="div"/> <!-- div -->
             <ref name="blockquote"/> <!-- blockquote -->
             <ref name="poem"/> <!-- section -->
-            <ref name="linegroup"/> <!-- section -->
+            <ref name="linegroup"/> <!-- section, div -->
             <ref name="byline"/> <!-- span -->
             <ref name="dateline"/> <!-- span -->
             <ref name="epigraph"/> <!-- p -->
@@ -663,58 +663,24 @@
             </list>
         </attribute>
         <ref name="attrsrqd.notype"/>
-        <optional>
+        <zeroOrMore>
             <element name="section">
                 <attribute name="class">
                     <list>
                         <ref name="classes"/>
-                        <value>frontcover</value>
+                        <choice>
+                            <value>frontcover</value>
+                            <value>rearcover</value>
+                            <value>leftflap</value>
+                            <value>rightflap</value>
+                        </choice>
                         <ref name="classes"/>
                     </list>
                 </attribute>
                 <ref name="attrsrqd.noclass"/>
                 <ref name="level2.content.noattrs"/>
-            </element>
-        </optional>
-        <optional>
-            <element name="section">
-                <attribute name="class">
-                    <list>
-                        <ref name="classes"/>
-                        <value>rearcover</value>
-                        <ref name="classes"/>
-                    </list>
-                </attribute>
-                <ref name="attrsrqd.noclass"/>
-                <ref name="level2.content.noattrs"/>
-            </element>
-        </optional>
-        <optional>
-            <element name="section">
-                <attribute name="class">
-                    <list>
-                        <ref name="classes"/>
-                        <value>leftflap</value>
-                        <ref name="classes"/>
-                    </list>
-                </attribute>
-                <ref name="attrsrqd.noclass"/>
-                <ref name="level2.content.noattrs"/>
-            </element>
-        </optional>
-        <optional>
-            <element name="section">
-                <attribute name="class">
-                    <list>
-                        <ref name="classes"/>
-                        <value>rightflap</value>
-                        <ref name="classes"/>
-                    </list>
-                </attribute>
-                <ref name="attrsrqd.noclass"/>
-                <ref name="level2.content.noattrs"/>
-            </element>
-        </optional>
+           </element>
+        </zeroOrMore>
     </define>
     
     <!--
@@ -752,7 +718,7 @@
         <optional>
             <choice>
                 <value>titlepage</value>
-                <ref name="common-top-level-types"/>
+                <ref name="types.sectioning"/>
             </choice>
         </optional>
     </define>
@@ -816,7 +782,7 @@
         </choice>
     </define>
     <define name="bodymatter.types">
-        <ref name="common-top-level-types"/>
+        <ref name="types.sectioning"/>
     </define>
     
     <!--
@@ -850,7 +816,7 @@
     </define>
     <define name="backmatter.types">
         <optional>
-            <ref name="common-top-level-types"/>
+            <ref name="types.sectioning"/>
         </optional>
     </define>
     
@@ -961,7 +927,7 @@
                 <list>
                     <ref name="types"/>
                     <optional>
-                        <ref name="common-top-level-types"/>
+                        <ref name="types.sectioning"/>
                     </optional>
                     <ref name="types"/>
                 </list>
@@ -1013,7 +979,18 @@
         </choice>
     </define>
     <define name="attlist.level3" combine="interleave">
-        <ref name="attrsrqd"/> <!-- attrsrqd instead of attrs because all sectioning elements should have id attributes -->
+        <optional>
+            <attribute name="epub:type">
+                <list>
+                    <ref name="types"/>
+                    <optional>
+                        <ref name="types.sectioning"/>
+                    </optional>
+                    <ref name="types"/>
+                </list>
+            </attribute>
+        </optional>
+        <ref name="attrsrqd.notype"/> <!-- attrsrqd instead of attrs because all sectioning elements should have id attributes -->
     </define>
     
     <define name="level4">
@@ -1059,7 +1036,18 @@
         </choice>
     </define>
     <define name="attlist.level4" combine="interleave">
-        <ref name="attrsrqd"/> <!-- attrsrqd instead of attrs because all sectioning elements should have id attributes -->
+        <optional>
+            <attribute name="epub:type">
+                <list>
+                    <ref name="types"/>
+                    <optional>
+                        <ref name="types.sectioning"/>
+                    </optional>
+                    <ref name="types"/>
+                </list>
+            </attribute>
+        </optional>
+        <ref name="attrsrqd.notype"/> <!-- attrsrqd instead of attrs because all sectioning elements should have id attributes -->
     </define>
     
     <define name="level5">
@@ -1105,7 +1093,18 @@
         </choice>
     </define>
     <define name="attlist.level5" combine="interleave">
-        <ref name="attrsrqd"/> <!-- attrsrqd instead of attrs because all sectioning elements should have id attributes -->
+        <optional>
+            <attribute name="epub:type">
+                <list>
+                    <ref name="types"/>
+                    <optional>
+                        <ref name="types.sectioning"/>
+                    </optional>
+                    <ref name="types"/>
+                </list>
+            </attribute>
+        </optional>
+        <ref name="attrsrqd.notype"/> <!-- attrsrqd instead of attrs because all sectioning elements should have id attributes -->
     </define>
     
     <define name="level6">
@@ -1151,7 +1150,18 @@
         </choice>
     </define>
     <define name="attlist.level6" combine="interleave">
-        <ref name="attrsrqd"/> <!-- attrsrqd instead of attrs because all sectioning elements should have id attributes -->
+        <optional>
+            <attribute name="epub:type">
+                <list>
+                    <ref name="types"/>
+                    <optional>
+                        <ref name="types.sectioning"/>
+                    </optional>
+                    <ref name="types"/>
+                </list>
+            </attribute>
+        </optional>
+        <ref name="attrsrqd.notype"/> <!-- attrsrqd instead of attrs because all sectioning elements should have id attributes -->
     </define>
     
     <!-- ============================= Text Markup ============================= -->
@@ -1839,12 +1849,12 @@
         <!-- linegroups with headlines must be section elements; otherwise they must be div elements -->
         <choice>
             <element name="div">
-                <ref name="attrs.noclass"/>
+                <ref name="attrs.base"/>
                 <ref name="attlist.linegroup"/>
                 <ref name="linegroup.common"/>
             </element>
             <element name="section">
-                <ref name="attrsrqd.noclass"/> <!-- attrsrqd instead of attrs because all sectioning elements should have id attributes -->
+                <ref name="attrsrqd.base"/> <!-- attrsrqd instead of attrs because all sectioning elements should have id attributes -->
                 <ref name="attlist.linegroup"/>
                 <ref name="linegroup.common"/>
                 <ref name="hd"/> <!-- h1, h2, h3, h4, h5, h6 -->
@@ -1860,7 +1870,7 @@
                 <ref name="dateline"/> <!-- span -->
                 <ref name="epigraph"/> <!-- p -->
                 <ref name="byline"/> <!-- span -->
-                <ref name="linegroup"/> <!-- section -->
+                <ref name="linegroup"/> <!-- section, div -->
                 <ref name="line"/> <!-- p -->
                 <ref name="pagebreak.block"/> <!-- div -->
                 <ref name="prodnote"/> <!-- aside -->
@@ -1884,6 +1894,17 @@
                 <ref name="classes"/>
             </list>
         </attribute>
+        <optional>
+            <attribute name="epub:type">
+                <list>
+                    <ref name="types"/>
+                    <optional>
+                        <value>z3998:verse</value>
+                    </optional>
+                    <ref name="types"/>
+                </list>
+            </attribute>
+        </optional>
     </define>
     
     <!-- Use: poem is a complete poem or fragment thereof. -->
@@ -1900,7 +1921,7 @@
                     <ref name="dateline"/> <!-- span -->
                     <ref name="epigraph"/> <!-- p -->
                     <ref name="byline"/> <!-- span -->
-                    <ref name="linegroup"/> <!-- section -->
+                    <ref name="linegroup"/> <!-- section, div -->
                     <ref name="line"/> <!-- p -->
                     <ref name="pagebreak.block"/> <!-- div -->
                     <ref name="img"/> <!-- img -->
@@ -2999,16 +3020,12 @@
         -->
         <element name="dl">
             <ref name="attlist.dl"/>
-            <zeroOrMore>
-                <group>
-                    <oneOrMore>
-                        <ref name="dt"/> <!-- dt -->
-                    </oneOrMore>
-                    <oneOrMore>
-                        <ref name="dd"/> <!-- dd -->
-                    </oneOrMore>
-                </group>
-            </zeroOrMore>
+            <oneOrMore>
+                <choice>
+                    <ref name="dt"/> <!-- dt -->
+                    <ref name="dd"/> <!-- dd -->
+                </choice>
+            </oneOrMore>
         </element>
     </define>
     <define name="attlist.dl" combine="interleave">
@@ -3572,9 +3589,12 @@
     
     <!-- ======================== values for the epub:type and class attributes ======================== -->
     
-    <define name="common-top-level-types">
+    <define name="types.sectioning">
         <choice>
+            <value>volume</value>
             <value>chapter</value>
+            <value>subchapter</value>
+            <value>division</value>
             <value>abstract</value>
             <value>foreword</value>
             <value>preface</value>
@@ -3597,9 +3617,12 @@
             <value>credits</value>
             <value>keywords</value>
             <value>index</value>
+            <value>index-headnotes</value>
+            <value>index-legend</value>
+            <value>index-group</value>
             <value>glossary</value>
             <value>bibliography</value>
-            <value>titlepage</value>
+            <!--<value>titlepage</value>-->
             <value>halftitlepage</value>
             <value>copyright-page</value>
             <value>seriespage</value>
@@ -3612,12 +3635,26 @@
             <value>dedication</value>
             <value>revision-history</value>
             <value>case-study</value>
+            <value>notice</value>
             <value>answers</value>
+            <value>assessment</value>
             <value>assessments</value>
             <value>qna</value>
             <value>practices</value>
             <value>footnotes</value>
             <value>rearnotes</value>
+            <value>page-list</value>
+            <value>z3998:section</value>
+            <value>z3998:subsection</value>
+            <value>z3998:discography</value>
+            <value>z3998:filmography</value>
+            <value>z3998:published-works</value>
+            <value>z3998:publisher-address</value>
+            <value>z3998:editorial-note</value>
+            <value>z3998:grant-acknowledgment</value>
+            <value>z3998:biographical-note</value>
+            <value>z3998:translator-note</value>
+            <value>z3998:promotional-copy</value>
         </choice>
     </define>
     
@@ -3628,6 +3665,7 @@
                 <!--<value>afterword</value>-->
                 <!--<value>annoref</value>-->
                 <!--<value>annotation</value>-->
+                <value>answer</value>
                 <!--<value>appendix</value>-->
                 <!--<value>backmatter</value>-->
                 <value>biblioentry</value>
@@ -3643,7 +3681,7 @@
                 <!--<value>cover</value>-->
                 <!--<value>covertitle</value>-->
                 <value>dedication</value>
-                <value>division</value>
+                <!--<value>division</value>-->
                 <!--<value>epigraph</value>-->
                 <!--<value>epilogue</value>-->
                 <value>errata</value>
@@ -3683,7 +3721,7 @@
                 <value>rearnote</value>
                 <!--<value>rearnotes</value>-->
                 <!--<value>sidebar</value>-->
-                <value>subchapter</value>
+                <!--<value>subchapter</value>-->
                 <value>subtitle</value>
                 <value>table</value>
                 <value>table-cell</value>
@@ -3692,7 +3730,7 @@
                 <!--<value>titlepage</value>-->
                 <value>toc</value>
                 <value>topic-sentence</value>
-                <value>volume</value>
+                <!--<value>volume</value>-->
                 <value>warning</value>
                 <value>z3998:abbreviations</value>
                 <value>z3998:acknowledgments</value>
@@ -3772,28 +3810,28 @@
                 <!--<value>z3998:glossary</value>-->
                 <value>z3998:grant-acknowledgment</value>
                 <value>z3998:grapheme</value>
-                <value>z3998:halftitle</value>
+                <!--<value>z3998:halftitle</value>-->
                 <value>z3998:halftitle-page</value>
-                <value>z3998:help</value>
+                <!--<value>z3998:help</value>-->
                 <value>z3998:homograph</value>
                 <value>z3998:http</value>
                 <value>z3998:hymn</value>
                 <value>z3998:illustration</value>
                 <value>z3998:image-placeholder</value>
-                <value>z3998:imprimatur</value>
-                <value>z3998:imprint</value>
+                <!--<value>z3998:imprimatur</value>-->
+                <!--<value>z3998:imprint</value>-->
                 <!--<value>z3998:index</value>-->
                 <value>z3998:initialism</value>
                 <!--<value>z3998:introduction</value>-->
                 <value>z3998:introductory-note</value>
                 <value>z3998:ip</value>
                 <value>z3998:isbn</value>
-                <value>z3998:keyword</value>
+                <!--<value>z3998:keyword</value>-->
                 <value>z3998:letter</value>
-                <value>z3998:loi</value>
-                <value>z3998:lot</value>
+                <!--<value>z3998:loi</value>-->
+                <!--<value>z3998:lot</value>-->
                 <value>z3998:lyrics</value>
-                <value>z3998:marginalia</value>
+                <!--<value>z3998:marginalia</value>-->
                 <value>z3998:measure</value>
                 <value>z3998:mixed</value>
                 <value>z3998:morpheme</value>
@@ -3804,11 +3842,11 @@
                 <value>z3998:nonresolving-reference</value>
                 <!--<value>z3998:note</value>-->
                 <!--<value>z3998:noteref</value>-->
-                <value>z3998:notice</value>
+                <!--<value>z3998:notice</value>-->
                 <value>z3998:orderedlist</value>
                 <value>z3998:ordinal</value>
                 <value>z3998:organization</value>
-                <value>z3998:other-credits</value>
+                <!--<value>z3998:other-credits</value>-->
                 <!--<value>z3998:pagebreak</value>-->
                 <value>z3998:page-footer</value>
                 <value>z3998:page-header</value>
@@ -3828,8 +3866,8 @@
                 <value>z3998:postal</value>
                 <value>z3998:postal-code</value>
                 <value>z3998:postscript</value>
-                <value>z3998:practice</value>
-                <value>z3998:preamble</value>
+                <!--<value>z3998:practice</value>-->
+                <!--<value>z3998:preamble</value>-->
                 <!--<value>z3998:preface</value>-->
                 <value>z3998:prefix</value>
                 <value>z3998:presentation</value>
@@ -3843,7 +3881,7 @@
                 <value>z3998:publisher-logo</value>
                 <value>z3998:range</value>
                 <value>z3998:ratio</value>
-                <value>z3998:rearnote</value>
+                <!--<value>z3998:rearnote</value>-->
                 <!--<value>z3998:rearnotes</value>-->
                 <value>z3998:recipient</value>
                 <value>z3998:recto</value>
@@ -3857,7 +3895,7 @@
                 <value>z3998:salutation</value>
                 <value>z3998:scene</value>
                 <value>z3998:secondary</value>
-                <value>z3998:section</value>
+                <!--<value>z3998:section</value>-->
                 <value>z3998:sender</value>
                 <!--<value>z3998:sentence</value>-->
                 <!--<value>z3998:sidebar</value>-->
@@ -3869,8 +3907,8 @@
                 <value>z3998:structure</value>
                 <value>z3998:subchapter</value>
                 <value>z3998:subject</value>
-                <value>z3998:subsection</value>
-                <value>z3998:subtitle</value>
+                <!--<value>z3998:subsection</value>-->
+                <!--<value>z3998:subtitle</value>-->
                 <value>z3998:suffix</value>
                 <value>z3998:surname</value>
                 <value>z3998:taxonomy</value>
@@ -3879,11 +3917,11 @@
                 <value>z3998:textbook</value>
                 <value>z3998:t-form</value>
                 <value>z3998:timeline</value>
-                <value>z3998:title</value>
+                <!--<value>z3998:title</value>-->
                 <value>z3998:title-page</value>
                 <value>z3998:to</value>
                 <!--<value>z3998:toc</value>-->
-                <value>z3998:topic-sentence</value>
+                <!--<value>z3998:topic-sentence</value>-->
                 <value>z3998:translator</value>
                 <value>z3998:translator-note</value>
                 <value>z3998:truncation</value>
@@ -3893,7 +3931,7 @@
                 <value>z3998:verso</value>
                 <value>z3998:v-form</value>
                 <value>z3998:volume</value>
-                <value>z3998:warning</value>
+                <!--<value>z3998:warning</value>-->
                 <value>z3998:weight</value>
                 <!--<value>z3998:word</value>-->
             </choice>
@@ -3929,6 +3967,7 @@
                 <value>indented</value>
                 <value>initialism</value>
                 <value>isbn</value>
+                <value>issn</value>
                 <value>jacketcopy</value>
                 <value>keyboard</value>
                 <value>leftflap</value>

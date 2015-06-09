@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="dtbook.frameworks" default="dist">
 	<!-- Set property oxygen_installation_folder in Window->Preferences->Ant->Runtime->Properties -->
-	<property name="version-number" value="3.0.4" />
+	<property name="version-number" value="3.0.7" />
 	<target name="dist">
 		<jar destfile="./frameworks/dtbook2005/nota.oxygen.jar" basedir="./bin">
 			<manifest>
@@ -21,11 +21,11 @@
 		<copy todir="./frameworks/xhtmlepub/" file="./lib/commons-lang3-3.3.2.LICENSE.txt" />
 		<copy todir="./frameworks/ncx/" file="./lib/commons-lang3-3.3.2.LICENSE.txt" />
 		<copy todir="./frameworks/opf/" file="./lib/commons-lang3-3.3.2.LICENSE.txt" />
-		<copy todir="./frameworks/dtbook110/" file="./lib/truezip-samples-7.7.6-jar-with-dependencies.jar" />
-		<copy todir="./frameworks/dtbook2005/" file="./lib/truezip-samples-7.7.6-jar-with-dependencies.jar" />
-		<copy todir="./frameworks/ncx/" file="./lib/truezip-samples-7.7.6-jar-with-dependencies.jar" />
-		<copy todir="./frameworks/opf/" file="./lib/truezip-samples-7.7.6-jar-with-dependencies.jar" />
-		<copy todir="./frameworks/xhtmlepub/" file="./lib/truezip-samples-7.7.6-jar-with-dependencies.jar" />
+		<copy todir="./frameworks/dtbook110/" file="./lib/truezip-samples-7.7.8-jar-with-dependencies.jar" />
+		<copy todir="./frameworks/dtbook2005/" file="./lib/truezip-samples-7.7.8-jar-with-dependencies.jar" />
+		<copy todir="./frameworks/ncx/" file="./lib/truezip-samples-7.7.8-jar-with-dependencies.jar" />
+		<copy todir="./frameworks/opf/" file="./lib/truezip-samples-7.7.8-jar-with-dependencies.jar" />
+		<copy todir="./frameworks/xhtmlepub/" file="./lib/truezip-samples-7.7.8-jar-with-dependencies.jar" />
 		<zip destfile="./updatesite/dtbook110_${version-number}.zip" basedir="./frameworks" includes="dtbook110/**" />
 		<zip destfile="./updatesite/dtbook2005_${version-number}.zip" basedir="./frameworks" includes="dtbook2005/**" />
 		<zip destfile="./updatesite/xhtmlepub_${version-number}.zip" basedir="./frameworks" includes="xhtmlepub/**" />

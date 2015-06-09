@@ -10,6 +10,10 @@ Oxygen version 16.0 is supported, may also work with earlier versions.
 
 nota.oxygen is copyright [Nota](http://nota.nu/) and distritributed under [LGPL version 3](/Notalib/dtbookOxygen/blob/master/lgpl-license.txt).
 
+## Documentation
+
+http://www.oxygenxml.com/InstData/Editor/SDK/javadoc/ro/sync/ecss/extensions/api/package-summary.html
+
 ## Setup
 
 The nota.oxygen add-ins is an eclipse project. In order to develop the add-ins, you need eclipse. Eclipse Luna package "Eclipse IDE for Java EE Developers" is recommended.

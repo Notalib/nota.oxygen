@@ -20,6 +20,7 @@ public class XHTMLUniqueAttributesRecognizer extends
 			GenerateIDElementsInfo.DEFAULT_ID_GENERATION_PATTERN, 
 			new String[] {
 					"a", 
+					"aside",
 					"body",
 					"div",
 					"h1", 

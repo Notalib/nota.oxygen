@@ -69,7 +69,7 @@ public class UpdateNavigationDocumentsOperation extends BaseAuthorOperation {
 		pageItems = new ArrayList<NavItem>();
 		topLevelTocItems = new ArrayList<TocItem>();
 		playOrder = 0;
-		for (AuthorAccess textDocAccess : EpubUtils.getSpine(opfAccess, false)) {
+		for (AuthorAccess textDocAccess : EpubUtils.getSpine(opfAccess, true)) {
 			topLevelTocItems.addAll(getTocItems(textDocAccess, opfAccess));
 		}
 		foldTocItemsByPartAndChapter();
