@@ -54,7 +54,7 @@ public class Concatter extends JPanel implements ActionListener, PropertyChangeL
 			
 			// get all xhtml files from extracted zip file
 			listOfFiles = EpubUtils.getFiles(false, true);
-						
+			
 			// create concat handler instance
 			concatHandler = new ConcatHandler();
 

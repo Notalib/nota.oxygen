@@ -14,6 +14,11 @@ nota.oxygen is copyright [Nota](http://nota.nu/) and distritributed under [LGPL 
 
 http://www.oxygenxml.com/InstData/Editor/SDK/javadoc/ro/sync/ecss/extensions/api/package-summary.html
 
+## Update Sites URLs
+Options->Preferences->Add-ons:
+Live: http://notalib.github.io/nota.oxygen/dk.nota.oxygen.xml
+Test: http://ybk.github.io/nota.oxygen/dk.nota.oxygen.xml
+
 ## Setup
 
 The nota.oxygen add-ins is an eclipse project. In order to develop the add-ins, you need eclipse. Eclipse Luna package "Eclipse IDE for Java EE Developers" is recommended.
