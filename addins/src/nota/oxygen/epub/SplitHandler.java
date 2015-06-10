@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.xml.sax.*;
 import org.xml.sax.helpers.DefaultHandler;
@@ -17,7 +18,7 @@ public class SplitHandler extends DefaultHandler {
 	
 	public SplitHandler() {
 		htmlAttributes = new HashMap<String, String>();
-		metaNodes = new HashMap<String, String>();
+		metaNodes = new TreeMap<String, String>();
 		cssLinks = new ArrayList<String>();
 	}
 	
