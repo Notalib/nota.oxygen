@@ -3,8 +3,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.oxygenxml.com/ns/extension http://www.oxygenxml.com/ns/extension/extensions.xsd">
     <xt:extension id="dk.nota.oxygen.dtbook110">
-        <xt:location href="dtbook110_3.0.8.zip"/>
-        <xt:version>3.0.8</xt:version>
+        <xt:location href="dtbook110_3.0.9.zip"/>
+        <xt:version>3.0.9</xt:version>
         <xt:oxy_version>16.0+</xt:oxy_version>
         <xt:type>framework</xt:type>
         <xt:author>Ole Holst Andersen</xt:author>
@@ -15,8 +15,8 @@
         <xt:license><![CDATA[nota.oxygen is copyright Nota and distritributed under LGPL version 3.]]></xt:license>
     </xt:extension>
     <xt:extension id="dk.nota.oxygen.dtbook2005">
-        <xt:location href="dtbook2005_3.0.8.zip"/>
-        <xt:version>3.0.8</xt:version>
+        <xt:location href="dtbook2005_3.0.9.zip"/>
+        <xt:version>3.0.9</xt:version>
         <xt:oxy_version>16.0+</xt:oxy_version>
         <xt:type>framework</xt:type>
         <xt:author>Ole Holst Andersen</xt:author>
@@ -27,8 +27,8 @@
         <xt:license><![CDATA[nota.oxygen is copyright Nota and distritributed under LGPL version 3.]]></xt:license>
     </xt:extension>
     <xt:extension id="dk.nota.oxygen.xhtmlepub">
-        <xt:location href="xhtmlepub_3.0.8.zip"/>
-        <xt:version>3.0.8</xt:version>
+        <xt:location href="xhtmlepub_3.0.9.zip"/>
+        <xt:version>3.0.9</xt:version>
         <xt:oxy_version>16.0+</xt:oxy_version>
         <xt:type>framework</xt:type>
         <xt:author>Ole Holst Andersen</xt:author>
@@ -39,8 +39,8 @@
         <xt:license><![CDATA[nota.oxygen is copyright Nota and distritributed under LGPL version 3.]]></xt:license>
     </xt:extension>
     <xt:extension id="dk.nota.oxygen.ncx">
-        <xt:location href="ncx_3.0.8.zip"/>
-        <xt:version>3.0.8</xt:version>
+        <xt:location href="ncx_3.0.9.zip"/>
+        <xt:version>3.0.9</xt:version>
         <xt:oxy_version>16.0+</xt:oxy_version>
         <xt:type>framework</xt:type>
         <xt:author>Ole Holst Andersen</xt:author>
@@ -51,8 +51,8 @@
         <xt:license><![CDATA[nota.oxygen is copyright Nota and distritributed under LGPL version 3.]]></xt:license>
     </xt:extension>
     <xt:extension id="dk.nota.oxygen.opf">
-        <xt:location href="opf_3.0.8.zip"/>
-        <xt:version>3.0.8</xt:version>
+        <xt:location href="opf_3.0.9.zip"/>
+        <xt:version>3.0.9</xt:version>
         <xt:oxy_version>16.0+</xt:oxy_version>
         <xt:type>framework</xt:type>
         <xt:author>Ole Holst Andersen</xt:author>
@@ -63,8 +63,8 @@
         <xt:license><![CDATA[nota.oxygen is copyright Nota and distritributed under LGPL version 3.]]></xt:license>
     </xt:extension>
     <xt:extension id="dk.nota.oxygen.xhtmlcartoons">
-        <xt:location href="xhtmlcartoons_3.0.8.zip"/>
-        <xt:version>3.0.8</xt:version>
+        <xt:location href="xhtmlcartoons_3.0.9.zip"/>
+        <xt:version>3.0.9</xt:version>
         <xt:oxy_version>16.0+</xt:oxy_version>
         <xt:type>framework</xt:type>
         <xt:author>Ole Holst Andersen</xt:author>
