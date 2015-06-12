@@ -41,16 +41,24 @@ public class Concatter extends JPanel implements ActionListener, PropertyChangeL
 		// Main task. Executed in background thread.
 		@Override
 		public Void doInBackground() {
-			if (!EpubUtils.start(taskOutput)) return null;
-			if (!EpubUtils.unzip(taskOutput)) return null;
-			if (!EpubUtils.canConcat(taskOutput)) return null;
-			if (!EpubUtils.backup(taskOutput)) return null;
+			if (!EpubUtils.start(taskOutput))
+				return null;
+			
+			if (!EpubUtils.unzip(taskOutput))
+				return null;
+			
+			if (!EpubUtils.canConcat(taskOutput))
+				return null;
+			
+			if (!EpubUtils.backup(taskOutput))
+				return null;
 			
 			EpubUtils.outputProcess("PREPARING AND PARSING", true, taskOutput);
 			
 			// create package handler instance
 			packageHandler = new PackageHandler();
-			if (!EpubUtils.parseFile(new File(EpubUtils.EPUB_FOLDER + File.separator + EpubUtils.PACKAGE_FILENAME), packageHandler, taskOutput)) return null;
+			if (!EpubUtils.parseFile(new File(EpubUtils.EPUB_FOLDER + File.separator + EpubUtils.PACKAGE_FILENAME), packageHandler, taskOutput)) 
+				return null;
 			
 			// get all xhtml files from extracted zip file
 			listOfFiles = EpubUtils.getFiles(false, true);
@@ -60,10 +68,12 @@ public class Concatter extends JPanel implements ActionListener, PropertyChangeL
 
 			for (File file : listOfFiles) {
 				// prepare source file
-				if (!EpubUtils.prepareFile(file, taskOutput)) return null;
-				
+				if (!EpubUtils.prepareFile(file, taskOutput))
+					return null;
+
 				// parse source file
-				if (!EpubUtils.parseFile(file, concatHandler, taskOutput)) return null;
+				if (!EpubUtils.parseFile(file, concatHandler, taskOutput))
+					return null;
 			}
 			
 			EpubUtils.outputProcess("BUILDING CONCAT DOCUMENT", true, taskOutput);
@@ -78,10 +88,12 @@ public class Concatter extends JPanel implements ActionListener, PropertyChangeL
 			EpubUtils.addUniqueIds(concatDoc.getDocumentElement(), taskOutput);
 			
 			// clean references
-			if (!cleanReferences(concatDoc.getElementsByTagName("a"), EpubUtils.EPUB_FOLDER, taskOutput)) return null;
+			if (!cleanReferences(concatDoc.getElementsByTagName("a"), EpubUtils.EPUB_FOLDER, taskOutput))
+				return null;
 			
 			// save concat document
-			if (!EpubUtils.saveDocument(concatDoc, new File(EpubUtils.EPUB_FOLDER + File.separator + EpubUtils.CONCAT_FILENAME), taskOutput)) return null;
+			if (!EpubUtils.saveDocument(concatDoc, new File(EpubUtils.EPUB_FOLDER + File.separator + EpubUtils.CONCAT_FILENAME), taskOutput)) 
+				return null;
 			
 			EpubUtils.outputProcess("MODIFYING PACKAGE DOCUMENT", true, taskOutput);
 			
@@ -91,18 +103,22 @@ public class Concatter extends JPanel implements ActionListener, PropertyChangeL
 			}
 			
 			// add concat document to opf document
-			if (!EpubUtils.addOpfItem(packageDoc, EpubUtils.CONCAT_FILENAME, 0, taskOutput)) return null;
+			if (!EpubUtils.addOpfItem(packageDoc, EpubUtils.CONCAT_FILENAME, 0, taskOutput)) 
+				return null;
 			
 			// remove non concat documents from opf document
 			for (int i = 0; i < listOfFiles.length; i++) {
-				if (!EpubUtils.removeOpfItem(packageDoc, listOfFiles[i].getName(), taskOutput)) return null;
+				if (!EpubUtils.removeOpfItem(packageDoc, listOfFiles[i].getName(), taskOutput)) 
+					return null;
 			}
 
 			// remove fallback from non xhtml spine elements
-			if (!EpubUtils.removeFallbackFromOpf(packageDoc, taskOutput)) return null;
+			if (!EpubUtils.removeFallbackFromOpf(packageDoc, taskOutput)) 
+				return null;
 						
 			// save opf document
-			if (!EpubUtils.saveDocument(packageDoc, new File(EpubUtils.EPUB_FOLDER + File.separator + EpubUtils.PACKAGE_FILENAME), taskOutput)) return null;
+			if (!EpubUtils.saveDocument(packageDoc, new File(EpubUtils.EPUB_FOLDER + File.separator + EpubUtils.PACKAGE_FILENAME), taskOutput)) 
+				return null;
 
 			EpubUtils.outputProcess("MODIFYING EPUB", true, taskOutput);
 			
@@ -111,17 +127,23 @@ public class Concatter extends JPanel implements ActionListener, PropertyChangeL
 			
 			TFile destination = new TFile(EpubUtils.EPUB.getPath() + File.separator + EpubUtils.EPUB_FOLDER.substring(EpubUtils.EPUB_FOLDER.lastIndexOf(File.separator)).replace(File.separator, ""));
 			
-			if (!EpubUtils.addFileToEpub(new TFile(EpubUtils.EPUB_FOLDER + File.separator + EpubUtils.CONCAT_FILENAME), destination, taskOutput)) return null;
+			if (!EpubUtils.addFileToEpub(new TFile(EpubUtils.EPUB_FOLDER + File.separator + EpubUtils.CONCAT_FILENAME), destination, taskOutput)) 
+				return null;
 			
-			if (!EpubUtils.addFileToEpub(new TFile(EpubUtils.EPUB_FOLDER + File.separator + EpubUtils.PACKAGE_FILENAME), destination, taskOutput)) return null;
+			if (!EpubUtils.addFileToEpub(new TFile(EpubUtils.EPUB_FOLDER + File.separator + EpubUtils.PACKAGE_FILENAME), destination, taskOutput)) 
+				return null;
 			
 			for (int i = 0; i < listOfFiles.length; i++) {
-				if (!EpubUtils.removeFileFromEpub(new TFile(destination, listOfFiles[i].getName()), taskOutput)) return null;
+				if (!EpubUtils.removeFileFromEpub(new TFile(destination, listOfFiles[i].getName()), taskOutput)) 
+					return null;
 			}
 			
-			if (!EpubUtils.commitChanges(taskOutput)) return null;
+			if (!EpubUtils.commitChanges(taskOutput)) 
+				return null;
 
-			if (!EpubUtils.finish(taskOutput)) return null;
+			if (!EpubUtils.finish(taskOutput)) 
+				return null;
+			
 			return null;
 		}
 

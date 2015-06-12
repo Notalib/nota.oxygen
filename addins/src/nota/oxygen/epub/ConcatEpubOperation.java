@@ -11,20 +11,20 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 	private String epubFolder;
 	
 	@Override
-	public ArgumentDescriptor[] getArguments() {
-		return new ArgumentDescriptor[]{};
-	}
-
-	@Override
 	public String getDescription() {
 		return "Concats epub files";
+	}
+	
+	@Override
+	public ArgumentDescriptor[] getArguments() {
+		return new ArgumentDescriptor[]{};
 	}
 
 	@Override
 	protected void parseArguments(ArgumentsMap args) throws IllegalArgumentException {
 		// Nothing to parse!!!
 	}
-
+	
 	@Override
 	protected void doOperation() throws AuthorOperationException {
 		try {
@@ -47,7 +47,7 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 			Concatter.main(new String[] {epub, epubFolder});
 		} catch (Exception e) {
 			e.printStackTrace();
-			showMessage("Could not finalize operation. An Exception occurred: " + e.getMessage());
+			showMessage("Could not finalize ConcatEpubOperation. An Exception occurred: " + e.getMessage());
 			return;
 		}
 	}
