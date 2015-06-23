@@ -57,7 +57,7 @@ import ro.sync.exml.workspace.api.editor.page.WSEditorPage;
 import ro.sync.exml.workspace.api.editor.page.author.WSAuthorEditorPage;
 import ro.sync.exml.workspace.api.editor.page.text.WSTextEditorPage;
 
-public class EpubUtils {	
+public class EpubUtils {
 	public static URL getEpubUrl(URL baseEpubUrl, String url)
 	{
 		URL epubUrl = Utils.getZipRootUrl(baseEpubUrl);
@@ -615,12 +615,9 @@ public class EpubUtils {
 			ZipEntry inZipEntry = inZip.getNextEntry();
 			while (inZipEntry != null) {
 				String fileName = inZipEntry.getName();
-				if (fileName.contains(".")) {
-					String extension = fileName.substring(fileName.lastIndexOf(".")).replace(".", "");
-					if (!extension.equals("xhtml") && !extension.equals("ncx") && !extension.equals("opf")) {
-						inZipEntry = inZip.getNextEntry();
-						continue;
-					}
+				if (!fileName.endsWith(".xhtml") && !fileName.endsWith(".ncx") && !fileName.endsWith(".opf")) {
+					inZipEntry = inZip.getNextEntry();
+					continue;
 				}
 
 				File unZippedFile = new File(destDir + File.separator + fileName);
@@ -863,9 +860,12 @@ public class EpubUtils {
 			
 			FileOutputStream  fop = new FileOutputStream(file);
 			String xmlDeclaration = "<?xml version='1.0' encoding='UTF-8'?>\n";
-			String doctype = "<!DOCTYPE html>\n";
 			fop.write(xmlDeclaration.getBytes());
-			fop.write(doctype.getBytes());
+			if (!file.getName().equals(PACKAGE_FILENAME)) {
+				String doctype = "<!DOCTYPE html>\n";
+				fop.write(doctype.getBytes());
+			}
+			
 			StreamResult result = new StreamResult(fop);
 			
 			// transform concatenated document to xml content string
@@ -911,6 +911,9 @@ public class EpubUtils {
 
 			Element spineItem = opfDoc.createElement("itemref");
 			spineItem.setAttribute("idref", id);
+			if (fileName.endsWith("-cover.xhtml")) {
+				spineItem.setAttribute("linear", "no");
+			}
 			spine.item(0).appendChild(spineItem);
 
 			return true;
@@ -1013,7 +1016,7 @@ public class EpubUtils {
         for (int i = 0; i < files.length; i++) {
             String fileName = files[i].getName();
 
-            if (fileName.endsWith(NAVIGATION_FILENAME) || (fileName.contains(".") && !fileName.substring(fileName.lastIndexOf(".")).equals(".xhtml"))) {
+            if (fileName.endsWith(NAVIGATION_FILENAME) || !fileName.endsWith(".xhtml")) {
                 if (files[i].isFile()) {
                 	if (!subFolder.equals("")) nonSpineElements.add(subFolder + "/" + files[i].getName());
                 	else nonSpineElements.add(files[i].getName());
@@ -1057,6 +1060,7 @@ public class EpubUtils {
 	public static boolean commitChanges(JTextArea taskOutput) {
 		try {
 			outputMessage(taskOutput, "Committing changes to epub");
+			//TVFS.umount(new TFile(EPUB));
 			TVFS.umount();
 			return true;
 		} catch (FsSyncException fsse) {

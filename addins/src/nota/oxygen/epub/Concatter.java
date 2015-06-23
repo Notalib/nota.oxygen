@@ -122,11 +122,16 @@ public class Concatter extends JPanel implements ActionListener, PropertyChangeL
 
 			EpubUtils.outputProcess("MODIFYING EPUB", true, taskOutput);
 			
-			// modify epub file
-			TConfig.get().setArchiveDetector(new TArchiveDetector("epub", new JarDriver(IOPoolLocator.SINGLETON)));
+			// obtain the global configuration
+			TConfig config = TConfig.get();
+			config.setArchiveDetector(new TArchiveDetector("epub", new JarDriver(IOPoolLocator.SINGLETON)));
 			
-			TFile destination = new TFile(EpubUtils.EPUB.getPath() + File.separator + EpubUtils.EPUB_FOLDER.substring(EpubUtils.EPUB_FOLDER.lastIndexOf(File.separator)).replace(File.separator, ""));
+			// get epub file destination
+			String epubPath = EpubUtils.EPUB.getPath();
+			String epubFolder = EpubUtils.EPUB_FOLDER.substring(EpubUtils.EPUB_FOLDER.lastIndexOf(File.separator)).replace(File.separator, "");
+			TFile destination = new TFile(epubPath + File.separator + epubFolder);
 			
+			// modify epub file destination
 			if (!EpubUtils.addFileToEpub(new TFile(EpubUtils.EPUB_FOLDER + File.separator + EpubUtils.CONCAT_FILENAME), destination, taskOutput)) 
 				return null;
 			
@@ -137,10 +142,11 @@ public class Concatter extends JPanel implements ActionListener, PropertyChangeL
 				if (!EpubUtils.removeFileFromEpub(new TFile(destination, listOfFiles[i].getName()), taskOutput)) 
 					return null;
 			}
-			
+
+			// commit changes to epub file destination
 			if (!EpubUtils.commitChanges(taskOutput)) 
 				return null;
-
+			
 			if (!EpubUtils.finish(taskOutput)) 
 				return null;
 			
@@ -193,9 +199,9 @@ public class Concatter extends JPanel implements ActionListener, PropertyChangeL
 		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		
 		// Instances of javax.swing.SwingWorker are not reusuable, so we create new instances as needed.
-		task = new Task();
-		task.addPropertyChangeListener(this);
-		task.execute();
+		this.task = new Task();
+		this.task.addPropertyChangeListener(this);
+		this.task.execute();
 	}
 
 	private static void createAndShowGUI() {
@@ -279,10 +285,10 @@ public class Concatter extends JPanel implements ActionListener, PropertyChangeL
 				for (int j = 0; j < attrs.getLength(); j++) {
 					Attr attr = (Attr) attrs.item(j);
 					if (attr.getNodeName().equalsIgnoreCase("href")) {
-						if (!attr.getNodeValue().contains("www") && attr.getNodeValue().contains("#")) {
+						if (!attr.getNodeValue().contains("http:") && !attr.getNodeValue().contains("www.") && attr.getNodeValue().contains("#")) {
 							// remove file reference
 							attr.setNodeValue(attr.getNodeValue().substring(attr.getNodeValue().indexOf("#")));
-						} else if (!attr.getNodeValue().contains("www") && !attr.getNodeValue().contains("#") && attr.getNodeValue().contains(".xhtml")) {
+						} else if (!attr.getNodeValue().contains("http:") && !attr.getNodeValue().contains("www.") && !attr.getNodeValue().contains("#") && attr.getNodeValue().contains(".xhtml")) {
 							String fileRef = attr.getNodeValue();
 
 							// create default handler instance

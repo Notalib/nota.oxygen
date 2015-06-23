@@ -27,7 +27,7 @@
 							<String>${framework}/i18n/</String>
 							<String>${framework}/xhtml.jar</String>
 							<String>${framework}/nota.oxygen.jar</String>
-							<String>${framework}/truezip-samples-7.7.8-jar-with-dependencies.jar</String>
+							<String>${framework}/truezip-samples-7.7.9-jar-with-dependencies.jar</String>
 						</String-array>
 					</field>
 					<field name="parentClassLoaderID">
@@ -4737,12 +4737,7 @@ else 'rearnotes backmatter'
 														<String>ancestor-or-self::*[@epub:type="footnotes backmatter" or @epub:type="rearnotes backmatter" or @epub:type="backmatter footnotes" or @epub:type="backmatter rearnotes"]</String>
 													</field>
 													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>header fragment</String>
-																<String>&lt;a class="noteref" epub:type="noteref" xmlns="http://www.w3.org/1999/xhtml" href="$href">*&lt;/a></String>
-															</entry>
-														</serializableOrderedMap>
+														<serializableOrderedMap/>
 													</field>
 													<field name="operationID">
 														<String>nota.oxygen.epub.notes.InsertNoteRefOperation</String>

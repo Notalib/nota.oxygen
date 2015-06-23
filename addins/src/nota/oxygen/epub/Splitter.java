@@ -142,11 +142,16 @@ public class Splitter extends JPanel implements ActionListener, PropertyChangeLi
 
 			EpubUtils.outputProcess("MODIFYING EPUB", true, taskOutput);
 			
-			// modify epub file
-			TConfig.get().setArchiveDetector(new TArchiveDetector("epub", new JarDriver(IOPoolLocator.SINGLETON)));
-
-			TFile destination = new TFile(EpubUtils.EPUB.getPath() + File.separator + EpubUtils.EPUB_FOLDER.substring(EpubUtils.EPUB_FOLDER.lastIndexOf(File.separator)).replace(File.separator, ""));
-
+			// obtain the global configuration
+			TConfig config = TConfig.get();
+			config.setArchiveDetector(new TArchiveDetector("epub", new JarDriver(IOPoolLocator.SINGLETON)));
+						
+			// get epub file destination
+			String epubPath = EpubUtils.EPUB.getPath();
+			String epubFolder = EpubUtils.EPUB_FOLDER.substring(EpubUtils.EPUB_FOLDER.lastIndexOf(File.separator)).replace(File.separator, "");
+			TFile destination = new TFile(epubPath + File.separator + epubFolder);
+						
+			// modify epub file destination
 			for (int i = 0; i < listOfFiles.length; i++) {
 				if (!EpubUtils.addFileToEpub(new TFile(listOfFiles[i]), destination, taskOutput)) 
 					return null;
@@ -158,6 +163,7 @@ public class Splitter extends JPanel implements ActionListener, PropertyChangeLi
 			if (!EpubUtils.removeFileFromEpub(new TFile(destination, EpubUtils.CONCAT_FILENAME), taskOutput)) 
 				return null;
 
+			// commit changes to epub file destination
 			if (!EpubUtils.commitChanges(taskOutput)) 
 				return null;
 			
@@ -210,9 +216,9 @@ public class Splitter extends JPanel implements ActionListener, PropertyChangeLi
 		startButton.setEnabled(false);
 		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		
-		task = new Task();
-		task.addPropertyChangeListener(this);
-		task.execute();
+		this.task = new Task();
+		this.task.addPropertyChangeListener(this);
+		this.task.execute();
 	}
 
 	private static void createAndShowGUI() {

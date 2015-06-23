@@ -9,19 +9,20 @@ import ro.sync.ecss.extensions.api.AuthorOperationException;
 public class SplitEpubOperation extends BaseAuthorOperation {
 	private String epub;
 	private String epubFolder;
-	
+
 	@Override
 	public String getDescription() {
 		return "Splits epub file";
 	}
-	
+
 	@Override
 	public ArgumentDescriptor[] getArguments() {
 		return new ArgumentDescriptor[] {};
 	}
 
 	@Override
-	protected void parseArguments(ArgumentsMap args) throws IllegalArgumentException {
+	protected void parseArguments(ArgumentsMap args)
+			throws IllegalArgumentException {
 		// Nothing to parse!!!
 	}
 	

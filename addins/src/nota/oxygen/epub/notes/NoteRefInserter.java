@@ -34,6 +34,8 @@ public class NoteRefInserter extends JPanel implements ActionListener, PropertyC
 	private static String fileName;
 	private File[] listOfFiles;
 	
+	private static FindNoteRefHandler findNoteRefHandler;
+	
 	public static boolean ERRORS_FOUND;
 	
 	class Task extends SwingWorker<Void, Void> {
@@ -42,11 +44,11 @@ public class NoteRefInserter extends JPanel implements ActionListener, PropertyC
 		protected Void doInBackground() throws Exception {
 			if (!EpubUtils.start(taskOutput))
 				return null;
-			
-			if (!EpubUtils.backup(taskOutput))
+
+			if (!EpubUtils.unzip(taskOutput))
 				return null;
 			
-			if (!EpubUtils.unzip(taskOutput))
+			if (!EpubUtils.backup(taskOutput))
 				return null;
 			
 			EpubUtils.outputProcess("PREPARING AND PARSING", true, taskOutput);
@@ -54,10 +56,10 @@ public class NoteRefInserter extends JPanel implements ActionListener, PropertyC
 			// get all files where noterefs can be found
 			listOfFiles = EpubUtils.getFiles(false, false);
 
-			FindNoteRefHandler findNoteRefHandler = new FindNoteRefHandler();
+			findNoteRefHandler = new FindNoteRefHandler();
 			for (File file : listOfFiles) {
-				if (file.getName().substring(file.getName().lastIndexOf("-")).equals("-footnotes.xhtml") || 
-					file.getName().substring(file.getName().lastIndexOf("-")).equals("-rearnotes.xhtml")) {
+				String fileName = file.getName();
+				if (fileName.endsWith("-footnotes.xhtml") || fileName.endsWith("-rearnotes.xhtml")) {
 					continue;
 				}
 				
@@ -181,19 +183,25 @@ public class NoteRefInserter extends JPanel implements ActionListener, PropertyC
 			
 			EpubUtils.outputProcess("MODIFYING EPUB", true, taskOutput);
 			
-			// modify epub file
-			TConfig.get().setArchiveDetector(new TArchiveDetector("epub", new JarDriver(IOPoolLocator.SINGLETON)));
-
-			TFile destination = new TFile(EpubUtils.EPUB.getPath() + File.separator + EpubUtils.EPUB_FOLDER.substring(EpubUtils.EPUB_FOLDER.lastIndexOf(File.separator)).replace(File.separator, ""));
-
+			// obtain the global configuration
+			TConfig config = TConfig.get();
+			config.setArchiveDetector(new TArchiveDetector("epub", new JarDriver(IOPoolLocator.SINGLETON)));
+						
+			// get epub file destination
+			String epubPath = EpubUtils.EPUB.getPath();
+			String epubFolder = EpubUtils.EPUB_FOLDER.substring(EpubUtils.EPUB_FOLDER.lastIndexOf(File.separator)).replace(File.separator, "");
+			TFile destination = new TFile(epubPath + File.separator + epubFolder);
+						
+			// modify epub file destination
 			for (File file : listOfFiles) {
 				if (!EpubUtils.addFileToEpub(new TFile(file), destination, taskOutput))
 					return null;
 			}
 			
+			// commit changes to epub file destination
 			if (!EpubUtils.commitChanges(taskOutput))
 				return null;
-
+			
 			if (!EpubUtils.finish(taskOutput))
 				return null;
 			
@@ -243,9 +251,9 @@ public class NoteRefInserter extends JPanel implements ActionListener, PropertyC
 		startButton.setEnabled(false);
 		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		
-		task = new Task();
-		task.addPropertyChangeListener(this);
-		task.execute();
+		this.task = new Task();
+		this.task.addPropertyChangeListener(this);
+		this.task.execute();
 	}
 	
 	private static void createAndShowGUI() {

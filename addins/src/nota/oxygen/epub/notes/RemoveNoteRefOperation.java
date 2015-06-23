@@ -30,6 +30,8 @@ public class RemoveNoteRefOperation extends BaseAuthorOperation {
 	@Override
 	protected void doOperation() throws AuthorOperationException {
 		try {
+			getAuthorAccess().getWorkspaceAccess().closeAll();
+			
 			// get epub zip path
 			epub = Utils.getZipPath(getAuthorAccess().getEditorAccess().getEditorLocation().toString());
 			if (epub == null || epub.equals("")) {

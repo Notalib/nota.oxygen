@@ -4,11 +4,14 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+
 import java.beans.*;
 import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
+
 import nota.oxygen.epub.EpubUtils;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -38,12 +41,12 @@ public class NoteRefRemover extends JPanel implements ActionListener, PropertyCh
 			if (!EpubUtils.start(taskOutput))
 				return null;
 			
-			if (!EpubUtils.backup(taskOutput))
-				return null;
-			
 			if (!EpubUtils.unzip(taskOutput))
 				return null;
 			
+			if (!EpubUtils.backup(taskOutput))
+				return null;
+
 			EpubUtils.outputProcess("REMOVING NOTEREFS FROM DOCUMENT", true, taskOutput);
 			
 			Document doc = EpubUtils.createDocument(new File(EpubUtils.EPUB_FOLDER + File.separator + fileName), taskOutput);
@@ -115,14 +118,20 @@ public class NoteRefRemover extends JPanel implements ActionListener, PropertyCh
 			
 			EpubUtils.outputProcess("MODIFYING EPUB", true, taskOutput);
 			
-			// modify epub file
-			TConfig.get().setArchiveDetector(new TArchiveDetector("epub", new JarDriver(IOPoolLocator.SINGLETON)));
-
-			TFile destination = new TFile(EpubUtils.EPUB.getPath() + File.separator + EpubUtils.EPUB_FOLDER.substring(EpubUtils.EPUB_FOLDER.lastIndexOf(File.separator)).replace(File.separator, ""));
-
+			// obtain the global configuration
+			TConfig config = TConfig.get();
+			config.setArchiveDetector(new TArchiveDetector("epub", new JarDriver(IOPoolLocator.SINGLETON)));
+						
+			// get epub file destination
+			String epubPath = EpubUtils.EPUB.getPath();
+			String epubFolder = EpubUtils.EPUB_FOLDER.substring(EpubUtils.EPUB_FOLDER.lastIndexOf(File.separator)).replace(File.separator, "");
+			TFile destination = new TFile(epubPath + File.separator + epubFolder);
+						
+			// modify epub file destination
 			if (!EpubUtils.addFileToEpub(new TFile(EpubUtils.EPUB_FOLDER + File.separator + fileName), destination, taskOutput))
 				return null;
 			
+			// commit changes to epub file destination
 			if (!EpubUtils.commitChanges(taskOutput))
 				return null;
 

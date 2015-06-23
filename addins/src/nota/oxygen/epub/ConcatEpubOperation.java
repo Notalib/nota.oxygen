@@ -9,19 +9,20 @@ import nota.oxygen.common.Utils;
 public class ConcatEpubOperation extends BaseAuthorOperation {
 	private String epub;
 	private String epubFolder;
-	
+
 	@Override
 	public String getDescription() {
 		return "Concats epub files";
 	}
-	
+
 	@Override
 	public ArgumentDescriptor[] getArguments() {
-		return new ArgumentDescriptor[]{};
+		return new ArgumentDescriptor[] {};
 	}
 
 	@Override
-	protected void parseArguments(ArgumentsMap args) throws IllegalArgumentException {
+	protected void parseArguments(ArgumentsMap args)
+			throws IllegalArgumentException {
 		// Nothing to parse!!!
 	}
 	
@@ -44,7 +45,7 @@ public class ConcatEpubOperation extends BaseAuthorOperation {
 				return;
 			}
 
-			Concatter.main(new String[] {epub, epubFolder});
+			Concatter.main(new String[] { epub, epubFolder });
 		} catch (Exception e) {
 			e.printStackTrace();
 			showMessage("Could not finalize ConcatEpubOperation. An Exception occurred: " + e.getMessage());
