@@ -1111,14 +1111,6 @@
 		<comment>Insert figure(s) from file(s)</comment>
 		<val lang="en_US">Insert figure(s) from system file(s), with the side-effect of adding them to the epub zip archive</val>
 	</key>
-	<key type="action" value="insert.noteref">
-		<comment>Insert Noteref</comment>
-		<val lang="en_US">Insert noteref</val>
-	</key>
-	<key type="action" value="insert.noteref.description">
-		<comment>Insert Noteref</comment>
-		<val lang="en_US">Insert noteref</val>
-	</key>
 	<key type="action" value="insert.noterefs">
 		<comment>Insert Noterefs</comment>
 		<val lang="en_US">Insert noterefs</val>
@@ -1126,14 +1118,6 @@
 	<key type="action" value="insert.noterefs.description">
 		<comment>Insert Noterefs</comment>
 		<val lang="en_US">Insert noterefs</val>
-	</key>
-	<key type="action" value="remove.noteref">
-		<comment>Remove Noteref</comment>
-		<val lang="en_US">Remove noteref</val>
-	</key>
-	<key type="action" value="remove.noteref.description">
-		<comment>Remove Noteref</comment>
-		<val lang="en_US">Remove noteref</val>
 	</key>
 	<key type="action" value="remove.noterefs">
 		<comment>Remove Noterefs</comment>

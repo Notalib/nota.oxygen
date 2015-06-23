@@ -53,16 +53,24 @@ public class Splitter extends JPanel implements ActionListener, PropertyChangeLi
 		
 		@Override
 		public Void doInBackground() {
-			if (!EpubUtils.start(taskOutput)) return null;
-			if (!EpubUtils.unzip(taskOutput)) return null;
-			if (!EpubUtils.canSplit(taskOutput)) return null;
-			if (!EpubUtils.backup(taskOutput)) return null;
+			if (!EpubUtils.start(taskOutput))
+				return null;
+			
+			if (!EpubUtils.unzip(taskOutput))
+				return null;
+			
+			if (!EpubUtils.canSplit(taskOutput))
+				return null;
+			
+			if (!EpubUtils.backup(taskOutput))
+				return null;
 
 			EpubUtils.outputProcess("PREPARING AND PARSING", true, taskOutput);
 			
 			// create package handler instance
 			packageHandler = new PackageHandler();
-			if (!EpubUtils.parseFile(new File(EpubUtils.EPUB_FOLDER + File.separator + EpubUtils.PACKAGE_FILENAME), packageHandler, taskOutput)) return null;
+			if (!EpubUtils.parseFile(new File(EpubUtils.EPUB_FOLDER + File.separator + EpubUtils.PACKAGE_FILENAME), packageHandler, taskOutput)) 
+				return null;
 			
 			docNumber = 0;
 			docList = new TreeMap<String, Document>();
@@ -75,10 +83,12 @@ public class Splitter extends JPanel implements ActionListener, PropertyChangeLi
 			splitHandler = new SplitHandler();
 
 			// prepare source file
-			if (!EpubUtils.prepareFile(listOfFiles[0], taskOutput)) return null;
+			if (!EpubUtils.prepareFile(listOfFiles[0], taskOutput)) 
+				return null;
 
 			// parse source file
-			if (!EpubUtils.parseFile(listOfFiles[0], splitHandler, taskOutput)) return null;
+			if (!EpubUtils.parseFile(listOfFiles[0], splitHandler, taskOutput)) 
+				return null;
 			
 			if (splitHandler.getMetaNodes().containsKey("dc:identifier")) {
 				idPrefix = splitHandler.getMetaNodes().get("dc:identifier");
@@ -86,9 +96,14 @@ public class Splitter extends JPanel implements ActionListener, PropertyChangeLi
 			
 			EpubUtils.outputProcess("BUILDING SPLIT DOCUMENTS", true, taskOutput);
 
-			if (!splitConcatDocument(listOfFiles[0])) return null;
-			if (!mapRefs()) return null;
-			if (!saveDocs()) return null;
+			if (!splitConcatDocument(listOfFiles[0]))
+				return null;
+			
+			if (!mapRefs())
+				return null;
+			
+			if (!saveDocs())
+				return null;
 			
 			EpubUtils.outputProcess("MODIFYING PACKAGE DOCUMENT", true, taskOutput);
 			
@@ -109,36 +124,52 @@ public class Splitter extends JPanel implements ActionListener, PropertyChangeLi
 			
 			for (int i = 0; i < listOfFiles.length; i++) {
 				// add split document to opf document
-				if (!EpubUtils.addOpfItem(packageDoc, listOfFiles[i].getName(), i+1, taskOutput)) return null;
+				if (!EpubUtils.addOpfItem(packageDoc, listOfFiles[i].getName(), i+1, taskOutput)) 
+					return null;
 			}
 			
 			// remove concat document from opf document
-			if (!EpubUtils.removeOpfItem(packageDoc, EpubUtils.CONCAT_FILENAME, taskOutput)) return null;
+			if (!EpubUtils.removeOpfItem(packageDoc, EpubUtils.CONCAT_FILENAME, taskOutput)) 
+				return null;
 
 			// remove fallback from non xhtml spine elements
-			if (!EpubUtils.removeFallbackFromOpf(packageDoc, taskOutput)) return null;
+			if (!EpubUtils.removeFallbackFromOpf(packageDoc, taskOutput)) 
+				return null;
 
 			// save opf document
-			if (!EpubUtils.saveDocument(packageDoc, new File(EpubUtils.EPUB_FOLDER	+ File.separator + EpubUtils.PACKAGE_FILENAME), taskOutput)) return null;
+			if (!EpubUtils.saveDocument(packageDoc, new File(EpubUtils.EPUB_FOLDER	+ File.separator + EpubUtils.PACKAGE_FILENAME), taskOutput)) 
+				return null;
 
 			EpubUtils.outputProcess("MODIFYING EPUB", true, taskOutput);
 			
-			// modify epub file
-			TConfig.get().setArchiveDetector(new TArchiveDetector("epub", new JarDriver(IOPoolLocator.SINGLETON)));
-
-			TFile destination = new TFile(EpubUtils.EPUB.getPath() + File.separator + EpubUtils.EPUB_FOLDER.substring(EpubUtils.EPUB_FOLDER.lastIndexOf(File.separator)).replace(File.separator, ""));
-
+			// obtain the global configuration
+			TConfig config = TConfig.get();
+			config.setArchiveDetector(new TArchiveDetector("epub", new JarDriver(IOPoolLocator.SINGLETON)));
+						
+			// get epub file destination
+			String epubPath = EpubUtils.EPUB.getPath();
+			String epubFolder = EpubUtils.EPUB_FOLDER.substring(EpubUtils.EPUB_FOLDER.lastIndexOf(File.separator)).replace(File.separator, "");
+			TFile destination = new TFile(epubPath + File.separator + epubFolder);
+						
+			// modify epub file destination
 			for (int i = 0; i < listOfFiles.length; i++) {
-				if (!EpubUtils.addFileToEpub(new TFile(listOfFiles[i]), destination, taskOutput)) return null;
+				if (!EpubUtils.addFileToEpub(new TFile(listOfFiles[i]), destination, taskOutput)) 
+					return null;
 			}
 
-			if (!EpubUtils.addFileToEpub(new TFile(EpubUtils.EPUB_FOLDER + File.separator + EpubUtils.PACKAGE_FILENAME), destination, taskOutput)) return null;
+			if (!EpubUtils.addFileToEpub(new TFile(EpubUtils.EPUB_FOLDER + File.separator + EpubUtils.PACKAGE_FILENAME), destination, taskOutput)) 
+				return null;
 
-			if (!EpubUtils.removeFileFromEpub(new TFile(destination, EpubUtils.CONCAT_FILENAME), taskOutput)) return null;
+			if (!EpubUtils.removeFileFromEpub(new TFile(destination, EpubUtils.CONCAT_FILENAME), taskOutput)) 
+				return null;
 
-			if (!EpubUtils.commitChanges(taskOutput)) return null;
+			// commit changes to epub file destination
+			if (!EpubUtils.commitChanges(taskOutput)) 
+				return null;
 			
-			if (!EpubUtils.finish(taskOutput)) return null;
+			if (!EpubUtils.finish(taskOutput)) 
+				return null;
+			
 			return null;
 		}
 
@@ -185,9 +216,9 @@ public class Splitter extends JPanel implements ActionListener, PropertyChangeLi
 		startButton.setEnabled(false);
 		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		
-		task = new Task();
-		task.addPropertyChangeListener(this);
-		task.execute();
+		this.task = new Task();
+		this.task.addPropertyChangeListener(this);
+		this.task.execute();
 	}
 
 	private static void createAndShowGUI() {
