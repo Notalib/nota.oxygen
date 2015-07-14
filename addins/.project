@@ -16,7 +16,7 @@
 			<arguments>
 				<dictionary>
 					<key>LaunchConfigHandle</key>
-					<value>&lt;project&gt;/.externalToolBuilders/Ant Builder.launch</value>
+					<value>&lt;project&gt;/.externalToolBuilders/Ant.launch</value>
 				</dictionary>
 			</arguments>
 		</buildCommand>
@@ -24,4 +24,10 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<variableList>
+		<variable>
+			<name>OXYGEN_HOME</name>
+			<value>file:/C:/Oxygen</value>
+		</variable>
+	</variableList>
 </projectDescription>
