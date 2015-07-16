@@ -53,6 +53,7 @@ public class PackageHandler extends DefaultHandler {
 	}
 	
 	public void startElement(String uri, String localName, String qualifiedName, Attributes attributes) {
+		characterData = "";
 	}
 
 	public void endElement(String uri, String localName, String qualifiedName) {
@@ -90,9 +91,10 @@ public class PackageHandler extends DefaultHandler {
 	}
 
 	public void characters(char characters[], int start, int length) {
-		characterData = new String(characters, start, length);
-		characterData = characterData.replaceAll("&(?!amp;)", "&amp;");
-		characterData = characterData.replaceAll("<", "&lt;");
-		characterData = characterData.replaceAll(">", "&gt;");
+		String tempCharacterData = new String(characters, start, length);
+		tempCharacterData = tempCharacterData.replaceAll("&(?!amp;)", "&amp;");
+		tempCharacterData = tempCharacterData.replaceAll("<", "&lt;");
+		tempCharacterData = tempCharacterData.replaceAll(">", "&gt;");
+		characterData += tempCharacterData;
 	}
 }
