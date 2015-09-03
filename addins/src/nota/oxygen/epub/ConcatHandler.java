@@ -128,10 +128,12 @@ public class ConcatHandler extends DefaultHandler {
 		characterData = new String(characters, start, length);
 		
 		if (isBody) {
-			if (characterData.indexOf("\n") < 0 && characterData.length() > 0) {
+			if (characterData.length() > 0 && !characterData.matches("[ \t\r\n\f]+")) {
 				characterData = characterData.replaceAll("&(?!amp;)", "&amp;");
 				characterData = characterData.replaceAll("<", "&lt;");
 				characterData = characterData.replaceAll(">", "&gt;");
+				characterData = characterData.replaceAll("\"", "&quot;");
+				characterData = characterData.replaceAll("'", "&apos;");
 				bodyLines.add(characterData);
 			}
 		}
