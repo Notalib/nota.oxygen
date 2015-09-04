@@ -95,6 +95,8 @@ public class PackageHandler extends DefaultHandler {
 		tempCharacterData = tempCharacterData.replaceAll("&(?!amp;)", "&amp;");
 		tempCharacterData = tempCharacterData.replaceAll("<", "&lt;");
 		tempCharacterData = tempCharacterData.replaceAll(">", "&gt;");
+		tempCharacterData = tempCharacterData.replaceAll("\"", "&quot;");
+		tempCharacterData = tempCharacterData.replaceAll("'", "&apos;");
 		characterData += tempCharacterData;
 	}
 }
