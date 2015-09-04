@@ -97,5 +97,7 @@ public class SplitHandler extends DefaultHandler {
 		characterData = characterData.replaceAll("&(?!amp;)", "&amp;");
 		characterData = characterData.replaceAll("<", "&lt;");
 		characterData = characterData.replaceAll(">", "&gt;");
+		characterData = characterData.replaceAll("\"", "&quot;");
+		characterData = characterData.replaceAll("'", "&apos;");
 	}
 }
