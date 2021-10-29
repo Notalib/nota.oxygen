@@ -1,0 +1,5314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serialized version="20.1" xml:space="preserve">
+	<serializableOrderedMap>
+		<entry>
+			<String>document.types</String>
+			<documentTypeDescriptor-array>
+				<documentTypeDescriptor>
+					<field name="extensionPatch">
+						<null/>
+					</field>
+					<field name="name">
+						<String>XHTML [EPUB 3]</String>
+					</field>
+					<field name="schemaDescriptor">
+						<docTypeSchema>
+							<field name="type">
+								<Integer>4</Integer>
+							</field>
+							<field name="uri">
+								<String>${framework}/schema/nordic-xhtml5.rng</String>
+							</field>
+						</docTypeSchema>
+					</field>
+					<field name="classpath">
+						<String-array>
+							<String>${framework}/resources/</String>
+							<String>${framework}/i18n/</String>
+							<String>${framework}/xhtml.jar</String>
+							<String>${framework}/epub.jar</String>
+						</String-array>
+					</field>
+					<field name="parentClassLoaderID">
+						<String>dk.nota.oxygen.plugin</String>
+					</field>
+					<field name="authorExtensionDescriptor">
+						<authorExtension>
+							<field name="cssDescriptors">
+								<cssFile-array>
+									<cssFile>
+										<field name="href">
+											<String>${framework}/css/epub.css</String>
+										</field>
+										<field name="title">
+											<String>EPUB CSS</String>
+										</field>
+										<field name="alternate">
+											<Boolean>false</Boolean>
+										</field>
+									</cssFile>
+									<cssFile>
+										<field name="href">
+											<String>${framework}/css/show_colspec.css</String>
+										</field>
+										<field name="title">
+											<String>Show cols</String>
+										</field>
+										<field name="alternate">
+											<Boolean>true</Boolean>
+										</field>
+									</cssFile>
+									<cssFile>
+										<field name="href">
+											<String>${framework}/css/hide_colspec.css</String>
+										</field>
+										<field name="title">
+											<String>Hide cols</String>
+										</field>
+										<field name="alternate">
+											<Boolean>true</Boolean>
+										</field>
+									</cssFile>
+								</cssFile-array>
+							</field>
+							<field name="mergeCSSsFromDocument">
+								<Boolean>true</Boolean>
+							</field>
+							<field name="multipleAlternateSelectionEnabled">
+								<Boolean>false</Boolean>
+							</field>
+							<field name="actionDescriptors">
+								<action-array>
+									<action>
+										<field name="id">
+											<String>bold</String>
+										</field>
+										<field name="name">
+											<String>${i18n(bold)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(bold_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/Bold20.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/Bold16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String>B</String>
+										</field>
+										<field name="accelerator">
+											<String>M1 B</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>element</String>
+																<String>&lt;strong xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ToggleSurroundWithElementOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>italic</String>
+										</field>
+										<field name="name">
+											<String>${i18n(italic)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(italic_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/Italic20.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/Italic16.png</String>
+										</field>
+										<field name="accessKey">
+											<String>I</String>
+										</field>
+										<field name="accelerator">
+											<String>M1 I</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>element</String>
+																<String>&lt;em xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ToggleSurroundWithElementOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>underline</String>
+										</field>
+										<field name="name">
+											<String>${i18n(underline)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(underline_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/Underline20.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/Underline16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String>U</String>
+										</field>
+										<field name="accelerator">
+											<String>M1 U</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>element</String>
+																<String>&lt;u xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ToggleSurroundWithElementOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>paragraph</String>
+										</field>
+										<field name="name">
+											<String>${i18n(paragraph)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(paragraph_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/Paragraph20.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/Paragraph16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String>P</String>
+										</field>
+										<field name="accelerator">
+											<String>M1 M2 P</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*:p[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;p xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+															<entry>
+																<String>insertLocation</String>
+																<String>ancestor-or-self::*:p[namespace-uri()='http://www.w3.org/1999/xhtml'][1]</String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>After</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;p xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>unorderedList</String>
+										</field>
+										<field name="name">
+											<String>${i18n(unorderedList)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(unorderedList_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/UnorderedList20.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/UnorderedList16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:ol[namespace-uri()= 'http://www.w3.org/1999/xhtml'] | self::*:ul[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;li xmlns="http://www.w3.org/1999/xhtml">&lt;ul>&lt;li/>&lt;/ul>&lt;/li></String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Inside as first child</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:dl[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;dt xmlns="http://www.w3.org/1999/xhtml"/>&lt;dd xmlns="http://www.w3.org/1999/xhtml">&lt;ul>&lt;li/>&lt;/ul>&lt;/dd></String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Inside as first child</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;ul xmlns="http://www.w3.org/1999/xhtml">&lt;li/>&lt;/ul></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>orderedList</String>
+										</field>
+										<field name="name">
+											<String>${i18n(orderedList)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(orderedList_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/OrderedList20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/OrderedList16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:ol[namespace-uri()= 'http://www.w3.org/1999/xhtml'] | self::*:ul[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;li xmlns="http://www.w3.org/1999/xhtml">&lt;ol>&lt;li/>&lt;/ol>&lt;/li></String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Inside as first child</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:dl[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;dt xmlns="http://www.w3.org/1999/xhtml"/>&lt;dd xmlns="http://www.w3.org/1999/xhtml">&lt;ol>&lt;li/>&lt;/ol>&lt;/dd></String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Inside as first child</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;ol xmlns="http://www.w3.org/1999/xhtml">&lt;li/>&lt;/ol></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>listitem</String>
+										</field>
+										<field name="name">
+											<String>Insert list item</String>
+										</field>
+										<field name="description">
+											<String>${i18n(listitem_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/ListItem20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/ListItem16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:ul[namespace-uri()= 'http://www.w3.org/1999/xhtml'] | self::*:ol[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;li xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*:li[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;li xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+															<entry>
+																<String>insertLocation</String>
+																<String>ancestor-or-self::*:li[namespace-uri()='http://www.w3.org/1999/xhtml'][1]</String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>After</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:dl[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;dt xmlns="http://www.w3.org/1999/xhtml"/>&lt;dd xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Inside as first child</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::node()[self::*:dt | self::*:dd][namespace-uri()='http://www.w3.org/1999/xhtml'][1]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;dt xmlns="http://www.w3.org/1999/xhtml"/>&lt;dd xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+															<entry>
+																<String>insertLocation</String>
+																<String>ancestor-or-self::node()[self::*:dt | self::*:dd][namespace-uri()='http://www.w3.org/1999/xhtml'][1]</String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>After</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>insert.table</String>
+										</field>
+										<field name="name">
+											<String>${i18n(insert.table)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(insert.table_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/Table20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/Table16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>oxy:allows-child-element("*:table")</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap/>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertTableOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>insert.table.row.below</String>
+										</field>
+										<field name="name">
+											<String>${i18n(insert.table.row.below)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(insert.table.row.below_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/TableRow20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/TableRow16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:thead[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>header row</String>
+																<String>yes</String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Inside as first child</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.w3.org/1999/xhtml</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertRowOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:tbody[namespace-uri()='http://www.w3.org/1999/xhtml'] | self::*:tfoot[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>header row</String>
+																<String>no</String>
+															</entry>
+															<entry>
+																<String>insertLocation</String>
+																<String></String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Inside as first child</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.w3.org/1999/xhtml</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertRowOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*:tr[namespace-uri()='http://www.w3.org/1999/xhtml'][1][parent::*:thead]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>header row</String>
+																<String>yes</String>
+															</entry>
+															<entry>
+																<String>insertLocation</String>
+																<String>ancestor-or-self::*:tr[namespace-uri()='http://www.w3.org/1999/xhtml'][1][parent::*:thead]</String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>After</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.w3.org/1999/xhtml</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertRowOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*:tr[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>header row</String>
+																<String>no</String>
+															</entry>
+															<entry>
+																<String>insertLocation</String>
+																<String>ancestor-or-self::*:tr[namespace-uri()='http://www.w3.org/1999/xhtml'][1]</String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>After</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.w3.org/1999/xhtml</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertRowOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>insert.table.entry</String>
+										</field>
+										<field name="name">
+											<String>${i18n(insert.table.entry)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(insert.table.entry_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/TableCell20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/TableCell16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:tr[namespace-uri()='http://www.w3.org/1999/xhtml'][parent::*:thead]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;th xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:tr[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;td xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:thead[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;tr xmlns="http://www.w3.org/1999/xhtml">&lt;th/>&lt;/tr></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>(self::*:tbody | self::*:tfoot)[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;tr xmlns="http://www.w3.org/1999/xhtml">&lt;td/>&lt;/tr></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::node()[namespace-uri()='http://www.w3.org/1999/xhtml'][self::*:th | self::*:td][1][self::*:th]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;th xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+															<entry>
+																<String>insertLocation</String>
+																<String>ancestor-or-self::*:th[namespace-uri()='http://www.w3.org/1999/xhtml'][1]</String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>After</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*:td[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;td xmlns="http://www.w3.org/1999/xhtml"/></String>
+															</entry>
+															<entry>
+																<String>insertLocation</String>
+																<String>ancestor-or-self::*:td[namespace-uri()='http://www.w3.org/1999/xhtml'][1]</String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>After</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>table.join.row.cells</String>
+										</field>
+										<field name="name">
+											<String>${i18n(table.join.row.cells)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(table.join.row.cells_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/TableJoinRowCells20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/TableJoinRowCells16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>oxy:current-selected-element()[self::*:tr[namespace-uri()= 'http://www.w3.org/1999/xhtml']][1] or ancestor-or-self::*:tr[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap/>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.JoinRowCellsOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>table.split.left</String>
+										</field>
+										<field name="name">
+											<String>${i18n(table.split.left)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(table.split.left_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/TableSplitCellLeft20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/TableSplitCellLeft16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*:td[namespace-uri()= 'http://www.w3.org/1999/xhtml'] | ancestor-or-self::*:th[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>Split point</String>
+																<String>Left</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.SplitLeftRightOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>table.split.right</String>
+										</field>
+										<field name="name">
+											<String>${i18n(table.split.right)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(table.split.right_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/TableSplitCellRight20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/TableSplitCellRight16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*:td[namespace-uri()= 'http://www.w3.org/1999/xhtml'] | ancestor-or-self::*:th[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>Split point</String>
+																<String>Right</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.SplitLeftRightOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>table.join.cell.above</String>
+										</field>
+										<field name="name">
+											<String>${i18n(table.join.cell.above)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(table.join.cell.above_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/TableJoinCellUp20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/TableJoinCellUp16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*:td[namespace-uri()= 'http://www.w3.org/1999/xhtml'] | ancestor-or-self::*:th[namespace-uri()= 'http://www.w3.org/1999/xhtml'] |
+ancestor-or-self::*:tr[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>Join direction</String>
+																<String>Above</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.JoinCellAboveBelowOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>table.join.cell.below</String>
+										</field>
+										<field name="name">
+											<String>${i18n(table.join.cell.below)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(table.join.cell.below_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/TableJoinCellDown20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/TableJoinCellDown16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*:td[namespace-uri()= 'http://www.w3.org/1999/xhtml'] | ancestor-or-self::*:th[namespace-uri()= 'http://www.w3.org/1999/xhtml'] |
+ancestor-or-self::*:tr[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>Join direction</String>
+																<String>Below</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.JoinCellAboveBelowOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>table.split.below</String>
+										</field>
+										<field name="name">
+											<String>${i18n(table.split.below)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(table.split.below_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/TableSplitCellDown20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/TableSplitCellDown16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*:td[namespace-uri()= 'http://www.w3.org/1999/xhtml'] | ancestor-or-self::*:th[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>Split point</String>
+																<String>Below</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.SplitCellAboveBelowOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>table.split.above</String>
+										</field>
+										<field name="name">
+											<String>${i18n(table.split.above)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(table.split.above_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/TableSplitCellUp20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/TableSplitCellUp16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*:td[namespace-uri()= 'http://www.w3.org/1999/xhtml'] | ancestor-or-self::*:th[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>Split point</String>
+																<String>Above</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.SplitCellAboveBelowOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>insert.table.column.after</String>
+										</field>
+										<field name="name">
+											<String>${i18n(insert.table.column.after)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(insert.table.column.after_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/TableColumn20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/TableColumn16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*:tr[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.w3.org/1999/xhtml</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertColumnOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>delete.table.column</String>
+										</field>
+										<field name="name">
+											<String>${i18n(delete.table.column)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(delete.table.column_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/DeleteColumn20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/DeleteColumn16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>(ancestor-or-self::*:th |
+ancestor-or-self::*:tr | ancestor-or-self::*:td)[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap/>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.DeleteColumnOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>delete.table.row</String>
+										</field>
+										<field name="name">
+											<String>${i18n(delete.table.row)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(delete.table.row_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/DeleteRow20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/DeleteRow16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>(ancestor-or-self::*:tr  |
+ancestor-or-self::*:tbody) [namespace-uri()='http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap/>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.DeleteRowOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>heading.h1</String>
+										</field>
+										<field name="name">
+											<String>H1</String>
+										</field>
+										<field name="description">
+											<String>Creates an h1 at the current position</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>(ancestor-or-self::*:p|ancestor-or-self::*[matches(local-name(), 'h\d')])/(parent::section|parent::body)</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>newDepth</String>
+																<String>1</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.HeadingOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>heading.h2</String>
+										</field>
+										<field name="name">
+											<String>H2</String>
+										</field>
+										<field name="description">
+											<String>Creates an h2 at the current position</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>(ancestor-or-self::*:p|ancestor-or-self::*[matches(local-name(), 'h\d')])/(parent::section|parent::body)</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>newDepth</String>
+																<String>2</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.HeadingOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>heading.h3</String>
+										</field>
+										<field name="name">
+											<String>H3</String>
+										</field>
+										<field name="description">
+											<String>Creates an h3 at the current position</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>(ancestor-or-self::*:p|ancestor-or-self::*[matches(local-name(), 'h\d')])/(parent::section|parent::body)</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>newDepth</String>
+																<String>3</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.HeadingOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>heading.h4</String>
+										</field>
+										<field name="name">
+											<String>H4</String>
+										</field>
+										<field name="description">
+											<String>Creates an h4 at the current position</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>(ancestor-or-self::*:p|ancestor-or-self::*[matches(local-name(), 'h\d')])/(parent::section|parent::body)</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>newDepth</String>
+																<String>4</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.HeadingOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>heading.h5</String>
+										</field>
+										<field name="name">
+											<String>H5</String>
+										</field>
+										<field name="description">
+											<String>Creates an h5 at the current position</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>(ancestor-or-self::*:p|ancestor-or-self::*[matches(local-name(), 'h\d')])/(parent::section|parent::body)</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>newDepth</String>
+																<String>5</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.HeadingOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>heading.h6</String>
+										</field>
+										<field name="name">
+											<String>H6</String>
+										</field>
+										<field name="description">
+											<String>Creates an h6 at the current position</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>(ancestor-or-self::*:p|ancestor-or-self::*[matches(local-name(), 'h\d')])/(parent::section|parent::body)</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>newDepth</String>
+																<String>6</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.HeadingOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>definitionList</String>
+										</field>
+										<field name="name">
+											<String>Insert definition list</String>
+										</field>
+										<field name="description">
+											<String>${i18n(definitionList_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/VariableList16.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/VariableList16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:ol[namespace-uri()= 'http://www.w3.org/1999/xhtml'] | self::*:ul[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;li xmlns="http://www.w3.org/1999/xhtml">&lt;dl>&lt;dt/>&lt;dd/>&lt;/dl>&lt;/li></String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Inside as first child</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;dl xmlns="http://www.w3.org/1999/xhtml">&lt;dt/>&lt;dd/>&lt;/dl></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>insert.equation</String>
+										</field>
+										<field name="name">
+											<String>${i18n(insert.equation)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(insert.equation_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/Equation20.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/Equation16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap/>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.xhtml.InsertEquationOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>show.XHTML.documentation</String>
+										</field>
+										<field name="name">
+											<String>${i18n(show.XHTML.documentation)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(show.XHTML.documentation_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/BrowseReferenceManual16.png</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>true()</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>URL pattern</String>
+																<String>http://dev.w3.org/html5/spec/Overview.html#the-{Element_name}-element</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.ShowElementDocumentationOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>play.media</String>
+										</field>
+										<field name="name">
+											<String>${i18n(play.media.resource)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(play.media.desc)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>${framework}/css/img/play_media.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::object</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>resourcePath</String>
+																<String>@data</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.OpenInSystemAppOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>play.audio</String>
+										</field>
+										<field name="name">
+											<String>${i18n(play.media.resource)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(play.media.desc)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>${framework}/css/img/play_audio.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::audio</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>resourcePath</String>
+																<String>@src</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.OpenInSystemAppOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>play.video</String>
+										</field>
+										<field name="name">
+											<String>${i18n(play.media.resource)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(play.media.desc)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>${framework}/css/img/play_video.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::video</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>resourcePath</String>
+																<String>@src</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.OpenInSystemAppOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>sort</String>
+										</field>
+										<field name="name">
+											<String>${i18n(sort)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(sort_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/Sort20.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/Sort16.png</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>oxy:current-selected-element()[self::*:tbody] |
+oxy:current-selected-element()[self::*:thead] |
+oxy:current-selected-element()[self::*:table] |
+oxy:current-selected-element()[self::*:tfoot] |
+ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*:ul | self::*:ol]
+[1][self::*:tbody | self::*:tfoot | self::*:thead]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap/>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.XHTMLTableSortOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>oxy:current-selected-element()[self::*:ol] |
+oxy:current-selected-element()[self::*:ul] |
+ancestor-or-self::*:ol | ancestor-or-self::*:ul</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap/>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.sort.XHTMLListSortOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>sort_table</String>
+										</field>
+										<field name="name">
+											<String>${i18n(sort)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(sort_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/Sort20.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/Sort16.png</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>oxy:current-selected-element()[self::*:tbody] |
+oxy:current-selected-element()[self::*:thead] |
+oxy:current-selected-element()[self::*:table] |
+oxy:current-selected-element()[self::*:tfoot] |
+ancestor-or-self::node()[self::*:tbody | self::*:tfoot | self::*:thead | self::*:ul | self::*:ol]
+[1][self::*:tbody | self::*:tfoot | self::*:thead]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap/>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.XHTMLTableSortOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>table.collapse.colspec</String>
+										</field>
+										<field name="name">
+											<String>${i18n(table.toggle.colspec)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(table.toggle.colspec_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/Expanded16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>1</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>.</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>-oxy-visible-colspecs</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.RemovePseudoClassOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>table.expand.colspec</String>
+										</field>
+										<field name="name">
+											<String>${i18n(table.toggle.colspec)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(table.toggle.colspec_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/Collapsed16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>1</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>elementLocation</String>
+																<String>.</String>
+															</entry>
+															<entry>
+																<String>name</String>
+																<String>-oxy-visible-colspecs</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SetPseudoClassOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>insert.table.row.above</String>
+										</field>
+										<field name="name">
+											<String>${i18n(insert.table.row.above)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(insert.table.row.above_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/TableRowAbove20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/TableRowAbove16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:thead[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>header row</String>
+																<String>yes</String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Inside as first child</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.w3.org/1999/xhtml</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertRowOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::*:tbody[namespace-uri()='http://www.w3.org/1999/xhtml'] | self::*:tfoot[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>header row</String>
+																<String>no</String>
+															</entry>
+															<entry>
+																<String>insertLocation</String>
+																<String></String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Inside as first child</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.w3.org/1999/xhtml</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertRowOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*:tr[namespace-uri()='http://www.w3.org/1999/xhtml'][1][parent::*:thead]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>header row</String>
+																<String>yes</String>
+															</entry>
+															<entry>
+																<String>insertLocation</String>
+																<String>ancestor-or-self::*:tr[namespace-uri()='http://www.w3.org/1999/xhtml'][1][parent::*:thead]</String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Before</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.w3.org/1999/xhtml</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertRowOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*:tr[namespace-uri()='http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>header row</String>
+																<String>no</String>
+															</entry>
+															<entry>
+																<String>insertLocation</String>
+																<String>ancestor-or-self::*:tr[namespace-uri()='http://www.w3.org/1999/xhtml'][1]</String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Before</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.w3.org/1999/xhtml</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertRowOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>insert.table.column.before</String>
+										</field>
+										<field name="name">
+											<String>${i18n(insert.table.column.before)}</String>
+										</field>
+										<field name="description">
+											<String>${i18n(insert.table.column.before_description)}</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/TableColumnBefore20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/TableColumnBefore16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*:tr[namespace-uri()= 'http://www.w3.org/1999/xhtml']</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>insertPosition</String>
+																<String>Before</String>
+															</entry>
+															<entry>
+																<String>namespace</String>
+																<String>http://www.w3.org/1999/xhtml</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.table.operations.xhtml.InsertColumnOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>list.create.ordered</String>
+										</field>
+										<field name="name">
+											<String>Create ordered list</String>
+										</field>
+										<field name="description">
+											<String>Create an ordered list from selected paragraphs and/or lists</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/OrderedList20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/OrderedList16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::ol|ancestor-or-self::p|ancestor-or-self::ul</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>listType</String>
+																<String>ordered</String>
+															</entry>
+															<entry>
+																<String>operationType</String>
+																<String>createOrdered</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.ListOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>list.create.unordered</String>
+										</field>
+										<field name="name">
+											<String>Create unordered list</String>
+										</field>
+										<field name="description">
+											<String>Create an unordered list from selected paragraphs and/or lists</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/UnorderedList20.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/UnorderedList16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::ol|ancestor-or-self::p|ancestor-or-self::ul</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>listType</String>
+																<String>unordered</String>
+															</entry>
+															<entry>
+																<String>operationType</String>
+																<String>createUnordered</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.ListOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>list.convert.paragraph</String>
+										</field>
+										<field name="name">
+											<String>Dissolve list items</String>
+										</field>
+										<field name="description">
+											<String>Dissolves selected list items</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::li</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>listType</String>
+																<String>none</String>
+															</entry>
+															<entry>
+																<String>operationType</String>
+																<String>dissolve</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.ListOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>table.convert</String>
+										</field>
+										<field name="name">
+											<String>Convert table to paragraphs</String>
+										</field>
+										<field name="description">
+											<String>Converts paragraphs to table cells or table cells to paragraphs</String>
+										</field>
+										<field name="largeIconPath">
+											<String>${framework}/img/ParagraphTable20.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>${framework}/img/ParagraphTable16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::p[not(ancestor-or-self::table)]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>columns</String>
+																<String>${ask('Columns: ', generic, '0')}</String>
+															</entry>
+															<entry>
+																<String>rows</String>
+																<String>${ask('Rows: ', generic, '0')}</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.TableOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::table</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>dissolve</String>
+																<String>true</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.TableOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>heading.none</String>
+										</field>
+										<field name="name">
+											<String>None</String>
+										</field>
+										<field name="description">
+											<String>Converts the selected heading to a paragraph</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>(ancestor-or-self::*[matches(local-name(), 'h\d')])/(parent::section|parent::body)</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>newDepth</String>
+																<String>none</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.HeadingOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>heading.normalise</String>
+										</field>
+										<field name="name">
+											<String>Normalise headings</String>
+										</field>
+										<field name="description">
+											<String>Normalises heading hierarchy throughout document</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>/html/body</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap/>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.HierarchyOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>operation.store</String>
+										</field>
+										<field name="name">
+											<String>Store operation</String>
+										</field>
+										<field name="description">
+											<String>Store subsequent operations</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>discard</String>
+																<String>false</String>
+															</entry>
+															<entry>
+																<String>perform</String>
+																<String>false</String>
+															</entry>
+															<entry>
+																<String>procedure</String>
+																<String>store</String>
+															</entry>
+															<entry>
+																<String>store</String>
+																<String>true</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.common.RepeatOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>operation.perform</String>
+										</field>
+										<field name="name">
+											<String>Repeat operation</String>
+										</field>
+										<field name="description">
+											<String>Repeat the most recent operation</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<String>F4</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>discard</String>
+																<String>false</String>
+															</entry>
+															<entry>
+																<String>perform</String>
+																<String>true</String>
+															</entry>
+															<entry>
+																<String>procedure</String>
+																<String>perform</String>
+															</entry>
+															<entry>
+																<String>store</String>
+																<String>false</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.common.RepeatOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>operation.discard</String>
+										</field>
+										<field name="name">
+											<String>Discard operation</String>
+										</field>
+										<field name="description">
+											<String>Discard the stored operation</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>discard</String>
+																<String>true</String>
+															</entry>
+															<entry>
+																<String>perform</String>
+																<String>false</String>
+															</entry>
+															<entry>
+																<String>procedure</String>
+																<String>discard</String>
+															</entry>
+															<entry>
+																<String>store</String>
+																<String>false</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.common.RepeatOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>figure.caption.insert</String>
+										</field>
+										<field name="name">
+											<String>Insert caption</String>
+										</field>
+										<field name="description">
+											<String>Inserts a caption at the appropriate position within a figure element</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::figure[@class = "image"]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;figcaption xmlns="http://www.w3.org/1999/xhtml">&lt;/figcaption></String>
+															</entry>
+															<entry>
+																<String>insertLocation</String>
+																<String>ancestor-or-self::figure[@class = "image"][1]</String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Inside as last child</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+													</field>
+												</actionMode>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::figure[@class = "image-series"]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;figcaption xmlns="http://www.w3.org/1999/xhtml">&lt;/figcaption></String>
+															</entry>
+															<entry>
+																<String>insertLocation</String>
+																<String>ancestor-or-self::figure[@class = "image-series"][1]</String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Inside as first child</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>figure.description.insert</String>
+										</field>
+										<field name="name">
+											<String>Insert description</String>
+										</field>
+										<field name="description">
+											<String>Inserts a description at the appropriate position within a figure element</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<String>ctrl shift I</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::figure[@class = "image"]</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;aside xmlns="http://www.w3.org/1999/xhtml" epub:type="z3998:production" class="desc">&lt;p>&lt;/p>&lt;/aside></String>
+															</entry>
+															<entry>
+																<String>insertLocation</String>
+																<String>ancestor-or-self::figure[@class = "image"][1]</String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Inside as last child</String>
+															</entry>
+															<entry>
+																<String>schemaAware</String>
+																<String>false</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>figure.insert</String>
+										</field>
+										<field name="name">
+											<String>Insert images</String>
+										</field>
+										<field name="description">
+											<String>Inserts images along with the required figure elements</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::body and not(ancestor-or-self::p)</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap/>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.InsertImagesOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>heading.bridgehead</String>
+										</field>
+										<field name="name">
+											<String>Bridgehead</String>
+										</field>
+										<field name="description">
+											<String>Creates a bridgehead at the current position</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::p</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap/>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.BridgeheadOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>language.wrap.xx</String>
+										</field>
+										<field name="name">
+											<String>Set language to xx</String>
+										</field>
+										<field name="description">
+											<String>Wraps selected text in a span element with language xx</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<String>ctrl shift L</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;span lang="xx" xml:lang="xx" xmlns="http://www.w3.org/1999/xhtml">&lt;/span></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>list.indent.ordered</String>
+										</field>
+										<field name="name">
+											<String>Indent (ordered)</String>
+										</field>
+										<field name="description">
+											<String>Converts selected list items to list items in an ordered sublist</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/OrderedList20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/OrderedList16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::li</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>listType</String>
+																<String>ordered</String>
+															</entry>
+															<entry>
+																<String>operationType</String>
+																<String>indentOrdered</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.ListOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>list.indent.unordered</String>
+										</field>
+										<field name="name">
+											<String>Indent (unordered)</String>
+										</field>
+										<field name="description">
+											<String>Converts selected list items to list items in an unordered sublist</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/OrderedList20.gif</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/OrderedList16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::li</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>listType</String>
+																<String>ordered</String>
+															</entry>
+															<entry>
+																<String>operationType</String>
+																<String>indentUnordered</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.ListOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>anchor.convert</String>
+										</field>
+										<field name="name">
+											<String>Convert to link anchor</String>
+										</field>
+										<field name="description">
+											<String>Converts selected word or phrase to a link anchor</String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/Link16.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/Link20.png</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap/>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.AnchorOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>heading.none.shift</String>
+										</field>
+										<field name="name">
+											<String>None + shift</String>
+										</field>
+										<field name="description">
+											<String>Converts the selected heading to a paragraph and shifts subsections</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>(ancestor-or-self::*[matches(local-name(), 'h\d')])/(parent::section|parent::body)</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>newDepth</String>
+																<String>none</String>
+															</entry>
+															<entry>
+																<String>shift</String>
+																<String>true</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.HeadingOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>heading.h1.shift</String>
+										</field>
+										<field name="name">
+											<String>H1 + shift</String>
+										</field>
+										<field name="description">
+											<String>Creates an h1 at the current position and shifts subsections</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>(ancestor-or-self::*:p|ancestor-or-self::*[matches(local-name(), 'h\d')])/(parent::section|parent::body)</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>newDepth</String>
+																<String>1</String>
+															</entry>
+															<entry>
+																<String>shift</String>
+																<String>true</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.HeadingOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>heading.h2.shift</String>
+										</field>
+										<field name="name">
+											<String>H2 + shift</String>
+										</field>
+										<field name="description">
+											<String>Creates an h1 at the current position and shifts subsections</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>(ancestor-or-self::*:p|ancestor-or-self::*[matches(local-name(), 'h\d')])/(parent::section|parent::body)</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>newDepth</String>
+																<String>2</String>
+															</entry>
+															<entry>
+																<String>shift</String>
+																<String>true</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.HeadingOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>heading.h3.shift</String>
+										</field>
+										<field name="name">
+											<String>H3 + shift</String>
+										</field>
+										<field name="description">
+											<String>Creates an h3 at the current position and shifts subsections</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>(ancestor-or-self::*:p|ancestor-or-self::*[matches(local-name(), 'h\d')])/(parent::section|parent::body)</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>newDepth</String>
+																<String>3</String>
+															</entry>
+															<entry>
+																<String>shift</String>
+																<String>true</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.HeadingOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>heading.h4.shift</String>
+										</field>
+										<field name="name">
+											<String>H4 + shift</String>
+										</field>
+										<field name="description">
+											<String>Creates an h3 at the current position and shifts ubsections</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>(ancestor-or-self::*:p|ancestor-or-self::*[matches(local-name(), 'h\d')])/(parent::section|parent::body)</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>newDepth</String>
+																<String>4</String>
+															</entry>
+															<entry>
+																<String>shift</String>
+																<String>true</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.HeadingOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>heading.h5.shift</String>
+										</field>
+										<field name="name">
+											<String>H5 + shift</String>
+										</field>
+										<field name="description">
+											<String>Creates an h3 at the current position and shifts subsections</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>(ancestor-or-self::*:p|ancestor-or-self::*[matches(local-name(), 'h\d')])/(parent::section|parent::body)</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>newDepth</String>
+																<String>5</String>
+															</entry>
+															<entry>
+																<String>shift</String>
+																<String>true</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.HeadingOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>heading.h6.shift</String>
+										</field>
+										<field name="name">
+											<String>H6 + shift</String>
+										</field>
+										<field name="description">
+											<String>Creates an h3 at the current position and shifts subsections</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>(ancestor-or-self::*:p|ancestor-or-self::*[matches(local-name(), 'h\d')])/(parent::section|parent::body)</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>newDepth</String>
+																<String>6</String>
+															</entry>
+															<entry>
+																<String>shift</String>
+																<String>true</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.HeadingOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>imagemaps.import</String>
+										</field>
+										<field name="name">
+											<String>Import image maps</String>
+										</field>
+										<field name="description">
+											<String></String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>depth</String>
+																<String>${xpath_eval(count(ancestor::body|ancestor::section))}</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.ImportImageMapsOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>table.cells.convert.data</String>
+										</field>
+										<field name="name">
+											<String>Convert cells to data cells</String>
+										</field>
+										<field name="description">
+											<String></String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/Heading24_dark.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/Heading16_dark.png</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::table</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>cellType</String>
+																<String>td</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.ConvertTableCellsOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>table.cells.convert.header</String>
+										</field>
+										<field name="name">
+											<String>Convert cells to header cells</String>
+										</field>
+										<field name="description">
+											<String></String>
+										</field>
+										<field name="largeIconPath">
+											<String>/images/Heading24.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>/images/Heading16.gif</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::table</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>cellType</String>
+																<String>th</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.ConvertTableCellsOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>figure.description.next</String>
+										</field>
+										<field name="name">
+											<String>Go to next undescribed image</String>
+										</field>
+										<field name="description">
+											<String>Moves the caret to the next figure element that does not contain a description</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<String>ctrl shift N</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>position</String>
+																<String>Inside, at the end</String>
+															</entry>
+															<entry>
+																<String>selection</String>
+																<String>None</String>
+															</entry>
+															<entry>
+																<String>xpathLocation</String>
+																<String>following::figure[not(figure)][not(aside)][1]</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.MoveCaretOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>figure.description.previous</String>
+										</field>
+										<field name="name">
+											<String>Go to previous undescribed image</String>
+										</field>
+										<field name="description">
+											<String>Moves the caret to the previous figure element that does not contain a description</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<String>ctrl shift P</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>position</String>
+																<String>Inside, at the beginning</String>
+															</entry>
+															<entry>
+																<String>selection</String>
+																<String>None</String>
+															</entry>
+															<entry>
+																<String>xpathLocation</String>
+																<String>preceding::figure[not(figure)][not(aside)][1]</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.MoveCaretOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>images.unfold</String>
+										</field>
+										<field name="name">
+											<String>Unfold images</String>
+										</field>
+										<field name="description">
+											<String></String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap/>
+													</field>
+													<field name="operationID">
+														<String>dk.nota.oxygen.operations.html.ToggleImagesOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+								</action-array>
+							</field>
+							<field name="menubarDescriptor">
+								<menu>
+									<field name="label">
+										<String>XHTML</String>
+									</field>
+									<field name="accessKey">
+										<String></String>
+									</field>
+									<field name="iconPath">
+										<null/>
+									</field>
+									<field name="menuEntriesDescriptorList">
+										<menuEntry-array>
+											<menuItem>
+												<field name="actionID">
+													<String>bold</String>
+												</field>
+											</menuItem>
+											<menuItem>
+												<field name="actionID">
+													<String>italic</String>
+												</field>
+											</menuItem>
+											<menuItem>
+												<field name="actionID">
+													<String>underline</String>
+												</field>
+											</menuItem>
+											<menuItem>
+												<field name="actionID">
+													<String>anchor.convert</String>
+												</field>
+											</menuItem>
+											<menuSeparator/>
+											<menu>
+												<field name="label">
+													<String>${i18n(heading)}</String>
+												</field>
+												<field name="accessKey">
+													<String></String>
+												</field>
+												<field name="iconPath">
+													<String>/images/Heading16.gif</String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h1</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h2</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h3</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h4</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h5</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h6</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.none</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h1.shift</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h2.shift</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h3.shift</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h4.shift</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h5.shift</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h6.shift</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.none.shift</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.bridgehead</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.normalise</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+												<field name="context">
+													<null/>
+												</field>
+											</menu>
+											<menuItem>
+												<field name="actionID">
+													<String>paragraph</String>
+												</field>
+											</menuItem>
+											<menu>
+												<field name="label">
+													<String>${i18n(list)}</String>
+												</field>
+												<field name="accessKey">
+													<String></String>
+												</field>
+												<field name="iconPath">
+													<String>/images/ListItem16.gif</String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>orderedList</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>unorderedList</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>definitionList</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>listitem</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>list.create.ordered</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>list.create.unordered</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>list.indent.ordered</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>list.indent.unordered</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>list.convert.paragraph</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+												<field name="context">
+													<null/>
+												</field>
+											</menu>
+											<menu>
+												<field name="label">
+													<String>Images</String>
+												</field>
+												<field name="accessKey">
+													<String></String>
+												</field>
+												<field name="iconPath">
+													<String>/images/Image16.gif</String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>figure.insert</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>figure.caption.insert</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>figure.description.insert</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>figure.description.next</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>figure.description.previous</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>imagemaps.import</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>images.unfold</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+												<field name="context">
+													<null/>
+												</field>
+											</menu>
+											<menuSeparator/>
+											<menu>
+												<field name="label">
+													<String>${i18n(table)}</String>
+												</field>
+												<field name="accessKey">
+													<String></String>
+												</field>
+												<field name="iconPath">
+													<String>/images/Table16.gif</String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.table</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.table.row.above</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.table.row.below</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>delete.table.row</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.table.column.before</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.table.column.after</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>delete.table.column</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.table.entry</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>table.join.row.cells</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>table.join.cell.above</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>table.join.cell.below</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>table.split.left</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>table.split.right</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>table.split.above</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>table.split.below</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>table.cells.convert.header</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>table.cells.convert.data</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>table.convert</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+												<field name="context">
+													<null/>
+												</field>
+											</menu>
+										</menuEntry-array>
+									</field>
+									<field name="context">
+										<null/>
+									</field>
+								</menu>
+							</field>
+							<field name="popupMenuDescriptor">
+								<menu>
+									<field name="label">
+										<String>Contextual Menu</String>
+									</field>
+									<field name="accessKey">
+										<null/>
+									</field>
+									<field name="iconPath">
+										<null/>
+									</field>
+									<field name="menuEntriesDescriptorList">
+										<menuEntry-array>
+											<menuItem>
+												<field name="actionID">
+													<String>italic</String>
+												</field>
+											</menuItem>
+											<menuItem>
+												<field name="actionID">
+													<String>bold</String>
+												</field>
+											</menuItem>
+											<menuItem>
+												<field name="actionID">
+													<String>underline</String>
+												</field>
+											</menuItem>
+											<menuItem>
+												<field name="actionID">
+													<String>anchor.convert</String>
+												</field>
+											</menuItem>
+											<menuSeparator/>
+											<menu>
+												<field name="label">
+													<String>${i18n(heading)}</String>
+												</field>
+												<field name="accessKey">
+													<String></String>
+												</field>
+												<field name="iconPath">
+													<String>/images/Heading16.gif</String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h1</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h2</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h3</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h4</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h5</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h6</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.none</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h1.shift</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h2.shift</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h3.shift</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h4.shift</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h5.shift</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.h6.shift</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.none.shift</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.bridgehead</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>heading.normalise</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+												<field name="context">
+													<null/>
+												</field>
+											</menu>
+											<menuItem>
+												<field name="actionID">
+													<String>paragraph</String>
+												</field>
+											</menuItem>
+											<menu>
+												<field name="label">
+													<String>Lists</String>
+												</field>
+												<field name="accessKey">
+													<String></String>
+												</field>
+												<field name="iconPath">
+													<String>/images/ListItem16.gif</String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>orderedList</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>unorderedList</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>definitionList</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>listitem</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>list.create.ordered</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>list.create.unordered</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>list.indent.ordered</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>list.indent.unordered</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>list.convert.paragraph</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+												<field name="context">
+													<null/>
+												</field>
+											</menu>
+											<menu>
+												<field name="label">
+													<String>Images</String>
+												</field>
+												<field name="accessKey">
+													<String></String>
+												</field>
+												<field name="iconPath">
+													<String>/images/Image16.gif</String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>figure.insert</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>figure.caption.insert</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>figure.description.insert</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>figure.description.next</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>figure.description.previous</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>imagemaps.import</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>images.unfold</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+												<field name="context">
+													<null/>
+												</field>
+											</menu>
+											<menu>
+												<field name="label">
+													<String>${i18n(table)}</String>
+												</field>
+												<field name="accessKey">
+													<String></String>
+												</field>
+												<field name="iconPath">
+													<String>/images/Table16.gif</String>
+												</field>
+												<field name="menuEntriesDescriptorList">
+													<menuEntry-array>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.table.row.above</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.table.row.below</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>delete.table.row</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.table.column.before</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.table.column.after</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>delete.table.column</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>insert.table.entry</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>table.join.row.cells</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>table.join.cell.above</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>table.join.cell.below</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>table.split.left</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>table.split.right</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>table.split.above</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>table.split.below</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>table.cells.convert.header</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>table.cells.convert.data</String>
+															</field>
+														</menuItem>
+														<menuSeparator/>
+														<menuItem>
+															<field name="actionID">
+																<String>table.convert</String>
+															</field>
+														</menuItem>
+													</menuEntry-array>
+												</field>
+												<field name="context">
+													<null/>
+												</field>
+											</menu>
+										</menuEntry-array>
+									</field>
+									<field name="context">
+										<null/>
+									</field>
+								</menu>
+							</field>
+							<field name="toolbarDescriptor">
+								<toolbar>
+									<field name="id">
+										<String>XHTML</String>
+									</field>
+									<field name="type">
+										<Integer>2</Integer>
+									</field>
+									<field name="largeIconPath">
+										<null/>
+									</field>
+									<field name="smallIconPath">
+										<null/>
+									</field>
+									<field name="toolbarEntriesDescriptorList">
+										<toolbarEntry-array>
+											<toolbarItem>
+												<field name="actionID">
+													<String>italic</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>bold</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>underline</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>anchor.convert</String>
+												</field>
+											</toolbarItem>
+											<toolbarSeparator/>
+											<toolbar>
+												<field name="id">
+													<String>${i18n(heading)}</String>
+												</field>
+												<field name="type">
+													<Integer>3</Integer>
+												</field>
+												<field name="largeIconPath">
+													<String>/images/Heading20.gif</String>
+												</field>
+												<field name="smallIconPath">
+													<String>/images/Heading16.gif</String>
+												</field>
+												<field name="toolbarEntriesDescriptorList">
+													<toolbarEntry-array>
+														<toolbarItem>
+															<field name="actionID">
+																<String>heading.h1</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>heading.h2</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>heading.h3</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>heading.h4</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>heading.h5</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>heading.h6</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>heading.none</String>
+															</field>
+														</toolbarItem>
+														<toolbarSeparator/>
+														<toolbarItem>
+															<field name="actionID">
+																<String>heading.h1.shift</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>heading.h2.shift</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>heading.h3.shift</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>heading.h4.shift</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>heading.h5.shift</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>heading.h6.shift</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>heading.none.shift</String>
+															</field>
+														</toolbarItem>
+														<toolbarSeparator/>
+														<toolbarItem>
+															<field name="actionID">
+																<String>heading.bridgehead</String>
+															</field>
+														</toolbarItem>
+														<toolbarSeparator/>
+														<toolbarItem>
+															<field name="actionID">
+																<String>heading.normalise</String>
+															</field>
+														</toolbarItem>
+													</toolbarEntry-array>
+												</field>
+											</toolbar>
+											<toolbarItem>
+												<field name="actionID">
+													<String>paragraph</String>
+												</field>
+											</toolbarItem>
+											<toolbar>
+												<field name="id">
+													<String>Lists</String>
+												</field>
+												<field name="type">
+													<Integer>3</Integer>
+												</field>
+												<field name="largeIconPath">
+													<String>/images/ListItem20.gif</String>
+												</field>
+												<field name="smallIconPath">
+													<String>/images/ListItem16.gif</String>
+												</field>
+												<field name="toolbarEntriesDescriptorList">
+													<toolbarEntry-array>
+														<toolbarItem>
+															<field name="actionID">
+																<String>orderedList</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>unorderedList</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>definitionList</String>
+															</field>
+														</toolbarItem>
+														<toolbarSeparator/>
+														<toolbarItem>
+															<field name="actionID">
+																<String>listitem</String>
+															</field>
+														</toolbarItem>
+														<toolbarSeparator/>
+														<toolbarItem>
+															<field name="actionID">
+																<String>list.create.ordered</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>list.create.unordered</String>
+															</field>
+														</toolbarItem>
+														<toolbarSeparator/>
+														<toolbarItem>
+															<field name="actionID">
+																<String>list.indent.ordered</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>list.indent.unordered</String>
+															</field>
+														</toolbarItem>
+														<toolbarSeparator/>
+														<toolbarItem>
+															<field name="actionID">
+																<String>list.convert.paragraph</String>
+															</field>
+														</toolbarItem>
+													</toolbarEntry-array>
+												</field>
+											</toolbar>
+											<toolbar>
+												<field name="id">
+													<String>Images</String>
+												</field>
+												<field name="type">
+													<Integer>3</Integer>
+												</field>
+												<field name="largeIconPath">
+													<String>/images/Image20.png</String>
+												</field>
+												<field name="smallIconPath">
+													<String>/images/Image16.gif</String>
+												</field>
+												<field name="toolbarEntriesDescriptorList">
+													<toolbarEntry-array>
+														<toolbarItem>
+															<field name="actionID">
+																<String>figure.insert</String>
+															</field>
+														</toolbarItem>
+														<toolbarSeparator/>
+														<toolbarItem>
+															<field name="actionID">
+																<String>figure.caption.insert</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>figure.description.insert</String>
+															</field>
+														</toolbarItem>
+														<toolbarSeparator/>
+														<toolbarItem>
+															<field name="actionID">
+																<String>figure.description.next</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>figure.description.previous</String>
+															</field>
+														</toolbarItem>
+														<toolbarSeparator/>
+														<toolbarItem>
+															<field name="actionID">
+																<String>imagemaps.import</String>
+															</field>
+														</toolbarItem>
+														<toolbarSeparator/>
+														<toolbarItem>
+															<field name="actionID">
+																<String>images.unfold</String>
+															</field>
+														</toolbarItem>
+													</toolbarEntry-array>
+												</field>
+											</toolbar>
+											<toolbarSeparator/>
+											<toolbarItem>
+												<field name="actionID">
+													<String>sort</String>
+												</field>
+											</toolbarItem>
+											<toolbarSeparator/>
+											<toolbarItem>
+												<field name="actionID">
+													<String>insert.table</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>insert.table.row.below</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>insert.table.row.above</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>insert.table.column.after</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>insert.table.entry</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>delete.table.column</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>delete.table.row</String>
+												</field>
+											</toolbarItem>
+											<toolbar>
+												<field name="id">
+													<String>${i18n(table.join.split)}</String>
+												</field>
+												<field name="type">
+													<Integer>3</Integer>
+												</field>
+												<field name="largeIconPath">
+													<String>/images/TableJoinSplit20.gif</String>
+												</field>
+												<field name="smallIconPath">
+													<String>/images/TableJoinSplit16.gif</String>
+												</field>
+												<field name="toolbarEntriesDescriptorList">
+													<toolbarEntry-array>
+														<toolbarItem>
+															<field name="actionID">
+																<String>table.join.row.cells</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>table.join.cell.above</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>table.join.cell.below</String>
+															</field>
+														</toolbarItem>
+														<toolbarSeparator/>
+														<toolbarItem>
+															<field name="actionID">
+																<String>table.split.left</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>table.split.right</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>table.split.above</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>table.split.below</String>
+															</field>
+														</toolbarItem>
+													</toolbarEntry-array>
+												</field>
+											</toolbar>
+											<toolbarItem>
+												<field name="actionID">
+													<String>table.cells.convert.header</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>table.cells.convert.data</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>table.convert</String>
+												</field>
+											</toolbarItem>
+										</toolbarEntry-array>
+									</field>
+								</toolbar>
+							</field>
+							<field name="additionalToolbarsDescriptors">
+								<null/>
+							</field>
+							<field name="contextualItems">
+								<contextProvider>
+									<field name="items">
+										<contextItem-array>
+											<contextItem>
+												<field name="targets">
+													<list>
+														<Integer>0</Integer>
+													</list>
+												</field>
+												<field name="actionID">
+													<String>insert.table.row.below</String>
+												</field>
+												<field name="alias">
+													<String>${i18n(row.wizard)}</String>
+												</field>
+											</contextItem>
+											<contextItem>
+												<field name="targets">
+													<list>
+														<Integer>0</Integer>
+													</list>
+												</field>
+												<field name="actionID">
+													<String>insert.table</String>
+												</field>
+												<field name="alias">
+													<String>${i18n(table.wizard)}</String>
+												</field>
+											</contextItem>
+										</contextItem-array>
+									</field>
+									<field name="removeItems">
+										<null/>
+									</field>
+								</contextProvider>
+							</field>
+							<field name="tableSupportClassName">
+								<null/>
+							</field>
+							<field name="tableCellSeparatorSupportClassName">
+								<null/>
+							</field>
+							<field name="tableColWidthSupportClassName">
+								<null/>
+							</field>
+							<field name="customReferencesResolver">
+								<null/>
+							</field>
+							<field name="editPropertiesHandler">
+								<null/>
+							</field>
+							<field name="authorExtensionStateListener">
+								<String>dk.nota.oxygen.listeners.html.XhtmlExtensionStateListener</String>
+							</field>
+							<field name="attributesRecognizer">
+								<null/>
+							</field>
+							<field name="authorActionEventHandler">
+								<null/>
+							</field>
+							<field name="authorImageDecorator">
+								<null/>
+							</field>
+						</authorExtension>
+					</field>
+					<field name="templatesLocations">
+						<String-array>
+							<String>${frameworkDir}/templates</String>
+						</String-array>
+					</field>
+					<field name="xmlCatalogs">
+						<String-array>
+							<String>${framework}/dtd/xhtmlcatalog.xml</String>
+							<String>${framework}/relaxng/catalog.xml</String>
+							<String>${framework}/nvdl/catalog.xml</String>
+							<String>${frameworks}/xhtml11/dtd/xhtmlcatalog.xml</String>
+							<String>${frameworks}/xhtml11/schema/xhtmlcatalog.xml</String>
+							<String>${framework}/xhtml5%20(epub3)/catalog-compat.xml</String>
+						</String-array>
+					</field>
+					<field name="description">
+						<String>An extension of HTML as an XML language with added provisions for EPUB 3.</String>
+					</field>
+					<field name="doctypeRules">
+						<documentTypeRule-array>
+							<documentTypeRule>
+								<field name="namespace">
+									<String>http://www.w3.org/1999/xhtml</String>
+								</field>
+								<field name="rootElem">
+									<String>html</String>
+								</field>
+								<field name="fileName">
+									<String>*</String>
+								</field>
+								<field name="publicID">
+									<String>*</String>
+								</field>
+								<field name="javaRuleClass">
+									<String>dk.nota.oxygen.frameworks.ArchiveDocumentTypeMatcher</String>
+								</field>
+								<field name="attributeLocalName">
+									<String>*</String>
+								</field>
+								<field name="attributeNamespace">
+									<String>*</String>
+								</field>
+								<field name="attributeValue">
+									<String>*</String>
+								</field>
+							</documentTypeRule>
+						</documentTypeRule-array>
+					</field>
+					<field name="scenarios">
+						<scenario-array/>
+					</field>
+					<field name="validationScenarios">
+						<validationScenario-array>
+							<validationScenario>
+								<field name="pairs">
+									<list>
+										<validationUnit>
+											<field name="validationType">
+												<validationUnitType>
+													<field name="validationInputType">
+														<String>text/xml</String>
+													</field>
+												</validationUnitType>
+											</field>
+											<field name="url">
+												<String>${currentFileURL}</String>
+											</field>
+											<field name="validationEngine">
+												<validationEngine>
+													<field name="engineType">
+														<String>&lt;Default engine></String>
+													</field>
+													<field name="allowsAutomaticValidation">
+														<Boolean>true</Boolean>
+													</field>
+												</validationEngine>
+											</field>
+											<field name="allowAutomaticValidation">
+												<Boolean>true</Boolean>
+											</field>
+											<field name="extensions">
+												<null/>
+											</field>
+											<field name="validationSchema">
+												<validationUnitSchema>
+													<field name="dtdSchemaPublicID">
+														<null/>
+													</field>
+													<field name="schematronPhase">
+														<null/>
+													</field>
+													<field name="type">
+														<Integer>7</Integer>
+													</field>
+													<field name="uri">
+														<String>${framework}/schema/nordic-xhtml5.sch</String>
+													</field>
+												</validationUnitSchema>
+											</field>
+										</validationUnit>
+										<validationUnit>
+											<field name="validationType">
+												<validationUnitType>
+													<field name="validationInputType">
+														<String>text/xml</String>
+													</field>
+												</validationUnitType>
+											</field>
+											<field name="url">
+												<String>${currentFileURL}</String>
+											</field>
+											<field name="validationEngine">
+												<validationEngine>
+													<field name="engineType">
+														<String>&lt;Default engine></String>
+													</field>
+													<field name="allowsAutomaticValidation">
+														<Boolean>true</Boolean>
+													</field>
+												</validationEngine>
+											</field>
+											<field name="allowAutomaticValidation">
+												<Boolean>true</Boolean>
+											</field>
+											<field name="extensions">
+												<null/>
+											</field>
+											<field name="validationSchema">
+												<validationUnitSchema>
+													<field name="dtdSchemaPublicID">
+														<null/>
+													</field>
+													<field name="schematronPhase">
+														<null/>
+													</field>
+													<field name="type">
+														<Integer>4</Integer>
+													</field>
+													<field name="uri">
+														<String>${framework}/schema/nordic-xhtml5.rng</String>
+													</field>
+												</validationUnitSchema>
+											</field>
+										</validationUnit>
+									</list>
+								</field>
+								<field name="type">
+									<String>Validation_scenario</String>
+								</field>
+								<field name="name">
+									<String>EPUB content document</String>
+								</field>
+							</validationScenario>
+							<validationScenario>
+								<field name="pairs">
+									<list>
+										<validationUnit>
+											<field name="validationType">
+												<validationUnitType>
+													<field name="validationInputType">
+														<String>text/xml</String>
+													</field>
+												</validationUnitType>
+											</field>
+											<field name="url">
+												<String>${currentFileURL}</String>
+											</field>
+											<field name="validationEngine">
+												<validationEngine>
+													<field name="engineType">
+														<String>&lt;Default engine></String>
+													</field>
+													<field name="allowsAutomaticValidation">
+														<Boolean>true</Boolean>
+													</field>
+												</validationEngine>
+											</field>
+											<field name="allowAutomaticValidation">
+												<Boolean>true</Boolean>
+											</field>
+											<field name="extensions">
+												<null/>
+											</field>
+											<field name="validationSchema">
+												<validationUnitSchema>
+													<field name="dtdSchemaPublicID">
+														<null/>
+													</field>
+													<field name="schematronPhase">
+														<null/>
+													</field>
+													<field name="type">
+														<Integer>7</Integer>
+													</field>
+													<field name="uri">
+														<String>${framework(NCX)}/schema/nordic-nav.sch</String>
+													</field>
+												</validationUnitSchema>
+											</field>
+										</validationUnit>
+									</list>
+								</field>
+								<field name="type">
+									<String>Validation_scenario</String>
+								</field>
+								<field name="name">
+									<String>EPUB navigation document</String>
+								</field>
+							</validationScenario>
+						</validationScenario-array>
+					</field>
+					<field name="defaultValidationScenarios">
+						<list>
+							<String>EPUB content document</String>
+							<String>EPUB navigation document</String>
+						</list>
+					</field>
+					<field name="defaultTransformationScenarios">
+						<null/>
+					</field>
+					<field name="extensionsBundleClassName">
+						<String>ro.sync.ecss.extensions.xhtml.XHTMLExtensionsBundle</String>
+					</field>
+					<field name="useImposedInitialPage">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="imposedInitialPage">
+						<String>Text</String>
+					</field>
+					<field name="elementLocatorExtension">
+						<null/>
+					</field>
+					<field name="schemaManagerFilterExtension">
+						<null/>
+					</field>
+					<field name="authorSWTDndExtension">
+						<null/>
+					</field>
+					<field name="textSWTDndExtension">
+						<null/>
+					</field>
+					<field name="authorSwingDndExtension">
+						<null/>
+					</field>
+					<field name="cssStylesFilterExtension">
+						<null/>
+					</field>
+					<field name="attributesValueEditor">
+						<null/>
+					</field>
+					<field name="priority">
+						<Integer>4</Integer>
+					</field>
+					<field name="xmlNodeCustomizerExtension">
+						<null/>
+					</field>
+					<field name="externalObjectInsertionHandler">
+						<null/>
+					</field>
+					<field name="customAttributeValueEditor">
+						<null/>
+					</field>
+					<field name="textModeExternalObjectInsertionHandler">
+						<null/>
+					</field>
+				</documentTypeDescriptor>
+			</documentTypeDescriptor-array>
+		</entry>
+	</serializableOrderedMap>
+</serialized>

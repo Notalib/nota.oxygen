@@ -1,11 +1,5 @@
-# nota.oxygen
+# Nota plugins for oXygen
 
-Add-ins for oxygen Xml Editor - dtbook and epub
+A collection of oXygen extensions (frameworks and plugins) developed at Nota.
 
-Add-ins are located in subfolder addins, for more info see the [readme](./addins/readme.md) located [there](./addins).
-
-The directory [dicts](./dicts) contains additional spelling dictionaries for oXygen (currently a danish one).
-
-## License and copyright
-
-nota.oxygen is copyright [Nota](http://nota.nu/) and distritributed under [LGPL version 3](LICENSE).
+The repository is divided into two separate projects: "dtbook" for older DTBook frameworks, "epub" for the more recent EPUB plugin as well as frameworks for EPUB-related file formats.
